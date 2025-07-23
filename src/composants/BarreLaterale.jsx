@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
-import { MdInbox, MdStar, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdContacts, MdAttachFile, MdLabel, MdExpandMore } from "react-icons/md";
+import { MdInbox, MdStar, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdLabel, MdExpandMore, MdEdit } from "react-icons/md";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = () => {
@@ -8,10 +8,16 @@ const BarreLaterale = () => {
     categories: false,
     plus: false,
     labels: true,
+    work: true, // état pour le dossier Work
   });
 
   return (
     <aside className="w-72 bg-black text-white h-full flex flex-col py-4 px-2 overflow-y-auto border-r border-gray-800">
+      {/* Bouton Nouveau message */}
+      <button className="w-full mb-4 py-3 bg-gray-50 hover:bg-gray-200 text-black font-bold rounded-2xl transition flex items-center justify-center gap-2">
+        <MdEdit className="text-xl" />
+        Nouveau message
+      </button>
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         <li>
@@ -90,24 +96,50 @@ const BarreLaterale = () => {
             <FcFolder className="text-xl" />
             <span>CESI 2024 - CESI 2025</span>
           </li>
-          <li className="flex items-center gap-2 px-3 py-1 text-base">
-            <FcFolder className="text-xl" />
-            <span>Généalogie</span>
-          </li>
-          <li className="flex items-center gap-2 px-3 py-1 text-base">
-            <FcFolder className="text-xl" />
-            <span>Lieres</span>
-          </li>
-          <li className="flex items-center gap-2 px-3 py-1 text-base">
-            <FcFolder className="text-xl" />
-            <span>Maison</span>
-          </li>
+        
+        
           <li className="flex items-center gap-2 px-3 py-1 text-base">
             <FcFolder className="text-xl" />
             <span>MaisonCléo</span>
           </li>
         </ul>
       </div>
+      {/* Dossier Work avec exemples */}
+      <button
+        className={`w-full bg-blue-50/10 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 text-blue-400 font-semibold transition ${open.work ? 'bg-blue-50/20' : ''}`}
+        onClick={() => setOpen({ ...open, work: !open.work })}
+      >
+        <FcFolder className="text-xl" />
+        Work
+      </button>
+      {open.work && (
+        <ul className="mb-4">
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">Creative</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">11</span>
+          </li>
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">Development</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">6</span>
+          </li>
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">Email Marketing</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">10</span>
+          </li>
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">Paid Media</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">1</span>
+          </li>
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">SMS Marketing</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">7</span>
+          </li>
+          <li className="flex items-center justify-between py-1">
+            <span className="flex items-center gap-2 text-white">Strategy</span>
+            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">2</span>
+          </li>
+        </ul>
+      )}
     </aside>
   );
 };
