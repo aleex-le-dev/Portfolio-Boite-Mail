@@ -3,83 +3,74 @@ import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdStar, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdLabel, MdExpandMore, MdEdit } from "react-icons/md";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
-const BarreLaterale = () => {
-  const [open, setOpen] = useState({
+const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
+  const [open] = useState({
     categories: false,
     plus: false,
     labels: true,
-    work: true, // état pour le dossier Work
+    work: true,
   });
 
   return (
     <aside className="w-72 bg-black text-white h-full flex flex-col py-4 px-2 overflow-y-auto border-r border-gray-800">
       {/* Bouton Nouveau message */}
-      <button className="w-full mb-4 py-3 bg-gray-50 hover:bg-gray-200 text-black font-bold rounded-2xl transition flex items-center justify-center gap-2">
-        <MdEdit className="text-xl" />
+      <button className={`w-full mb-4 py-3 bg-black hover:bg-gray-200 font-bold rounded-2xl transition flex items-center justify-center gap-2 ${selectedCategory === 'Nouveau message' ? 'ring-2 ring-blue-500' : ''}`}
+        onClick={() => setSelectedCategory('Nouveau message')}
+      >
+        <MdEdit className="text-xl"  />
         Nouveau message
       </button>
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl bg-gray-800 font-bold text-base focus:outline-none">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-bold text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Boîte de réception')}
+          >
             <MdInbox className="text-2xl" />
             Boîte de réception
           </button>
         </li>
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl hover:bg-gray-800 text-base">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Messages suivis' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Messages suivis')}
+          >
             <MdStar className="text-2xl" />
             Messages suivis
           </button>
         </li>
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl hover:bg-gray-800 text-base">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'En attente' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('En attente')}
+          >
             <MdSchedule className="text-2xl" />
             En attente
           </button>
         </li>
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl bg-gray-800 font-semibold text-base">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-semibold text-base ${selectedCategory === 'Important' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Important')}
+          >
             <MdLabelImportant className="text-2xl" />
             Important
           </button>
         </li>
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl hover:bg-gray-800 text-base">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Messages envoyés' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Messages envoyés')}
+          >
             <MdSend className="text-2xl" />
             Messages envoyés
             <span className="ml-2 text-green-400">✔✔</span>
           </button>
         </li>
         <li>
-          <button className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl hover:bg-gray-800 text-base">
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Brouillons' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Brouillons')}
+          >
             <MdDescription className="text-2xl" />
             Brouillons
           </button>
         </li>
-   
-     
-        {/* Catégories déroulantes */}
-        <li>
-          <button
-            className="flex items-center w-full gap-3 px-3 py-2 rounded-2xl hover:bg-gray-800 text-base"
-            onClick={() => setOpen({ ...open, categories: !open.categories })}
-          >
-            <MdLabel className="text-2xl" />
-            Catégories
-            <span className="ml-auto text-xl font-bold">
-              {open.categories ? '-' : '+'}
-            </span>
-          </button>
-          {open.categories && (
-            <ul className="ml-10 mt-0.5 space-y-0.5 text-gray-300 text-base">
-              <li>Projets</li>
-              <li>Perso</li>
-              <li>Clients</li>
-            </ul>
-          )}
-        </li>
-    
       </ul>
       {/* Section Libellés */}
       <div className="mt-6">
@@ -106,37 +97,61 @@ const BarreLaterale = () => {
       </div>
       {/* Dossier Work avec exemples */}
       <button
-        className={`w-full bg-blue-50/10 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 text-blue-400 font-semibold transition ${open.work ? 'bg-blue-50/20' : ''}`}
-        onClick={() => setOpen({ ...open, work: !open.work })}
+        className={`w-full bg-blue-50/10 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 font-semibold transition ${selectedCategory === 'Work' ? 'bg-blue-400/30 text-blue-200' : 'text-blue-400'} ${open.work ? 'bg-blue-50/20' : ''}`}
+        onClick={() => setSelectedCategory('Work')}
       >
         <FcFolder className="text-xl" />
         Work
       </button>
       {open.work && (
         <ul className="mb-4">
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">Creative</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">11</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Creative' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Creative')}
+            >
+              <span className="flex items-center gap-2">Creative</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">11</span>
+            </button>
           </li>
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">Development</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">6</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Development' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Development')}
+            >
+              <span className="flex items-center gap-2">Development</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">6</span>
+            </button>
           </li>
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">Email Marketing</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">10</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Email Marketing' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Email Marketing')}
+            >
+              <span className="flex items-center gap-2">Email Marketing</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">10</span>
+            </button>
           </li>
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">Paid Media</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">1</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Paid Media' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Paid Media')}
+            >
+              <span className="flex items-center gap-2">Paid Media</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">1</span>
+            </button>
           </li>
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">SMS Marketing</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">7</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'SMS Marketing' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('SMS Marketing')}
+            >
+              <span className="flex items-center gap-2">SMS Marketing</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">7</span>
+            </button>
           </li>
-          <li className="flex items-center justify-between py-1">
-            <span className="flex items-center gap-2 text-white">Strategy</span>
-            <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">2</span>
+          <li>
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Strategy' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Strategy')}
+            >
+              <span className="flex items-center gap-2">Strategy</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">2</span>
+            </button>
           </li>
         </ul>
       )}
