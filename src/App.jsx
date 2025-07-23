@@ -1,12 +1,9 @@
-import './App.css'
+import React from "react";
+import BoiteMail from "./composants/BoiteMail";
 
+// Composant principal qui affiche la boîte mail du portfolio
 function App() {
-
-  return (
-  <div>
-    <h1 className='text-3xl font-bold underline text-center text-red-500'>Hello World</h1>
-  </div>
-  )
+  return <BoiteMail />;
 }
 
-export default App
+export default App;

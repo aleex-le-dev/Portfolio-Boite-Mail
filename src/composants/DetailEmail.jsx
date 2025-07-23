@@ -1,0 +1,14 @@
+import React from "react";
+
+// Composant qui affiche le détail d'un "email" (détail d'un projet, expérience, etc.)
+const DetailEmail = () => {
+  return (
+    <section className="flex-1 bg-gray-50 h-full overflow-y-auto p-8">
+      {/* Exemple de détail, à remplacer par des données dynamiques plus tard */}
+      <h2 className="text-2xl font-bold mb-4 text-blue-700">Titre du projet ou expérience</h2>
+      <p className="text-gray-700 text-lg">Description détaillée du projet, des missions, des compétences utilisées, etc.</p>
+    </section>
+  );
+};
+
+export default DetailEmail; 
