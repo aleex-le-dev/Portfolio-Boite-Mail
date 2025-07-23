@@ -13,11 +13,13 @@ const BoiteMail = () => {
       <EnTete onToggleSidebar={() => setSidebarOpen((v) => !v)} />
       <div className="flex flex-1 overflow-hidden">
         {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />}
-        <div className="flex flex-1 rounded-2xl overflow-hidden bg-white mx-6">
-          <div className={sidebarOpen ? "w-96" : "w-1/2"}>
+        <div className="w-[30%] mx-0.5">
+          <div className="h-full bg-white rounded-2xl overflow-hidden">
             <ListeEmails selectedCategory={selectedCategory} />
           </div>
-          <div className={sidebarOpen ? "flex-1" : "w-1/2"}>
+        </div>
+        <div className="w-[70%] mx-0.5">
+          <div className="h-full bg-white rounded-2xl overflow-hidden">
             <DetailEmail />
           </div>
         </div>
