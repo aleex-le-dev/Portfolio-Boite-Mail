@@ -47,18 +47,18 @@ const ListeEmails = ({ selectedCategory }) => {
   const inboxMails = [
     {
       avatar: "https://randomuser.me/api/portraits/men/36.jpg",
-      name: "Cécile Fourcade",
-      subject: "Mise à jour de l'organisation",
-      preview: "Bonjour à tous, nous sommes ravis de partager les nouv...",
-      date: "Jeu. 19:19",
+      name: "Portfolio Web",
+      subject: "Refonte du site vitrine",
+      preview: "Projet de refonte complète du site web pour un client...",
+      date: "2024-05-01",
       badge: true
     },
     {
       avatar: "https://randomuser.me/api/portraits/women/37.jpg",
-      name: "Wanda Howard",
-      subject: "Options de réunion pour jeudi...",
-      preview: "Bonjour à tous, que pensez-vous de cette ...",
-      date: "Jeu. 19:12",
+      name: "Application Mobile",
+      subject: "Développement d'une app React Native",
+      preview: "Application mobile pour la gestion de tâches...",
+      date: "2024-04-15",
       badge: true,
       calendar: true
     }

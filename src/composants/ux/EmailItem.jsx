@@ -1,6 +1,6 @@
 import React from "react";
 
-// Composant EmailItem : design compact type Outlook, avatar, nom, badge vert, sujet, date à droite, preview, icône calendrier si présent
+// Composant EmailItem : affiche un élément de portfolio (projet, compétence, expérience, contact)
 // Props : avatar (url), name (string), subject (string|JSX), preview (string|JSX), date (string), badge (bool), calendar (bool), onClick (fn)
 const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onClick }) => (
   <div

@@ -23,35 +23,35 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-bold text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
-            onClick={() => setSelectedCategory('Boîte de réception')}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-bold text-base focus:outline-none ${selectedCategory === 'Projets' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Projets')}
           >
             <MdInbox className="text-2xl" />
-            Boîte de réception
+            Projets
           </button>
         </li>
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Messages suivis' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
-            onClick={() => setSelectedCategory('Messages suivis')}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Compétences' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Compétences')}
           >
             <MdStar className="text-2xl" />
-            Messages suivis
+            Compétences
           </button>
         </li>
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'En attente' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
-            onClick={() => setSelectedCategory('En attente')}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Expériences' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Expériences')}
           >
             <MdSchedule className="text-2xl" />
-            En attente
+            Expériences
           </button>
         </li>
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-semibold text-base ${selectedCategory === 'Important' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
-            onClick={() => setSelectedCategory('Important')}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-semibold text-base ${selectedCategory === 'Contact' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-white/80'}`}
+            onClick={() => setSelectedCategory('Contact')}
           >
             <MdLabelImportant className="text-2xl" />
-            Important
+            Contact
           </button>
         </li>
         <li>
@@ -95,62 +95,38 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           </li>
         </ul>
       </div>
-      {/* Dossier Work avec exemples */}
+      {/* Dossier Portfolio avec exemples */}
       <button
-        className={`w-full bg-blue-50/10 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 font-semibold transition ${selectedCategory === 'Work' ? 'bg-blue-400/30 text-blue-200' : 'text-blue-400'} ${open.work ? 'bg-blue-50/20' : ''}`}
-        onClick={() => setSelectedCategory('Work')}
+        className={`w-full bg-blue-50/10 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 font-semibold transition ${selectedCategory === 'Portfolio' ? 'bg-blue-400/30 text-blue-200' : 'text-blue-400'} ${open.work ? 'bg-blue-50/20' : ''}`}
+        onClick={() => setSelectedCategory('Portfolio')}
       >
         <FcFolder className="text-xl" />
-        Work
+        Portfolio
       </button>
       {open.work && (
         <ul className="mb-4">
           <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Creative' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('Creative')}
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Web' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Web')}
             >
-              <span className="flex items-center gap-2">Creative</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">11</span>
+              <span className="flex items-center gap-2">Web</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">5</span>
             </button>
           </li>
           <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Development' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('Development')}
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Mobile' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Mobile')}
             >
-              <span className="flex items-center gap-2">Development</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">6</span>
+              <span className="flex items-center gap-2">Mobile</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">3</span>
             </button>
           </li>
           <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Email Marketing' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('Email Marketing')}
+            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Design' ? 'bg-blue-500/30 text-white' : ''}`}
+              onClick={() => setSelectedCategory('Design')}
             >
-              <span className="flex items-center gap-2">Email Marketing</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">10</span>
-            </button>
-          </li>
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Paid Media' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('Paid Media')}
-            >
-              <span className="flex items-center gap-2">Paid Media</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">1</span>
-            </button>
-          </li>
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'SMS Marketing' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('SMS Marketing')}
-            >
-              <span className="flex items-center gap-2">SMS Marketing</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">7</span>
-            </button>
-          </li>
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Strategy' ? 'bg-blue-500/30 text-white' : ''}`}
-              onClick={() => setSelectedCategory('Strategy')}
-            >
-              <span className="flex items-center gap-2">Strategy</span>
-              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">2</span>
+              <span className="flex items-center gap-2">Design</span>
+              <span className="bg-white rounded-full px-2 text-black text-sm font-semibold">4</span>
             </button>
           </li>
         </ul>
