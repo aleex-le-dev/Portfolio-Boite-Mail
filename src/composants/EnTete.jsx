@@ -5,7 +5,7 @@ const EnTete = () => {
   return (
     <header className="flex items-center justify-between h-16 px-6 bg-white shadow border-b">
       {/* Logo et titre du portfolio */}
-      <div className="font-bold text-2xl text-blue-700">Portfolio.</div>
+      <div className="font-bold text-2xl text-blue-700">Salutalex.fr</div>
       {/* Barre de recherche */}
       <input
         type="text"
