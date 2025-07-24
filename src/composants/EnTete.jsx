@@ -1,8 +1,9 @@
 import React from "react";
 import SearchBar from "./ux/SearchBar";
-import { FiSettings, FiUser } from "react-icons/fi";
+import { FiSettings } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant } from "react-icons/md";
 import { LABELS } from "./constantes";
+import emailsData from "./email.json";
 
 const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail, onSelectCategory }) => {
   // Fonction pour obtenir l'icône de catégorie
@@ -25,6 +26,21 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
 
   const searchRef = React.useRef();
   const resultsRef = React.useRef();
+  const [showUserMenu, setShowUserMenu] = React.useState(false);
+  // Récupère l'avatar de l'utilisateur depuis les messages envoyés
+  const userEmail = "alexandre.janacek@gmail.com";
+  let userAvatar = "https://randomuser.me/api/portraits/men/48.jpg";
+  let userName = "Alexandre";
+  const userMail = emailsData.find(m => m.email === userEmail);
+  if (userMail) {
+    userAvatar = userMail.senderAvatar || userAvatar;
+    userName = userMail.sender || userName;
+  }
+  const user = {
+    email: userEmail,
+    name: userName,
+    avatar: userAvatar
+  };
 
   React.useEffect(() => {
     function handleClickOutside(event) {
@@ -152,13 +168,26 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           </div>
         )}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 relative">
         <button className="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Paramètres">
           <FiSettings className="text-2xl text-gray-700" />
         </button>
-        <button className="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Profil">
-          <FiUser className="text-2xl text-gray-700" />
+        <button
+          className="p-1 rounded-full border-2 border-blue-400 hover:shadow-lg transition relative"
+          aria-label="Profil utilisateur"
+          onClick={() => setShowUserMenu(v => !v)}
+        >
+          <img src={user.avatar} alt="avatar" className="w-9 h-9 rounded-full object-cover" />
         </button>
+        {showUserMenu && (
+          <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-2xl shadow-2xl w-80 z-50 flex flex-col items-center p-6 animate-fade-in">
+            <img src={user.avatar} alt="avatar" className="w-16 h-16 rounded-full object-cover border-4 border-blue-200 mb-2" />
+            <div className="font-semibold text-lg mb-1">Bonjour {user.name} !</div>
+            <div className="text-gray-600 text-sm mb-4">{user.email}</div>
+            <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition mb-2">Gérer votre compte</button>
+            <button className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition">Se déconnecter</button>
+          </div>
+        )}
       </div>
     </header>
   );
