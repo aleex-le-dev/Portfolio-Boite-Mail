@@ -8,6 +8,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
     categories: false,
     plus: false,
     labels: {
+      "Projets": false,
       "A propos de moi": false
     },
     work: false,
@@ -78,7 +79,8 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           </button>
         </li>
       </ul>
-      {/* Section Libellés */}
+
+      {/* Libellés */}
       <div className="mt-6">
         <div className="flex items-center justify-between px-3 mb-2">
           <span className="uppercase font-bold tracking-wider text-base">Libellés</span>
@@ -100,7 +102,35 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
                 <span className="uppercase">{label}</span>
                 <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
               </button>
-              {isOpen && (
+              {isOpen && label === 'Projets' && (
+                <ul className="mb-4">
+                  <li>
+                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Web' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+                      onClick={() => { setSelectedCategory('Web'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
+                    >
+                      <span className="flex items-center gap-2">Web</span>
+                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">5</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Mobile' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+                      onClick={() => { setSelectedCategory('Mobile'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
+                    >
+                      <span className="flex items-center gap-2">Mobile</span>
+                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">3</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Design' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+                      onClick={() => { setSelectedCategory('Design'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
+                    >
+                      <span className="flex items-center gap-2">Design</span>
+                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">4</span>
+                    </button>
+                  </li>
+                </ul>
+              )}
+              {isOpen && label === 'A propos de moi' && (
                 <ul className="mb-2">
                   <li>
                     <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900">
@@ -120,43 +150,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           ))}
         </ul>
       </div>
-      {/* Dossier Portfolio avec exemples */}
-      <button
-        className="w-full bg-white rounded-xl uppercase px-3 py-2 mb-1 flex items-center gap-2 transition text-gray-900 font-normal"
-        onClick={() => setOpen(o => ({ ...o, work: !o.work, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) }))}
-      >
-        <FcFolder className="text-xl " />
-        Projets
-        <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.work ? 'rotate-180' : ''}`} />
-      </button>
-      {open.work && (
-        <ul className="mb-4">
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Web' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => { setSelectedCategory('Web'); setOpen({ ...open, work: false }); }}
-            >
-              <span className="flex items-center gap-2">Web</span>
-              <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">5</span>
-            </button>
-          </li>
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Mobile' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => { setSelectedCategory('Mobile'); setOpen({ ...open, work: false }); }}
-            >
-              <span className="flex items-center gap-2">Mobile</span>
-              <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">3</span>
-            </button>
-          </li>
-          <li>
-            <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Design' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => { setSelectedCategory('Design'); setOpen({ ...open, work: false }); }}
-            >
-              <span className="flex items-center gap-2">Design</span>
-              <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">4</span>
-            </button>
-          </li>
-        </ul>
-      )}
     </aside>
   );
 };
