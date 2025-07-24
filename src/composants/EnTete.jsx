@@ -22,6 +22,25 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   const searchNorm = search ? search.toLowerCase().replace(/\s+/g, '') : '';
   const hasLabel = LABELS.some(l => l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) || l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm)));
   const noResult = search && !searchResults.length && !hasLabel;
+
+  const searchRef = React.useRef();
+  const resultsRef = React.useRef();
+
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target) &&
+        resultsRef.current &&
+        !resultsRef.current.contains(event.target)
+      ) {
+        onSearchChange({ target: { value: '' } });
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [onSearchChange]);
+
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
@@ -33,13 +52,15 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
       </div>
       {/* Barre de recherche */}
       <div className="relative w-96">
-        <SearchBar
-          placeholder="Rechercher dans les emails"
-          value={search}
-          onChange={onSearchChange}
-        />
+        <div ref={searchRef}>
+          <SearchBar
+            placeholder="Rechercher dans les emails"
+            value={search}
+            onChange={onSearchChange}
+          />
+        </div>
         {search && search.length >= 3 && (
-          <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[800px] px-2 max-h-[80vh]">
+          <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[800px] px-2 max-h-[80vh]">
             {noResult ? (
               <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
             ) : (
