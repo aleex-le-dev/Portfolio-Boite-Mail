@@ -5,23 +5,37 @@ import BoiteMail from "./composants/BoiteMail";
 // Composant principal qui affiche la boîte mail du portfolio
 function App() {
   const boiteMailRef = useRef();
-  const [showIntro, setShowIntro] = useState(true);
+  const [introStep, setIntroStep] = useState(0); // 0: cube, 1: zoom, 2: transition, 3: app
+
+  useEffect(() => {
+    if (introStep === 0) {
+      setTimeout(() => setIntroStep(1), 2200); // cube anim
+    } else if (introStep === 1) {
+      setTimeout(() => setIntroStep(2), 1100); // zoom
+    } else if (introStep === 2) {
+      setTimeout(() => setIntroStep(3), 700); // color transition
+    }
+  }, [introStep]);
+
   const handleShowInfoMail = () => {
     if (boiteMailRef.current && boiteMailRef.current.selectInfoMail) {
       boiteMailRef.current.selectInfoMail();
     }
   };
-  useEffect(() => {
-    const timer = setTimeout(() => setShowIntro(false), 2600);
-    return () => clearTimeout(timer);
-  }, []);
-  return <>
-    {showIntro && <Win10Intro />}
-    {!showIntro && <>
-      <BoiteMail ref={boiteMailRef} />
-      <CookieBanner onShowInfo={handleShowInfoMail} />
-    </>}
-  </>;
+
+  return (
+    <>
+      {introStep === 0 && <Win10Intro />}
+      {introStep === 1 && <Win10Intro zoom />}
+      {introStep === 2 && <div className="dev3d-color-transition" />}
+      {introStep === 3 && (
+        <>
+          <BoiteMail ref={boiteMailRef} />
+          <CookieBanner onShowInfo={handleShowInfoMail} />
+        </>
+      )}
+    </>
+  );
 }
 
 export default App;
@@ -48,15 +62,31 @@ const CookieBanner = ({ onShowInfo }) => {
 };
 
 // Animation Windows 10 style
-function Win10Intro() {
+function Win10Intro({ zoom }) {
   return (
-    <div className="win10-intro-bg">
-      <div className="win10-logo">
-        <div className="win10-square win10-square1" />
-        <div className="win10-square win10-square2" />
-        <div className="win10-square win10-square3" />
-        <div className="win10-square win10-square4" />
+    <div className={`dev3d-intro-bg${zoom ? ' dev3d-intro-zoom' : ''}`}>
+      <div className={`dev3d-cube-scene${zoom ? ' dev3d-cube-zoom' : ''}`}>
+        <div className={`dev3d-cube${zoom ? ' dev3d-cube-zoomed' : ''}`}>
+          <div className="dev3d-face dev3d-face-front flex items-center justify-center">
+            <span style={{fontSize: '3.5rem', color: '#fff', fontWeight: 700, textShadow: '0 2px 16px #00adef99'}}>S</span>
+          </div>
+          <div className="dev3d-face dev3d-face-back" />
+          <div className="dev3d-face dev3d-face-right" />
+          <div className="dev3d-face dev3d-face-left" />
+          <div className="dev3d-face dev3d-face-top" />
+          <div className="dev3d-face dev3d-face-bottom" />
+        </div>
       </div>
+      <div className="dev3d-title">
+        <span>salutalex.fr</span>
+      </div>
+    </div>
+  );
+}
+
+function Win10Desktop() {
+  return (
+    <div className="win10-desktop-bg">
     </div>
   );
 }
