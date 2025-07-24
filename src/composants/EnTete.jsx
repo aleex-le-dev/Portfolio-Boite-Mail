@@ -163,19 +163,19 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           <FiSettings className="text-2xl text-gray-700" />
         </button>
         <button
-          className="p-1 rounded-full border-2 border-blue-500 hover:shadow-lg transition relative"
+          className="p-0 rounded-full hover:shadow-lg transition relative"
           aria-label="Profil utilisateur"
           onClick={() => setShowUserMenu(v => !v)}
+          style={{background: 'none', border: 'none'}}
         >
-          <img src={user.avatar} alt="avatar" className="w-11 h-11 rounded-full object-cover" style={{background: 'none', padding: 0, margin: 0}} />
+          <img src={user.avatar} alt="avatar" className="w-14 h-14 rounded-full object-cover border-4 border-blue-500" style={{background: 'none', padding: 0, margin: 0}} />
         </button>
         {showUserMenu && (
           <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-2xl shadow-2xl w-80 z-50 flex flex-col items-center p-6 animate-fade-in">
             <img src={user.avatar} alt="avatar" className="w-16 h-16 rounded-full object-cover border-4 border-solid border-blue-500 mb-2" style={{background: 'none', padding: 0, margin: 0}} />
             <div className="font-semibold text-lg mb-1 whitespace-nowrap">Bonjour {user.name} !</div>
             <div className="text-gray-600 text-sm mb-4">{user.email}</div>
-            <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition mb-2">Gérer votre compte</button>
-            <button className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition">Se déconnecter</button>
+            <button className="w-full py-2 bg-gray-100 hover:bg-red-500 hover:text-white text-gray-800 font-semibold rounded-xl transition">Se déconnecter</button>
           </div>
         )}
       </div>
