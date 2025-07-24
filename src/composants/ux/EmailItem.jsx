@@ -5,7 +5,7 @@ const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onCl
     className="flex items-start gap-3 px-4 py-3 border-b cursor-pointer transition"
     onClick={onClick}
   >
-    <img src={avatar} alt={name} className="w-10 h-10 rounded-full object-cover mt-1" />
+    <img src={avatar} alt={name} className="w-10 h-10 object-cover mt-1" />
     <div className="flex-1 min-w-0">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">

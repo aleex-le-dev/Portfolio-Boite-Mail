@@ -23,7 +23,7 @@ const DetailEmailView = ({
   return (
     <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
       {/* Corps du mail */}
-      <div className={`flex-1 px-10 pl-8 flex flex-col ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
+      <div className={`px-10 pl-8 flex flex-col ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
         {category !== 'Messages envoyés' && (
           <>
             <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
@@ -80,13 +80,14 @@ const DetailEmailView = ({
       </div>
       {/* Barre d'actions en bas */}
       {category !== 'Messages envoyés' && (
-        <div className="flex justify-center gap-6 px-10 pb-8 pt-2">
+        <div className="flex justify-center gap-6 px-10 mt-6 mb-0">
           <button
-            className="flex items-center gap-2 border border-gray-400 rounded-full px-6 py-2 text-gray-700 font-medium hover:bg-gray-50 transition"
+            className="flex items-center gap-2 border border-gray-400 rounded-full px-6 py-2 text-gray-700 font-medium hover:bg-gray-50 transition mt-0 mb-0"
             onClick={() => setShowReply(true)}
           >
-            <FiCornerUpLeft className="text-base" />
+           
             Répondre
+            <FiCornerUpRight className="text-base" />
           </button>
         </div>
       )}

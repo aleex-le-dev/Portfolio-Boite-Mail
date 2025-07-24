@@ -153,11 +153,11 @@ const BoiteMail = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen bg-white  ">
       <EnTete onToggleSidebar={() => setSidebarOpen((v) => !v)} />
       <div className="flex flex-1 overflow-hidden">
         {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />}
-        <div className="w-[30%] mx-0.5 min-w-[280px]">
+        <div className="w-[30%] mx-0.5 min-w-[280px] shadow-lg rounded-2xl">
           <div className="h-full bg-white rounded-2xl overflow-hidden">
             <ListeEmails
               selectedCategory={selectedCategory}
@@ -167,7 +167,7 @@ const BoiteMail = () => {
             />
           </div>
         </div>
-        <div className="w-[70%] mx-0.5">
+        <div className="w-[70%] mx-0.5 shadow-lg rounded-2xl">
           <div className="h-full bg-white rounded-2xl overflow-hidden flex flex-col items-center justify-center">
             {filteredEmails.length > 0 && selectedEmail ? (
               <>
