@@ -12,7 +12,8 @@ const DetailEmailView = ({
   email = "email@example.com", 
   onSendMail,
   category,
-  id
+  id,
+  to
 }) => {
   const [showReply, setShowReply] = useState(false);
 
@@ -90,6 +91,10 @@ const DetailEmailView = ({
   return (
     <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
       {/* Corps du mail */}
+      <style>{`
+        .mail-content a { color: #2563eb; text-decoration: underline; transition: color 0.2s; }
+        .mail-content a:hover { color: #1d4ed8; text-decoration: underline; }
+      `}</style>
       <div className={`px-10 pl-8 flex flex-col ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
         {category !== 'Messages envoyés' && (
           <>
@@ -102,16 +107,63 @@ const DetailEmailView = ({
                   <span className="text-xs text-gray-500">{date}</span>
                 </div>
                 {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px]" />}
-                <div className="mt-5">
-                  {Array.isArray(content) ? content.map((c, i) =>
-                    <div key={i} className="text-gray-900 text-base whitespace-pre-line">{c}</div>
-                  ) : <div className="text-gray-900 text-base whitespace-pre-line">{content}</div>}
+                <div className="mt-5 mail-content">
+                  {Array.isArray(content)
+                    ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
+                        /<a\s|<br\s*\/?\s*>/i.test(c)
+                          ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                          : <div key={i} className="text-gray-900 text-base">{c}</div>
+                      )
+                    : (/<a\s|<br\s*\/?\s*>/i.test(content)
+                        ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className="text-gray-900 text-base">{content}</div>
+                      )}
+                  {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
+                    <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
+                  )}
+                </div>
+                {category === 'Mes certifications' && image && (
+                  <img src={image} alt="certification" className="rounded-xl mt-8 mb-4 object-contain max-w-[420px] w-full shadow-lg border border-gray-200" />
+                )}
+              </div>
+            </div>
+          </>
+        )}
+        {category === 'Messages envoyés' && !to && (
+          <>
+            <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
+            <div className="flex items-start gap-3 mb-4 w-full">
+              <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
+              <div className="flex flex-col w-full">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-sm font-semibold text-gray-900">{sender}</span>
+                  <span className="text-xs text-gray-500">{date}</span>
+                </div>
+                <div className="mt-5 mail-content">
+                  {Array.isArray(content)
+                    ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
+                        /<a\s|<br\s*\/?\s*>/i.test(c)
+                          ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                          : <div key={i} className="text-gray-900 text-base">{c}</div>
+                      )
+                    : (/<a\s|<br\s*\/?\s*>/i.test(content)
+                        ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className="text-gray-900 text-base">{content}</div>
+                      )}
+                  {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
+                    <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
+                  )}
+                  {!Array.isArray(content) && image && (
+                    <div className="w-full flex justify-center mt-6">
+                      <img src={image} alt="Pièce jointe" className="rounded-xl object-contain max-w-[420px] w-full shadow-lg border border-gray-200" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </>
         )}
-        {category === 'Messages envoyés' && Array.isArray(content) && content.length > 1 ? (
+        {category === 'Messages envoyés' && to && Array.isArray(content) && content.length > 1 && (
           <div className="text-gray-900 text-base w-full">
             <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
             <div className="flex items-start gap-3 mb-2">
@@ -123,10 +175,11 @@ const DetailEmailView = ({
                   <span className="text-sm font-semibold text-gray-900">{sender}</span>
                   <span className="text-xs text-gray-500">{date}</span>
                 </div>
-                {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px]" />}
-                <div className="mt-5">
+                <div className="mt-5 mail-content">
                   {content.slice(0, -1).map((c, i) =>
-                    <div key={i} className="text-gray-900 text-base whitespace-pre-line">{c}</div>
+                    /<a\s|<br\s*\/?\s*>/i.test(c)
+                      ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                      : <div key={i} className="text-gray-900 text-base">{c}</div>
                   )}
                 </div>
               </div>
@@ -143,17 +196,17 @@ const DetailEmailView = ({
               </div>
             </div>
           </div>
-        ) : category === 'Important' && id === 1000 ? null : null}
+        )}
       </div>
       {/* Barre d'actions en bas */}
-      {category !== 'Messages envoyés' && (
+      {category !== 'Messages envoyés' && category !== 'Archive' && (
         <div className="flex gap-6 px-10 mt-6 mb-0 ml-11">
           <button
-            className="flex items-center gap-2 border border-gray-400 rounded-full px-8 py-3 text-lg text-gray-700 font-bold hover:bg-gray-50 transition mt-0 mb-0"
+            className="flex items-center gap-2 border border-gray-400 rounded-full px-5 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50 transition mt-0 mb-0"
             onClick={() => setShowReply(true)}
           >
             Répondre
-            <FiCornerUpRight className="text-2xl" />
+            <FiCornerUpRight className="text-xl" />
           </button>
         </div>
       )}

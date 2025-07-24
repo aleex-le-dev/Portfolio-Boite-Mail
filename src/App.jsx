@@ -1,12 +1,12 @@
 import React, { useState, useRef } from "react";
 import "./intro.css";
 import BoiteMail from "./composants/BoiteMail";
-import Intro from "./Intro";
+// import Intro from "./Intro";
 import CookieBanner from "./composants/CookieBanner";
 
 function App() {
   const boiteMailRef = useRef();
-  const [introDone, setIntroDone] = useState(false);
+  // const [introDone, setIntroDone] = useState(false);
 
   const handleShowInfoMail = () => {
     if (boiteMailRef.current && boiteMailRef.current.selectInfoMail) {
@@ -14,7 +14,7 @@ function App() {
     }
   };
 
-  if (!introDone) return <Intro onFinish={() => setIntroDone(true)} />;
+  // if (!introDone) return <Intro onFinish={() => setIntroDone(true)} />;
 
   return (
     <>

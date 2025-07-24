@@ -12,7 +12,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
       {emails.length > 0 ? (
         emails.map((mail) => {
           let preview = Array.isArray(mail.content) && mail.content.length > 0
-            ? mail.content[0].substring(0, 60) + (mail.content[0].length > 60 ? '...' : '')
+            ? mail.content[0].replace(/<br\s*\/?>/gi, ' ').substring(0, 60) + (mail.content[0].replace(/<br\s*\/?>/gi, ' ').length > 60 ? '...' : '')
             : '';
           return (
             <div

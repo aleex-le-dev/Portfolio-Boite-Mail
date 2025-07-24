@@ -16,6 +16,11 @@ const BoiteMail = forwardRef((props, ref) => {
   const [selectedEmailId, setSelectedEmailId] = useState(null);
 
   useEffect(() => {
+    // Nettoyage du localStorage pour éviter les doublons de test
+    localStorage.removeItem('messageenvoye');
+  }, []);
+
+  useEffect(() => {
     fetch("./src/composants/email.json")
       .then(res => res.json())
       .then(data => {
@@ -48,7 +53,32 @@ const BoiteMail = forwardRef((props, ref) => {
     try {
       sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
     } catch {/* ignore */}
-    filteredEmails = sent.map(e => e.todayDate ? { ...e, date: todayStr } : e);
+    // On ne garde que le mail le plus récent par conversation (par sujet+destinataire)
+    const uniqueSent = [];
+    const seen = new Set();
+    for (const mail of sent) {
+      const key = mail.title + '|' + (mail.email || mail.to || '');
+      if (!seen.has(key)) {
+        uniqueSent.push(mail);
+        seen.add(key);
+      }
+    }
+    const jsonSent = emails.filter(e => e.category === 'Messages envoyés' && !uniqueSent.find(s => s.id === e.id));
+    const allSent = [...uniqueSent, ...jsonSent];
+    // Unicité stricte par conversation (titre+destinataire) pour l'affichage et le compteur, mais uniquement pour les mails du JSON (pas de champ 'to')
+    const uniqueFiltered = [];
+    const seenFiltered = new Set();
+    for (const mail of allSent) {
+      if (mail.to) continue; // ignorer les réponses du localStorage
+      const key = mail.title + '|' + (mail.email || '');
+      if (!seenFiltered.has(key)) {
+        uniqueFiltered.push(mail);
+        seenFiltered.add(key);
+      }
+    }
+    filteredEmails = uniqueFiltered.map(e => e.todayDate ? { ...e, date: todayStr } : e);
+    console.log('filteredEmails:', filteredEmails);
+    console.log('compteur affiché:', filteredEmails.length);
   } else {
     filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
       e.todayDate ? { ...e, date: todayStr } : e
@@ -188,7 +218,7 @@ const BoiteMail = forwardRef((props, ref) => {
         }}
       />
       <div className="flex flex-1 overflow-hidden">
-        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} />}
+        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} filteredEmails={filteredEmails} />}
         <div className="w-[30%] mx-0.5 min-w-[280px] shadow-lg rounded-2xl">
           <div className="h-full bg-white rounded-2xl overflow-hidden">
             <ListeEmails

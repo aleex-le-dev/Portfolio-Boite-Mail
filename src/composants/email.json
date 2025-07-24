@@ -170,5 +170,206 @@
       "",
       "Ce site est un portfolio personnel. Pour toute question ou demande, contactez-moi à l'adresse ci-dessus."
     ]
+  },
+  {
+    "id": 1001,
+    "category": "Mes certifications",
+    "title": "Certification Objectifs IA obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/Objectif-IA.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez brillamment validé la formation 'Objectifs IA' sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 1002,
+    "category": "Mes certifications",
+    "title": "Certification Cybersecurité obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/cybersécurité.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation 'Cybersecurité' sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 1003,
+    "category": "Mes certifications",
+    "title": "Certification HTML5 et CSS3 obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/HTML5-CSS3-min.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation 'HTML5 et CSS3' sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 1004,
+    "category": "Mes certifications",
+    "title": "Certification PHP et MySQL obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/PHP-MySQL-min.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation 'PHP et MySQL' sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 1005,
+    "category": "Mes certifications",
+    "title": "Certification Git et Github obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/git.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation 'Git et Github' sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 1006,
+    "category": "Mes certifications",
+    "title": "Certification Wordpress 5 obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/WordPress-min.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation 'Wordpress 5' sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 1007,
+    "category": "Mes certifications",
+    "title": "Certification L'UX Design obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/ux.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation 'L'UX Design' sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 1008,
+    "category": "Mes certifications",
+    "title": "Certification Le marketing Digital obtenue !",
+    "sender": "Google",
+    "email": "certifications@google.com",
+    "senderAvatar": "https://www.google.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/google-certifification.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation 'Les fondamentaux du marketing Digital' de Google et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 1009,
+    "category": "Mes certifications",
+    "title": "Certification Le SEO obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/seo.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation 'Le SEO' sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 1010,
+    "category": "Mes certifications",
+    "title": "Certification Illustrator obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/illustrator.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation 'Illustrator' sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 2001,
+    "category": "Archive",
+    "title": "Alerte commit : record battu sur GitHub !",
+    "sender": "GitHub Team",
+    "email": "noreply@github.com",
+    "senderAvatar": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "date": "Aujourd'hui",
+    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "content": [
+      "Hello Aleex,<br />",
+      "Notre robot a détecté une activité anormale sur votre compte GitHub...",
+      "Vous venez de battre le record du nombre de commits ce mois-ci !",
+      "On espère que votre clavier va bien. 😅",
+      "<br />Retrouvez votre profil ici : <a href=\"https://github.com/aleex-le-dev\" target=\"_blank\">github.com/aleex-le-dev</a>",
+      "\n\nHappy coding!\n— L'équipe GitHub"
+    ]
+  },
+  {
+    "id": 2002,
+    "category": "Archive",
+    "title": "Félicitations, votre profil LinkedIn explose les compteurs !",
+    "sender": "LinkedIn France",
+    "email": "notifications-noreply@linkedin.com",
+    "senderAvatar": "https://cdn-icons-png.flaticon.com/512/174/174857.png",
+    "date": "Aujourd'hui",
+    "image": "https://cdn-icons-png.flaticon.com/512/174/174857.png",
+    "content": [
+      "Bonjour Alexandre,<br />",
+      "Votre profil LinkedIn vient de battre un record de visites cette semaine !",
+      "Des recruteurs, des collègues et même des inconnus s'intéressent à votre parcours.",
+      "<br />Découvrez votre profil : <a href=\"https://www.linkedin.com/in/alexandrejanacek/\" target=\"_blank\">linkedin.com/in/alexandrejanacek</a>",
+      "\n\nContinuez à briller sur LinkedIn !\n— L'équipe LinkedIn France"
+    ]
+  },
+  {
+    "id": 3001,
+    "category": "Messages envoyés",
+    "title": "Candidature Développeur Web – OpenAI",
+    "sender": "Aleex Le Dev",
+    "email": "alex@salutalex.fr",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/CV Alexandre_Janacek_Concepteur_Développeur.png",
+    "content": [
+      "Bonjour à toute l'équipe OpenAI,",
+      "",
+      "Je me permets de vous adresser ma candidature pour un poste de Développeur Web au sein de votre entreprise visionnaire.",
+      "",
+      "Passionné par l'intelligence artificielle, l'innovation et le développement web, je maîtrise React, Node.js, les API REST, et Javascript. J'ai mené à bien de nombreux projets fullstack, de la conception à la mise en production, en privilégiant la qualité, la sécurité et l'expérience utilisateur.",
+      "",
+      "Ma veille technologique constante, ma capacité à apprendre vite et à résoudre des problèmes complexes me permettent de m'adapter à des environnements exigeants et de contribuer à des projets d'envergure internationale.",
+      "",
+      "Je suis convaincu que mon expertise technique, mon esprit d'équipe et ma créativité seraient des atouts pour accompagner OpenAI dans ses prochaines innovations.",
+      "",
+      "Je vous remercie pour l'attention portée à ma candidature et reste à votre disposition pour un entretien.",
+      "",
+      "Cordialement,",
+      "Alexandre Janacek"
+    ]
   }
 ] 

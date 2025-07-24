@@ -6,15 +6,20 @@ import { LABELS, NAV_CATEGORIES } from "./constantes";
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
 
-  const [open, setOpen] = useState({
+  const [open, setOpen] = useState(() => ({
     categories: false,
     plus: false,
-    labels: {
-      "Projets": false,
-      "A propos de moi": false
-    },
+    labels: Object.fromEntries(LABELS.map(l => [l.label, false])),
     work: false,
-  });
+  }));
+
+  // Synchronise dynamiquement les clés de labels si LABELS change (ex: renommage)
+  React.useEffect(() => {
+    setOpen(o => ({
+      ...o,
+      labels: Object.fromEntries(LABELS.map(l => [l.label, !!o.labels[l.label]])),
+    }));
+  }, [LABELS]);
 
   // Ferme tous les menus déroulants (projets et labels)
   function closeAllDropdowns() {
@@ -70,18 +75,28 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
             <li key={label}>
               <button className="flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg hover:bg-gray-100 text-gray-900"
                 onClick={() => {
-                  setOpen(o => ({
-                    ...o,
-                    labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, l === label ? !o.labels[l] : false])),
-                    work: false
-                  }));
+                  if (label === 'Mes certifications') {
+                    setSelectedCategory(label);
+                    closeAllDropdowns();
+                  } else {
+                    setOpen(o => ({
+                      ...o,
+                      labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, l === label ? !o.labels[l] : false])),
+                      work: false
+                    }));
+                  }
                 }}
               >
                 <FcFolder className="text-xl" />
                 <span className="uppercase">{label}</span>
-                <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
+                {label === 'Messages envoyés' && (
+                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label && !mail.to).length}</span>
+                )}
+                {label !== 'Mes certifications' && (
+                  <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
+                )}
               </button>
-              {open.labels[label] && (
+              {label !== 'Mes certifications' && open.labels[label] && (
                 <ul className="mb-4">
                   {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
                     let allMails = [...(emails || [])];

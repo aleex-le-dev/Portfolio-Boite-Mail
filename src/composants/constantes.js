@@ -13,12 +13,16 @@ export const NAV_CATEGORIES = [
 // Affiché par ordre alphabétique
 export const LABELS = [
   {
-    label: 'Projets',
+    label: 'Mes projets',
     subs: ['Web', 'Mobile', 'Design',]
   },
   {
     label: 'A propos de moi',
     subs: ['Exemple 2', 'Exemple 1']
+  },
+  {
+    label: 'Mes certifications',
+    subs: []
   }
 ];
 
