@@ -28,15 +28,29 @@ const BoiteMail = () => {
             return { ...email, date: date.toLocaleDateString('fr-FR') };
           }
         });
-        setEmails(emailsWithDates);
+        // Ajout des messages envoyés depuis localStorage
+        let sent = [];
+        try {
+          sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+        } catch {/* ignore */}
+        setEmails([...sent, ...emailsWithDates]);
       });
   }, []);
 
   // Filtrer les emails selon la catégorie sélectionnée
   const todayStr = new Date().toLocaleDateString('fr-FR');
-  const filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
-    e.todayDate ? { ...e, date: todayStr } : e
-  );
+  let filteredEmails = [];
+  if (selectedCategory === 'Messages envoyés') {
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    filteredEmails = sent.map(e => e.todayDate ? { ...e, date: todayStr } : e);
+  } else {
+    filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
+      e.todayDate ? { ...e, date: todayStr } : e
+    );
+  }
   // Sélectionner le mail courant
   const selectedEmail = filteredEmails.find(e => e.id === selectedEmailId) || filteredEmails[0];
 
@@ -44,6 +58,40 @@ const BoiteMail = () => {
   useEffect(() => {
     setSelectedEmailId(filteredEmails[0]?.id || null);
   }, [selectedCategory, emails]);
+
+  // Fonction pour ajouter un mail envoyé
+  const handleSendMail = ({ subject, message, to }) => {
+    // Chercher le mail original pour récupérer son contenu
+    let original = emails.find(e => e.title === subject && e.email === to);
+    let originalContent = original && original.content ? original.content : [];
+    let originalSummary = original && original.summary ? original.summary : "";
+    let originalImage = original && original.image ? original.image : null;
+    // Ne pas dupliquer la réponse si elle est déjà dans le contenu
+    if (originalContent.length > 0 && originalContent[originalContent.length - 1] === message) {
+      originalContent = originalContent.slice(0, -1);
+    }
+    const newMail = {
+      id: emails.length > 0 ? Math.max(...emails.map(e => e.id)) + 1 : 1,
+      category: "Messages envoyés",
+      title: subject,
+      sender: "Alex@salutalex.fr",
+      email: "Alex@salutalex.fr",
+      senderAvatar: "https://randomuser.me/api/portraits/men/37.jpg",
+      date: new Date().toLocaleDateString('fr-FR'),
+      summary: originalSummary,
+      image: originalImage,
+      content: [...originalContent, message],
+      to: to
+    };
+    setEmails([newMail, ...emails]);
+    // Persistance dans localStorage
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    sent.unshift(newMail);
+    localStorage.setItem('messageenvoye', JSON.stringify(sent));
+  };
 
   return (
     <div className="flex flex-col h-screen bg-white">
@@ -92,7 +140,7 @@ const BoiteMail = () => {
                     {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
                   </div>
                 </div>
-                <DetailEmailView {...selectedEmail} />
+                <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} />
               </>
             ) : (
               <div className="text-gray-400 text-lg">Vous n'avez sélectionné aucune conversation.</div>

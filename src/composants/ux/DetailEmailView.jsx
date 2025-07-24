@@ -10,7 +10,9 @@ const DetailEmailView = ({
   summary = "Résumé du mail...",
   image,
   content = "Contenu détaillé du mail...",
-  email = "email@example.com" // Added email prop
+  email = "email@example.com", 
+  onSendMail,
+  category
 }) => {
   const [showReply, setShowReply] = useState(false);
 
@@ -23,20 +25,52 @@ const DetailEmailView = ({
     <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
       {/* Corps du mail */}
       <div className="flex-1 px-10 py-8 flex flex-col items-center">
-        <h1 className="text-2xl font-bold mb-2 text-center">{title}</h1>
-        <div className="flex items-center gap-3 mb-4">
-          <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
-          <div>
-            <div className="font-semibold text-gray-900">{sender}</div>
-            <div className="text-xs text-gray-500">{date}</div>
-          </div>
-        </div>
-        <div className="text-gray-700 text-base mb-4 text-center max-w-2xl">{summary}</div>
-        {image && (
-          <img src={image} alt="illustration" className="rounded-xl mb-6 max-w-full max-h-72 object-cover" />
+        {category !== 'Messages envoyés' && (
+          <>
+            <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
+            <div className="flex items-center gap-3 mb-4 w-full">
+              <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
+              <div>
+                <div className="font-semibold text-gray-900">{sender}</div>
+                <div className="text-xs text-gray-500">{date}</div>
+              </div>
+            </div>
+            <div className="text-gray-700 text-base mb-4 text-left max-w-2xl w-full">{summary}</div>
+            {image && (
+              <img src={image} alt="illustration" className="rounded-xl mb-6 object-cover max-w-full max-h-72" />
+            )}
+          </>
         )}
         <div className="text-gray-900 text-base max-w-2xl w-full mt-2">
-          {content}
+          {Array.isArray(content) && category === 'Messages envoyés' && content.length > 1 ? (
+            <>
+              <div className="flex items-start gap-3 mb-2">
+                {senderAvatar &&
+                  <img src={senderAvatar} alt={sender} className="w-8 h-8 rounded-full object-cover border border-gray-300 mt-1" />
+                }
+                <div className="flex flex-col gap-1 w-full">
+                  <div className="text-sm font-semibold text-gray-900">{sender}</div>
+                  <div className="text-xs text-gray-500 mb-2">{date}</div>
+                  {summary && <div className="text-gray-700 text-base mb-2">{summary}</div>}
+                  {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px]" />}
+                  {content.slice(0, -1).map((c, i) =>
+                    <div key={i} className="text-gray-900 text-base whitespace-pre-line">{c}</div>
+                  )}
+                </div>
+              </div>
+              <hr className="my-4 border-t-2 border-gray-200" />
+              <div className="flex items-start gap-3 mt-4">
+                <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Alex@salutalex.fr" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400" />
+                <div className="flex flex-col">
+                  <div className="text-sm font-semibold text-gray-900">Alex@salutalex.fr</div>
+                  <div className="text-xs text-gray-500 mb-2">
+                    {date} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                  </div>
+                  <div className="text-gray-900 text-base whitespace-pre-line">{content[content.length - 1]}</div>
+                </div>
+              </div>
+            </>
+          ) : Array.isArray(content) ? content.map((c, i) => <div key={i}>{c}</div>) : content}
         </div>
       </div>
       {/* Barre d'actions en bas */}
@@ -48,14 +82,10 @@ const DetailEmailView = ({
           <FiCornerUpLeft className="text-base" />
           Répondre
         </button>
-        <button className="flex items-center gap-2 border border-gray-400 rounded-full px-6 py-2 text-gray-700 font-medium hover:bg-gray-50 transition">
-          <FiCornerUpRight className="text-base" />
-          Transférer
-        </button>
       </div>
       {showReply && (
         <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/10" onClick={handleOverlayClick}>
-          <RepondreMail onClose={() => setShowReply(false)} from={email} />
+          <RepondreMail onClose={() => setShowReply(false)} from={email} subject={title} onSendMail={onSendMail} />
         </div>
       )}
     </div>
