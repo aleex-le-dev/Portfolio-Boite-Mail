@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
 import { LABELS, NAV_CATEGORIES } from "./constantes";
+import emailsData from "./email.json";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsProp }) => {
@@ -89,7 +90,12 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsPr
               {open.labels[label] && (
                 <ul className="mb-4">
                   {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
-                    const count = (emails || []).filter(mail => mail.category === sub).length;
+                    let allMails = [...(emailsData || [])];
+                    try {
+                      const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+                      allMails = [...allMails, ...sent];
+                    } catch {/* ignore */}
+                    const count = allMails.filter(mail => mail.category === sub).length;
                     return (
                       <li key={sub}>
                         <button
@@ -97,7 +103,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsPr
                           onClick={() => { setSelectedCategory(sub); }}
                         >
                           <span className="flex items-center gap-2">{sub}</span>
-                          <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold" style={{visibility: count > 0 ? 'visible' : 'hidden'}}>{count}</span>
+                          <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{count}</span>
                         </button>
                       </li>
                     );
