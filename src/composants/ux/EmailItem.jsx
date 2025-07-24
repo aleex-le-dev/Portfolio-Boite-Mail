@@ -1,7 +1,5 @@
 import React from "react";
 
-// Composant EmailItem : affiche un élément de portfolio (projet, compétence, expérience, contact)
-// Props : avatar (url), name (string), subject (string|JSX), preview (string|JSX), date (string), badge (bool), calendar (bool), onClick (fn)
 const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onClick }) => (
   <div
     className="flex items-start gap-3 px-4 py-3 border-b cursor-pointer transition bg-white hover:bg-blue-50"
