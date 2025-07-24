@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiArrowLeft, FiArrowRight, FiTrash2, FiArchive, FiCornerUpLeft, FiCornerUpRight } from "react-icons/fi";
+import { FiCornerUpLeft, FiCornerUpRight } from "react-icons/fi";
 import RepondreMail from "./RepondreMail";
 
 const DetailEmailView = ({
@@ -10,7 +10,7 @@ const DetailEmailView = ({
   summary = "Résumé du mail...",
   image,
   content = "Contenu détaillé du mail...",
-  page = "1 / 1"
+  email = "email@example.com" // Added email prop
 }) => {
   const [showReply, setShowReply] = useState(false);
 
@@ -21,16 +21,6 @@ const DetailEmailView = ({
 
   return (
     <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
-      {/* Barre d'actions en haut, hauteur fixe */}
-      <div className="flex items-center justify-between px-6 border-b bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 h-8 min-h-8 rounded-tr-2xl">
-        <div className="flex items-center gap-2">
-          <button className="p-0.5 rounded hover:bg-gray-200"><FiArrowLeft className="text-sm" /></button>
-          <button className="p-0.5 rounded hover:bg-gray-200"><FiArrowRight className="text-sm" /></button>
-          <button className="p-0.5 rounded hover:bg-gray-200"><FiArchive className="text-sm" /></button>
-          <button className="p-0.5 rounded hover:bg-gray-200"><FiTrash2 className="text-sm" /></button>
-        </div>
-        <div className="font-semibold">{page}</div>
-      </div>
       {/* Corps du mail */}
       <div className="flex-1 px-10 py-8 flex flex-col items-center">
         <h1 className="text-2xl font-bold mb-2 text-center">{title}</h1>
@@ -50,7 +40,7 @@ const DetailEmailView = ({
         </div>
       </div>
       {/* Barre d'actions en bas */}
-      <div className="flex gap-6 px-10 pb-8 pt-2">
+      <div className="flex justify-center gap-6 px-10 pb-8 pt-2">
         <button
           className="flex items-center gap-2 border border-gray-400 rounded-full px-6 py-2 text-gray-700 font-medium hover:bg-gray-50 transition"
           onClick={() => setShowReply(true)}
@@ -65,7 +55,7 @@ const DetailEmailView = ({
       </div>
       {showReply && (
         <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/10" onClick={handleOverlayClick}>
-          <RepondreMail onClose={() => setShowReply(false)} />
+          <RepondreMail onClose={() => setShowReply(false)} from={email} />
         </div>
       )}
     </div>

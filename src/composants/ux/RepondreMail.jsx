@@ -1,29 +1,26 @@
-import React from "react";
-import { FiPaperclip } from "react-icons/fi";
+// Composant pour afficher le formulaire de réponse à un mail
 
-// Composant RepondreMail : formulaire de réponse à un mail, style moderne
+import React from "react";
+import { LuSendHorizontal, } from "react-icons/lu";
+import { FaPaperclip } from "react-icons/fa6";
+import { RiCloseLargeLine } from "react-icons/ri";
+
+
 const RepondreMail = ({
   from = "hello@mattered.com",
-  subject = "Let's work together",
-  message = "Hi Mattered team,\n\nI'd love to chat about how we might work together on an upcoming project.\n\nLooking forward to connecting!",
+  subject = "",
+  message = "",
   onClose
 }) => (
   <div className="bg-white rounded-2xl shadow-xl w-[420px] max-w-full p-0 border border-gray-200">
     <div className="flex items-center justify-between px-5 py-3 border-b">
-      <span className="font-semibold text-lg">New Message</span>
-      <div className="flex gap-2">
-        <button className="w-6 h-6 rounded hover:bg-gray-100">-</button>
-        <button className="w-6 h-6 rounded hover:bg-gray-100">□</button>
-        <button className="w-6 h-6 rounded hover:bg-gray-100" onClick={onClose}>×</button>
+      <span className="font-semibold text-lg">Répondre à {from}</span>
+      <div className="flex items-center justify-center">
+        <button className=" hover:bg-gray-100" onClick={onClose}><RiCloseLargeLine /></button>
       </div>
     </div>
     <form className="flex flex-col gap-3 px-5 py-4">
-      <input
-        className="w-full rounded border border-gray-200 px-3 py-2 text-gray-500 bg-gray-50 text-sm"
-        placeholder="From"
-        value={from}
-        readOnly
-      />
+   
       <input
         className="w-full rounded border border-gray-200 px-3 py-2 text-gray-500 bg-gray-50 text-sm"
         placeholder="Subject"
@@ -36,13 +33,13 @@ const RepondreMail = ({
         defaultValue={message}
       />
       <div className="flex items-center justify-between mt-2">
-        <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-          Send <span className="text-lg">▻</span>
-        </button>
-        <div className="flex items-center gap-4">
-          <button type="button" className="text-gray-500 hover:text-gray-700 text-xl"><FiPaperclip /></button>
-          <button type="button" className="text-gray-500 hover:text-gray-700 text-xl font-bold">T</button>
+      <div className="flex items-center gap-4">
+          <button type="button" className="text-gray-500 hover:text-gray-700 text-xl"><FaPaperclip /></button>
         </div>
+        <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+          Envoyer <LuSendHorizontal className="text-lg" />
+        </button>
+    
       </div>
     </form>
   </div>
