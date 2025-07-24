@@ -65,7 +65,7 @@
     "id": 1000,
     "category": "Important",
     "title": "Information sur la confidentialité et le stockage local",
-    "sender": "Aleex Le Dev",
+    "sender": "Politique de cookie",
     "email": "alex@salutalex.fr",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "Aujourd'hui",
@@ -86,6 +86,27 @@
       "",
       "Vos droits :",
       "Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur. Pour toute question, contactez-moi à alex@salutalex.fr."
+    ]
+  },
+  {
+    "id": 1001,
+    "category": "Important",
+    "title": "Mentions légales du site",
+    "sender": "Mentions légales",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "Aujourd'hui",
+    "image": null,
+    "content": [
+    
+      "",
+      "Éditeur : Aleex Le Dev",
+      "Email : alexandre.janacek@gmail.com",
+      "Directeur de la publication : Aleex Le Dev",
+      "Hébergeur : O2SWITCH",
+      "Contact hébergeur : https://www.o2switch.fr/contact/",
+      "",
+      "Ce site est un portfolio personnel. Pour toute question ou demande, contactez-moi à l'adresse ci-dessus."
     ]
   }
 ] 
