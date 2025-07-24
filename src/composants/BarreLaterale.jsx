@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
-import emailsData from "./email.json";
+import { LABELS, NAV_CATEGORIES } from "./constantes";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
-const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
+const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsProp }) => {
+  const [emails, setEmails] = useState(emailsProp || []);
+  useEffect(() => { setEmails(emailsProp || []); }, [emailsProp]);
+
   const [open, setOpen] = useState({
     categories: false,
     plus: false,
@@ -17,7 +20,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
 
   // Fonction utilitaire pour compter les mails d'une catégorie
   const getMailCountByCategory = (cat) => {
-    return (emailsData || []).filter(mail => mail.category === cat).length;
+    let count = (emails || []).filter(mail => mail.category === cat).length;
+    // Ajout des messages envoyés archivés dans le localStorage
+    try {
+      const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+      count += sent.filter(mail => mail.category === cat).length;
+    } catch {/* ignore erreur JSON */}
+    return count;
   };
 
   // Ferme tous les menus déroulants (projets et labels)
@@ -28,29 +37,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false]))
     }));
   }
-
-  // Définition des catégories principales pour la navigation
-  const NAV_CATEGORIES = [
-    { label: 'Boîte de réception', value: 'Boîte de réception', icon: MdInbox },
-    { label: 'Messages envoyés', value: 'Messages envoyés', icon: MdSend },
-    { label: 'Important', value: 'Important', icon: MdLabelImportant },
-    { label: 'Archive', value: 'Archive', icon: MdArchive },
-    { label: 'Brouillons', value: 'Brouillons', icon: MdSchedule },
-    { label: 'Corbeille', value: 'Corbeille', icon: MdDelete },
-    
-  ];
-
-  // Définition des libellés et sous-libellés pour la section libellés
-  const LABELS_CONFIG = [
-    {
-      label: 'Projets',
-      subs: ['Web', 'Mobile', 'Design', 'Exemple 1', 'Exemple 2']
-    },
-    {
-      label: 'A propos de moi',
-      subs: ['Exemple 1', 'Exemple 2']
-    }
-  ];
 
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
@@ -85,7 +71,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           <span className="uppercase font-bold tracking-wider text-base">Libellés</span>
         </div>
         <ul className="space-y-0.5">
-          {LABELS_CONFIG.map(({ label, subs }) => (
+          {LABELS.map(({ label, subs }) => (
             <li key={label}>
               <button className="flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg hover:bg-gray-100 text-gray-900"
                 onClick={() => {
@@ -102,16 +88,20 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
               </button>
               {open.labels[label] && (
                 <ul className="mb-4">
-                  {subs.map(sub => (
-                    <li key={sub}>
-                      <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900"
-                        onClick={() => { setSelectedCategory(sub); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
-                      >
-                        <span className="flex items-center gap-2">{sub}</span>
-                        <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{getMailCountByCategory(sub)}</span>
-                      </button>
-                    </li>
-                  ))}
+                  {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
+                    const count = (emails || []).filter(mail => mail.category === sub).length;
+                    return (
+                      <li key={sub}>
+                        <button
+                          className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === sub ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
+                          onClick={() => { setSelectedCategory(sub); }}
+                        >
+                          <span className="flex items-center gap-2">{sub}</span>
+                          <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold" style={{visibility: count > 0 ? 'visible' : 'hidden'}}>{count}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </li>
