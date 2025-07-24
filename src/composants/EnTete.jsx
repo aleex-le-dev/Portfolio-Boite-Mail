@@ -5,6 +5,12 @@ import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdL
 
 // Composant d'en-tête de la boîte mail (barre supérieure)
 // Props : onToggleSidebar (fonction pour ouvrir/fermer la barre latérale)
+
+const LABELS = [
+  { label: 'Projets', subs: ['Web', 'Mobile', 'Design', 'Exemple 1', 'Exemple 2'] },
+  { label: 'A propos de moi', subs: ['Exemple 1', 'Exemple 2'] }
+];
+
 const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail, onSelectCategory }) => {
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
@@ -19,6 +25,10 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   };
   // Fonction utilitaire pour trier les sous-libellés
   const sortAlpha = arr => [...arr].sort((a, b) => a.localeCompare(b, 'fr'));
+  // Détection d'absence totale de résultats (ni mail ni libellé)
+  const searchNorm = search ? search.toLowerCase().replace(/\s+/g, '') : '';
+  const hasLabel = LABELS.some(l => l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) || l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm)));
+  const noResult = search && !searchResults.length && !hasLabel;
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
@@ -35,7 +45,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           value={search}
           onChange={onSearchChange}
         />
-        {search && (searchResults.length > 0 || (searchResults.some(mail => (mail.labels || []).some(label => label.toLowerCase() === search.toLowerCase())))) && (
+        {search && (searchResults.length > 0 || hasLabel) && (
           <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50  overflow-y-auto w-[800px] px-2">
             {/* Catégorie Emails */}
             {searchResults.length > 0 && (
@@ -72,20 +82,23 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             )}
             {/* Catégorie Libellés */}
             {(() => {
-              // Définition des libellés principaux et sous-libellés comme dans la barre latérale
-              const LABELS = [
-                { label: 'Projets', subs: ['Web', 'Mobile', 'Design', 'Exemple 1', 'Exemple 2'] },
-                { label: 'A propos de moi', subs: ['Exemple 1', 'Exemple 2'] }
-              ];
-              const searchNorm = search.toLowerCase().replace(/\s+/g, '');
-              const matchingLabels = LABELS.filter(l => l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) || l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm)));
+              // Utilisation de la constante LABELS définie hors composant
+              const matchingLabels = LABELS.filter(l => {
+                const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                return matchParent || matchChild;
+              });
               if (matchingLabels.length === 0) return null;
               return (
                 <div className="mb-2">
                   <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
                   {matchingLabels.flatMap(({ label, subs }) => {
-                    if (label.toLowerCase().replace(/\s+/g, '').includes(searchNorm)) {
-                      // Affiche TOUS les sous-libellés si le parent matche, même sans mail
+                    // Si la recherche matche le parent OU un sous-libellé, on affiche TOUS les sous-libellés
+                    if (
+                      label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
+                      subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
+                    ) {
+                      // Si AU MOINS UN sous-libellé matche, on affiche TOUS les sous-libellés du parent
                       return sortAlpha(subs).map(sub => (
                         <button
                           key={label + '-' + sub}
@@ -121,6 +134,9 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
               );
             })()}
           </div>
+        )}
+        {noResult && (
+          <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
         )}
       </div>
       <div className="flex items-center gap-4">
