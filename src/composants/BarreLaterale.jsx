@@ -44,16 +44,17 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
             >
               {Icon && <Icon className="text-2xl" />}
               <span className={`w-35 text-left ${selectedCategory === value ? 'font-bold' : ''}`}>{label}</span>
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{
-                (() => {
-                  let allMails = [...(emails || [])];
-                  try {
-                    const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-                    allMails = [...allMails, ...sent];
-                  } catch {/* ignore */}
-                  return allMails.filter(mail => mail.category === value).length;
-                })()
-              }</span>
+              {(() => {
+                let allMails = [...(emails || [])];
+                try {
+                  const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+                  allMails = [...allMails, ...sent];
+                } catch {/* ignore */}
+                const count = allMails.filter(mail => mail.category === value).length;
+                return count > 0 && (
+                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{count}</span>
+                );
+              })()}
             </button>
           </li>
         ))}
@@ -96,7 +97,9 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                           onClick={() => { setSelectedCategory(sub); }}
                         >
                           <span className="flex items-center gap-2">{sub}</span>
-                          <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{count}</span>
+                          {count > 0 && (
+                            <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{count}</span>
+                          )}
                         </button>
                       </li>
                     );
