@@ -5,7 +5,7 @@ import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdL
 
 // Composant d'en-tête de la boîte mail (barre supérieure)
 // Props : onToggleSidebar (fonction pour ouvrir/fermer la barre latérale)
-const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail }) => {
+const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail, onSelectCategory }) => {
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
     switch ((cat || '').toLowerCase()) {
@@ -17,6 +17,8 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
       default: return <MdFolder className="text-gray-400 text-lg" />;
     }
   };
+  // Fonction utilitaire pour trier les sous-libellés
+  const sortAlpha = arr => [...arr].sort((a, b) => a.localeCompare(b, 'fr'));
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
@@ -70,48 +72,48 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             )}
             {/* Catégorie Libellés */}
             {(() => {
-              // On cherche les libellés qui CONTIENNENT la recherche (insensible à la casse)
-              const rawLabels = searchResults.flatMap(mail => (mail.labels || []));
-              // Normalisation : minuscule, suppression espaces, suppression s/pluriel
-              const normalize = l => l.toLowerCase().replace(/\s+/g, '').replace(/s$/, '');
-              const uniqueLabelsMap = {};
-              rawLabels.forEach(label => {
-                const norm = normalize(label);
-                if (!uniqueLabelsMap[norm]) uniqueLabelsMap[norm] = label;
-              });
+              // Définition des libellés principaux et sous-libellés comme dans la barre latérale
+              const LABELS = [
+                { label: 'Projets', subs: ['Web', 'Mobile', 'Design'] },
+                { label: 'A propos de moi', subs: ['Exemple 1', 'Exemple 2'] }
+              ];
               const searchNorm = search.toLowerCase().replace(/\s+/g, '');
-              const matchingLabels = Object.values(uniqueLabelsMap).filter(label =>
-                normalize(label).includes(searchNorm)
-              );
+              const matchingLabels = LABELS.filter(l => l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) || l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm)));
               if (matchingLabels.length === 0) return null;
               return (
                 <div className="mb-2">
                   <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
-                  {matchingLabels.flatMap(label => {
-                    // Pour chaque mail qui a ce label, on affiche une ligne par sous-libellé (autre label du mail)
-                    const mailsWithLabel = searchResults.filter(mail => (mail.labels || []).includes(label));
-                    const combos = [];
-                    mailsWithLabel.forEach(mail => {
-                      const subLabels = (mail.labels || []).filter(l => l !== label);
-                      if (subLabels.length === 0) {
-                        combos.push({ label, sub: null });
-                      } else {
-                        subLabels.forEach(sub => combos.push({ label, sub }));
-                      }
-                    });
-                    // On évite les doublons exacts
-                    const uniqueCombos = Array.from(new Set(combos.map(c => c.label + '|' + (c.sub || '')))).map(key => {
-                      const [label, sub] = key.split('|');
-                      return { label, sub: sub || null };
-                    });
-                    return uniqueCombos.map(({ label, sub }) => (
+                  {matchingLabels.flatMap(({ label, subs }) => {
+                    // Si la recherche matche le parent, on affiche toutes les combinaisons parent-sous-libellé
+                    if (label.toLowerCase().replace(/\s+/g, '').includes(searchNorm)) {
+                      return sortAlpha(subs).map(sub => (
+                        <button
+                          key={label + '-' + sub}
+                          className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                          type="button"
+                          onClick={() => {
+                            if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                            else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                          }}
+                        >
+                          <MdLabelImportant className="text-yellow-500 text-lg" />
+                          <span className="text-base font-bold text-gray-800">{label} - {sub}</span>
+                        </button>
+                      ));
+                    }
+                    // Sinon, on affiche seulement les sous-libellés qui matchent
+                    return sortAlpha(subs.filter(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))).map(sub => (
                       <button
-                        key={label + '-' + (sub || 'parent')}
+                        key={label + '-' + sub}
                         className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
                         type="button"
+                        onClick={() => {
+                          if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                          else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                        }}
                       >
                         <MdLabelImportant className="text-yellow-500 text-lg" />
-                        <span className="text-base font-bold text-gray-800">{label}{sub ? ` - ${sub}` : ''}</span>
+                        <span className="text-base font-bold text-gray-800">{label} - {sub}</span>
                       </button>
                     ));
                   })}

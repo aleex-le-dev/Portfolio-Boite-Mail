@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
+import emailsData from "./email.json";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
@@ -14,6 +15,11 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
     work: false,
   });
 
+  // Fonction utilitaire pour compter les mails d'une catégorie
+  const getMailCountByCategory = (cat) => {
+    return (emailsData || []).filter(mail => mail.category === cat).length;
+  };
+
   // Ferme tous les menus déroulants (projets et labels)
   function closeAllDropdowns() {
     setOpen(o => ({
@@ -24,7 +30,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
   }
 
   return (
-    <aside className="w-auto min-w-fit min-w-[220px] whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
+    <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
       {/* Bouton Nouveau message sticky */}
       <div className="sticky top-0 z-10 bg-white pb-2">
         <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2">
@@ -35,11 +41,14 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-blue-50 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
             onClick={() => { setSelectedCategory('Boîte de réception'); closeAllDropdowns(); }}
           >
             <MdInbox className="text-2xl" />
-            Boîte de réception
+            <span className={`w-35 text-left ${selectedCategory === 'Boîte de réception' ? 'font-bold' : ''}`}>Boîte de réception</span>
+            {getMailCountByCategory('Boîte de réception') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Boîte de réception')}</span>
+            )}
           </button>
         </li>
        
@@ -49,7 +58,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
             onClick={() => { setSelectedCategory('Messages envoyés'); closeAllDropdowns(); }}
           >
             <MdSend className="text-2xl" />
-            Messages envoyés
+            <span className={`w-35 text-left ${selectedCategory === 'Messages envoyés' ? 'font-bold' : ''}`}>Messages envoyés</span>
+            {getMailCountByCategory('Messages envoyés') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Messages envoyés')}</span>
+            )}
           </button>
         </li>
         <li>
@@ -57,7 +69,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
             onClick={() => { setSelectedCategory('Important'); closeAllDropdowns(); }}
           >
             <MdLabelImportant className="text-2xl" />
-            Important
+            <span className={`w-35 text-left ${selectedCategory === 'Important' ? 'font-bold' : ''}`}>Important</span>
+            {getMailCountByCategory('Important') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Important')}</span>
+            )}
           </button>
         </li>
         <li>
@@ -65,7 +80,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
             onClick={() => { setSelectedCategory('Archive'); closeAllDropdowns(); }}
           >
             <MdArchive className="text-2xl" />
-            Archive
+            <span className={`w-35 text-left ${selectedCategory === 'Archive' ? 'font-bold' : ''}`}>Archive</span>
+            {getMailCountByCategory('Archive') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Archive')}</span>
+            )}
           </button>
         </li>
         <li>
@@ -73,7 +91,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
             onClick={() => { setSelectedCategory('Brouillons'); closeAllDropdowns(); }}
           >
             <MdSchedule className="text-2xl" />
-            Brouillons
+            <span className={`w-35 text-left ${selectedCategory === 'Brouillons' ? 'font-bold' : ''}`}>Brouillons</span>
+            {getMailCountByCategory('Brouillons') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Brouillons')}</span>
+            )}
           </button>
         </li>
         <li>
@@ -81,7 +102,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
             onClick={() => { setSelectedCategory('Corbeille'); closeAllDropdowns(); }}
           >
             <MdDelete className="text-2xl" />
-            Corbeille
+            <span className={`w-35 text-left ${selectedCategory === 'Corbeille' ? 'font-bold' : ''}`}>Corbeille</span>
+            {getMailCountByCategory('Corbeille') > 0 && (
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Corbeille')}</span>
+            )}
           </button>
         </li>
       </ul>
@@ -109,46 +133,28 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
               </button>
               {isOpen && label === 'Projets' && (
                 <ul className="mb-4">
-                  <li>
-                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Web' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-                      onClick={() => { setSelectedCategory('Web'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
-                    >
-                      <span className="flex items-center gap-2">Web</span>
-                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">5</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Mobile' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-                      onClick={() => { setSelectedCategory('Mobile'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
-                    >
-                      <span className="flex items-center gap-2">Mobile</span>
-                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">3</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Design' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-                      onClick={() => { setSelectedCategory('Design'); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
-                    >
-                      <span className="flex items-center gap-2">Design</span>
-                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">4</span>
-                    </button>
-                  </li>
+                  {['Web', 'Mobile', 'Design'].map(sub => (
+                    <li key={sub}>
+                      <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === sub ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+                        onClick={() => { setSelectedCategory(sub); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
+                      >
+                        <span className="flex items-center gap-2">{sub}</span>
+                        <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{getMailCountByCategory(sub)}</span>
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               )}
               {isOpen && label === 'A propos de moi' && (
                 <ul className="mb-2">
-                  <li>
-                    <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900">
-                      <span className="flex items-center gap-2">Exemple 1</span>
-                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">2</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900">
-                      <span className="flex items-center gap-2">Exemple 2</span>
-                      <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">1</span>
-                    </button>
-                  </li>
+                  {["Exemple 1", "Exemple 2"].map(sub => (
+                    <li key={sub}>
+                      <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900">
+                        <span className="flex items-center gap-2">{sub}</span>
+                        <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{getMailCountByCategory(sub)}</span>
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               )}
             </li>
