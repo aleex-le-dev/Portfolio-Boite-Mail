@@ -7,8 +7,7 @@
     "email": "sophie.martin@email.com",
     "senderAvatar": "https://randomuser.me/api/portraits/women/44.jpg",
     "date": "10/06/2024",
-    "summary": "Bonjour, je souhaite un portfolio moderne pour présenter mes projets de design...",
-    "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    "image": "",
     "content": [
       "Bonjour,",
       "Je suis designer graphique et j'aimerais un portfolio moderne pour mettre en valeur mes réalisations.",
@@ -23,10 +22,9 @@
     "email": "contact@agencewebparis.fr",
     "senderAvatar": "https://randomuser.me/api/portraits/men/45.jpg",
     "date": "09/06/2024",
-    "summary": "Nous recherchons un développeur React pour un projet de site vitrine...",
-    "image": "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=600&q=80",
+    "image": "",
     "content": [
-      "Bonjour Alexandre,",
+      "Bonjour Alex,",
       "Nous avons consulté votre portfolio et nous recherchons un développeur React pour un site vitrine.",
       "Seriez-vous disponible pour un entretien cette semaine ?"
     ]
@@ -39,46 +37,15 @@
     "email": "julien.lefevre@email.com",
     "senderAvatar": "https://randomuser.me/api/portraits/men/46.jpg",
     "date": "08/06/2024",
-    "summary": "Je souhaite moderniser mon CV en ligne et ajouter une section projets...",
-    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "image": "",
     "content": [
       "Bonjour,",
       "Je souhaite moderniser mon CV en ligne et y intégrer une section projets.",
       "Merci de me faire un retour sur vos disponibilités."
     ]
   },
-  {
-    "id": 4,
-    "category": "Projets",
-    "title": "Refonte du site vitrine",
-    "sender": "Portfolio Web",
-    "email": "contact@portfolioweb.com",
-    "senderAvatar": "https://randomuser.me/api/portraits/men/36.jpg",
-    "date": "01/05/2024",
-    "summary": "Projet de refonte complète du site web pour un client...",
-    "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-    "content": [
-      "Refonte complète du site vitrine d'une PME.",
-      "Mise en place d'une nouvelle identité visuelle, responsive design, et optimisation SEO.",
-      "Livraison clé en main et formation du client à l'administration du site."
-    ]
-  },
-  {
-    "id": 5,
-    "category": "A propos de moi",
-    "title": "Présentation",
-    "sender": "Alexandre",
-    "email": "alexandre@email.com",
-    "senderAvatar": "https://randomuser.me/api/portraits/men/37.jpg",
-    "date": "Aujourd'hui",
-    "summary": "Développeur web passionné, spécialisé React et Node.js.",
-    "image": "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=600&q=80",
-    "content": [
-      "Je m'appelle Alexandre, développeur web fullstack.",
-      "J'aime créer des applications modernes, performantes et accessibles.",
-      "Contactez-moi pour vos projets web, mobile ou design !"
-    ]
-  },
+
+ 
   {
     "id": 6,
     "category": "Boîte de réception",
@@ -87,13 +54,11 @@
     "email": "claire.dubois@email.com",
     "senderAvatar": "https://randomuser.me/api/portraits/women/47.jpg",
     "date": "07/06/2024",
-    "summary": "Bonjour Alexandre, je souhaite collaborer avec vous sur un projet web...",
-    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "image": "",
     "content": [
-      "Bonjour Alexandre,",
+      "Bonjour Alex,",
       "Je travaille sur un projet de plateforme web et j'aimerais bénéficier de votre expertise en développement React.",
       "Seriez-vous disponible pour un échange cette semaine ? Merci d'avance !"
     ]
   }
-
 ] 

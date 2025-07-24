@@ -10,25 +10,28 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
         </div>
       )}
       {emails.length > 0 ? (
-        emails.map((mail) => (
-          <div
-            key={mail.id}
-            className={`cursor-pointer ${selectedEmailId === mail.id ? 'bg-blue-50' : ''}`}
-            onClick={() => setSelectedEmailId(mail.id)}
-          >
-            <div className="flex items-center gap-3 px-4 py-3 border-b">
-              <img src={mail.senderAvatar} alt={mail.sender} className="w-10 h-10 rounded-full object-cover" />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-gray-900 truncate">{mail.sender}</span>
-                  <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{mail.date}</span>
-                </div>
-                <div className="text-gray-800 truncate -mt-0.5 font-medium">{mail.title}</div>
-                <div className="text-gray-600 text-sm truncate">{mail.summary.slice(0, 60)}...</div>
-              </div>
+        emails.map((mail) => {
+          let preview = Array.isArray(mail.content) && mail.content.length > 0
+            ? mail.content[0].substring(0, 60) + (mail.content[0].length > 60 ? '...' : '')
+            : '';
+          return (
+            <div
+              key={mail.id}
+              className={`cursor-pointer ${selectedEmailId === mail.id ? 'bg-blue-50' : ''}`}
+              onClick={() => setSelectedEmailId(mail.id)}
+            >
+              <EmailItem
+                avatar={mail.senderAvatar}
+                name={mail.sender}
+                subject={mail.title}
+                preview={preview}
+                date={mail.date}
+                badge={mail.badge}
+                calendar={mail.calendar}
+              />
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
       )}
