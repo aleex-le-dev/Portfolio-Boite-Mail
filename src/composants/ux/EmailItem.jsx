@@ -1,6 +1,8 @@
 import React from "react";
+import { HiPaperClip } from "react-icons/hi";
+import { MdAttachFile } from "react-icons/md";
 
-const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onClick }) => (
+const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, image, onClick }) => (
   <div
     className="flex items-start gap-3 px-4 py-3 border-b cursor-pointer transition"
     onClick={onClick}
@@ -19,7 +21,16 @@ const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onCl
           <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{date}</span>
         </div>
       </div>
-      <div className="text-gray-800 truncate -mt-0.5">{subject}</div>
+      <div className="text-gray-800 truncate -mt-0.5 flex items-center gap-2">
+        {subject && subject.includes('OpenAI') ? (
+          <>
+            <span>Candidature spontanée</span>
+            {image && <MdAttachFile className="inline-block text-lg text-black" title="Pièce jointe" />}
+          </>
+        ) : (
+          <>{subject}</>
+        )}
+      </div>
       <div className="text-gray-600 text-sm truncate">{preview}</div>
     </div>
   </div>

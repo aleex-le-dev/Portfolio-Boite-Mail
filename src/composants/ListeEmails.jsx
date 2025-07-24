@@ -28,6 +28,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
                 date={mail.date}
                 badge={mail.badge}
                 calendar={mail.calendar}
+                image={mail.image}
               />
             </div>
           );

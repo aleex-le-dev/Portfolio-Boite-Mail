@@ -220,6 +220,9 @@ const BoiteMail = forwardRef((props, ref) => {
                 if (mail.email && mail.email.toLowerCase().includes(searchLower)) return true;
                 if (Array.isArray(mail.content) && mail.content.some(c => c.toLowerCase().includes(searchLower))) return true;
                 if ((mail.labels || []).some(label => label.toLowerCase().includes(searchLower))) return true;
+                // Recherche sur le alt ou title d'image (ex: CValex)
+                if (mail.image && (mail.alt && mail.alt.toLowerCase().includes(searchLower))) return true;
+                if (mail.image && (mail.title && mail.title.toLowerCase().includes(searchLower))) return true;
                 return false;
               })
               .slice(0, 10)

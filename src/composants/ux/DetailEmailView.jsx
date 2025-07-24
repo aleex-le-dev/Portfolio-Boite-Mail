@@ -156,7 +156,13 @@ const DetailEmailView = ({
                   {/* Affiche l'image props.image à la fin si c'est la candidature OpenAI */}
                   {title && title.includes('OpenAI') && image && (
                     <div className="w-full flex justify-center mt-6">
-                      <img src={image} alt="CV Alexandre Janacek" className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200" style={{maxWidth: '100%'}} />
+                      <img
+                        src={image}
+                        alt="CV Alexandre Janacek"
+                        title="CV Alexandre Janacek"
+                        className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200"
+                        style={{maxWidth: '100%'}}
+                      />
                     </div>
                   )}
                 </div>
