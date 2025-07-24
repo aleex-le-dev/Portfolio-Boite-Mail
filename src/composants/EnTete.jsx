@@ -2,8 +2,7 @@ import React from "react";
 import SearchBar from "./ux/SearchBar";
 import { FiSettings } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant } from "react-icons/md";
-import { LABELS } from "./constantes";
-import emailsData from "./email.json";
+import { LABELS, USERNAME, USER_EMAIL, USER_AVATAR } from "./constantes";
 
 const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail, onSelectCategory }) => {
   // Fonction pour obtenir l'icône de catégorie
@@ -27,19 +26,10 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   const searchRef = React.useRef();
   const resultsRef = React.useRef();
   const [showUserMenu, setShowUserMenu] = React.useState(false);
-  // Récupère l'avatar de l'utilisateur depuis les messages envoyés
-  const userEmail = "alex@salutalex.fr";
-  let userAvatar = "https://randomuser.me/api/portraits/men/48.jpg";
-  let userName = "Alexandre";
-  const userMail = emailsData.find(m => m.email === userEmail && !['Mentions légales', 'Politique de cookie'].includes(m.sender));
-  if (userMail) {
-    userAvatar = userMail.senderAvatar || userAvatar;
-    userName = userMail.sender || userName;
-  }
   const user = {
-    email: userEmail,
-    name: userName,
-    avatar: userAvatar
+    email: USER_EMAIL,
+    name: USERNAME,
+    avatar: USER_AVATAR
   };
 
   React.useEffect(() => {
@@ -173,16 +163,16 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           <FiSettings className="text-2xl text-gray-700" />
         </button>
         <button
-          className="p-1 rounded-full border-2 border-blue-400 hover:shadow-lg transition relative"
+          className="p-1 rounded-full border-2 border-blue-500 hover:shadow-lg transition relative"
           aria-label="Profil utilisateur"
           onClick={() => setShowUserMenu(v => !v)}
         >
-          <img src={user.avatar} alt="avatar" className="w-9 h-9 rounded-full object-cover" />
+          <img src={user.avatar} alt="avatar" className="w-11 h-11 rounded-full object-cover" style={{background: 'none', padding: 0, margin: 0}} />
         </button>
         {showUserMenu && (
           <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-2xl shadow-2xl w-80 z-50 flex flex-col items-center p-6 animate-fade-in">
-            <img src={user.avatar} alt="avatar" className="w-16 h-16 rounded-full object-cover border-4 border-blue-200 mb-2" />
-            <div className="font-semibold text-lg mb-1">Bonjour {user.name} !</div>
+            <img src={user.avatar} alt="avatar" className="w-16 h-16 rounded-full object-cover border-4 border-solid border-blue-500 mb-2" style={{background: 'none', padding: 0, margin: 0}} />
+            <div className="font-semibold text-lg mb-1 whitespace-nowrap">Bonjour {user.name} !</div>
             <div className="text-gray-600 text-sm mb-4">{user.email}</div>
             <button className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition mb-2">Gérer votre compte</button>
             <button className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded-xl transition">Se déconnecter</button>

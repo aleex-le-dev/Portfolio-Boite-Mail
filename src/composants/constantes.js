@@ -20,4 +20,9 @@ export const LABELS = [
     label: 'A propos de moi',
     subs: ['Exemple 2', 'Exemple 1']
   }
-]; 
+];
+
+// Mes infos
+export const USERNAME = 'Aleex Le Dev';
+export const USER_EMAIL = 'alex@salutalex.fr';
+export const USER_AVATAR = 'https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o'; 
