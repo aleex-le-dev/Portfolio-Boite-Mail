@@ -1,12 +1,24 @@
 import React from "react";
+import DetailEmailView from "./ux/DetailEmailView";
 
-// Composant qui affiche le détail d'un "email" (détail d'un projet, expérience, etc.)
+// Composant de détail d'email : à terme, les données viendront d'un JSON dynamique
 const DetailEmail = () => {
+  // Exemple statique, à remplacer par une récupération dynamique
   return (
-    <section className="flex-1 bg-gray-50 h-full overflow-y-auto p-8 rounded-2xl">
-      <h2 className="text-base font-bold mb-4 text-blue-700 rounded-xl">Titre du projet ou expérience</h2>
-      <p className="text-gray-700 text-base rounded-lg">Description détaillée du projet, des missions, des compétences utilisées, etc.</p>
-    </section>
+    <DetailEmailView
+      title="Winner: Website of the Year"
+      sender="Mattered PR"
+      senderAvatar="https://randomuser.me/api/portraits/men/32.jpg"
+      date="16 Oct. 2023"
+      summary="In the fast-paced realm of digital marketing, it's easy for an agency's own branding to take a backseat while they focus on delivering creative brilliance to their clients. At Mattered, we place a high premium on customer experience. We believe that purposeful interactions lead to meaningful connections and it was time to apply the philosophy..."
+      image="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+      content={<>
+        <p className="font-bold text-lg mb-2">What started as a quirky idea turned into an immersive space expedition, ultimately earning Mattered the esteemed Netty Award for 'Best New Website.'</p>
+        <p className="mb-2">In the fast-paced realm of digital marketing, it's easy for an agency's own branding to take a backseat while they focus on delivering creative brilliance to their clients. At Mattered, we place a high premium on customer experience.</p>
+        <p className="mb-2">We believe that purposeful interactions lead to meaningful connections and it was time to apply the philosophy to ourselves. To walk the walk, if you will. The objective was clear: we needed to create a captivating digital space that would leave a lasting impression on both current and potential clients.</p>
+      </>}
+      page="16 / 34"
+    />
   );
 };
 

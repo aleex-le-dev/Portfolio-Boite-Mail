@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "category": "Boîte de réception",
+    "title": "Winner: Website of the Year",
+    "sender": "Alex PR",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/32.jpg",
+    "date": "16 Oct. 2023",
+    "summary": "In the fast-paced realm of digital marketing, it's easy for an agency's own branding to take a backseat while they focus on delivering creative brilliance to their clients. At Mattered, we place a high premium on customer experience. We believe that purposeful interactions lead to meaningful connections and it was time to apply the philosophy...",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    "content": [
+      "What started as a quirky idea turned into an immersive space expedition, ultimately earning Mattered the esteemed Netty Award for 'Best New Website.'",
+      "In the fast-paced realm of digital marketing, it's easy for an agency's own branding to take a backseat while they focus on delivering creative brilliance to their clients. At Mattered, we place a high premium on customer experience.",
+      "We believe that purposeful interactions lead to meaningful connections and it was time to apply the philosophy to ourselves. To walk the walk, if you will. The objective was clear: we needed to create a captivating digital space that would leave a lasting impression on both current and potential clients."
+    ],
+    "page": "16 / 34"
+  },
+  {
+    "id": 2,
+    "category": "Projets",
+    "title": "Refonte du site vitrine",
+    "sender": "Portfolio Web",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/36.jpg",
+    "date": "01 Mai 2024",
+    "summary": "Projet de refonte complète du site web pour un client...",
+    "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    "content": [
+      "Refonte complète du site vitrine d'une PME.",
+      "Mise en place d'une nouvelle identité visuelle, responsive design, et optimisation SEO.",
+      "Livraison clé en main et formation du client à l'administration du site."
+    ],
+    "page": "1 / 1"
+  },
+  {
+    "id": 3,
+    "category": "A propos de moi",
+    "title": "Présentation",
+    "sender": "Alexandre",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/37.jpg",
+    "date": "Aujourd'hui",
+    "summary": "Développeur web passionné, spécialisé React et Node.js.",
+    "image": "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=600&q=80",
+    "content": [
+      "Je m'appelle Alexandre, développeur web fullstack.",
+      "J'aime créer des applications modernes, performantes et accessibles.",
+      "Contactez-moi pour vos projets web, mobile ou design !"
+    ],
+    "page": "1 / 1"
+  }
+] 

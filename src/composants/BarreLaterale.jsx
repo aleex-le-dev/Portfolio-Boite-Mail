@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
-import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdEdit, MdDelete, MdExpandMore } from "react-icons/md";
+import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
@@ -13,8 +13,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
     },
     work: false,
   });
-
-  React.useEffect(() => { console.log('open.work:', open.work); }, [open.work]);
 
   // Ferme tous les menus déroulants (projets et labels)
   function closeAllDropdowns() {
@@ -60,6 +58,14 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           >
             <MdLabelImportant className="text-2xl" />
             Important
+          </button>
+        </li>
+        <li>
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Archive' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+            onClick={() => { setSelectedCategory('Archive'); closeAllDropdowns(); }}
+          >
+            <MdArchive className="text-2xl" />
+            Archive
           </button>
         </li>
         <li>

@@ -66,7 +66,9 @@ const ListeEmails = ({ selectedCategory }) => {
   return (
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
       {selectedCategory === "Boîte de réception" && inboxMails.length > 0 && (
-        <div className="px-4 py-2 text-xs text-gray-500 font-semibold bg-gray-50 border-b">Aujourd'hui</div>
+        <div className="flex justify-center items-center text-center px-4 py-0 h-8 min-h-8 text-xs text-gray-500 font-semibold bg-gray-50 border-b rounded-tl-2xl">
+          Aujourd'hui
+        </div>
       )}
       {selectedCategory === "Boîte de réception"
         ? inboxMails.length > 0
