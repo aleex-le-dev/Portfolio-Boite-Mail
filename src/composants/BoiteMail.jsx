@@ -1,6 +1,6 @@
 // Composant principal qui structure la boîte mail du portfolio
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import EnTete from "./EnTete";
 import BarreLaterale from "./BarreLaterale";
 import ListeEmails from "./ListeEmails";
@@ -9,7 +9,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
 import { MdLabelImportant, MdInbox } from "react-icons/md";
 
-const BoiteMail = () => {
+const BoiteMail = forwardRef((props, ref) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("Boîte de réception");
   const [emails, setEmails] = useState([]);
@@ -152,6 +152,15 @@ const BoiteMail = () => {
     }
   };
 
+  useImperativeHandle(ref, () => ({
+    selectInfoMail: () => {
+      setSelectedCategory('Important');
+      setTimeout(() => {
+        setSelectedEmailId(1000);
+      }, 0);
+    }
+  }));
+
   return (
     <div className="flex flex-col h-screen bg-white  ">
       <EnTete onToggleSidebar={() => setSidebarOpen((v) => !v)} />
@@ -219,6 +228,6 @@ const BoiteMail = () => {
       </div>
     </div>
   );
-};
+});
 
 export default BoiteMail; 

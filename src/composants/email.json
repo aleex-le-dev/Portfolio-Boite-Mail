@@ -60,5 +60,32 @@
       "Je travaille sur un projet de plateforme web et j'aimerais bénéficier de votre expertise en développement React.",
       "Seriez-vous disponible pour un échange cette semaine ? Merci d'avance !"
     ]
+  },
+  {
+    "id": 1000,
+    "category": "Important",
+    "title": "Information sur la confidentialité et le stockage local",
+    "sender": "Aleex Le Dev",
+    "email": "alex@salutalex.fr",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "Aujourd'hui",
+    "image": null,
+    "content": [
+      "Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.",
+      "",
+      "Qu'est-ce que le stockage local ?",
+      "Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.",
+      "",
+      "Utilisation sur ce site :",
+      "- Mémorisation de vos messages envoyés",
+      "- Conservation de vos préférences d'affichage",
+      "- Amélioration de l'expérience utilisateur",
+      "",
+      "Aucune exploitation commerciale :",
+      "Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi. Aucune information n'est transmise à des tiers.",
+      "",
+      "Vos droits :",
+      "Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur. Pour toute question, contactez-moi à alex@salutalex.fr."
+    ]
   }
 ] 
