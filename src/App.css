@@ -1,2 +1,17 @@
 
 @import "tailwindcss";
+
+@keyframes slideUpCookie {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cookie-banner-animate {
+  animation: slideUpCookie 0.5s cubic-bezier(0.4,0,0.2,1);
+}
