@@ -36,7 +36,7 @@ const DetailEmailView = ({
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 my-4">
-            <h2 className="text-xl font-bold text-blue-800 mb-4">Confidentialité & Stockage local</h2>
+            <h2 className="text-xl font-bold text-blue-800 mb-4">Confidentialité & stockage local</h2>
             <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.</p>
             <h3 className="font-semibold text-blue-700 mt-6 mb-1">Qu'est-ce que le stockage local&nbsp;?</h3>
             <p className="mb-3 text-gray-700">Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
@@ -52,6 +52,37 @@ const DetailEmailView = ({
             <p className="mb-1 text-gray-700">Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur.</p>
             <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alex@salutalex.fr" className="underline text-blue-700">alex@salutalex.fr</a>.</p>
           </div>
+        </div>
+      </div>
+    );
+  }
+  if (category === 'Important' && id === 1001) {
+    return (
+      <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
+        <div className="px-10 pl-8 flex flex-col">
+          <h1 className="text-2xl font-bold mb-4 text-left w-full">Mentions légales du site</h1>
+          <div className="flex items-start gap-3 mb-4 w-full">
+            <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
+            <div className="flex flex-col w-full">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-sm font-semibold text-gray-900">{sender}</span>
+                <span className="text-xs text-gray-500">{date}</span>
+              </div>
+            </div>
+          </div>
+          <div className="mb-2">
+            <strong>Éditeur :</strong> Aleex Le Dev
+          </div>
+          <div className="mb-2">
+            <strong>Contact :</strong> <a href="mailto:alexandre.janacek@gmail.com" className="underline text-blue-700">alexandre.janacek@gmail.com</a>
+          </div>
+          <div className="mb-2">
+            <strong>Directeur de la publication :</strong> Aleex Le Dev
+          </div>
+          <div className="mb-2">
+            <strong>Hébergeur :</strong> O2SWITCH (<a href="https://www.o2switch.fr/contact/" className="underline text-blue-700">contact</a>)
+          </div>
+          <div className="mt-6 text-gray-700">Ce site est un portfolio personnel. Pour toute question ou demande, contactez-moi à l'adresse ci-dessus.</div>
         </div>
       </div>
     );

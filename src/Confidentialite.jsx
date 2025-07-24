@@ -4,7 +4,7 @@ import React from "react";
 // À lier dans la bannière cookie ou dans les mentions légales
 const Confidentialite = () => (
   <div className="max-w-2xl mx-auto px-4 py-10">
-    <h1 className="text-3xl font-bold mb-6">Confidentialité & Stockage local</h1>
+    <h1 className="text-3xl font-bold mb-6">Confidentialité & stockage local</h1>
     <p className="mb-4">Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.</p>
     <h2 className="text-xl font-semibold mt-6 mb-2">Qu'est-ce que le stockage local&nbsp;?</h2>
     <p className="mb-4">Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>

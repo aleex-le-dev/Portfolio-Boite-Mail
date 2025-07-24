@@ -90,7 +90,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       <div className="mt-6">
         <div className="flex items-center justify-between px-3 mb-2">
           <span className="uppercase font-bold tracking-wider text-base">Libellés</span>
-          <button className="text-2xl text-gray-400 hover:text-gray-700 leading-none">+</button>
         </div>
         <ul className="space-y-0.5">
           {Object.entries(open.labels).map(([label, isOpen]) => (
