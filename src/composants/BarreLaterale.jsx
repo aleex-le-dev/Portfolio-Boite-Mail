@@ -1,80 +1,67 @@
 import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
-import { MdInbox, MdStar, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdLabel, MdExpandMore, MdEdit } from "react-icons/md";
+import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdDescription, MdEdit, MdDelete } from "react-icons/md";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
 const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
-  const [open] = useState({
+  const [open, setOpen] = useState({
     categories: false,
-    plus: false,
+    plus: false,  
     labels: true,
     work: true,
   });
 
   return (
-    <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto border-r border-gray-200">
-      {/* Bouton Nouveau message */}
-      <button className="w-full mb-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2">
-        <MdEdit className="text-xl" />
-        Nouveau message
-      </button>
+    <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
+      {/* Bouton Nouveau message sticky */}
+      <div className="sticky top-0 z-10 bg-white pb-2">
+        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2">
+          <MdEdit className="text-xl" />
+          Nouveau message
+        </button>
+      </div>
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl font-bold text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => setSelectedCategory('Boîte de réception')}
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-blue-50 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
+            onClick={() => { setSelectedCategory('Boîte de réception'); setOpen({ ...open, work: false }); }}
           >
             <MdInbox className="text-2xl" />
             Boîte de réception
           </button>
         </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Projets' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => setSelectedCategory('Projets')}
-          >
-            <MdInbox className="text-2xl" />
-            Projets
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Compétences' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => setSelectedCategory('Compétences')}
-          >
-            <MdStar className="text-2xl" />
-            Compétences
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Expériences' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => setSelectedCategory('Expériences')}
-          >
-            <MdSchedule className="text-2xl" />
-            Expériences
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl  text-base ${selectedCategory === 'Contact' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => setSelectedCategory('Contact')}
-          >
-            <MdLabelImportant className="text-2xl" />
-            Contact
-          </button>
-        </li>
+       
+      
         <li>
           <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Messages envoyés' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
             onClick={() => setSelectedCategory('Messages envoyés')}
           >
             <MdSend className="text-2xl" />
             Messages envoyés
-            <span className="ml-2 text-green-400">✔✔</span>
+          </button>
+        </li>
+        <li>
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Important' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+            onClick={() => setSelectedCategory('Important')}
+          >
+            <MdLabelImportant className="text-2xl" />
+            Important
           </button>
         </li>
         <li>
           <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Brouillons' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
             onClick={() => setSelectedCategory('Brouillons')}
           >
-            <MdDescription className="text-2xl" />
+            <MdSchedule className="text-2xl" />
             Brouillons
+          </button>
+        </li>
+        <li>
+          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Corbeille' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+            onClick={() => setSelectedCategory('Corbeille')}
+          >
+            <MdDelete className="text-2xl" />
+            Corbeille
           </button>
         </li>
       </ul>
@@ -87,7 +74,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
         <ul className="space-y-0.5">
           <li className="flex items-center gap-2 px-3 py-1 text-base">
             <FcFolder className="text-xl" />
-            <span>CDA / ADAPECO</span>
+            <span className="uppercase">A propos de moi</span>
           </li>
           <li className="flex items-center gap-2 px-3 py-1 text-base">
             <FcFolder className="text-xl" />
@@ -103,17 +90,18 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       </div>
       {/* Dossier Portfolio avec exemples */}
       <button
-        className={`w-full bg-blue-50 rounded-xl px-3 py-2 mb-1 flex items-center gap-2 font-semibold transition ${selectedCategory === 'Portfolio' ? 'bg-blue-100 text-blue-700' : 'text-blue-600'} ${open.work ? 'bg-blue-50' : ''}`}
-        onClick={() => setSelectedCategory('Portfolio')}
+        className="w-full bg-white rounded-xl uppercase px-3 py-2 mb-1 flex items-center gap-2 transition text-gray-900 font-normal"
+        onClick={() => setOpen({ ...open, work: !open.work })}
       >
-        <FcFolder className="text-xl" />
-        Portfolio
+        <FcFolder className="text-xl " />
+        Projets
+        <span className="ml-auto text-xl font-bold">{open.work ? '-' : '+'}</span>
       </button>
       {open.work && (
         <ul className="mb-4">
           <li>
             <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Web' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => setSelectedCategory('Web')}
+              onClick={() => { setSelectedCategory('Web'); setOpen({ ...open, work: false }); }}
             >
               <span className="flex items-center gap-2">Web</span>
               <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">5</span>
@@ -121,7 +109,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           </li>
           <li>
             <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Mobile' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => setSelectedCategory('Mobile')}
+              onClick={() => { setSelectedCategory('Mobile'); setOpen({ ...open, work: false }); }}
             >
               <span className="flex items-center gap-2">Mobile</span>
               <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">3</span>
@@ -129,7 +117,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           </li>
           <li>
             <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === 'Design' ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => setSelectedCategory('Design')}
+              onClick={() => { setSelectedCategory('Design'); setOpen({ ...open, work: false }); }}
             >
               <span className="flex items-center gap-2">Design</span>
               <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">4</span>

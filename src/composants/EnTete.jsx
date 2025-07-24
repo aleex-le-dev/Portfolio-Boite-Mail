@@ -6,7 +6,7 @@ import { MdMenu } from "react-icons/md";
 // Props : onToggleSidebar (fonction pour ouvrir/fermer la barre latérale)
 const EnTete = ({ onToggleSidebar }) => {
   return (
-    <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-sm">
+    <header className="w-full flex items-center justify-between px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
       <div className="flex items-center">
         <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
