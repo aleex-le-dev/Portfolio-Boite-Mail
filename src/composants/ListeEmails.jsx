@@ -17,7 +17,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
           return (
             <div
               key={mail.id}
-              className={`cursor-pointer ${selectedEmailId === mail.id ? 'bg-blue-50' : ''}`}
+              className={`cursor-pointer rounded-xl transition-colors duration-100 ${selectedEmailId === mail.id ? 'bg-blue-100' : 'hover:bg-gray-50'}`}
               onClick={() => setSelectedEmailId(mail.id)}
             >
               <EmailItem

@@ -2,7 +2,7 @@ import React from "react";
 
 const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, onClick }) => (
   <div
-    className="flex items-start gap-3 px-4 py-3 border-b cursor-pointer transition bg-white hover:bg-blue-50"
+    className="flex items-start gap-3 px-4 py-3 border-b cursor-pointer transition"
     onClick={onClick}
   >
     <img src={avatar} alt={name} className="w-10 h-10 rounded-full object-cover mt-1" />
