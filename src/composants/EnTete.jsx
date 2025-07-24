@@ -31,7 +31,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   const userEmail = "alexandre.janacek@gmail.com";
   let userAvatar = "https://randomuser.me/api/portraits/men/48.jpg";
   let userName = "Alexandre";
-  const userMail = emailsData.find(m => m.email === userEmail);
+  const userMail = emailsData.find(m => m.email === userEmail && !['Mentions légales', 'Politique de cookie'].includes(m.sender));
   if (userMail) {
     userAvatar = userMail.senderAvatar || userAvatar;
     userName = userMail.sender || userName;
