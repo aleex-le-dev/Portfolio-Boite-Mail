@@ -29,6 +29,29 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
     }));
   }
 
+  // Définition des catégories principales pour la navigation
+  const NAV_CATEGORIES = [
+    { label: 'Boîte de réception', value: 'Boîte de réception', icon: MdInbox },
+    { label: 'Messages envoyés', value: 'Messages envoyés', icon: MdSend },
+    { label: 'Important', value: 'Important', icon: MdLabelImportant },
+    { label: 'Archive', value: 'Archive', icon: MdArchive },
+    { label: 'Brouillons', value: 'Brouillons', icon: MdSchedule },
+    { label: 'Corbeille', value: 'Corbeille', icon: MdDelete },
+    
+  ];
+
+  // Définition des libellés et sous-libellés pour la section libellés
+  const LABELS_CONFIG = [
+    {
+      label: 'Projets',
+      subs: ['Web', 'Mobile', 'Design', 'Exemple 1', 'Exemple 2']
+    },
+    {
+      label: 'A propos de moi',
+      subs: ['Exemple 1', 'Exemple 2']
+    }
+  ];
+
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
       {/* Bouton Nouveau message sticky */}
@@ -40,74 +63,20 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
       </div>
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === 'Boîte de réception' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Boîte de réception'); closeAllDropdowns(); }}
-          >
-            <MdInbox className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Boîte de réception' ? 'font-bold' : ''}`}>Boîte de réception</span>
-            {getMailCountByCategory('Boîte de réception') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Boîte de réception')}</span>
-            )}
-          </button>
-        </li>
-       
-      
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === 'Messages envoyés' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Messages envoyés'); closeAllDropdowns(); }}
-          >
-            <MdSend className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Messages envoyés' ? 'font-bold' : ''}`}>Messages envoyés</span>
-            {getMailCountByCategory('Messages envoyés') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Messages envoyés')}</span>
-            )}
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Important' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Important'); closeAllDropdowns(); }}
-          >
-            <MdLabelImportant className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Important' ? 'font-bold' : ''}`}>Important</span>
-            {getMailCountByCategory('Important') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Important')}</span>
-            )}
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Archive' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Archive'); closeAllDropdowns(); }}
-          >
-            <MdArchive className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Archive' ? 'font-bold' : ''}`}>Archive</span>
-            {getMailCountByCategory('Archive') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Archive')}</span>
-            )}
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Brouillons' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Brouillons'); closeAllDropdowns(); }}
-          >
-            <MdSchedule className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Brouillons' ? 'font-bold' : ''}`}>Brouillons</span>
-            {getMailCountByCategory('Brouillons') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Brouillons')}</span>
-            )}
-          </button>
-        </li>
-        <li>
-          <button className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base ${selectedCategory === 'Corbeille' ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-            onClick={() => { setSelectedCategory('Corbeille'); closeAllDropdowns(); }}
-          >
-            <MdDelete className="text-2xl" />
-            <span className={`w-35 text-left ${selectedCategory === 'Corbeille' ? 'font-bold' : ''}`}>Corbeille</span>
-            {getMailCountByCategory('Corbeille') > 0 && (
-              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory('Corbeille')}</span>
-            )}
-          </button>
-        </li>
+        {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (
+          <li key={value}>
+            <button
+              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === value ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+              onClick={() => { setSelectedCategory(value); closeAllDropdowns(); }}
+            >
+              {Icon && <Icon className="text-2xl" />}
+              <span className={`w-35 text-left ${selectedCategory === value ? 'font-bold' : ''}`}>{label}</span>
+              {getMailCountByCategory(value) > 0 && (
+                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory(value)}</span>
+              )}
+            </button>
+          </li>
+        ))}
       </ul>
 
       {/* Libellés */}
@@ -116,7 +85,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
           <span className="uppercase font-bold tracking-wider text-base">Libellés</span>
         </div>
         <ul className="space-y-0.5">
-          {Object.entries(open.labels).map(([label, isOpen]) => (
+          {LABELS_CONFIG.map(({ label, subs }) => (
             <li key={label}>
               <button className="flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg hover:bg-gray-100 text-gray-900"
                 onClick={() => {
@@ -129,27 +98,15 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
               >
                 <FcFolder className="text-xl" />
                 <span className="uppercase">{label}</span>
-                <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
               </button>
-              {isOpen && label === 'Projets' && (
+              {open.labels[label] && (
                 <ul className="mb-4">
-                  {['Web', 'Mobile', 'Design'].map(sub => (
+                  {subs.map(sub => (
                     <li key={sub}>
-                      <button className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === sub ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+                      <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900"
                         onClick={() => { setSelectedCategory(sub); setOpen(o => ({ ...o, labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false])) })); }}
                       >
-                        <span className="flex items-center gap-2">{sub}</span>
-                        <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{getMailCountByCategory(sub)}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {isOpen && label === 'A propos de moi' && (
-                <ul className="mb-2">
-                  {["Exemple 1", "Exemple 2"].map(sub => (
-                    <li key={sub}>
-                      <button className="flex items-center justify-between w-full py-1 px-2 rounded-lg hover:bg-gray-100 text-gray-900">
                         <span className="flex items-center gap-2">{sub}</span>
                         <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{getMailCountByCategory(sub)}</span>
                       </button>

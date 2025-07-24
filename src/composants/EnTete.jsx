@@ -74,7 +74,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             {(() => {
               // Définition des libellés principaux et sous-libellés comme dans la barre latérale
               const LABELS = [
-                { label: 'Projets', subs: ['Web', 'Mobile', 'Design'] },
+                { label: 'Projets', subs: ['Web', 'Mobile', 'Design', 'Exemple 1', 'Exemple 2'] },
                 { label: 'A propos de moi', subs: ['Exemple 1', 'Exemple 2'] }
               ];
               const searchNorm = search.toLowerCase().replace(/\s+/g, '');
@@ -84,8 +84,8 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
                 <div className="mb-2">
                   <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
                   {matchingLabels.flatMap(({ label, subs }) => {
-                    // Si la recherche matche le parent, on affiche toutes les combinaisons parent-sous-libellé
                     if (label.toLowerCase().replace(/\s+/g, '').includes(searchNorm)) {
+                      // Affiche TOUS les sous-libellés si le parent matche, même sans mail
                       return sortAlpha(subs).map(sub => (
                         <button
                           key={label + '-' + sub}
