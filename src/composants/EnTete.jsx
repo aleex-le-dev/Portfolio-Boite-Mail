@@ -28,7 +28,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   const resultsRef = React.useRef();
   const [showUserMenu, setShowUserMenu] = React.useState(false);
   // Récupère l'avatar de l'utilisateur depuis les messages envoyés
-  const userEmail = "alexandre.janacek@gmail.com";
+  const userEmail = "alex@salutalex.fr";
   let userAvatar = "https://randomuser.me/api/portraits/men/48.jpg";
   let userName = "Alexandre";
   const userMail = emailsData.find(m => m.email === userEmail && !['Mentions légales', 'Politique de cookie'].includes(m.sender));

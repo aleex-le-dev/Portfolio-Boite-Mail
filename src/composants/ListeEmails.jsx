@@ -5,7 +5,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
   return (
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
       {emails.length > 0 && (
-        <div className="flex justify-center items-center text-center px-4 py-0 h-8 min-h-8 text-xs text-gray-500 font-semibold bg-gray-50 border-b rounded-tl-2xl">
+        <div className="flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-base text-gray-700 font-bold bg-gray-50 border-b rounded-tl-2xl">
           Aujourd'hui
         </div>
       )}
