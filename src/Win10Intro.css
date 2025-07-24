@@ -40,68 +40,6 @@
   80% { opacity: 1; transform: scale(1.1) rotate(2deg); }
   100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
-/* Animation d'intro 3D développeur */
-.dev3d-intro-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: linear-gradient(135deg, #0c2340 0%, #1e3c72 100%);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: dev3d-fadeout 0.7s 2.5s forwards;
-}
-@keyframes dev3d-fadeout {
-  to { opacity: 0; visibility: hidden; }
-}
-.dev3d-cube-scene {
-  width: 120px;
-  height: 120px;
-  perspective: 600px;
-  margin-bottom: 32px;
-}
-.dev3d-cube {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: dev3d-cube-rotate 2.2s cubic-bezier(.7,0,.3,1) infinite;
-}
-@keyframes dev3d-cube-rotate {
-  0% { transform: rotateX(-20deg) rotateY(0deg);}
-  80% { transform: rotateX(-20deg) rotateY(360deg);}
-  100% { transform: rotateX(-20deg) rotateY(360deg);}
-}
-.dev3d-face {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, #00adef 60%, #fff 100%);
-  opacity: 0.95;
-  border-radius: 12px;
-  box-shadow: 0 0 32px #00adef55;
-}
-.dev3d-face-front  { transform: rotateY(  0deg) translateZ(60px);}
-.dev3d-face-back   { transform: rotateY(180deg) translateZ(60px);}
-.dev3d-face-right  { transform: rotateY( 90deg) translateZ(60px);}
-.dev3d-face-left   { transform: rotateY(-90deg) translateZ(60px);}
-.dev3d-face-top    { transform: rotateX( 90deg) translateZ(60px);}
-.dev3d-face-bottom { transform: rotateX(-90deg) translateZ(60px);}
-.dev3d-title {
-  color: #fff;
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-shadow: 0 4px 24px #00adef99;
-  opacity: 0;
-  transform: translateY(32px);
-  animation: dev3d-title-in 0.8s 1.2s forwards;
-}
-@keyframes dev3d-title-in {
-  to { opacity: 1; transform: translateY(0);}
-}
 /* Animation d'intro portfolio */
 .portfolio-intro-bg {
   position: fixed;
@@ -171,29 +109,21 @@
   60% { transform: scale(1.15) translateY(-8px); opacity: 1; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
-.dev3d-intro-zoom {
-  animation: dev3d-fadeout 0.7s 1.1s forwards;
+/* Animation de clignotement pour le S */
+.dev3d-face-s {
+  /* Cette classe doit être appliquée à l'élément S sur la face du cube */
+  animation: s-blink 2.2s cubic-bezier(.7,0,.3,1) both;
 }
-.dev3d-cube-zoom {
-  transition: transform 1s cubic-bezier(.7,0,.3,1);
-  transform: scale(1.6) translateY(30px);
-}
-.dev3d-cube-zoomed {
-  animation: dev3d-cube-zoom-anim 2s cubic-bezier(.86,0,.07,1) forwards;
-}
-@keyframes dev3d-cube-zoom-anim {
-  0% { transform: rotateX(-20deg) rotateY(0deg) scale(1); }
-  100% { transform: rotateX(0deg) rotateY(0deg) scale(2.8); }
-}
-.dev3d-color-transition {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: linear-gradient(135deg, #00adef 0%, #0c2340 100%);
-  animation: dev3d-color-fade 2.5s linear forwards;
-}
-@keyframes dev3d-color-fade {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes s-blink {
+  0% { opacity: 1; }
+  10% { opacity: 0.2; }
+  20% { opacity: 1; }
+  30% { opacity: 0.2; }
+  40% { opacity: 1; }
+  50% { opacity: 0.2; }
+  60% { opacity: 1; }
+  70% { opacity: 0.2; }
+  80% { opacity: 1; }
+  90% { opacity: 0.2; }
+  100% { opacity: 1; }
 } 
