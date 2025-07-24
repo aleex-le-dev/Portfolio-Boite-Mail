@@ -153,9 +153,10 @@ const DetailEmailView = ({
                   {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
                     <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
                   )}
-                  {!Array.isArray(content) && image && (
+                  {/* Affiche l'image props.image à la fin si c'est la candidature OpenAI */}
+                  {title && title.includes('OpenAI') && image && (
                     <div className="w-full flex justify-center mt-6">
-                      <img src={image} alt="Pièce jointe" className="rounded-xl object-contain max-w-[420px] w-full shadow-lg border border-gray-200" />
+                      <img src={image} alt="CV Alexandre Janacek" className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200" style={{maxWidth: '100%'}} />
                     </div>
                   )}
                 </div>

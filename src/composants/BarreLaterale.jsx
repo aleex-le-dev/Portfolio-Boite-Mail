@@ -92,6 +92,19 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                 {label === 'Messages envoyés' && (
                   <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label && !mail.to).length}</span>
                 )}
+                {label === 'Corbeille' && (
+                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{
+                    (() => {
+                      let sent = [];
+                      try {
+                        sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+                      } catch {/* ignore */}
+                      const jsonTrash = (emails || []).filter(e => e.category === label);
+                      const allTrash = [...sent.filter(e => e.category === label), ...jsonTrash.filter(js => !sent.find(s => s.id === js.id))];
+                      return allTrash.length;
+                    })()
+                  }</span>
+                )}
                 {label !== 'Mes certifications' && (
                   <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
                 )}

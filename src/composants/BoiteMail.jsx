@@ -48,37 +48,25 @@ const BoiteMail = forwardRef((props, ref) => {
   const todayStr = new Date().toLocaleDateString('fr-FR');
   const [search, setSearch] = useState("");
   let filteredEmails = [];
-  if (selectedCategory === 'Messages envoyés') {
+  if (selectedCategory === 'Corbeille') {
     let sent = [];
     try {
       sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
     } catch {/* ignore */}
-    // On ne garde que le mail le plus récent par conversation (par sujet+destinataire)
-    const uniqueSent = [];
-    const seen = new Set();
-    for (const mail of sent) {
-      const key = mail.title + '|' + (mail.email || mail.to || '');
-      if (!seen.has(key)) {
-        uniqueSent.push(mail);
-        seen.add(key);
-      }
-    }
-    const jsonSent = emails.filter(e => e.category === 'Messages envoyés' && !uniqueSent.find(s => s.id === e.id));
-    const allSent = [...uniqueSent, ...jsonSent];
-    // Unicité stricte par conversation (titre+destinataire) pour l'affichage et le compteur, mais uniquement pour les mails du JSON (pas de champ 'to')
-    const uniqueFiltered = [];
-    const seenFiltered = new Set();
-    for (const mail of allSent) {
-      if (mail.to) continue; // ignorer les réponses du localStorage
-      const key = mail.title + '|' + (mail.email || '');
-      if (!seenFiltered.has(key)) {
-        uniqueFiltered.push(mail);
-        seenFiltered.add(key);
-      }
-    }
-    filteredEmails = uniqueFiltered.map(e => e.todayDate ? { ...e, date: todayStr } : e);
+    const jsonTrash = emails.filter(e => e.category === 'Corbeille');
+    const allTrash = [...sent.filter(e => e.category === 'Corbeille'), ...jsonTrash.filter(js => !sent.find(s => s.id === js.id))];
+    filteredEmails = allTrash.map(e => e.todayDate ? { ...e, date: todayStr } : e);
+  } else if (selectedCategory === 'Messages envoyés') {
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    // Affiche tous les mails (JSON + localStorage)
+    const jsonSent = emails.filter(e => e.category === 'Messages envoyés');
+    const allSent = [...sent, ...jsonSent.filter(js => !sent.find(s => s.id === js.id))];
+    filteredEmails = allSent.map(e => e.todayDate ? { ...e, date: todayStr } : e);
     console.log('filteredEmails:', filteredEmails);
-    console.log('compteur affiché:', filteredEmails.length);
+    console.log('compteur affiché:', (emails || []).filter(e => e.category === 'Messages envoyés' && !e.to).length);
   } else {
     filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
       e.todayDate ? { ...e, date: todayStr } : e
@@ -172,15 +160,40 @@ const BoiteMail = forwardRef((props, ref) => {
 
   // Fonction pour mettre un mail à la corbeille
   const handleTrash = (id) => {
-    setEmails(prev => prev.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e));
+    setEmails(prev => {
+      let updated = prev;
+      const mailToDelete = prev.find(e => e.id === id);
+      if (mailToDelete) {
+        // Si le mail est en boîte de réception, messages envoyés, important ou archive, on le déplace dans la corbeille
+        if ([
+          'Boîte de réception',
+          'Messages envoyés',
+          'Important',
+          'Archive'
+        ].includes(mailToDelete.category)) {
+          updated = prev.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
+        } else {
+          // Sinon, suppression complète (ex: déjà en corbeille)
+          updated = prev.filter(e => e.id !== id);
+        }
+      }
+      // Si c'est une réponse, supprime aussi l'original de la boîte de réception (même sujet + destinataire)
+      if (mailToDelete && mailToDelete.to) {
+        updated = updated.filter(e => !(e.category === 'Boîte de réception' && e.title === mailToDelete.title && e.email === mailToDelete.to));
+      }
+      if (selectedCategory === 'Messages envoyés') {
+        const next = updated.filter(e => e.category === 'Messages envoyés');
+        setSelectedEmailId(next[0]?.id || null);
+      }
+      return updated;
+    });
     let sent = [];
     try {
       sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
     } catch {/* ignore */}
-    if (sent.find(e => e.id === id)) {
-      sent = sent.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
-      localStorage.setItem('messageenvoye', JSON.stringify(sent));
-    }
+    // Déplace aussi dans la corbeille côté localStorage
+    sent = sent.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
+    localStorage.setItem('messageenvoye', JSON.stringify(sent));
   };
 
   useImperativeHandle(ref, () => ({
