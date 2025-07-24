@@ -10,6 +10,7 @@ export const NAV_CATEGORIES = [
   { label: 'Corbeille', value: 'Corbeille', icon: MdDelete },
 ];
 
+// Affiché par ordre alphabétique
 export const LABELS = [
   {
     label: 'Projets',
