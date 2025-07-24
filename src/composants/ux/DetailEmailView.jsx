@@ -24,13 +24,13 @@ const DetailEmailView = ({
   return (
     <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
       {/* Corps du mail */}
-      <div className="flex-1 px-10 py-8 flex flex-col items-center">
+      <div className="flex-1 px-10 pl-8 flex flex-col items-center">
         {category !== 'Messages envoyés' && (
           <>
             <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
             <div className="flex items-center gap-3 mb-4 w-full">
               <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
-              <div>
+              <div className="flex flex-col">
                 <div className="font-semibold text-gray-900">{sender}</div>
                 <div className="text-xs text-gray-500">{date}</div>
               </div>
@@ -60,9 +60,9 @@ const DetailEmailView = ({
               </div>
               <hr className="my-4 border-t-2 border-gray-200" />
               <div className="flex items-start gap-3 mt-4">
-                <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Alex@salutalex.fr" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400" />
+                <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alex@salutalex.fr" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400" />
                 <div className="flex flex-col">
-                  <div className="text-sm font-semibold text-gray-900">Alex@salutalex.fr</div>
+                  <div className="text-sm font-semibold text-gray-900">alex@salutalex.fr</div>
                   <div className="text-xs text-gray-500 mb-2">
                     {date} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
                   </div>

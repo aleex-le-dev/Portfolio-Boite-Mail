@@ -66,6 +66,9 @@ const BoiteMail = () => {
     let originalContent = original && original.content ? original.content : [];
     let originalSummary = original && original.summary ? original.summary : "";
     let originalImage = original && original.image ? original.image : null;
+    let originalSender = original && original.sender ? original.sender : "";
+    let originalSenderAvatar = original && original.senderAvatar ? original.senderAvatar : "";
+    let originalEmail = original && original.email ? original.email : "";
     // Ne pas dupliquer la réponse si elle est déjà dans le contenu
     if (originalContent.length > 0 && originalContent[originalContent.length - 1] === message) {
       originalContent = originalContent.slice(0, -1);
@@ -74,9 +77,9 @@ const BoiteMail = () => {
       id: emails.length > 0 ? Math.max(...emails.map(e => e.id)) + 1 : 1,
       category: "Messages envoyés",
       title: subject,
-      sender: "Alex@salutalex.fr",
-      email: "Alex@salutalex.fr",
-      senderAvatar: "https://randomuser.me/api/portraits/men/37.jpg",
+      sender: originalSender,
+      email: originalEmail,
+      senderAvatar: originalSenderAvatar,
       date: new Date().toLocaleDateString('fr-FR'),
       summary: originalSummary,
       image: originalImage,
