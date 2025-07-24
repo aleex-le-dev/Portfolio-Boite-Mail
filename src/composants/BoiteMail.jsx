@@ -43,39 +43,16 @@ const BoiteMail = forwardRef((props, ref) => {
   const todayStr = new Date().toLocaleDateString('fr-FR');
   const [search, setSearch] = useState("");
   let filteredEmails = [];
-  const searchLower = search.trim().toLowerCase();
-  const match = (mail) => {
-    if (!searchLower) return true;
-    if (mail.title && mail.title.toLowerCase().includes(searchLower)) return true;
-    if (mail.sender && mail.sender.toLowerCase().includes(searchLower)) return true;
-    if (mail.email && mail.email.toLowerCase().includes(searchLower)) return true;
-    if (Array.isArray(mail.content) && mail.content.some(c => c.toLowerCase().includes(searchLower))) return true;
-    return false;
-  };
-  if (search && search.trim().length >= 3) {
-    if (selectedCategory === 'Messages envoyés') {
-      let sent = [];
-      try {
-        sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-      } catch {/* ignore */}
-      filteredEmails = sent.map(e => e.todayDate ? { ...e, date: todayStr } : e);
-    } else {
-      filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
-        e.todayDate ? { ...e, date: todayStr } : e
-      );
-    }
+  if (selectedCategory === 'Messages envoyés') {
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    filteredEmails = sent.map(e => e.todayDate ? { ...e, date: todayStr } : e);
   } else {
-    if (selectedCategory === 'Messages envoyés') {
-      let sent = [];
-      try {
-        sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-      } catch {/* ignore */}
-      filteredEmails = sent.filter(match).map(e => e.todayDate ? { ...e, date: todayStr } : e);
-    } else {
-      filteredEmails = emails.filter(e => e.category === selectedCategory && match(e)).map(e =>
-        e.todayDate ? { ...e, date: todayStr } : e
-      );
-    }
+    filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
+      e.todayDate ? { ...e, date: todayStr } : e
+    );
   }
   // Sélectionner le mail courant
   const selectedEmail = filteredEmails.find(e => e.id === selectedEmailId) || filteredEmails[0];
@@ -193,7 +170,15 @@ const BoiteMail = forwardRef((props, ref) => {
         onSearchChange={e => setSearch(e.target.value)}
         searchResults={search && search.trim().length >= 3
           ? [...emails, ...(JSON.parse(localStorage.getItem('messageenvoye') || '[]'))]
-              .filter(match)
+              .filter(mail => {
+                const searchLower = search.trim().toLowerCase();
+                if (mail.title && mail.title.toLowerCase().includes(searchLower)) return true;
+                if (mail.sender && mail.sender.toLowerCase().includes(searchLower)) return true;
+                if (mail.email && mail.email.toLowerCase().includes(searchLower)) return true;
+                if (Array.isArray(mail.content) && mail.content.some(c => c.toLowerCase().includes(searchLower))) return true;
+                if ((mail.labels || []).some(label => label.toLowerCase().includes(searchLower))) return true;
+                return false;
+              })
               .slice(0, 10)
           : []}
         onSelectMail={mail => {

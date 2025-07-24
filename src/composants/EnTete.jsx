@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./ux/SearchBar";
 import { FiSettings, FiUser } from "react-icons/fi";
-import { MdMenu, MdInbox, MdSend, MdLabelImportant, MdArchive, MdSchedule, MdDelete, MdFolder } from "react-icons/md";
+import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant } from "react-icons/md";
 
 // Composant d'en-tête de la boîte mail (barre supérieure)
 // Props : onToggleSidebar (fonction pour ouvrir/fermer la barre latérale)
@@ -11,7 +11,6 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
     switch ((cat || '').toLowerCase()) {
       case 'boîte de réception': return <MdInbox className="text-blue-500 text-lg" />;
       case 'messages envoyés': return <MdSend className="text-green-500 text-lg" />;
-      case 'important': return <MdLabelImportant className="text-yellow-500 text-lg" />;
       case 'archive': return <MdArchive className="text-gray-500 text-lg" />;
       case 'brouillons': return <MdSchedule className="text-purple-500 text-lg" />;
       case 'corbeille': return <MdDelete className="text-red-500 text-lg" />;
@@ -29,7 +28,11 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
       </div>
       {/* Barre de recherche */}
       <div className="relative w-96">
-        <SearchBar placeholder="Rechercher dans les emails" value={search} onChange={onSearchChange} />
+        <SearchBar
+          placeholder="Rechercher dans les emails"
+          value={search}
+          onChange={onSearchChange}
+        />
         {search && (searchResults.length > 0 || (searchResults.some(mail => (mail.labels || []).some(label => label.toLowerCase() === search.toLowerCase())))) && (
           <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50  overflow-y-auto w-[800px] px-2">
             {/* Catégorie Emails */}
@@ -68,27 +71,49 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             {/* Catégorie Libellés */}
             {(() => {
               // On cherche les libellés qui CONTIENNENT la recherche (insensible à la casse)
-              const matchingLabels = Array.from(new Set(
-                searchResults.flatMap(mail => (mail.labels || []))
-              )).filter(label => label.toLowerCase().includes(search.toLowerCase()));
+              const rawLabels = searchResults.flatMap(mail => (mail.labels || []));
+              // Normalisation : minuscule, suppression espaces, suppression s/pluriel
+              const normalize = l => l.toLowerCase().replace(/\s+/g, '').replace(/s$/, '');
+              const uniqueLabelsMap = {};
+              rawLabels.forEach(label => {
+                const norm = normalize(label);
+                if (!uniqueLabelsMap[norm]) uniqueLabelsMap[norm] = label;
+              });
+              const searchNorm = search.toLowerCase().replace(/\s+/g, '');
+              const matchingLabels = Object.values(uniqueLabelsMap).filter(label =>
+                normalize(label).includes(searchNorm)
+              );
               if (matchingLabels.length === 0) return null;
               return (
                 <div className="mb-2">
                   <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
-                  {matchingLabels.map(label => {
-                    // Trouver le premier mail contenant ce libellé
-                    const mailWithLabel = searchResults.find(mail => (mail.labels || []).includes(label));
-                    return (
+                  {matchingLabels.flatMap(label => {
+                    // Pour chaque mail qui a ce label, on affiche une ligne par sous-libellé (autre label du mail)
+                    const mailsWithLabel = searchResults.filter(mail => (mail.labels || []).includes(label));
+                    const combos = [];
+                    mailsWithLabel.forEach(mail => {
+                      const subLabels = (mail.labels || []).filter(l => l !== label);
+                      if (subLabels.length === 0) {
+                        combos.push({ label, sub: null });
+                      } else {
+                        subLabels.forEach(sub => combos.push({ label, sub }));
+                      }
+                    });
+                    // On évite les doublons exacts
+                    const uniqueCombos = Array.from(new Set(combos.map(c => c.label + '|' + (c.sub || '')))).map(key => {
+                      const [label, sub] = key.split('|');
+                      return { label, sub: sub || null };
+                    });
+                    return uniqueCombos.map(({ label, sub }) => (
                       <button
-                        key={label}
+                        key={label + '-' + (sub || 'parent')}
                         className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
-                        onClick={() => mailWithLabel && onSelectMail(mailWithLabel)}
                         type="button"
                       >
                         <MdLabelImportant className="text-yellow-500 text-lg" />
-                        <span className="text-base font-bold text-gray-800">{label}</span>
+                        <span className="text-base font-bold text-gray-800">{label}{sub ? ` - ${sub}` : ''}</span>
                       </button>
-                    );
+                    ));
                   })}
                 </div>
               );
