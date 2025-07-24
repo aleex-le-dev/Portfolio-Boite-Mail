@@ -45,7 +45,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 4,
     "category": "Boîte de réception",
     "title": "Demande de collaboration pour un projet web",
     "sender": "Claire Dubois",
@@ -60,7 +60,7 @@
     ]
   },
   {
-    "id": 10,
+    "id": 5,
     "category": "Web",
     "title": "Nouveau site vitrine pour client PME",
     "sender": "Client PME",
@@ -75,7 +75,7 @@
     ]
   },
   {
-    "id": 11,
+    "id": 6,
     "category": "Mobile",
     "title": "Application mobile pour gestion de stock",
     "sender": "Startup Mobile",
@@ -90,7 +90,7 @@
     ]
   },
   {
-    "id": 12,
+    "id": 7,
     "category": "Design",
     "title": "Refonte graphique d'une plateforme SaaS",
     "sender": "SaaS Design",
@@ -105,7 +105,7 @@
     ]
   },
   {
-    "id": 1000,
+    "id": 8,
     "category": "Important",
     "title": "Information sur la confidentialité et le stockage local",
     "sender": "Politique de cookie",
@@ -132,7 +132,7 @@
     ]
   },
   {
-    "id": 1001,
+    "id": 9,
     "category": "Important",
     "title": "Mentions légales du site",
     "sender": "Mentions légales",
@@ -152,7 +152,7 @@
     ]
   },
   {
-    "id": 1002,
+    "id": 10,
     "category": "Web",
     "title": "Mentions légales du site",
     "sender": "Mentions légales",

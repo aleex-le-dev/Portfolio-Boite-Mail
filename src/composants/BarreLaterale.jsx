@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
 import { LABELS, NAV_CATEGORIES } from "./constantes";
 import emailsData from "./email.json";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
-const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsProp }) => {
-  const [emails, setEmails] = useState(emailsProp || []);
-  useEffect(() => { setEmails(emailsProp || []); }, [emailsProp]);
+const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
 
   const [open, setOpen] = useState({
     categories: false,
@@ -18,17 +16,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsPr
     },
     work: false,
   });
-
-  // Fonction utilitaire pour compter les mails d'une catégorie
-  const getMailCountByCategory = (cat) => {
-    let count = (emails || []).filter(mail => mail.category === cat).length;
-    // Ajout des messages envoyés archivés dans le localStorage
-    try {
-      const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-      count += sent.filter(mail => mail.category === cat).length;
-    } catch {/* ignore erreur JSON */}
-    return count;
-  };
 
   // Ferme tous les menus déroulants (projets et labels)
   function closeAllDropdowns() {
@@ -58,9 +45,16 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails: emailsPr
             >
               {Icon && <Icon className="text-2xl" />}
               <span className={`w-35 text-left ${selectedCategory === value ? 'font-bold' : ''}`}>{label}</span>
-              {getMailCountByCategory(value) > 0 && (
-                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{getMailCountByCategory(value)}</span>
-              )}
+              <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{
+                (() => {
+                  let allMails = [...(emailsData || [])];
+                  try {
+                    const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+                    allMails = [...allMails, ...sent];
+                  } catch {/* ignore */}
+                  return allMails.filter(mail => mail.category === value).length;
+                })()
+              }</span>
             </button>
           </li>
         ))}
