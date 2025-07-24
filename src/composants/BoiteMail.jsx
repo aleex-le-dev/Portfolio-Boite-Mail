@@ -5,7 +5,9 @@ import EnTete from "./EnTete";
 import BarreLaterale from "./BarreLaterale";
 import ListeEmails from "./ListeEmails";
 import DetailEmailView from "./ux/DetailEmailView";
-import { FiArchive, FiTrash2 } from "react-icons/fi";
+import { FiTrash2 } from "react-icons/fi";
+import { MdArchive } from "react-icons/md";
+import { MdLabelImportant, MdInbox } from "react-icons/md";
 
 const BoiteMail = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -96,6 +98,60 @@ const BoiteMail = () => {
     localStorage.setItem('messageenvoye', JSON.stringify(sent));
   };
 
+  // Fonction pour archiver un mail
+  const handleArchive = (id) => {
+    setEmails(prev => prev.map(e => e.id === id ? { ...e, category: 'Archive' } : e));
+    // Archive aussi dans localStorage si c'est un message envoyé
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    if (sent.find(e => e.id === id)) {
+      sent = sent.map(e => e.id === id ? { ...e, category: 'Archive' } : e);
+      localStorage.setItem('messageenvoye', JSON.stringify(sent));
+    }
+  };
+
+  // Fonction pour marquer un mail comme important
+  const handleImportant = (id) => {
+    setEmails(prev => prev.map(e => e.id === id ? { ...e, category: 'Important' } : e));
+    // Important aussi dans localStorage si c'est un message envoyé
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    if (sent.find(e => e.id === id)) {
+      sent = sent.map(e => e.id === id ? { ...e, category: 'Important' } : e);
+      localStorage.setItem('messageenvoye', JSON.stringify(sent));
+    }
+  };
+
+  // Fonction pour remettre un mail dans la boîte de réception
+  const handleToInbox = (id) => {
+    setEmails(prev => prev.map(e => e.id === id ? { ...e, category: 'Boîte de réception' } : e));
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    if (sent.find(e => e.id === id)) {
+      sent = sent.map(e => e.id === id ? { ...e, category: 'Boîte de réception' } : e);
+      localStorage.setItem('messageenvoye', JSON.stringify(sent));
+    }
+  };
+
+  // Fonction pour mettre un mail à la corbeille
+  const handleTrash = (id) => {
+    setEmails(prev => prev.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e));
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    if (sent.find(e => e.id === id)) {
+      sent = sent.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
+      localStorage.setItem('messageenvoye', JSON.stringify(sent));
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen bg-white">
       <EnTete onToggleSidebar={() => setSidebarOpen((v) => !v)} />
@@ -136,8 +192,18 @@ const BoiteMail = () => {
                     >
                       <svg className="text-sm" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
                     </button>
-                    <button className="p-0.5 rounded hover:bg-gray-200"><FiArchive className="text-base" /></button>
-                    <button className="p-0.5 rounded hover:bg-gray-200"><FiTrash2 className="text-base" /></button>
+                    {selectedCategory === 'Boîte de réception' && (
+                      <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-base" /></button>
+                    )}
+                    {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
+                      <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-base" /></button>
+                    )}
+                    {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
+                      <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-base" /></button>
+                    )}
+                    {selectedCategory !== 'Corbeille' && (
+                      <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleTrash(selectedEmailId)} title="Mettre à la corbeille"><FiTrash2 className="text-base" /></button>
+                    )}
                   </div>
                   <div className="font-semibold">
                     {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
