@@ -116,7 +116,7 @@ const DetailEmailView = ({
       </div>
       {/* Barre d'actions en bas */}
       {category !== 'Messages envoyés' && (
-        <div className="flex justify-center gap-6 px-10 mt-6 mb-0">
+        <div className="flex gap-6 px-10 mt-6 mb-0 ml-11">
           <button
             className="flex items-center gap-2 border border-gray-400 rounded-full px-6 py-2 text-gray-700 font-medium hover:bg-gray-50 transition mt-0 mb-0"
             onClick={() => setShowReply(true)}
