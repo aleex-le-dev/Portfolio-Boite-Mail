@@ -1,81 +1,37 @@
 import React from "react";
 import EmailItem from "./ux/EmailItem";
 
-const MAILS = {
-  Work: [
-    {
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-      name: "Wanda Howard",
-      subject: "Deck Review",
-      preview: "",
-      date: "Thu 6:54 PM",
-      badge: <span className="inline-block align-middle"><svg className="inline w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H3a1 1 0 1 1 0-2h6V3a1 1 0 0 1 1-1z"/></svg></span>,
-      selected: true
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/men/33.jpg",
-      name: "Allan Munger",
-      subject: "Please send customer info",
-      preview: <span className="text-green-600 font-semibold">Received 6 days ago. Reply? <span className="text-green-500 font-normal">Dismiss</span></span>,
-      date: "Thu 5/5"
-    }
-  ],
-  Creative: [
-    {
-      avatar: "https://randomuser.me/api/portraits/men/34.jpg",
-      name: "Henry Brill",
-      subject: <span className="text-blue-700 font-semibold">Tennis pictures</span>,
-      preview: "Hi Katri, Great seeing you at the mat...",
-      date: "11:21 AM",
-      badge: <span className="bg-blue-500 text-white text-xs rounded-full px-2">2</span>,
-      focused: true
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/women/35.jpg",
-      name: "Lydia Bauer",
-      subject: "Team Pictures",
-      preview: "Lorem ipsum dolor sit amet,",
-      date: "9:20 AM"
-    }
-  ]
-  
-};
-
-const ListeEmails = ({ selectedCategory }) => {
-  const today = new Date();
-  const todayStr = today.toLocaleDateString('fr-FR');
-  // Mails de la boîte de réception uniquement
-  const inboxMails = [
-    {
-      avatar: "https://randomuser.me/api/portraits/men/36.jpg",
-      name: "Portfolio Web",
-      subject: "Refonte du site vitrine",
-      preview: "Projet de refonte complète du site web pour un client...",
-      date: todayStr,
-      badge: true
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/women/37.jpg",
-      name: "Application Mobile",
-      subject: "Développement d'une app React Native",
-      preview: "Application mobile pour la gestion de tâches...",
-      date: todayStr,
-      badge: true,
-    }
-  ];
+const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
   return (
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
-      {selectedCategory === "Boîte de réception" && inboxMails.length > 0 && (
+      {emails.length > 0 && (
         <div className="flex justify-center items-center text-center px-4 py-0 h-8 min-h-8 text-xs text-gray-500 font-semibold bg-gray-50 border-b rounded-tl-2xl">
           Aujourd'hui
         </div>
       )}
-      {selectedCategory === "Boîte de réception"
-        ? inboxMails.length > 0
-          ? inboxMails.map((mail, i) => <EmailItem key={i} {...mail} />)
-          : <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
-        : <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
-      }
+      {emails.length > 0 ? (
+        emails.map((mail) => (
+          <div
+            key={mail.id}
+            className={`cursor-pointer ${selectedEmailId === mail.id ? 'bg-blue-50' : ''}`}
+            onClick={() => setSelectedEmailId(mail.id)}
+          >
+            <div className="flex items-center gap-3 px-4 py-3 border-b">
+              <img src={mail.senderAvatar} alt={mail.sender} className="w-10 h-10 rounded-full object-cover" />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <span className="font-semibold text-gray-900 truncate">{mail.sender}</span>
+                  <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">{mail.date}</span>
+                </div>
+                <div className="text-gray-800 truncate -mt-0.5 font-medium">{mail.title}</div>
+                <div className="text-gray-600 text-sm truncate">{mail.summary.slice(0, 60)}...</div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
+      )}
     </section>
   );
 };

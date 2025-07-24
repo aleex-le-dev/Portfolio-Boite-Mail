@@ -19,7 +19,10 @@ const BoiteMail = () => {
   }, []);
 
   // Filtrer les emails selon la catégorie sélectionnée
-  const filteredEmails = emails.filter(e => e.category === selectedCategory);
+  const todayStr = new Date().toLocaleDateString('fr-FR');
+  const filteredEmails = emails.filter(e => e.category === selectedCategory).map(e =>
+    e.todayDate ? { ...e, date: todayStr } : e
+  );
   // Sélectionner le mail courant
   const selectedEmail = filteredEmails.find(e => e.id === selectedEmailId) || filteredEmails[0];
 

@@ -3,9 +3,10 @@
     "id": 1,
     "category": "Boîte de réception",
     "title": "Winner: Website of the Year",
-    "sender": "Alex PR",
+    "sender": "Alex J",
     "senderAvatar": "https://randomuser.me/api/portraits/men/32.jpg",
     "date": "16 Oct. 2023",
+    "todayDate": true,
     "summary": "In the fast-paced realm of digital marketing, it's easy for an agency's own branding to take a backseat while they focus on delivering creative brilliance to their clients. At Mattered, we place a high premium on customer experience. We believe that purposeful interactions lead to meaningful connections and it was time to apply the philosophy...",
     "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
     "content": [
