@@ -188,7 +188,7 @@ const BoiteMail = forwardRef((props, ref) => {
         }}
       />
       <div className="flex flex-1 overflow-hidden">
-        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />}
+        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} />}
         <div className="w-[30%] mx-0.5 min-w-[280px] shadow-lg rounded-2xl">
           <div className="h-full bg-white rounded-2xl overflow-hidden">
             <ListeEmails

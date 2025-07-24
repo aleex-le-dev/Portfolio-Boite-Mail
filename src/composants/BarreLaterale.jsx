@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { FcFolder } from "react-icons/fc";
 import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
 import { LABELS, NAV_CATEGORIES } from "./constantes";
-import emailsData from "./email.json";
 
 // Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
-const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
+const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
 
   const [open, setOpen] = useState({
     categories: false,
@@ -47,7 +46,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
               <span className={`w-35 text-left ${selectedCategory === value ? 'font-bold' : ''}`}>{label}</span>
               <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{
                 (() => {
-                  let allMails = [...(emailsData || [])];
+                  let allMails = [...(emails || [])];
                   try {
                     const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
                     allMails = [...allMails, ...sent];
@@ -84,7 +83,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory }) => {
               {open.labels[label] && (
                 <ul className="mb-4">
                   {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
-                    let allMails = [...(emailsData || [])];
+                    let allMails = [...(emails || [])];
                     try {
                       const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
                       allMails = [...allMails, ...sent];
