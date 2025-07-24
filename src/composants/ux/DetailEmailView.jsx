@@ -1,7 +1,7 @@
+// Composant DetailEmailView : affiche le détail d'un mail sélectionné
+
 import React from "react";
 
-// Composant DetailEmailView : affiche le détail d'un mail sélectionné
-// Props : avatar (url), name (string), subject (string|JSX), date (string), content (JSX|string)
 const DetailEmailView = ({ avatar, name, subject, date, content }) => (
   <section className="flex-1 bg-white h-full overflow-y-auto p-8 rounded-2xl">
     <div className="flex items-center gap-4 mb-6">

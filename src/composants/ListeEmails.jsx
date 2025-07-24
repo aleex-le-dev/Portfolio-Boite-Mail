@@ -1,7 +1,6 @@
 import React from "react";
 import EmailItem from "./ux/EmailItem";
 
-// Exemple de structure de mails par catégorie
 const MAILS = {
   Work: [
     {
@@ -39,11 +38,10 @@ const MAILS = {
       date: "9:20 AM"
     }
   ]
-  // ... autres catégories
+  
 };
 
 const ListeEmails = ({ selectedCategory }) => {
-  // Date du jour au format JJ/MM/YYYY
   const today = new Date();
   const todayStr = today.toLocaleDateString('fr-FR');
   // Mails de la boîte de réception uniquement
@@ -63,14 +61,17 @@ const ListeEmails = ({ selectedCategory }) => {
       preview: "Application mobile pour la gestion de tâches...",
       date: todayStr,
       badge: true,
-      calendar: true
     }
   ];
   return (
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
-      <div className="px-4 py-2 text-xs text-gray-500 font-semibold bg-gray-50 border-b">Aujourd'hui</div>
+      {selectedCategory === "Boîte de réception" && inboxMails.length > 0 && (
+        <div className="px-4 py-2 text-xs text-gray-500 font-semibold bg-gray-50 border-b">Aujourd'hui</div>
+      )}
       {selectedCategory === "Boîte de réception"
-        ? inboxMails.map((mail, i) => <EmailItem key={i} {...mail} />)
+        ? inboxMails.length > 0
+          ? inboxMails.map((mail, i) => <EmailItem key={i} {...mail} />)
+          : <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
         : <div className="px-4 py-8 text-center text-gray-400 text-sm">Aucun mail à afficher pour cette catégorie.</div>
       }
     </section>
