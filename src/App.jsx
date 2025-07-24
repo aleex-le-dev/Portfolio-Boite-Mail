@@ -1,17 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./Win10Intro.css";
 import BoiteMail from "./composants/BoiteMail";
 
 // Composant principal qui affiche la boîte mail du portfolio
 function App() {
   const boiteMailRef = useRef();
+  const [showIntro, setShowIntro] = useState(true);
   const handleShowInfoMail = () => {
     if (boiteMailRef.current && boiteMailRef.current.selectInfoMail) {
       boiteMailRef.current.selectInfoMail();
     }
   };
+  useEffect(() => {
+    const timer = setTimeout(() => setShowIntro(false), 2600);
+    return () => clearTimeout(timer);
+  }, []);
   return <>
-    <BoiteMail ref={boiteMailRef} />
-    <CookieBanner onShowInfo={handleShowInfoMail} />
+    {showIntro && <Win10Intro />}
+    {!showIntro && <>
+      <BoiteMail ref={boiteMailRef} />
+      <CookieBanner onShowInfo={handleShowInfoMail} />
+    </>}
   </>;
 }
 
@@ -37,3 +46,17 @@ const CookieBanner = ({ onShowInfo }) => {
     </div>
   );
 };
+
+// Animation Windows 10 style
+function Win10Intro() {
+  return (
+    <div className="win10-intro-bg">
+      <div className="win10-logo">
+        <div className="win10-square win10-square1" />
+        <div className="win10-square win10-square2" />
+        <div className="win10-square win10-square3" />
+        <div className="win10-square win10-square4" />
+      </div>
+    </div>
+  );
+}
