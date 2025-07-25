@@ -1,12 +1,12 @@
 import React from "react";
 import EmailItem from "./ux/EmailItem";
 
-const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId }) => {
+const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selectedCategory }) => {
   return (
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
       {emails.length > 0 && (
         <div className="flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-base text-gray-700 font-bold bg-gray-50 border-b rounded-tl-2xl">
-          Aujourd'hui
+          {selectedCategory}
         </div>
       )}
       {emails.length > 0 ? (

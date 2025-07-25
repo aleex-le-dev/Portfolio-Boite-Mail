@@ -14,7 +14,6 @@ const DetailEmailView = ({
   category,
   id,
   to,
-  onTrash
 }) => {
   const [showReply, setShowReply] = useState(false);
 
@@ -215,12 +214,6 @@ const DetailEmailView = ({
           >
             Répondre
             <FiCornerUpRight className="text-xl" />
-          </button>
-          <button
-            className="flex items-center gap-2 border border-red-400 text-red-600 rounded-full px-5 py-2 text-base font-semibold hover:bg-red-50 transition mt-0 mb-0"
-            onClick={() => onTrash && onTrash(id)}
-          >
-            Supprimer
           </button>
         </div>
       )}
