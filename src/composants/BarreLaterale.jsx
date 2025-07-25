@@ -73,7 +73,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
         <ul className="space-y-0.5">
           {LABELS.map(({ label, subs }) => (
             <li key={label}>
-              <button className="flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg hover:bg-gray-100 text-gray-900"
+              <button className={`flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg ${selectedCategory === label ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
                 onClick={() => {
                   if (label === 'Mes certifications') {
                     setSelectedCategory(label);
@@ -109,7 +109,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                   <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
                 )}
               </button>
-              {label !== 'Mes certifications' && open.labels[label] && (
+              {subs && open.labels[label] && (
                 <ul className="mb-4">
                   {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
                     let allMails = [...(emails || [])];

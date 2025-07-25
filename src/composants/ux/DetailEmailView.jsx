@@ -13,7 +13,8 @@ const DetailEmailView = ({
   onSendMail,
   category,
   id,
-  to
+  to,
+  onTrash
 }) => {
   const [showReply, setShowReply] = useState(false);
 
@@ -158,7 +159,7 @@ const DetailEmailView = ({
                     <div className="w-full flex justify-center mt-6">
                       <img
                         src={image}
-                        alt="CV Alexandre Janacek"
+                        alt="CValex"
                         title="CV Alexandre Janacek"
                         className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200"
                         style={{maxWidth: '100%'}}
@@ -206,7 +207,7 @@ const DetailEmailView = ({
         )}
       </div>
       {/* Barre d'actions en bas */}
-      {category !== 'Messages envoyés' && category !== 'Archive' && (
+      {category !== 'Archive' && category !== 'Corbeille' && (
         <div className="flex gap-6 px-10 mt-6 mb-0 ml-11">
           <button
             className="flex items-center gap-2 border border-gray-400 rounded-full px-5 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50 transition mt-0 mb-0"
@@ -214,6 +215,12 @@ const DetailEmailView = ({
           >
             Répondre
             <FiCornerUpRight className="text-xl" />
+          </button>
+          <button
+            className="flex items-center gap-2 border border-red-400 text-red-600 rounded-full px-5 py-2 text-base font-semibold hover:bg-red-50 transition mt-0 mb-0"
+            onClick={() => onTrash && onTrash(id)}
+          >
+            Supprimer
           </button>
         </div>
       )}

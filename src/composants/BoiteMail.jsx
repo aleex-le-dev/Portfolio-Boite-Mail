@@ -169,7 +169,11 @@ const BoiteMail = forwardRef((props, ref) => {
           'Boîte de réception',
           'Messages envoyés',
           'Important',
-          'Archive'
+          'Archive',
+          'Mes certifications',
+          'Web',
+          'Mobile',
+          'Design'
         ].includes(mailToDelete.category)) {
           updated = prev.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
         } else {
@@ -193,6 +197,17 @@ const BoiteMail = forwardRef((props, ref) => {
     } catch {/* ignore */}
     // Déplace aussi dans la corbeille côté localStorage
     sent = sent.map(e => e.id === id ? { ...e, category: 'Corbeille' } : e);
+    localStorage.setItem('messageenvoye', JSON.stringify(sent));
+  };
+
+  // Déplace tous les emails d'un sous-libellé vers la corbeille
+  const handleDeleteSubLabel = (subLabel) => {
+    setEmails(prev => prev.map(e => e.category === subLabel ? { ...e, category: 'Corbeille' } : e));
+    let sent = [];
+    try {
+      sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
+    } catch {/* ignore */}
+    sent = sent.map(e => e.category === subLabel ? { ...e, category: 'Corbeille' } : e);
     localStorage.setItem('messageenvoye', JSON.stringify(sent));
   };
 
@@ -234,7 +249,7 @@ const BoiteMail = forwardRef((props, ref) => {
         }}
       />
       <div className="flex flex-1 overflow-hidden">
-        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} filteredEmails={filteredEmails} />}
+        {sidebarOpen && <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />}
         <div className="w-[30%] mx-0.5 min-w-[280px] shadow-lg rounded-2xl">
           <div className="h-full bg-white rounded-2xl overflow-hidden">
             <ListeEmails
@@ -288,7 +303,7 @@ const BoiteMail = forwardRef((props, ref) => {
                       {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
                     </div>
                   </div>
-                  <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} />
+                  <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} onTrash={handleTrash} />
                 </>
               ) : (
                 <div className="text-gray-400 text-lg">Vous n'avez sélectionné aucune conversation.</div>

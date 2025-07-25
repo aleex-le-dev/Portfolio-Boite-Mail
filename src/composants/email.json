@@ -151,28 +151,9 @@
       "Ce site est un portfolio personnel. Pour toute question ou demande, contactez-moi à l'adresse ci-dessus."
     ]
   },
+
   {
     "id": 10,
-    "category": "Web",
-    "title": "Mentions légales du site",
-    "sender": "Mentions légales",
-    "email": "alexandre.janacek@gmail.com",
-    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
-    "date": "Aujourd'hui",
-    "image": null,
-    "content": [
-      "",
-      "Éditeur : Aleex Le Dev",
-      "Email : alexandre.janacek@gmail.com",
-      "Directeur de la publication : Aleex Le Dev",
-      "Hébergeur : O2SWITCH",
-      "Contact hébergeur : https://www.o2switch.fr/contact/",
-      "",
-      "Ce site est un portfolio personnel. Pour toute question ou demande, contactez-moi à l'adresse ci-dessus."
-    ]
-  },
-  {
-    "id": 1001,
     "category": "Mes certifications",
     "title": "Certification Objectifs IA obtenue !",
     "sender": "OpenClassrooms",
@@ -186,7 +167,7 @@
     ]
   },
   {
-    "id": 1002,
+    "id": 11,
     "category": "Mes certifications",
     "title": "Certification Cybersecurité obtenue !",
     "sender": "OpenClassrooms",
@@ -200,7 +181,7 @@
     ]
   },
   {
-    "id": 1003,
+    "id": 12,
     "category": "Mes certifications",
     "title": "Certification HTML5 et CSS3 obtenue !",
     "sender": "OpenClassrooms",
@@ -214,7 +195,7 @@
     ]
   },
   {
-    "id": 1004,
+    "id": 13,
     "category": "Mes certifications",
     "title": "Certification PHP et MySQL obtenue !",
     "sender": "OpenClassrooms",
@@ -228,7 +209,7 @@
     ]
   },
   {
-    "id": 1005,
+    "id": 14,
     "category": "Mes certifications",
     "title": "Certification Git et Github obtenue !",
     "sender": "OpenClassrooms",
@@ -242,7 +223,7 @@
     ]
   },
   {
-    "id": 1006,
+    "id": 15,
     "category": "Mes certifications",
     "title": "Certification Wordpress 5 obtenue !",
     "sender": "OpenClassrooms",
@@ -256,7 +237,7 @@
     ]
   },
   {
-    "id": 1007,
+    "id": 16,
     "category": "Mes certifications",
     "title": "Certification L'UX Design obtenue !",
     "sender": "OpenClassrooms",
@@ -270,7 +251,7 @@
     ]
   },
   {
-    "id": 1008,
+    "id": 17,
     "category": "Mes certifications",
     "title": "Certification Le marketing Digital obtenue !",
     "sender": "Google",
@@ -284,7 +265,7 @@
     ]
   },
   {
-    "id": 1009,
+    "id": 18,
     "category": "Mes certifications",
     "title": "Certification Le SEO obtenue !",
     "sender": "OpenClassrooms",
@@ -298,7 +279,7 @@
     ]
   },
   {
-    "id": 1010,
+    "id": 19,
     "category": "Mes certifications",
     "title": "Certification Illustrator obtenue !",
     "sender": "OpenClassrooms",
@@ -312,7 +293,7 @@
     ]
   },
   {
-    "id": 2001,
+    "id": 20,
     "category": "Archive",
     "title": "Alerte commit : record battu sur GitHub !",
     "sender": "GitHub Team",
@@ -330,7 +311,7 @@
     ]
   },
   {
-    "id": 2002,
+    "id": 21,
     "category": "Archive",
     "title": "Félicitations, votre profil LinkedIn explose les compteurs !",
     "sender": "LinkedIn France",
@@ -347,7 +328,7 @@
     ]
   },
   {
-    "id": 3001,
+    "id": 22,
     "category": "Messages envoyés",
     "title": "Candidature Développeur Web – OpenAI",
     "sender": "Aleex Le Dev",
