@@ -96,25 +96,25 @@ function MailRainCanvas({ onFinish }) {
   // Effet machine à écrire pour le texte
   useEffect(() => {
     if (phase === 0 && displayed.length < welcome.length) {
-      const t = setTimeout(() => setDisplayed(welcome.slice(0, displayed.length+1)), 80);
+      const t = setTimeout(() => setDisplayed(welcome.slice(0, displayed.length+1)), 60);
       return () => clearTimeout(t);
     }
     if (phase === 0 && displayed.length === welcome.length) {
-      const t = setTimeout(() => setPhase(1), 900);
+      const t = setTimeout(() => setPhase(1), 400);
       return () => clearTimeout(t);
     }
     if (phase === 1) {
-      const t = setTimeout(() => setDisplayed(""), 250);
-      const t2 = setTimeout(() => setPhase(2), 300);
+      const t = setTimeout(() => setDisplayed(""), 150);
+      const t2 = setTimeout(() => setPhase(2), 200);
       return () => { clearTimeout(t); clearTimeout(t2); };
     }
     if (phase === 2 && displayed2.length < launch.length) {
-      const t = setTimeout(() => setDisplayed2(launch.slice(0, displayed2.length+1)), 80);
+      const t = setTimeout(() => setDisplayed2(launch.slice(0, displayed2.length+1)), 60);
       return () => clearTimeout(t);
     }
     // Fin de l'intro après affichage complet du second texte
     if (phase === 2 && displayed2.length === launch.length) {
-      const t = setTimeout(() => setPhase(3), 2500);
+      const t = setTimeout(() => setPhase(3), 1500);
       return () => clearTimeout(t);
     }
   }, [displayed, displayed2, phase]);

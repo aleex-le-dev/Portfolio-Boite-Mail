@@ -92,4 +92,21 @@
 }
 .clignote-s {
   animation: clignote-s 0.35s linear infinite;
+}
+
+/* Transition bleue pour le lancement de la boîte mail */
+.mailbox-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0c2340 0%, #1e3c72 100%);
+  z-index: 9999;
+  animation: mailbox-fadeout 1s ease-in-out forwards;
+}
+
+@keyframes mailbox-fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 } 

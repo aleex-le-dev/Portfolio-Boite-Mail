@@ -5,6 +5,7 @@ import EnTete from "./EnTete";
 import BarreLaterale from "./BarreLaterale";
 import ListeEmails from "./ListeEmails";
 import DetailEmailView from "./ux/DetailEmailView";
+import TemplateProjet from "./ux/TemplateProjet";
 import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
 import { MdLabelImportant, MdInbox } from "react-icons/md";
@@ -264,47 +265,51 @@ const BoiteMail = forwardRef((props, ref) => {
           <div className="h-full bg-white rounded-2xl overflow-hidden flex flex-col items-center justify-center">
             {search && search.trim().length >= 3 ? null : (
               filteredEmails.length > 0 && selectedEmail ? (
-                <>
-                  {/* Barre d'action au-dessus du détail */}
-                  <div className="flex items-center justify-between px-6 border-b bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 h-12 min-h-12 rounded-tr-2xl w-full">
-                    <div className="flex items-center gap-2">
-                      <button className="p-0.5 rounded hover:bg-gray-200"
-                        onClick={() => {
-                          const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
-                          if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
-                        }}
-                        disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === 0}
-                      >
-                        <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-                      </button>
-                      <button className="p-0.5 rounded hover:bg-gray-200"
-                        onClick={() => {
-                          const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
-                          if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
-                        }}
-                        disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === filteredEmails.length - 1}
-                      >
-                        <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-                      </button>
-                      {selectedCategory === 'Boîte de réception' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
-                      )}
-                      {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
-                      )}
-                      {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
-                      )}
-                      {selectedCategory !== 'Corbeille' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleTrash(selectedEmailId)} title="Mettre à la corbeille"><FiTrash2 className="text-xl" /></button>
-                      )}
+                selectedCategory === 'Design' ? (
+                  <TemplateProjet />
+                ) : (
+                  <>
+                    {/* Barre d'action au-dessus du détail */}
+                    <div className="flex items-center justify-between px-6 border-b bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 h-12 min-h-12 rounded-tr-2xl w-full">
+                      <div className="flex items-center gap-2">
+                        <button className="p-0.5 rounded hover:bg-gray-200"
+                          onClick={() => {
+                            const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
+                            if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
+                          }}
+                          disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === 0}
+                        >
+                          <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button className="p-0.5 rounded hover:bg-gray-200"
+                          onClick={() => {
+                            const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
+                            if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
+                          }}
+                          disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === filteredEmails.length - 1}
+                        >
+                          <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                        {selectedCategory === 'Boîte de réception' && (
+                          <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                        )}
+                        {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
+                          <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
+                        )}
+                        {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
+                          <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                        )}
+                        {selectedCategory !== 'Corbeille' && (
+                          <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleTrash(selectedEmailId)} title="Mettre à la corbeille"><FiTrash2 className="text-xl" /></button>
+                        )}
+                      </div>
+                      <div className="font-bold text-sm">
+                        {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
+                      </div>
                     </div>
-                    <div className="font-bold text-sm">
-                      {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
-                    </div>
-                  </div>
-                  <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} onTrash={handleTrash} />
-                </>
+                    <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} />
+                  </>
+                )
               ) : (
                 <div className="text-gray-400 text-lg">Vous n'avez sélectionné aucune conversation.</div>
               )
