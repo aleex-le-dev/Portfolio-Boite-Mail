@@ -62,10 +62,22 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
             ...cert,
             date: cert.date || "Aujourd'hui"
           }));
-          setEmails([...sent, ...emailsWithDates, ...projetsWithDates, ...certificationsWithDates]);
+          const allEmails = [...sent, ...emailsWithDates, ...projetsWithDates, ...certificationsWithDates];
+          setEmails(allEmails);
+          // Sélectionner automatiquement le premier email de la boîte de réception
+          const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
+          if (firstInboxEmail) {
+            setSelectedEmailId(firstInboxEmail.id);
+          }
         }).catch(() => {
           console.log('Projets ou certifications non trouvés, chargement des emails seulement');
-          setEmails([...sent, ...emailsWithDates]);
+          const allEmails = [...sent, ...emailsWithDates];
+          setEmails(allEmails);
+          // Sélectionner automatiquement le premier email de la boîte de réception
+          const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
+          if (firstInboxEmail) {
+            setSelectedEmailId(firstInboxEmail.id);
+          }
         });
       })
       .catch(error => {
