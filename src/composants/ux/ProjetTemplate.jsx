@@ -126,34 +126,58 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
         )}
 
         {/* Links Section */}
-        <div className="projet-section links-section">
-          <div className="section-content">
-            <h2 className="section-title">Liens utiles</h2>
-            <div className="project-links">
-              {projet.content
-                .filter(line => line.includes('https://'))
-                .map((link, index) => {
-                  const isDemo = link.includes('démo');
-                  return (
-                    <a 
-                      key={index} 
-                      href={link.split('https://')[1]} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className={`project-link ${isDemo ? 'demo-link' : 'code-link'}`}
-                    >
-                      <span className="link-icon">
-                        {isDemo ? '🚀' : '💻'}
-                      </span>
-                      <span className="link-text">
-                        {isDemo ? 'Voir la démo' : 'Code source'}
-                      </span>
-                    </a>
-                  );
-                })}
+        {projet.content.filter(line => line.includes('https://')).length > 0 && (
+          <div className="projet-section links-section">
+            <div className="section-content">
+              <h2 className="section-title">Liens utiles</h2>
+              <div className="project-links">
+                                 {projet.content
+                   .filter(line => line.includes('https://'))
+                                       .filter(line => {
+                      // Ne pas afficher le bouton si c'est "Voir le code : " sans URL après
+                      const isCodeLink = line.includes('Voir le code : ');
+                      if (isCodeLink) {
+                        const urlPart = line.split('Voir le code : ')[1];
+                        return urlPart && urlPart.trim() !== '';
+                      }
+                      return true;
+                    })
+                   .map((link, index) => {
+                     const isDemo = link.includes('site');
+                     return (
+                       <a 
+                         key={index} 
+                         href={`https://${link.split('https://')[1]}`} 
+                         target="_blank" 
+                         rel="noopener noreferrer"
+                         className={`project-link ${isDemo ? 'demo-link' : 'code-link'}`}
+                       >
+                         <span className="link-icon">
+                           {isDemo ? '🚀' : '💻'}
+                         </span>
+                         <span className="link-text">
+                           {isDemo ? 'Voir le site' : 'Voir le code'}
+                         </span>
+                       </a>
+                     );
+                   })
+                                       .filter((_, index, array) => {
+                      // Ne garder que les liens uniques par type (site vs code)
+                      const currentLink = array[index];
+                      const currentIsDemo = currentLink.props.className.includes('demo-link');
+                      
+                      // Chercher le premier lien du même type
+                      const firstOfSameType = array.findIndex(link => {
+                        const linkIsDemo = link.props.className.includes('demo-link');
+                        return linkIsDemo === currentIsDemo && link.props.href === currentLink.props.href;
+                      });
+                      
+                      return firstOfSameType === index;
+                    })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Close Button */}
         <button className="projet-close-btn" onClick={onClose}>
