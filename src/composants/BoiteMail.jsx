@@ -13,7 +13,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
 import { MdLabelImportant, MdInbox } from "react-icons/md";
 
-const BoiteMail = forwardRef((props, ref) => {
+const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
   const [emails, setEmails] = useState([]);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
@@ -257,7 +257,7 @@ const BoiteMail = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className={`flex flex-col h-screen ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
       <EnTete
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
         search={search}
@@ -274,7 +274,8 @@ const BoiteMail = forwardRef((props, ref) => {
           setSearch("");
           setSidebarOpen(false);
         }}
-
+        darkMode={darkMode}
+        onToggleDarkMode={onToggleDarkMode}
       />
       
       {/* Sidebar mobile - overlay */}

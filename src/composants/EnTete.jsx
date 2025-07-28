@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import SearchBar from "./ux/SearchBar";
-import { FiMoon } from "react-icons/fi";
+import { FiMoon, FiSun } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant, MdEdit } from "react-icons/md";
 import { LABELS, USERNAME, USER_EMAIL, USER_AVATAR } from "./constantes";
 
@@ -10,7 +10,9 @@ export default function EnTete({
   onSearchChange,
   searchResults,
   onSelectMail,
-  onSelectCategory
+  onSelectCategory,
+  darkMode,
+  onToggleDarkMode
 }) {
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
@@ -71,14 +73,14 @@ export default function EnTete({
 
 
   return (
-    <header className="w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 bg-white">
+    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">
-        <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
-          <MdMenu className="text-2xl text-gray-700" />
+        <button className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`} onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
+          <MdMenu className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} />
         </button>
-          <div className="hidden md:block font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
+          <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>salutalex.fr</div>
         </div>
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}
@@ -196,12 +198,13 @@ export default function EnTete({
           <button 
             className="p-2 rounded-full hover:bg-gray-200 transition" 
             aria-label="Mode sombre"
-            onClick={() => {
-              // TODO: Implémenter le mode sombre
-              console.log('Mode sombre à implémenter');
-            }}
+            onClick={onToggleDarkMode}
           >
-            <FiMoon className="text-xl text-gray-700" />
+            {darkMode ? (
+              <FiSun className="text-xl text-yellow-400" />
+            ) : (
+              <FiMoon className="text-xl text-gray-700" />
+            )}
           </button>
           
           <button
@@ -332,12 +335,13 @@ export default function EnTete({
         <button 
           className="p-2 rounded-full hover:bg-gray-200 transition" 
           aria-label="Mode sombre"
-          onClick={() => {
-            // TODO: Implémenter le mode sombre
-            console.log('Mode sombre à implémenter');
-          }}
+          onClick={onToggleDarkMode}
         >
-          <FiMoon className="text-2xl text-gray-700" />
+          {darkMode ? (
+            <FiSun className="text-2xl text-yellow-400" />
+          ) : (
+            <FiMoon className="text-2xl text-gray-700" />
+          )}
         </button>
         
         <button
