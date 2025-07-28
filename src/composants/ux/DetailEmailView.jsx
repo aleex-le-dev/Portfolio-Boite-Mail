@@ -110,9 +110,11 @@ const DetailEmailView = ({
                 <div className="mt-5 mail-content">
                   {Array.isArray(content)
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
-                        /<a\s|<br\s*\/?\s*>/i.test(c)
-                          ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                          : <div key={i} className="text-gray-900 text-base">{c}</div>
+                        c === ""
+                          ? <div key={i} className="h-4"></div>
+                          : /<a\s|<br\s*\/?\s*>/i.test(c)
+                            ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className="text-gray-900 text-base">{c}</div>
                       )
                     : (/<a\s|<br\s*\/?\s*>/i.test(content)
                         ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
@@ -142,9 +144,11 @@ const DetailEmailView = ({
                 <div className="mt-5 mail-content">
                   {Array.isArray(content)
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
-                        /<a\s|<br\s*\/?\s*>/i.test(c)
-                          ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                          : <div key={i} className="text-gray-900 text-base">{c}</div>
+                        c === ""
+                          ? <div key={i} className="h-4"></div>
+                          : /<a\s|<br\s*\/?\s*>/i.test(c)
+                            ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className="text-gray-900 text-base">{c}</div>
                       )
                     : (/<a\s|<br\s*\/?\s*>/i.test(content)
                         ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
@@ -184,9 +188,11 @@ const DetailEmailView = ({
                 </div>
                 <div className="mt-5 mail-content">
                   {content.slice(0, -1).map((c, i) =>
-                    /<a\s|<br\s*\/?\s*>/i.test(c)
-                      ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                      : <div key={i} className="text-gray-900 text-base">{c}</div>
+                    c === ""
+                      ? <div key={i} className="h-4"></div>
+                      : /<a\s|<br\s*\/?\s*>/i.test(c)
+                        ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
+                        : <div key={i} className="text-gray-900 text-base">{c}</div>
                   )}
                 </div>
               </div>
