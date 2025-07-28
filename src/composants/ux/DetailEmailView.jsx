@@ -36,22 +36,22 @@ const DetailEmailView = ({
               </div>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 my-4">
-            <h2 className="text-xl font-bold text-blue-800 mb-4">Confidentialité & stockage local</h2>
+          <div className=" border-blue-200 rounded-xl">
+            <h2 className="text-xl font-bold mb-4">Confidentialité & stockage local</h2>
             <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.</p>
-            <h3 className="font-semibold text-blue-700 mt-6 mb-1">Qu'est-ce que le stockage local&nbsp;?</h3>
-            <p className="mb-3 text-gray-700">Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
-            <h3 className="font-semibold text-blue-700 mt-6 mb-1">Utilisation sur ce site</h3>
+            <h3 className="font-semiboldmt-6 mb-1 font-semibold">Qu'est-ce que le stockage local&nbsp;?</h3>
+            <p className="mb-3 text-gray-700" >Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
+            <h3 className="font-semiboldmt-6 mb-1 font-semibold">Utilisation sur ce site</h3>
             <ul className="list-disc ml-6 mb-3 text-gray-700">
               <li>Mémorisation de vos messages envoyés</li>
               <li>Conservation de vos préférences d'affichage</li>
               <li>Amélioration de l'expérience utilisateur</li>
             </ul>
-            <h3 className="font-semibold text-blue-700 mt-6 mb-1">Aucune exploitation commerciale</h3>
+            <h3 className="font-semibold  mt-6 mb-1">Aucune exploitation commerciale</h3>
             <p className="mb-3 text-gray-700">Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi. Aucune information n'est transmise à des tiers.</p>
-            <h3 className="font-semibold text-blue-700 mt-6 mb-1">Vos droits</h3>
+            <h3 className="font-semibold  mt-6 mb-1">Vos droits</h3>
             <p className="mb-1 text-gray-700">Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur.</p>
-            <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alex@salutalex.fr" className="underline text-blue-700">alex@salutalex.fr</a>.</p>
+            <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alex@salutalex.fr" className="underline text-blue-700 hover:text-blue-800 transition-colors">alex@salutalex.fr</a>.</p>
           </div>
         </div>
       </div>
@@ -61,16 +61,18 @@ const DetailEmailView = ({
     return (
       <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
         <div className="px-10 pl-8 flex flex-col">
-          <h1 className="text-2xl font-bold mb-4 text-left w-full">Mentions légales du site</h1>
+          <h1 className="text-2xl font-bold mb-2 text-left w-full">Mentions légales du site</h1>
           <div className="flex items-start gap-3 mb-4 w-full">
             <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
             <div className="flex flex-col w-full">
+            
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-sm font-semibold text-gray-900">{sender}</span>
                 <span className="text-xs text-gray-500">{date}</span>
               </div>
             </div>
           </div>
+          <h2 className="text-xl font-bold mb-2">Mentions légales du site</h2>
           <div className="mb-2">
             <strong>Éditeur :</strong> Aleex Le Dev
           </div>

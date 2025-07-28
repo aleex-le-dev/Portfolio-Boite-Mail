@@ -61,7 +61,7 @@
   },
 
   {
-    "id": 8,
+    "id": 1000, 
     "category": "Important",
     "title": "Information sur la confidentialité et le stockage local",
     "sender": "Politique de cookie",
@@ -88,8 +88,8 @@
     ]
   },
   {
-    "id": 9,
-    "category": "Important",
+    "id": 1001, 
+        "category": "Important",
     "title": "Mentions légales du site",
     "sender": "Mentions légales",
     "email": "alexandre.janacek@gmail.com",
@@ -119,7 +119,7 @@
     "image": "./src/assets/certification/Objectif-IA.webp",
     "content": [
       "Félicitations Alex,",
-      "Vous avez brillamment validé la formation 'Objectifs IA' sur OpenClassrooms et obtenu la certification officielle."
+      "Vous avez brillamment validé la formation <b>'Objectifs IA'</b> sur OpenClassrooms et obtenu la certification officielle."
     ]
   },
   {
@@ -133,7 +133,7 @@
     "image": "./src/assets/certification/cybersécurité.webp",
     "content": [
       "Bravo Alex,",
-      "Vous avez validé la formation 'Cybersecurité' sur OpenClassrooms et reçu la certification officielle."
+      "Vous avez validé la formation <b>'Cybersecurité'</b> sur OpenClassrooms et reçu la certification officielle."
     ]
   },
   {
@@ -147,7 +147,7 @@
     "image": "./src/assets/certification/HTML5-CSS3-min.webp",
     "content": [
       "Félicitations Alex,",
-      "Vous avez validé la formation 'HTML5 et CSS3' sur OpenClassrooms et obtenu la certification officielle."
+      "Vous avez validé la formation <b>'HTML5 et CSS3'</b> sur OpenClassrooms et obtenu la certification officielle."
     ]
   },
   {
@@ -161,7 +161,7 @@
     "image": "./src/assets/certification/PHP-MySQL-min.webp",
     "content": [
       "Bravo Alex,",
-      "Vous avez validé la formation 'PHP et MySQL' sur OpenClassrooms et reçu la certification officielle."
+      "Vous avez validé la formation <b>'PHP et MySQL'</b> sur OpenClassrooms et reçu la certification officielle."
     ]
   },
   {
@@ -175,7 +175,7 @@
     "image": "./src/assets/certification/git.webp",
     "content": [
       "Félicitations Alex,",
-      "Vous avez validé la formation 'Git et Github' sur OpenClassrooms et obtenu la certification officielle."
+      "Vous avez validé la formation <b>'Git et Github'</b> sur OpenClassrooms et obtenu la certification officielle."
     ]
   },
   {
@@ -189,7 +189,7 @@
     "image": "./src/assets/certification/WordPress-min.webp",
     "content": [
       "Bravo Alex,",
-      "Vous avez validé la formation 'Wordpress 5' sur OpenClassrooms et reçu la certification officielle."
+      "Vous avez validé la formation <b>'Wordpress 5'</b> sur OpenClassrooms et reçu la certification officielle."
     ]
   },
   {
@@ -203,7 +203,7 @@
     "image": "./src/assets/certification/ux.webp",
     "content": [
       "Félicitations Alex,",
-      "Vous avez validé la formation 'L'UX Design' sur OpenClassrooms et obtenu la certification officielle."
+      "Vous avez validé la formation <b>'L'UX Design'</b> sur OpenClassrooms et obtenu la certification officielle."
     ]
   },
   {
@@ -217,7 +217,7 @@
     "image": "./src/assets/certification/google-certifification.webp",
     "content": [
       "Bravo Alex,",
-      "Vous avez validé la formation 'Les fondamentaux du marketing Digital' de Google et reçu la certification officielle."
+      "Vous avez validé la formation <b>'Les fondamentaux du marketing Digital'</b> de Google et reçu la certification officielle."
     ]
   },
   {
@@ -231,7 +231,7 @@
     "image": "./src/assets/certification/seo.webp",
     "content": [
       "Félicitations Alex,",
-      "Vous avez validé la formation 'Le SEO' sur OpenClassrooms et obtenu la certification officielle."
+      "Vous avez validé la formation <b>'Le SEO'</b> sur OpenClassrooms et obtenu la certification officielle."
     ]
   },
   {
@@ -245,7 +245,7 @@
     "image": "./src/assets/certification/illustrator.webp",
     "content": [
       "Bravo Alex,",
-      "Vous avez validé la formation 'Illustrator' sur OpenClassrooms et reçu la certification officielle."
+      "Vous avez validé la formation <b>'Illustrator'</b> sur OpenClassrooms et reçu la certification officielle."
     ]
   },
   {
@@ -256,14 +256,18 @@
     "email": "noreply@github.com",
     "senderAvatar": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
     "date": "Aujourd'hui",
-    "image": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    "image": "",
     "content": [
-      "Hello Aleex,<br />",
+      "Hello Aleex",
+      "",
       "Notre robot a détecté une activité anormale sur votre compte GitHub...",
       "Vous venez de battre le record du nombre de commits ce mois-ci !",
       "On espère que votre clavier va bien. 😅",
-      "<br />Retrouvez votre profil ici : <a href=\"https://github.com/aleex-le-dev\" target=\"_blank\">github.com/aleex-le-dev</a>",
-      "\n\nHappy coding!\n— L'équipe GitHub"
+      "",
+      "Retrouvez votre profil ici : <a href=\"https://github.com/aleex-le-dev\" target=\"_blank\">github.com/aleex-le-dev</a>",
+      "",
+      "Happy coding!",
+      "— L'équipe GitHub"
     ]
   },
   {
@@ -274,13 +278,18 @@
     "email": "notifications-noreply@linkedin.com",
     "senderAvatar": "https://cdn-icons-png.flaticon.com/512/174/174857.png",
     "date": "Aujourd'hui",
-    "image": "https://cdn-icons-png.flaticon.com/512/174/174857.png",
+    "image": "",
     "content": [
-      "Bonjour Alexandre,<br />",
+      "Bonjour Alexandre,",
+      "",
       "Votre profil LinkedIn vient de battre un record de visites cette semaine !",
       "Des recruteurs, des collègues et même des inconnus s'intéressent à votre parcours.",
-      "<br />Découvrez votre profil : <a href=\"https://www.linkedin.com/in/alexandrejanacek/\" target=\"_blank\">linkedin.com/in/alexandrejanacek</a>",
-      "\n\nContinuez à briller sur LinkedIn !\n— L'équipe LinkedIn France"
+      "",
+      "Découvrez votre profil : <a href=\"https://www.linkedin.com/in/alexandrejanacek/\" target=\"_blank\">linkedin.com/in/alexandrejanacek</a>",
+      "",
+      "Continuez à briller sur LinkedIn !",
+      "",
+      "— L'équipe LinkedIn France"
     ]
   },
   {
