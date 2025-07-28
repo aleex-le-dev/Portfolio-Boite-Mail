@@ -71,7 +71,9 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
                 ) : null;
               })()}
               {value === 'Messages envoyés' && (() => {
-                const count = JSON.parse(localStorage.getItem('messageenvoye') || '[]').length;
+                const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
+                const sentFromJSON = (emails || []).filter(mail => mail.category === 'Messages envoyés');
+                const count = sentFromLocalStorage.length + sentFromJSON.length;
                 return count > 0 ? (
                   <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-700 text-xs font-semibold">
                     {count}

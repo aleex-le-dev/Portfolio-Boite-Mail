@@ -83,7 +83,9 @@ const BoiteMail = forwardRef((props, ref) => {
   } else if (selectedCategory === 'Archive') {
     filteredEmails = emails.filter(mail => mail.category === 'Archive');
   } else if (selectedCategory === 'Messages envoyés') {
-    filteredEmails = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
+    const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
+    const sentFromJSON = emails.filter(mail => mail.category === 'Messages envoyés');
+    filteredEmails = [...sentFromLocalStorage, ...sentFromJSON];
   } else if (selectedCategory === 'Mes certifications') {
     filteredEmails = emails.filter(mail => mail.category === 'Mes certifications');
   } else {
