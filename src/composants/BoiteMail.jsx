@@ -17,7 +17,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
   const [emails, setEmails] = useState([]);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showReply, setShowReply] = useState(false);
   const [search, setSearch] = useState('');
 
@@ -258,25 +258,26 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
 
   return (
     <div className={`flex flex-col h-screen ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
-      <EnTete
-        onToggleSidebar={() => setSidebarOpen((v) => !v)}
-        search={search}
-        onSearchChange={e => setSearch(e.target.value)}
-        searchResults={searchResults}
-        onSelectMail={mail => {
-          setSelectedCategory(mail.category);
-          setTimeout(() => setSelectedEmailId(mail.id), 0);
-          setSearch("");
-        }}
-        onSelectCategory={category => {
-          setSelectedCategory(category);
-          setSelectedEmailId(null);
-          setSearch("");
-          setSidebarOpen(false);
-        }}
-        darkMode={darkMode}
-        onToggleDarkMode={onToggleDarkMode}
-      />
+                        <EnTete
+                    onToggleSidebar={() => setSidebarOpen((v) => !v)}
+                    search={search}
+                    onSearchChange={e => setSearch(e.target.value)}
+                    searchResults={searchResults}
+                    onSelectMail={mail => {
+                      setSelectedCategory(mail.category);
+                      setTimeout(() => setSelectedEmailId(mail.id), 0);
+                      setSearch("");
+                    }}
+                    onSelectCategory={category => {
+                      setSelectedCategory(category);
+                      setSelectedEmailId(null);
+                      setSearch("");
+                      setSidebarOpen(false);
+                    }}
+                    darkMode={darkMode}
+                    onToggleDarkMode={onToggleDarkMode}
+                    sidebarOpen={sidebarOpen}
+                  />
       
       {/* Sidebar mobile - overlay */}
       {sidebarOpen && (
@@ -314,14 +315,16 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
       
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar desktop - cachée sur mobile */}
-        <div className="hidden md:block">
-          <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onCloseSidebar={() => setSidebarOpen(false)} darkMode={darkMode} />
-        </div>
+        {sidebarOpen && (
+          <div className="hidden md:block">
+            <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onCloseSidebar={() => setSidebarOpen(false)} darkMode={darkMode} />
+          </div>
+        )}
         
         {/* Zone principale - responsive */}
         <div className="flex flex-1 flex-col md:flex-row overflow-hidden md:overflow-visible h-full md:h-auto">
           {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
-          <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} w-full md:w-[30%] mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
+          <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} ${sidebarOpen ? 'w-full md:w-[30%]' : 'w-full'} mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
             <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
               <ListeEmails
                 selectedCategory={selectedCategory}
@@ -334,7 +337,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
           </div>
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
-          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} w-full md:w-[70%] mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
+          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
             <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>

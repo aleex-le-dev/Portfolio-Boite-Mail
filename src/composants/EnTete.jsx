@@ -12,7 +12,8 @@ export default function EnTete({
   onSelectMail,
   onSelectCategory,
   darkMode,
-  onToggleDarkMode
+  onToggleDarkMode,
+  sidebarOpen
 }) {
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
@@ -77,7 +78,12 @@ export default function EnTete({
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">
-        <button className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`} onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
+        <button 
+          className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`} 
+          onClick={onToggleSidebar} 
+          aria-label={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
+          title={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
+        >
           <MdMenu className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} />
         </button>
           <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 whitespace-nowrap ${darkMode ? 'text-white' : 'text-gray-900'} `}>Alexandre Janacek</div>
