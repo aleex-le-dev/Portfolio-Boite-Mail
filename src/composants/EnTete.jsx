@@ -68,6 +68,8 @@ export default function EnTete({
     };
   }, [showUserMenu]);
 
+
+
   return (
     <header className="w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
@@ -88,10 +90,12 @@ export default function EnTete({
               onChange={onSearchChange}
             />
             
-            {search && search.length >= 3 && (
+                        {search && search.length >= 3 && (
               <>
-                <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
-                <div className="fixed left-1/2 top-20 -translate-x-1/2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)]">
+                <div className="fixed inset-0 bg-black/70 z-40 pointer-events-none"></div>
+                <div 
+                  className="fixed left-1/2 top-20 -translate-x-1/2 bg-white border border-gray-200 rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)]"
+                >
                   {searchResults.length === 0 ? (
                     <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
                   ) : (
@@ -116,18 +120,23 @@ export default function EnTete({
                                   const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                                   const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
                                   return (
-                                    <button
+                                    <div
                                       key={label + '-' + sub}
-                                      className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
-                                      type="button"
-                                      onClick={() => {
-                                        if (typeof onSelectCategory === 'function') onSelectCategory(sub);
-                                        else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                                      className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left cursor-pointer"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        onSelectCategory(sub);
+                                        onSearchChange({ target: { value: '' } });
+                                      }}
+                                      onTouchStart={(e) => {
+                                        e.stopPropagation();
+                                        onSelectCategory(sub);
+                                        onSearchChange({ target: { value: '' } });
                                       }}
                                     >
                                       {getCategoryIcon(sub)}
                                       <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
-                                    </button>
+                                    </div>
                                   );
                                 });
                               }
@@ -146,11 +155,19 @@ export default function EnTete({
                             const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
                             
                             return (
-                              <button
+                              <div
                                 key={mail.id + '-' + index}
-                                className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
-                                type="button"
-                                onClick={() => onSelectMail(mail)}
+                                className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left cursor-pointer"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onSelectMail(mail);
+                                  onSearchChange({ target: { value: '' } });
+                                }}
+                                onTouchStart={(e) => {
+                                  e.stopPropagation();
+                                  onSelectMail(mail);
+                                  onSearchChange({ target: { value: '' } });
+                                }}
                               >
                                 <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                                 <div className="flex-1 min-w-0">
@@ -161,7 +178,7 @@ export default function EnTete({
                                   <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
                                   <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
                                 </div>
-                              </button>
+                              </div>
                             );
                           })}
                         </div>

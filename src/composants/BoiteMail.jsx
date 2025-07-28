@@ -269,6 +269,12 @@ const BoiteMail = forwardRef((props, ref) => {
           setTimeout(() => setSelectedEmailId(mail.id), 0);
           setSearch("");
         }}
+        onSelectCategory={category => {
+          setSelectedCategory(category);
+          setSelectedEmailId(null);
+          setSearch("");
+          setSidebarOpen(false);
+        }}
       />
       
       {/* Sidebar mobile - overlay */}
