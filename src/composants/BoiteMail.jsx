@@ -277,6 +277,7 @@ const BoiteMail = forwardRef((props, ref) => {
           setSearch("");
           setSidebarOpen(false);
         }}
+
       />
       
       {/* Sidebar mobile - overlay */}
@@ -289,7 +290,10 @@ const BoiteMail = forwardRef((props, ref) => {
             <div className="p-4">
               <BarreLaterale 
                 selectedCategory={selectedCategory} 
-                setSelectedCategory={setSelectedCategory} 
+                setSelectedCategory={(category) => {
+                  setSelectedCategory(category);
+                  setSelectedEmailId(null);
+                }} 
                 emails={emails} 
                 onDeleteSubLabel={handleDeleteSubLabel} 
                 filteredEmails={filteredEmails}
@@ -339,11 +343,11 @@ const BoiteMail = forwardRef((props, ref) => {
                     <div className="flex items-center gap-2">
                       {/* Bouton retour sur mobile */}
                       <button 
-                        className="md:hidden px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-200 text-gray-500 text-sm font-medium"
+                        className="md:hidden p-2 text-gray-500"
                         onClick={() => setSelectedEmailId(null)}
                         aria-label="Retour à la liste"
                       >
-                        <IoMdArrowRoundBack />
+                        <IoMdArrowRoundBack className="text-2xl" />
                       </button>
                       <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
                         onClick={() => {
@@ -369,7 +373,13 @@ const BoiteMail = forwardRef((props, ref) => {
                       {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
                         <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
                       )}
+                      {selectedCategory === 'Messages envoyés' && (
+                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                      )}
                       {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
+                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                      )}
+                      {selectedCategory === 'Messages envoyés' && (
                         <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
                       )}
                       {selectedCategory !== 'Corbeille' && (

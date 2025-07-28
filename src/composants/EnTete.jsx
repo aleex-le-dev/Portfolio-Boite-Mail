@@ -73,11 +73,11 @@ export default function EnTete({
   return (
     <header className="w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
-      <div className="flex items-center justify-between mb-4 md:mb-0">
-        <div className="flex items-center">
-          <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
-            <MdMenu className="text-2xl text-gray-700" />
-          </button>
+      <div className="flex items-center justify-between mb-0 md:mb-0">
+      <div className="flex items-center">
+        <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
+          <MdMenu className="text-2xl text-gray-700" />
+        </button>
           <div className="hidden md:block font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
         </div>
         
@@ -239,77 +239,77 @@ export default function EnTete({
         {/* Barre de recherche - centrée */}
         <div className="relative w-full max-w-xl z-50 flex justify-center">
           <div ref={searchRef} className="w-full">
-            <SearchBar
+          <SearchBar
               placeholder="Rechercher..."
-              value={search}
-              onChange={onSearchChange}
-            />
-          </div>
+            value={search}
+            onChange={onSearchChange}
+          />
+        </div>
           
-          {search && search.length >= 3 && (
+        {search && search.length >= 3 && (
             <>
               <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
               <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh]">
-                {noResult ? (
-                  <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
-                ) : (
-                  <>
-                    {/* Catégorie Libellés */}
-                    {(() => {
-                      const matchingLabels = LABELS.filter(l => {
-                        const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
-                        const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
-                        return matchParent || matchChild;
-                      });
-                      if (matchingLabels.length === 0) return null;
-                      return (
-                        <div className="mb-2">
-                          <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
-                          {matchingLabels.flatMap(({ label, subs }) => {
-                            if (
-                              label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
-                              subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
-                            ) {
+            {noResult ? (
+              <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
+            ) : (
+              <>
+                {/* Catégorie Libellés */}
+                {(() => {
+                  const matchingLabels = LABELS.filter(l => {
+                    const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                    const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                    return matchParent || matchChild;
+                  });
+                  if (matchingLabels.length === 0) return null;
+                  return (
+                    <div className="mb-2">
+                      <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
+                      {matchingLabels.flatMap(({ label, subs }) => {
+                        if (
+                          label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
+                          subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
+                        ) {
                               return sortAlpha(subs).map(sub => {
                                 const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                                 const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
                                 return (
-                                  <button
-                                    key={label + '-' + sub}
-                                    className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
-                                    type="button"
-                                    onClick={() => {
-                                      if (typeof onSelectCategory === 'function') onSelectCategory(sub);
-                                      else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
-                                    }}
-                                  >
+                            <button
+                              key={label + '-' + sub}
+                              className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                              type="button"
+                              onClick={() => {
+                                if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                                else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                              }}
+                            >
                                     {getCategoryIcon(sub)}
                                     <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
-                                  </button>
+                            </button>
                                 );
                               });
                             }
                             return [];
-                          })}
-                        </div>
-                      );
-                    })()}
+                      })}
+                    </div>
+                  );
+                })()}
                     
                     {/* Résultats des emails */}
-                    {searchResults.length > 0 && (
+                {searchResults.length > 0 && (
                       <div>
-                        <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
+                    <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
                         {searchResults.map((mail, index) => {
                           const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                          const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                      const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
                           
-                          return (
-                            <button
+                      return (
+                        <button
                               key={mail.id + '-' + index}
                               className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
                               type="button"
-                              onClick={() => onSelectMail(mail)}
-                            >
+                          onClick={() => onSelectMail(mail)}
+                        >
                               <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
@@ -319,16 +319,16 @@ export default function EnTete({
                                 <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
                                 <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
                               </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
-              </div>
+              </>
+            )}
+          </div>
             </>
-          )}
+        )}
         </div>
       </div>
       
@@ -382,4 +382,4 @@ export default function EnTete({
       </div>
     </header>
   );
-}; 
+};

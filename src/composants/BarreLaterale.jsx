@@ -48,7 +48,11 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
           <li key={value}>
             <button
               className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-sm md:text-base focus:outline-none ${selectedCategory === value ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
-              onClick={() => { setSelectedCategory(value); closeAllDropdowns(); }}
+              onClick={() => { 
+                setSelectedCategory(value); 
+                closeAllDropdowns(); 
+                if (onCloseSidebar) onCloseSidebar();
+              }}
             >
               {Icon && <Icon className="text-xl md:text-2xl" />}
               <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>

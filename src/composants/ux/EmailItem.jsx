@@ -11,7 +11,7 @@ const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, imag
     <div className="flex-1 min-w-0">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <span className="font-semibold text-gray-900 truncate text-sm md:text-base">{name}</span>
+          <span className="font-semibold text-gray-900 truncate text-base md:text-base">{name}</span>
           {badge && <span className="inline-block w-2 h-2 bg-green-500 rounded-full ml-1"></span>}
         </div>
         <div className="flex items-center gap-1 md:gap-2">
@@ -24,14 +24,14 @@ const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, imag
       <div className="text-gray-800 truncate -mt-0.5 flex items-center gap-2">
         {subject && subject.includes('OpenAI') ? (
           <>
-            <span className="text-sm md:text-base">Candidature spontanée</span>
+            <span className="text-base md:text-base">Candidature spontanée</span>
             {image && <MdAttachFile className="inline-block text-base md:text-lg text-black" title="Pièce jointe" />}
           </>
         ) : (
-          <span className="text-sm md:text-base">{subject}</span>
+          <span className="text-base md:text-base">{subject}</span>
         )}
       </div>
-      <div className="text-gray-600 text-xs md:text-sm truncate">{preview}</div>
+      <div className="text-gray-600 text-sm md:text-sm truncate">{preview}</div>
     </div>
   </div>
 );
