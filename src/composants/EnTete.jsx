@@ -55,7 +55,16 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
             <MdMenu className="text-2xl text-gray-700" />
           </button>
-          <div className="font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
+          <div className="hidden md:block font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
+        </div>
+        
+        {/* Barre de recherche mobile - centrée */}
+        <div className="md:hidden flex-1 mx-4">
+          <SearchBar
+            placeholder="Rechercher..."
+            value={search}
+            onChange={onSearchChange}
+          />
         </div>
         
         {/* Boutons de droite - visibles sur mobile */}

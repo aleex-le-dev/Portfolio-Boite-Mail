@@ -316,6 +316,7 @@ const BoiteMail = forwardRef((props, ref) => {
                   setSearch("");
                   setSidebarOpen(false);
                 }}
+                onCloseSidebar={() => setSidebarOpen(false)}
               />
             </div>
           </div>

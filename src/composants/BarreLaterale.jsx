@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { FcFolder } from 'react-icons/fc';
-import { MdExpandMore, MdEdit } from 'react-icons/md';
+import { MdExpandMore, MdEdit, MdClose } from 'react-icons/md';
 import { LABELS, NAV_CATEGORIES } from './constantes.js';
 import SearchBar from './ux/SearchBar.jsx';
 
-const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDeleteSubLabel, filteredEmails, search, onSearchChange, searchResults, onSelectMail }) => {
+const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseSidebar }) => {
   const [open, setOpen] = useState({
     labels: Object.fromEntries(LABELS.map(l => [l.label, false])),
     work: false
@@ -19,17 +19,19 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDelete
 
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px]">
+      {/* Bouton fermer - visible uniquement sur mobile */}
+      <div className="md:hidden flex justify-end mb-4">
+        <button 
+          className="p-2 rounded-full hover:bg-gray-200 transition"
+          onClick={onCloseSidebar}
+          aria-label="Fermer le menu"
+        >
+          <MdClose className="text-2xl text-gray-700" />
+        </button>
+      </div>
+
       {/* Barre de recherche et bouton nouveau message - visibles uniquement sur mobile */}
       <div className="md:hidden space-y-3 mb-4">
-        {/* Barre de recherche */}
-        <div className="px-2">
-          <SearchBar
-            placeholder="Rechercher..."
-            value={search}
-            onChange={onSearchChange}
-          />
-        </div>
-        
         {/* Bouton Nouveau message */}
         <div className="px-2">
           <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
@@ -51,31 +53,46 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDelete
               <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>
                 {label}
               </span>
-              {value === 'Boîte de réception' && (
-                <span className="ml-auto bg-blue-100 rounded-full px-2 text-blue-700 text-xs font-semibold">
-                  {(emails || []).filter(mail => mail.category === 'Boîte de réception').length}
-                </span>
-              )}
-              {value === 'Important' && (
-                <span className="ml-auto bg-orange-100 rounded-full px-2 text-orange-700 text-xs font-semibold">
-                  {(emails || []).filter(mail => mail.category === 'Important').length}
-                </span>
-              )}
-              {value === 'Messages envoyés' && (
-                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-700 text-xs font-semibold">
-                  {JSON.parse(localStorage.getItem('messageenvoye') || '[]').length}
-                </span>
-              )}
-              {value === 'Corbeille' && (
-                <span className="ml-auto bg-red-100 rounded-full px-2 text-red-700 text-xs font-semibold">
-                  {(emails || []).filter(mail => mail.category === 'Corbeille').length}
-                </span>
-              )}
-              {value === 'Archive' && (
-                <span className="ml-auto bg-yellow-100 rounded-full px-2 text-yellow-700 text-xs font-semibold">
-                  {(emails || []).filter(mail => mail.category === 'Archive').length}
-                </span>
-              )}
+              {value === 'Boîte de réception' && (() => {
+                const count = (emails || []).filter(mail => mail.category === 'Boîte de réception').length;
+                return count > 0 ? (
+                  <span className="ml-auto bg-blue-100 rounded-full px-2 text-blue-700 text-xs font-semibold">
+                    {count}
+                  </span>
+                ) : null;
+              })()}
+              {value === 'Important' && (() => {
+                const count = (emails || []).filter(mail => mail.category === 'Important').length;
+                return count > 0 ? (
+                  <span className="ml-auto bg-orange-100 rounded-full px-2 text-orange-700 text-xs font-semibold">
+                    {count}
+                  </span>
+                ) : null;
+              })()}
+              {value === 'Messages envoyés' && (() => {
+                const count = JSON.parse(localStorage.getItem('messageenvoye') || '[]').length;
+                return count > 0 ? (
+                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-700 text-xs font-semibold">
+                    {count}
+                  </span>
+                ) : null;
+              })()}
+              {value === 'Corbeille' && (() => {
+                const count = (emails || []).filter(mail => mail.category === 'Corbeille').length;
+                return count > 0 ? (
+                  <span className="ml-auto bg-red-100 rounded-full px-2 text-red-700 text-xs font-semibold">
+                    {count}
+                  </span>
+                ) : null;
+              })()}
+              {value === 'Archive' && (() => {
+                const count = (emails || []).filter(mail => mail.category === 'Archive').length;
+                return count > 0 ? (
+                  <span className="ml-auto bg-yellow-100 rounded-full px-2 text-yellow-700 text-xs font-semibold">
+                    {count}
+                  </span>
+                ) : null;
+              })()}
             </button>
           </li>
         ))}
@@ -106,9 +123,15 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDelete
                 <span className="uppercase">
                   {label}
                 </span>
-                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">
-                  {(emails || []).filter(mail => mail.category === label).length}
-                </span>
+                {/* Compteur uniquement pour les libellés qui ne sont pas "Projets" ou "À propos de moi", et seulement si > 0 */}
+                {label !== 'Projets' && label !== 'À propos de moi' && (() => {
+                  const count = (emails || []).filter(mail => mail.category === label).length;
+                  return count > 0 ? (
+                    <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">
+                      {count}
+                    </span>
+                  ) : null;
+                })()}
                 {subs.length > 0 && (
                   <MdExpandMore className={`text-lg transition-transform ${open.labels[label] ? 'rotate-180' : ''}`} />
                 )}
@@ -125,7 +148,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDelete
                         <span className="text-left">
                           {sub}
                         </span>
-                        <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === sub).length}</span>
+                        {/* Compteur pour les sous-libellés seulement si > 0 */}
+                        {(() => {
+                          const count = (emails || []).filter(mail => mail.category === sub).length;
+                          return count > 0 ? (
+                            <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{count}</span>
+                          ) : null;
+                        })()}
                       </button>
                     </li>
                   ))}
