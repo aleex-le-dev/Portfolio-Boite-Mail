@@ -79,9 +79,9 @@ export default function EnTete({
           <div className="hidden md:block font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
         </div>
         
-        {/* Barre de recherche mobile - centrée */}
-        <div className="md:hidden flex-1 mx-4">
-          <div className="relative bg-white rounded-full border border-gray-200 shadow-sm">
+        {/* Barre de recherche mobile - centrée par rapport à l'écran */}
+        <div className="md:hidden flex-1 mx-4 flex justify-center">
+          <div className="relative bg-white rounded-full border border-gray-200 shadow-sm w-full max-w-md">
             <SearchBar
               placeholder="Rechercher..."
               value={search}
@@ -91,7 +91,7 @@ export default function EnTete({
             {search && search.length >= 3 && (
               <>
                 <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
-                <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] px-2 max-h-[80vh]">
+                <div className="fixed left-1/2 top-20 -translate-x-1/2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)]">
                   {searchResults.length === 0 ? (
                     <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
                   ) : (
