@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./intro.css";
 import BoiteMail from "./composants/BoiteMail";
 import Intro from "./Intro";
@@ -8,10 +8,16 @@ function App() {
   const boiteMailRef = useRef();
   const [introDone, setIntroDone] = useState(true);
   const [showTransition, setShowTransition] = useState(false);
+  const [pageTitle, setPageTitle] = useState("Aleex-le-dev Développeur Web | Lillers & Béthune");
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
+
+  // Mettre à jour le titre de la page
+  useEffect(() => {
+    document.title = pageTitle;
+  }, [pageTitle]);
 
   const handleShowInfoMail = () => {
     if (boiteMailRef.current && boiteMailRef.current.selectInfoMail) {
@@ -38,7 +44,7 @@ function App() {
     <>
       {!introDone && !showTransition && <Intro onFinish={handleIntroFinish} />}
       {showTransition && <div className="mailbox-transition" />}
-      {introDone && <BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />}
+      {introDone && <BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />}
       {introDone && <CookieBanner onShowInfo={handleShowInfoMail} />}
     </>
   );

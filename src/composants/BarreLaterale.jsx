@@ -51,7 +51,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
               onClick={() => { 
                 setSelectedCategory(value); 
                 closeAllDropdowns(); 
-                if (onCloseSidebar) onCloseSidebar();
               }}
             >
               {Icon && <Icon className="text-xl md:text-2xl" />}

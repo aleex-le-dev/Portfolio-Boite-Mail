@@ -282,6 +282,7 @@ export default function EnTete({
                               key={label + '-' + sub}
                               className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
                               type="button"
+                              aria-label={`Sélectionner ${sub}`}
                               onClick={() => {
                                 if (typeof onSelectCategory === 'function') onSelectCategory(sub);
                                 else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
@@ -312,6 +313,7 @@ export default function EnTete({
                               key={mail.id + '-' + index}
                               className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
                               type="button"
+                              aria-label={`Sélectionner l'email de ${mail.sender} : ${mail.title}`}
                           onClick={() => onSelectMail(mail)}
                         >
                               <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
@@ -341,6 +343,7 @@ export default function EnTete({
         <button 
           className="p-2 rounded-full hover:bg-gray-200 transition" 
           aria-label="Mode sombre"
+          title="Mode sombre"
           onClick={onToggleDarkMode}
         >
           {darkMode ? (
@@ -353,6 +356,7 @@ export default function EnTete({
         <button
           className="flex items-center gap-2 p-2 transition"
           aria-label="Profil utilisateur"
+          title="Profil utilisateur"
           onClick={() => setShowUserMenu(!showUserMenu)}
         >
           <div className="w-8 h-8 rounded-full overflow-hidden transition-transform hover:scale-110">
@@ -371,10 +375,10 @@ export default function EnTete({
               <div className="font-semibold text-gray-900">{user.name}</div>
               <div className="text-sm text-gray-500">{user.email}</div>
             </div>
-            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
+            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Paramètres">
               Paramètres
             </button>
-            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
+            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Déconnexion">
               Déconnexion
             </button>
           </div>

@@ -13,7 +13,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
 import { MdLabelImportant, MdInbox } from "react-icons/md";
 
-const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
+const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref) => {
   const [emails, setEmails] = useState([]);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
@@ -114,7 +114,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode }, ref) => {
   // Détecter si l'email sélectionné est un projet
   const isProjet = selectedEmail && PROJECT_CATEGORIES.includes(selectedEmail.category);
 
-
+  // Mettre à jour le titre de la page quand un mail est sélectionné
+  useEffect(() => {
+    if (selectedEmail && selectedEmail.title) {
+      onTitleChange(selectedEmail.title);
+    } else {
+      onTitleChange("Aleex-le-dev Développeur Web | Lillers & Béthune");
+    }
+  }, [selectedEmail, onTitleChange]);
 
   // Fonction pour ajouter un mail envoyé
   const handleSendMail = ({ subject, message, to }) => {
