@@ -6,7 +6,7 @@ import CookieBanner from "./composants/CookieBanner";
 
 function App() {
   const boiteMailRef = useRef();
-  const [introDone, setIntroDone] = useState(false);
+  const [introDone, setIntroDone] = useState(true);
   const [showTransition, setShowTransition] = useState(false);
 
   const handleShowInfoMail = () => {

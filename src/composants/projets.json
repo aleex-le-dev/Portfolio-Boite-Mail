@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "category": "Design",
+    "title": "Portfolio UI/UX Design - Interface moderne",
+    "sender": "Aleex Le Dev",
+    "email": "alex@salutalex.fr",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "Aujourd'hui",
+    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=600&fit=crop&crop=center",
+    "content": [
+      "Création d'une interface moderne et responsive pour un portfolio professionnel. Accent mis sur la clarté, l'accessibilité et l'impact visuel.",
+      "",
+      "Technologies utilisées :",
+      "• Figma • Adobe XD • CSS3 • JavaScript • HTML5",
+      "",
+      "Fonctionnalités principales :",
+      "• Design system complet (couleurs, typographies, composants)",
+      "• Maquettes Figma & prototypage interactif",
+      "• Optimisation mobile et desktop",
+      "• Animations et micro-interactions",
+      "• Tests utilisateurs et itérations",
+      "",
+      "Projet de design UI/UX complet avec création d'un design system, maquettes interactives et optimisation pour tous les écrans.",
+      "",
+      "Voir la démo : https://portfolio-design-demo.com",
+      "Code source : https://github.com/username/portfolio-design"
+    ]
+  }
+] 

@@ -310,27 +310,5 @@
       "Cordialement,",
       "Alexandre Janacek"
     ]
-  },
-  {
-    "id": 23,
-    "category": "Design",
-    "title": "Mise en avant : Portfolio UI/UX Design",
-    "sender": "Aleex Le Dev",
-    "email": "alex@salutalex.fr",
-    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
-    "date": "Aujourd'hui",
-    "image": "./src/assets/capture1.webp",
-    "content": [
-      "Découvrez une sélection de mes réalisations les plus marquantes, illustrant mon expertise en design, développement web et mobile. Chaque projet est pensé pour l'expérience utilisateur, la performance et l'innovation.",
-      "",
-      "<b>Portfolio UI/UX</b> :\nCréation d'une interface moderne et responsive pour un portfolio professionnel. Accent mis sur la clarté, l'accessibilité et l'impact visuel.",
-      "- Design system complet (couleurs, typographies, composants)",
-      "- Maquettes Figma & prototypage interactif",
-      "- Optimisation mobile et desktop",
-      "- Animations et micro-interactions",
-      "",
-      "<div class='grid grid-cols-2 gap-4 mt-4'>\n  <img src='./src/assets/capture1.webp' alt='Aperçu design 1' class='rounded-xl shadow-lg object-cover aspect-[4/3] border border-gray-200' />\n  <img src='./src/assets/capture2.webp' alt='Aperçu design 2' class='rounded-xl shadow-lg object-cover aspect-[4/3] border border-gray-200' />\n  <img src='./src/assets/capture3.webp' alt='Aperçu design 3' class='rounded-xl shadow-lg object-cover aspect-[4/3] border border-gray-200' />\n  <img src='./src/assets/capture4.webp' alt='Aperçu design 4' class='rounded-xl shadow-lg object-cover aspect-[4/3] border border-gray-200' />\n</div>",
-      "<a href='#' class='inline-block mt-2 px-6 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition'>Voir le projet</a>"
-    ]
   }
-] 
+]
