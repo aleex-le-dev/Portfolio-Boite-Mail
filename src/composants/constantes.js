@@ -10,11 +10,14 @@ export const NAV_CATEGORIES = [
   { label: 'Corbeille', value: 'Corbeille', icon: MdDelete },
 ];
 
+// Catégories de projets
+export const PROJECT_CATEGORIES = ['Design', 'Web', 'Mobile'];
+
 // Affiché par ordre alphabétique
 export const LABELS = [
   {
     label: 'Mes projets',
-    subs: ['Web', 'Mobile', 'Design',]
+    subs: PROJECT_CATEGORIES
   },
   {
     label: 'A propos de moi',

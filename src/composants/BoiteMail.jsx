@@ -5,6 +5,8 @@ import EnTete from "./EnTete";
 import BarreLaterale from "./BarreLaterale";
 import ListeEmails from "./ListeEmails";
 import DetailEmailView from "./ux/DetailEmailView";
+import ProjetTemplate from "./ux/ProjetTemplate";
+import { PROJECT_CATEGORIES } from "./constantes";
 
 import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
@@ -94,6 +96,9 @@ const BoiteMail = forwardRef((props, ref) => {
   }
   // Sélectionner le mail courant
   const selectedEmail = filteredEmails.find(e => e.id === selectedEmailId) || filteredEmails[0];
+
+  // Détecter si l'email sélectionné est un projet
+  const isProjet = selectedEmail && PROJECT_CATEGORIES.includes(selectedEmail.category);
 
   // Si la catégorie change, reset la sélection
   useEffect(() => {
@@ -323,7 +328,17 @@ const BoiteMail = forwardRef((props, ref) => {
                       {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
                     </div>
                   </div>
-                  <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} />
+                  {isProjet ? (
+                    <div className="w-full h-full overflow-y-auto">
+                      <ProjetTemplate 
+                        projet={selectedEmail} 
+                        onClose={() => {}} 
+                        embedded={true}
+                      />
+                    </div>
+                  ) : (
+                    <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} />
+                  )}
                 </>
               ) : (
                 <div className="text-gray-400 text-lg">Vous n'avez sélectionné aucune conversation.</div>

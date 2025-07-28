@@ -1,0 +1,188 @@
+import React, { useState } from 'react';
+import './ProjetTemplate.css';
+
+const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
+  const [previewImage, setPreviewImage] = useState(null);
+  
+  if (!projet) return null;
+
+  const getCategoryColor = (category) => {
+    switch (category) {
+      case 'Design': return '#2E8B57'; // Sea Green
+      case 'Web': return '#4169E1'; // Royal Blue
+      case 'Mobile': return '#FF6B35'; // Orange
+      default: return '#2E8B57';
+    }
+  };
+
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case 'Design': return '🎨';
+      case 'Web': return '🌐';
+      case 'Mobile': return '📱';
+      default: return '💼';
+    }
+  };
+
+  return (
+    <div className={embedded ? "projet-template-embedded" : "projet-template-overlay"} onClick={embedded ? undefined : onClose}>
+      <div className="projet-template-container" onClick={(e) => !embedded && e.stopPropagation()}>
+        {/* Header Section */}
+        <div className="projet-header" style={{ backgroundColor: getCategoryColor(projet.category) }}>
+          <div className="projet-header-content">
+            <h1 className="projet-title">{projet.title}</h1>
+            <div className="projet-meta">
+              <div className="sender-info">
+                <img src={projet.senderAvatar} alt={projet.sender} className="sender-avatar" />
+                <div>
+                  <p className="sender-name">{projet.sender}</p>
+                  <p className="sender-email">{projet.email}</p>
+                </div>
+              </div>
+              <p className="projet-date">{projet.date}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Image Section */}
+        {projet.image && (
+          <div className="projet-image-section">
+            <img src={projet.image} alt={projet.title} className="projet-main-image" />
+          </div>
+        )}
+
+        {/* Introduction Section */}
+        <div className="projet-section">
+          <div className="section-content">
+            <h2 className="section-title">À propos du projet</h2>
+            <p className="projet-description">{projet.content[0]}</p>
+          </div>
+        </div>
+
+        {/* Technologies Section */}
+        <div className="projet-section technologies-section">
+          <div className="section-content">
+            <h2 className="section-title">Technologies utilisées</h2>
+            <div className="technologies-grid">
+              {projet.content.find(line => line.includes('Technologies utilisées :')) && 
+                projet.content
+                  .slice(projet.content.findIndex(line => line.includes('Technologies utilisées :')) + 1)
+                  .find(line => line.includes('•'))
+                  ?.split('•')
+                  .filter(tech => tech.trim())
+                  .map((tech, index) => (
+                    <div key={index} className="tech-item">
+                      <span className="tech-bullet">•</span>
+                      <span className="tech-name">{tech.trim()}</span>
+                    </div>
+                  ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Features Section */}
+        <div className="projet-section features-section">
+          <div className="section-content">
+            <h2 className="section-title">Fonctionnalités principales</h2>
+            <div className="features-list">
+              {projet.content
+                .slice(
+                  projet.content.findIndex(line => line.includes('Fonctionnalités principales :')) + 1,
+                  projet.content.findIndex(line => line.includes('Projet')) !== -1 
+                    ? projet.content.findIndex(line => line.includes('Projet'))
+                    : projet.content.length
+                )
+                .filter(line => line.includes('•'))
+                .map((feature, index) => (
+                  <div key={index} className="feature-item">
+                    <span className="feature-bullet">•</span>
+                    <span className="feature-text">{feature.replace('•', '').trim()}</span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Screenshots Section */}
+        {projet.screenshots && projet.screenshots.length > 0 && (
+          <div className="projet-section screenshots-section">
+            <div className="section-content">
+              <h2 className="section-title">Captures d'écran</h2>
+              <div className="screenshots-grid">
+                {projet.screenshots.map((screenshot, index) => (
+                  <div key={index} className="screenshot-item">
+                    <img 
+                      src={screenshot} 
+                      alt={`Capture d'écran ${index + 1}`} 
+                      className="screenshot-image"
+                      onClick={() => setPreviewImage(screenshot)}
+                    />
+                    
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Screenshot Preview Modal */}
+        {previewImage && (
+          <div className="screenshot-preview-overlay" onClick={() => setPreviewImage(null)}>
+            <div className="screenshot-preview-container" onClick={(e) => e.stopPropagation()}>
+              <img 
+                src={previewImage} 
+                alt="Preview" 
+                className="screenshot-preview-image"
+              />
+              <button 
+                className="screenshot-preview-close" 
+                onClick={() => setPreviewImage(null)}
+                aria-label="Fermer l'aperçu"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Links Section */}
+        <div className="projet-section links-section">
+          <div className="section-content">
+            <h2 className="section-title">Liens utiles</h2>
+            <div className="project-links">
+              {projet.content
+                .filter(line => line.includes('https://'))
+                .map((link, index) => {
+                  const isDemo = link.includes('démo');
+                  const isCode = link.includes('Code source');
+                  return (
+                    <a 
+                      key={index} 
+                      href={link.split('https://')[1]} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={`project-link ${isDemo ? 'demo-link' : 'code-link'}`}
+                    >
+                      <span className="link-icon">
+                        {isDemo ? '🚀' : '💻'}
+                      </span>
+                      <span className="link-text">
+                        {isDemo ? 'Voir la démo' : 'Code source'}
+                      </span>
+                    </a>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+
+        {/* Close Button */}
+        <button className="projet-close-btn" onClick={onClose}>
+          ✕
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProjetTemplate; 
