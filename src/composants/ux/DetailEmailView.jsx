@@ -70,6 +70,8 @@ const DetailEmailView = ({
       <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
         <div className="px-10 pl-8 flex flex-col">
           <h1 className="text-2xl font-bold mb-2 text-left w-full">Mentions légales du site</h1>
+          <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
+
           <div className="flex items-start gap-3 mb-4 w-full">
             <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
             <div className="flex flex-col w-full">

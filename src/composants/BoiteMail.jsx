@@ -114,10 +114,7 @@ const BoiteMail = forwardRef((props, ref) => {
   // Détecter si l'email sélectionné est un projet
   const isProjet = selectedEmail && PROJECT_CATEGORIES.includes(selectedEmail.category);
 
-  // Si la catégorie change, reset la sélection
-  useEffect(() => {
-    setSelectedEmailId(filteredEmails[0]?.id || null);
-  }, [selectedCategory, emails]);
+
 
   // Fonction pour ajouter un mail envoyé
   const handleSendMail = ({ subject, message, to }) => {
