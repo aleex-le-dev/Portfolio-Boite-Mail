@@ -11,7 +11,15 @@ export const NAV_CATEGORIES = [
 ];
 
 // Catégories de projets
-export const PROJECT_CATEGORIES = ['Design', 'Web', 'Mobile'];
+export const PROJECT_CATEGORIES = ['Portfolio', 'React Native', 'E-commerce'];
+
+// Couleurs par catégorie de projet
+export const PROJECT_CATEGORY_COLORS = {
+  'Portfolio': '#2E8B57', // Sea Green
+  'React Native': '#4169E1', // Royal Blue
+  'E-commerce': '#FF6B35', // Orange
+  'default': 'black'
+};
 
 // Affiché par ordre alphabétique
 export const LABELS = [

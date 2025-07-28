@@ -11,9 +11,16 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
       )}
       {emails.length > 0 ? (
         emails.map((mail) => {
-          let preview = Array.isArray(mail.content) && mail.content.length > 0
-            ? mail.content[0].replace(/<br\s*\/?>/gi, ' ').substring(0, 60) + (mail.content[0].replace(/<br\s*\/?>/gi, ' ').length > 60 ? '...' : '')
-            : '';
+          let preview = '';
+          if (Array.isArray(mail.content) && mail.content.length > 0) {
+            if (selectedCategory === 'Boîte de réception' && mail.content.length >= 3) {
+              // Pour la boîte de réception, on affiche la 3e ligne (index 2)
+              preview = mail.content[2].replace(/<br\s*\/?>/gi, ' ').substring(0, 60) + (mail.content[2].replace(/<br\s*\/?>/gi, ' ').length > 60 ? '...' : '');
+            } else {
+              // Pour les autres catégories, on garde la première ligne
+              preview = mail.content[0].replace(/<br\s*\/?>/gi, ' ').substring(0, 60) + (mail.content[0].replace(/<br\s*\/?>/gi, ' ').length > 60 ? '...' : '');
+            }
+          }
           return (
             <div
               key={mail.id}

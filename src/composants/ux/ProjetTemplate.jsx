@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ProjetTemplate.css';
+import { PROJECT_CATEGORY_COLORS } from '../constantes';
 
 const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
   const [previewImage, setPreviewImage] = useState(null);
@@ -7,21 +8,7 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
   if (!projet) return null;
 
   const getCategoryColor = (category) => {
-    switch (category) {
-      case 'Design': return '#2E8B57'; // Sea Green
-      case 'Web': return '#4169E1'; // Royal Blue
-      case 'Mobile': return '#FF6B35'; // Orange
-      default: return '#2E8B57';
-    }
-  };
-
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case 'Design': return '🎨';
-      case 'Web': return '🌐';
-      case 'Mobile': return '📱';
-      default: return '💼';
-    }
+    return PROJECT_CATEGORY_COLORS[category] || PROJECT_CATEGORY_COLORS.default;
   };
 
   return (
@@ -32,13 +19,6 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
           <div className="projet-header-content">
             <h1 className="projet-title">{projet.title}</h1>
             <div className="projet-meta">
-              <div className="sender-info">
-                <img src={projet.senderAvatar} alt={projet.sender} className="sender-avatar" />
-                <div>
-                  <p className="sender-name">{projet.sender}</p>
-                  <p className="sender-email">{projet.email}</p>
-                </div>
-              </div>
               <p className="projet-date">{projet.date}</p>
             </div>
           </div>
@@ -154,7 +134,6 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
                 .filter(line => line.includes('https://'))
                 .map((link, index) => {
                   const isDemo = link.includes('démo');
-                  const isCode = link.includes('Code source');
                   return (
                     <a 
                       key={index} 

@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "category": "Design",
-    "title": "Portfolio UI/UX Design - Interface moderne",
+    "category": "E-commerce",
+    "title": "MaisonCléo",
     "sender": "Aleex Le Dev",
     "email": "alex@salutalex.fr",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
@@ -68,7 +68,7 @@
   },
   {
     "id": 3,
-    "category": "Mobile",
+    "category": "React Native",
     "title": "App Fitness - Suivi d'entraînement",
     "sender": "Aleex Le Dev",
     "email": "alex@salutalex.fr",
