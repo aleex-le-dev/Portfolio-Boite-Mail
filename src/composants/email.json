@@ -72,18 +72,18 @@
     "content": [
       "Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.",
       "",
-      "Qu'est-ce que le stockage local ?",
+      "<b>Qu'est-ce que le stockage local ?</b>",
       "Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.",
       "",
-      "Utilisation sur ce site :",
+      "<b>Utilisation sur ce site :</b>",
       "- Mémorisation de vos messages envoyés",
       "- Conservation de vos préférences d'affichage",
       "- Amélioration de l'expérience utilisateur",
       "",
-      "Aucune exploitation commerciale :",
+      "<b>Aucune exploitation commerciale :</b>",
       "Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi. Aucune information n'est transmise à des tiers.",
       "",
-      "Vos droits :",
+      "<b>Vos droits :</b>",
       "Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur. Pour toute question, contactez-moi à alex@salutalex.fr."
     ]
   },

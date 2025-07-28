@@ -112,11 +112,11 @@ const DetailEmailView = ({
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
                         c === ""
                           ? <div key={i} className="h-4"></div>
-                          : /<a\s|<br\s*\/?\s*>/i.test(c)
+                          : /<[^>]*>/i.test(c)
                             ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
                             : <div key={i} className="text-gray-900 text-base">{c}</div>
                       )
-                    : (/<a\s|<br\s*\/?\s*>/i.test(content)
+                    : (/<[^>]*>/i.test(content)
                         ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
                         : <div className="text-gray-900 text-base">{content}</div>
                       )}
@@ -146,11 +146,11 @@ const DetailEmailView = ({
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
                         c === ""
                           ? <div key={i} className="h-4"></div>
-                          : /<a\s|<br\s*\/?\s*>/i.test(c)
+                          : /<[^>]*>/i.test(c)
                             ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
                             : <div key={i} className="text-gray-900 text-base">{c}</div>
                       )
-                    : (/<a\s|<br\s*\/?\s*>/i.test(content)
+                    : (/<[^>]*>/i.test(content)
                         ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
                         : <div className="text-gray-900 text-base">{content}</div>
                       )}
@@ -190,7 +190,7 @@ const DetailEmailView = ({
                   {content.slice(0, -1).map((c, i) =>
                     c === ""
                       ? <div key={i} className="h-4"></div>
-                      : /<a\s|<br\s*\/?\s*>/i.test(c)
+                      : /<[^>]*>/i.test(c)
                         ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
                         : <div key={i} className="text-gray-900 text-base">{c}</div>
                   )}
