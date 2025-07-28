@@ -159,9 +159,21 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
         )}
       </div>
       <div className="flex items-center gap-4 relative">
-        <button className="p-2 rounded-full hover:bg-gray-200 transition" aria-label="Paramètres">
-          <FiSettings className="text-2xl text-gray-700" />
-        </button>
+                 <button 
+           className="p-2 rounded-full hover:bg-gray-200 transition-transform duration-500" 
+           aria-label="Paramètres"
+           onClick={(e) => {
+             const button = e.currentTarget;
+             if (button) {
+               const currentRotation = button.style.transform;
+               const currentDegrees = currentRotation ? parseInt(currentRotation.match(/rotate\((\d+)deg\)/)?.[1] || '0') : 0;
+               const newDegrees = currentDegrees + 180;
+               button.style.transform = `rotate(${newDegrees}deg)`;
+             }
+           }}
+         >
+           <FiSettings className="text-2xl text-gray-700" />
+         </button>
         <button
           className="p-0 rounded-full hover:shadow-lg transition relative"
           aria-label="Profil utilisateur"
