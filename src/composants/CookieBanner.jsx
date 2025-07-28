@@ -15,7 +15,7 @@ function CookieBanner({ onShowInfo }) {
   return (
     <div className="fixed bottom-0 left-0 w-full z-50 flex justify-center cookie-banner-animate">
       <div className="bg-white border border-gray-300 shadow-lg rounded-t-xl px-6 py-4 flex flex-col md:flex-row items-center gap-4 max-w-2xl w-full md:w-auto">
-        <span className="text-gray-700 text-sm flex-1">Ce site utilise le stockage local de votre navigateur pour améliorer votre expérience. Aucune donnée n’est transmise à des tiers. <button type="button" className="underline hover:text-blue-700" onClick={onShowInfo}>En savoir plus</button></span>
+        <span className="text-gray-700 text-sm flex-1">Ce site utilise des cookies et le stockage local pour améliorer votre expérience et analyser le trafic. <button type="button" className="underline hover:text-blue-700" onClick={onShowInfo}>En savoir plus</button></span>
         <button onClick={accept} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 transition">J'ai compris</button>
       </div>
     </div>

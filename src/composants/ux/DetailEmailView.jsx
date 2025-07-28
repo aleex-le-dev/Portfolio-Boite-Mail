@@ -38,20 +38,27 @@ const DetailEmailView = ({
             </div>
           </div>
           <div className=" border-blue-200 rounded-xl">
-            <h2 className="text-xl font-bold mb-4">Confidentialité & stockage local</h2>
-            <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et n'utilise que le stockage local de votre navigateur pour améliorer votre expérience utilisateur.</p>
-            <h3 className="font-semiboldmt-6 mb-1 font-semibold">Qu'est-ce que le stockage local&nbsp;?</h3>
-            <p className="mb-3 text-gray-700" >Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos messages envoyés ou vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
-            <h3 className="font-semiboldmt-6 mb-1 font-semibold">Utilisation sur ce site</h3>
+            <h2 className="text-xl font-bold mb-4">Confidentialité & cookies</h2>
+            <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
+            
+            <h3 className="font-semibold mt-6 mb-1">Cookies et analyse du trafic</h3>
+            <p className="mb-3 text-gray-700">Ce site utilise Google Tag Manager (GTM) pour analyser le trafic et améliorer l'expérience utilisateur. GTM peut placer des cookies sur votre appareil pour collecter des informations anonymes sur votre utilisation du site.</p>
+            
+            <h3 className="font-semibold mt-6 mb-1">Qu'est-ce que le stockage local&nbsp;?</h3>
+            <p className="mb-3 text-gray-700">Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
+            
+            <h3 className="font-semibold mt-6 mb-1">Utilisation sur ce site</h3>
             <ul className="list-disc ml-6 mb-3 text-gray-700">
-              <li>Mémorisation de vos messages envoyés</li>
-              <li>Conservation de vos préférences d'affichage</li>
+              <li>Analyse anonyme du trafic via Google Tag Manager</li>
+              <li>Conservation de vos préférences d'affichage (acceptation des cookies)</li>
               <li>Amélioration de l'expérience utilisateur</li>
             </ul>
-            <h3 className="font-semibold  mt-6 mb-1">Aucune exploitation commerciale</h3>
-            <p className="mb-3 text-gray-700">Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi. Aucune information n'est transmise à des tiers.</p>
-            <h3 className="font-semibold  mt-6 mb-1">Vos droits</h3>
-            <p className="mb-1 text-gray-700">Vous pouvez à tout moment effacer les données stockées via les paramètres de votre navigateur.</p>
+            
+            <h3 className="font-semibold mt-6 mb-1">Aucune exploitation commerciale</h3>
+            <p className="mb-3 text-gray-700">Les données collectées ne sont utilisées qu'à des fins d'analyse et d'amélioration du site. Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi personnalisé.</p>
+            
+            <h3 className="font-semibold mt-6 mb-1">Vos droits</h3>
+            <p className="mb-1 text-gray-700">Vous pouvez à tout moment effacer les cookies et données stockées via les paramètres de votre navigateur.</p>
             <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alex@salutalex.fr" className="underline text-blue-700 hover:text-blue-800 transition-colors">alex@salutalex.fr</a>.</p>
           </div>
         </div>
