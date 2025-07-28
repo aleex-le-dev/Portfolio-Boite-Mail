@@ -32,14 +32,6 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
 
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px]">
-      {/* Bouton Nouveau message sticky */}
-      <div className="sticky top-0 z-10 bg-white pb-2">
-        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm md:text-base">
-          <MdEdit className="text-lg md:text-xl" />
-          <span className="hidden sm:inline">Nouveau message</span>
-          <span className="sm:hidden">Nouveau</span>
-        </button>
-      </div>
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (

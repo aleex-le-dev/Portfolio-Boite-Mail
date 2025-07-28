@@ -278,19 +278,25 @@ const BoiteMail = forwardRef((props, ref) => {
           setSearch("");
         }}
       />
+      
+      {/* Sidebar mobile - overlay */}
+      {sidebarOpen && (
+        <div className="md:hidden fixed inset-0 z-50">
+          {/* Overlay sombre */}
+          <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)}></div>
+          {/* Sidebar */}
+          <div className="absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full">
+            <div className="p-4">
+              <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />
+            </div>
+          </div>
+        </div>
+      )}
+      
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar - cachée sur mobile par défaut */}
-        <div className={`${sidebarOpen ? 'block' : 'hidden'} md:block ${sidebarOpen ? 'fixed md:relative inset-0 z-40 md:z-auto' : ''}`}>
-          {sidebarOpen && (
-            <>
-              {/* Overlay pour mobile */}
-              <div className="md:hidden fixed inset-0 bg-black/50 z-30" onClick={() => setSidebarOpen(false)}></div>
-              {/* Sidebar */}
-              <div className="relative z-40 md:relative md:z-auto">
-                <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />
-              </div>
-            </>
-          )}
+        {/* Sidebar desktop - cachée sur mobile */}
+        <div className="hidden md:block">
+          <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />
         </div>
         
         {/* Zone principale - responsive */}
@@ -323,7 +329,6 @@ const BoiteMail = forwardRef((props, ref) => {
                           aria-label="Retour à la liste"
                         >
                           <IoMdArrowRoundBack />
-
                         </button>
                         <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
                           onClick={() => {
