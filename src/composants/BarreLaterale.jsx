@@ -3,6 +3,7 @@ import { FcFolder } from 'react-icons/fc';
 import { MdExpandMore, MdEdit, MdClose } from 'react-icons/md';
 import { LABELS, NAV_CATEGORIES } from './constantes.js';
 import SearchBar from './ux/SearchBar.jsx';
+import { IoMailSharp } from 'react-icons/io5';
 
 const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseSidebar }) => {
   const [open, setOpen] = useState({
@@ -36,7 +37,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         {/* Bouton Nouveau message */}
         <div className="px-2">
           <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
-            <MdEdit className="text-lg" />
+            <IoMailSharp className="text-lg" />
             Me contacter
           </button>
         </div>

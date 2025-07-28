@@ -326,13 +326,13 @@ const BoiteMail = forwardRef((props, ref) => {
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar desktop - cachée sur mobile */}
         <div className="hidden md:block">
-          <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />
+          <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onCloseSidebar={() => setSidebarOpen(false)} />
         </div>
         
         {/* Zone principale - responsive */}
-        <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
+        <div className="flex flex-1 flex-col md:flex-row overflow-hidden md:overflow-visible h-full md:h-auto">
           {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
-          <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} w-full md:w-[30%] mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl`}>
+          <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} w-full md:w-[30%] mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
             <div className="h-full bg-white rounded-2xl overflow-hidden">
               <ListeEmails
                 selectedCategory={selectedCategory}
@@ -344,7 +344,7 @@ const BoiteMail = forwardRef((props, ref) => {
           </div>
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
-          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} w-full md:w-[70%] mx-0.5 shadow-lg rounded-2xl`}>
+          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} w-full md:w-[70%] mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
             <div className="h-full bg-white rounded-2xl overflow-hidden flex flex-col items-center justify-center">
               {search && search.trim().length >= 3 ? null : (
                 filteredEmails.length > 0 && selectedEmail ? (
