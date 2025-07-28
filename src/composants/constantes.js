@@ -39,5 +39,5 @@ export const LABELS = [
 
 // Mes infos
 export const USERNAME = 'Alexandre Janacek';
-export const USER_EMAIL = 'alex@salutalex.fr';
+export const USER_EMAIL = 'alexandre.janacek@gmail.com';
 export const USER_AVATAR = 'https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o'; 

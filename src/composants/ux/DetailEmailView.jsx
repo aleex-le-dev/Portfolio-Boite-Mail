@@ -59,7 +59,7 @@ const DetailEmailView = ({
             
             <h3 className="font-semibold mt-6 mb-1">Vos droits</h3>
             <p className="mb-1 text-gray-700">Vous pouvez à tout moment effacer les cookies et données stockées via les paramètres de votre navigateur.</p>
-            <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alex@salutalex.fr" className="underline text-blue-700 hover:text-blue-800 transition-colors">alex@salutalex.fr</a>.</p>
+            <p className="text-gray-700">Pour toute question, contactez-moi à <a href="mailto:alexandre.janacek@gmail.com" className="underline text-blue-700 hover:text-blue-800 transition-colors">alexandre.janacek@gmail.com</a>.</p>
           </div>
         </div>
       </div>
@@ -212,7 +212,7 @@ const DetailEmailView = ({
             </div>
             <hr className="my-4 border-t-2 border-gray-200" />
             <div className="flex items-start gap-3 mt-4">
-              <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alex@salutalex.fr" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400 mt-1" />
+              <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alexandre.janacek@gmail.com" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400 mt-1" />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-gray-900">Aleex Le Dev</span>
