@@ -14,6 +14,7 @@ const DetailEmailView = ({
   category,
   id,
   to,
+  darkMode,
 }) => {
   const [showReply, setShowReply] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
@@ -25,15 +26,15 @@ const DetailEmailView = ({
 
   if (category === 'Important' && id === 1000) {
     return (
-      <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
+      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
         <div className="px-10 pl-8 flex flex-col">
           <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
           <div className="flex items-start gap-3 mb-4 w-full">
             <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
             <div className="flex flex-col w-full">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-semibold text-gray-900">{sender}</span>
-                <span className="text-xs text-gray-500">{date}</span>
+                <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
               </div>
             </div>
           </div>
@@ -67,7 +68,7 @@ const DetailEmailView = ({
   }
   if (category === 'Important' && id === 1001) {
     return (
-      <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
+      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
         <div className="px-10 pl-8 flex flex-col">
           <h1 className="text-2xl font-bold mb-2 text-left w-full">Mentions légales du site</h1>
           <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
@@ -101,7 +102,7 @@ const DetailEmailView = ({
     );
   }
   return (
-    <div className="w-full h-full flex flex-col bg-white rounded-2xl overflow-y-auto">
+    <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
       {/* Corps du mail */}
       <style>{`
         .mail-content a { color: #2563eb; text-decoration: underline; transition: color 0.2s; }
@@ -110,13 +111,13 @@ const DetailEmailView = ({
       <div className={`px-10 pl-8 flex flex-col ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
         {category !== 'Messages envoyés' && (
           <>
-            <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-4 w-full">
               <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold text-gray-900">{sender}</span>
-                  <span className="text-xs text-gray-500">{date}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px] cursor-pointer" onClick={() => setPreviewImage(image)} />}
                 <div className="mt-5 mail-content">

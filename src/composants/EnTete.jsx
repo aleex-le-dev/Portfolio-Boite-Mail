@@ -80,7 +80,7 @@ export default function EnTete({
         <button className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`} onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
           <MdMenu className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} />
         </button>
-          <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>salutalex.fr</div>
+          <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 whitespace-nowrap ${darkMode ? 'text-white' : 'text-gray-900'} `}>Alexandre Janacek</div>
         </div>
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}

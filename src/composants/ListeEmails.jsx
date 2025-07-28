@@ -1,11 +1,11 @@
 import React from "react";
 import EmailItem from "./ux/EmailItem";
 
-const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selectedCategory }) => {
+const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selectedCategory, darkMode }) => {
   return (
-    <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
+    <section className={`flex flex-col h-full overflow-y-auto rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
       {emails.length > 0 && (
-        <div className="flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base text-gray-700 font-bold bg-gray-50 border-b rounded-tl-2xl">
+        <div className={`flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base font-bold border-b rounded-tl-2xl ${darkMode ? 'text-gray-300 bg-gray-700' : 'text-gray-700 bg-gray-50'}`}>
           {selectedCategory}
         </div>
       )}
@@ -24,7 +24,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
           return (
             <div
               key={mail.id}
-              className={`cursor-pointer transition-colors duration-100 w-full ${selectedEmailId === mail.id ? 'bg-blue-100' : 'hover:bg-gray-50'}`}
+              className={`cursor-pointer transition-colors duration-100 w-full ${selectedEmailId === mail.id ? (darkMode ? 'bg-blue-900' : 'bg-blue-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50')}`}
               onClick={() => setSelectedEmailId(mail.id)}
             >
               <EmailItem
@@ -36,12 +36,13 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
                 badge={mail.badge}
                 calendar={mail.calendar}
                 image={mail.image}
+                darkMode={darkMode}
               />
             </div>
           );
         })
       ) : (
-        <div className="px-4 py-8 text-center text-gray-400 text-xs md:text-sm">Aucun mail à afficher pour cette catégorie.</div>
+        <div className={`px-4 py-8 text-center text-xs md:text-sm ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>Aucun mail à afficher pour cette catégorie.</div>
       )}
     </section>
   );
