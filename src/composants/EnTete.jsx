@@ -56,8 +56,8 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
         </button>
         <div className="font-bold text-2xl text-gray-900 ml-1">salutalex.fr</div>
       </div>
-      {/* Barre de recherche */}
-      <div className="relative w-96">
+             {/* Barre de recherche */}
+       <div className="relative w-96 z-50">
         <div ref={searchRef}>
           <SearchBar
             placeholder="Rechercher dans les emails"
@@ -65,8 +65,10 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             onChange={onSearchChange}
           />
         </div>
-        {search && search.length >= 3 && (
-          <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[800px] px-2 max-h-[80vh]">
+                 {search && search.length >= 3 && (
+           <>
+             <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
+             <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[800px] px-2 max-h-[80vh]">
             {noResult ? (
               <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
             ) : (
@@ -153,10 +155,11 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
                     })}
                   </div>
                 )}
-              </>
-            )}
-          </div>
-        )}
+                             </>
+             )}
+           </div>
+         </>
+       )}
       </div>
       <div className="flex items-center gap-4 relative">
                  <button 
