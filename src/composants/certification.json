@@ -1,0 +1,142 @@
+[
+  {
+    "id": 10,
+    "category": "Mes certifications",
+    "title": "Certification Objectifs IA obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/Objectif-IA.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez brillamment validé la formation <b>'Objectifs IA'</b> sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 11,
+    "category": "Mes certifications",
+    "title": "Certification Cybersecurité obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/cybersécurité.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation <b>'Cybersecurité'</b> sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 12,
+    "category": "Mes certifications",
+    "title": "Certification HTML5 et CSS3 obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/HTML5-CSS3-min.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation <b>'HTML5 et CSS3'</b> sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 13,
+    "category": "Mes certifications",
+    "title": "Certification PHP et MySQL obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/PHP-MySQL-min.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation <b>'PHP et MySQL'</b> sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 14,
+    "category": "Mes certifications",
+    "title": "Certification Git et Github obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/git.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation <b>'Git et Github'</b> sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 15,
+    "category": "Mes certifications",
+    "title": "Certification Wordpress 5 obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/WordPress-min.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation <b>'Wordpress 5'</b> sur OpenClassrooms et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 16,
+    "category": "Mes certifications",
+    "title": "Certification L'UX Design obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/ux.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation <b>'L'UX Design'</b> sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 17,
+    "category": "Mes certifications",
+    "title": "Certification Le marketing Digital obtenue !",
+    "sender": "Google",
+    "email": "certifications@google.com",
+    "senderAvatar": "https://www.google.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/google-certifification.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation <b>'Les fondamentaux du marketing Digital'</b> de Google et reçu la certification officielle."
+    ]
+  },
+  {
+    "id": 18,
+    "category": "Mes certifications",
+    "title": "Certification Le SEO obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/seo.webp",
+    "content": [
+      "Félicitations Alex,",
+      "Vous avez validé la formation <b>'Le SEO'</b> sur OpenClassrooms et obtenu la certification officielle."
+    ]
+  },
+  {
+    "id": 19,
+    "category": "Mes certifications",
+    "title": "Certification Illustrator obtenue !",
+    "sender": "OpenClassrooms",
+    "email": "contact@openclassrooms.com",
+    "senderAvatar": "https://www.openclassrooms.com/favicon.ico",
+    "date": "Aujourd'hui",
+    "image": "./src/assets/certification/illustrator.webp",
+    "content": [
+      "Bravo Alex,",
+      "Vous avez validé la formation <b>'Illustrator'</b> sur OpenClassrooms et reçu la certification officielle."
+    ]
+  }
+] 

@@ -46,20 +46,24 @@ const BoiteMail = forwardRef((props, ref) => {
           sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
         } catch {/* ignore */}
         
-        // Charger les projets en plus (optionnel)
-        fetch("./src/composants/projets.json")
-          .then(res => res.json())
-          .then(projetData => {
-            const projetsWithDates = projetData.map(projet => ({
-              ...projet,
-              date: projet.date || "Aujourd'hui"
-            }));
-            setEmails([...sent, ...emailsWithDates, ...projetsWithDates]);
-          })
-          .catch(() => {
-            console.log('Projets non trouvés, chargement des emails seulement');
-            setEmails([...sent, ...emailsWithDates]);
-          });
+        // Charger les projets et certifications
+        Promise.all([
+          fetch("./src/composants/projets.json").then(res => res.json()).catch(() => []),
+          fetch("./src/composants/certification.json").then(res => res.json()).catch(() => [])
+        ]).then(([projetData, certificationData]) => {
+          const projetsWithDates = projetData.map(projet => ({
+            ...projet,
+            date: projet.date || "Aujourd'hui"
+          }));
+          const certificationsWithDates = certificationData.map(cert => ({
+            ...cert,
+            date: cert.date || "Aujourd'hui"
+          }));
+          setEmails([...sent, ...emailsWithDates, ...projetsWithDates, ...certificationsWithDates]);
+        }).catch(() => {
+          console.log('Projets ou certifications non trouvés, chargement des emails seulement');
+          setEmails([...sent, ...emailsWithDates]);
+        });
       })
       .catch(error => {
         console.error('Erreur lors du chargement des emails:', error);
