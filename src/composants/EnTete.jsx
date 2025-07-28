@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from 'react';
 import SearchBar from "./ux/SearchBar";
 import { FiSettings } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant, MdEdit } from "react-icons/md";
 import { LABELS, USERNAME, USER_EMAIL, USER_AVATAR } from "./constantes";
 
-const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], onSelectMail, onSelectCategory }) => {
+export default function EnTete({
+  onToggleSidebar,
+  search,
+  onSearchChange,
+  searchResults,
+  onSelectMail,
+  onSelectCategory
+}) {
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
     switch ((cat || '').toLowerCase()) {
@@ -25,14 +32,15 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
 
   const searchRef = React.useRef();
   const resultsRef = React.useRef();
-  const [showUserMenu, setShowUserMenu] = React.useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef(null);
   const user = {
     email: USER_EMAIL,
     name: USERNAME,
     avatar: USER_AVATAR
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleClickOutside(event) {
       if (
         searchRef.current &&
@@ -46,6 +54,19 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onSearchChange]);
+
+  useEffect(() => {
+    if (!showUserMenu) return;
+    function handleClickOutside(event) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showUserMenu]);
 
   return (
     <header className="w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 bg-white">
@@ -94,7 +115,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
           </button>
           
           {showUserMenu && (
-            <div className="absolute right-4 top-16 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+            <div ref={userMenuRef} className="absolute right-4 top-16 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
               <div className="px-4 py-2 border-b border-gray-100">
                 <div className="font-semibold text-gray-900">{user.name}</div>
                 <div className="text-sm text-gray-500">{user.email}</div>
@@ -235,7 +256,7 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
         </button>
         
         {showUserMenu && (
-          <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+          <div ref={userMenuRef} className="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
             <div className="px-4 py-2 border-b border-gray-100">
               <div className="font-semibold text-gray-900">{user.name}</div>
               <div className="text-sm text-gray-500">{user.email}</div>
@@ -251,6 +272,4 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
       </div>
     </header>
   );
-};
-
-export default EnTete; 
+}; 

@@ -20,7 +20,8 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px]">
       {/* Bouton fermer - visible uniquement sur mobile */}
-      <div className="md:hidden flex justify-end mb-4">
+      <div className="md:hidden flex justify-between items-center mb-4">
+        <div className="font-bold text-lg text-gray-900">Alexandre Janacek</div>
         <button 
           className="p-2 rounded-full hover:bg-gray-200 transition"
           onClick={onCloseSidebar}
@@ -36,7 +37,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         <div className="px-2">
           <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
             <MdEdit className="text-lg" />
-            Nouveau message
+            Me contacter
           </button>
         </div>
       </div>
