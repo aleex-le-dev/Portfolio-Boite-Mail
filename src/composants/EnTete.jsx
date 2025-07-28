@@ -81,11 +81,97 @@ export default function EnTete({
         
         {/* Barre de recherche mobile - centrée */}
         <div className="md:hidden flex-1 mx-4">
-          <SearchBar
-            placeholder="Rechercher..."
-            value={search}
-            onChange={onSearchChange}
-          />
+          <div className="relative bg-white rounded-full border border-gray-200 shadow-sm">
+            <SearchBar
+              placeholder="Rechercher..."
+              value={search}
+              onChange={onSearchChange}
+            />
+            
+            {search && search.length >= 3 && (
+              <>
+                <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
+                <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] px-2 max-h-[80vh]">
+                  {searchResults.length === 0 ? (
+                    <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
+                  ) : (
+                    <>
+                      {/* Catégorie Libellés */}
+                      {(() => {
+                        const matchingLabels = LABELS.filter(l => {
+                          const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                          const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                          return matchParent || matchChild;
+                        });
+                        if (matchingLabels.length === 0) return null;
+                        return (
+                          <div className="mb-2">
+                            <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
+                            {matchingLabels.flatMap(({ label, subs }) => {
+                              if (
+                                label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
+                                subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
+                              ) {
+                                return sortAlpha(subs).map(sub => {
+                                  const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                                  const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                                  return (
+                                    <button
+                                      key={label + '-' + sub}
+                                      className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                                      type="button"
+                                      onClick={() => {
+                                        if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                                        else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                                      }}
+                                    >
+                                      {getCategoryIcon(sub)}
+                                      <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
+                                    </button>
+                                  );
+                                });
+                              }
+                              return [];
+                            })}
+                          </div>
+                        );
+                      })()}
+                      
+                      {/* Résultats des emails */}
+                      {searchResults.length > 0 && (
+                        <div>
+                          <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
+                          {searchResults.map((mail, index) => {
+                            const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                            
+                            return (
+                              <button
+                                key={mail.id + '-' + index}
+                                className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                                type="button"
+                                onClick={() => onSelectMail(mail)}
+                              >
+                                <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className="text-sm font-semibold text-gray-900" dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                    <span className="text-xs text-gray-500">{mail.date}</span>
+                                  </div>
+                                  <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
+                                  <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         </div>
         
         {/* Boutons de droite - visibles sur mobile */}
