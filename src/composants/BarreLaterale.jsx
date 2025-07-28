@@ -50,8 +50,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
             >
               {Icon && <Icon className="text-xl md:text-2xl" />}
               <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>
-                <span className="hidden sm:inline">{label}</span>
-                <span className="sm:hidden">{label.length > 8 ? label.substring(0, 8) + '...' : label}</span>
+                {label}
               </span>
               {(() => {
                 let allMails = [...(emails || [])];
@@ -93,8 +92,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
               >
                 <FcFolder className="text-lg md:text-xl" />
                 <span className="uppercase">
-                  <span className="hidden sm:inline">{label}</span>
-                  <span className="sm:hidden">{label.length > 8 ? label.substring(0, 8) + '...' : label}</span>
+                  {label}
                 </span>
                 {label === 'Messages envoyés' && (
                   <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label && !mail.to).length}</span>
@@ -129,8 +127,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                       >
                         <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                         <span className="text-left">
-                          <span className="hidden sm:inline">{sub}</span>
-                          <span className="sm:hidden">{sub.length > 8 ? sub.substring(0, 8) + '...' : sub}</span>
+                          {sub}
                         </span>
                         <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === sub).length}</span>
                       </button>

@@ -7,6 +7,7 @@ import ListeEmails from "./ListeEmails";
 import DetailEmailView from "./ux/DetailEmailView";
 import ProjetTemplate from "./ux/ProjetTemplate";
 import { PROJECT_CATEGORIES } from "./constantes";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 import { FiTrash2 } from "react-icons/fi";
 import { MdArchive } from "react-icons/md";
@@ -294,8 +295,8 @@ const BoiteMail = forwardRef((props, ref) => {
         
         {/* Zone principale - responsive */}
         <div className="flex flex-1 flex-col md:flex-row overflow-hidden">
-          {/* Liste des emails - pleine largeur sur mobile, 30% sur desktop */}
-          <div className="w-full md:w-[30%] mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl">
+          {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
+          <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} w-full md:w-[30%] mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl`}>
             <div className="h-full bg-white rounded-2xl overflow-hidden">
               <ListeEmails
                 selectedCategory={selectedCategory}
@@ -306,8 +307,8 @@ const BoiteMail = forwardRef((props, ref) => {
             </div>
           </div>
           
-          {/* Détail email - caché sur mobile si pas d'email sélectionné */}
-          <div className={`${selectedEmailId ? 'block' : 'hidden'} md:block w-full md:w-[70%] mx-0.5 shadow-lg rounded-2xl`}>
+          {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
+          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} w-full md:w-[70%] mx-0.5 shadow-lg rounded-2xl`}>
             <div className="h-full bg-white rounded-2xl overflow-hidden flex flex-col items-center justify-center">
               {search && search.trim().length >= 3 ? null : (
                 filteredEmails.length > 0 && selectedEmail ? (
@@ -315,7 +316,16 @@ const BoiteMail = forwardRef((props, ref) => {
                     {/* Barre d'action au-dessus du détail */}
                     <div className="flex items-center justify-between px-6 border-b bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 h-12 min-h-12 rounded-tr-2xl w-full">
                       <div className="flex items-center gap-2">
-                        <button className="p-0.5 rounded hover:bg-gray-200"
+                        {/* Bouton retour sur mobile */}
+                        <button 
+                          className="md:hidden px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-200 text-gray-500 text-sm font-medium"
+                          onClick={() => setSelectedEmailId(null)}
+                          aria-label="Retour à la liste"
+                        >
+                          <IoMdArrowRoundBack />
+
+                        </button>
+                        <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
                           onClick={() => {
                             const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                             if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
@@ -324,7 +334,7 @@ const BoiteMail = forwardRef((props, ref) => {
                         >
                           <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
                         </button>
-                        <button className="p-0.5 rounded hover:bg-gray-200"
+                        <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
                           onClick={() => {
                             const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                             if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);

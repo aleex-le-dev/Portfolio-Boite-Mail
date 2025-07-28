@@ -6,8 +6,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
     <section className="flex flex-col bg-white h-full overflow-y-auto rounded-2xl">
       {emails.length > 0 && (
         <div className="flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base text-gray-700 font-bold bg-gray-50 border-b rounded-tl-2xl">
-          <span className="hidden sm:inline">{selectedCategory}</span>
-          <span className="sm:hidden">{selectedCategory.length > 12 ? selectedCategory.substring(0, 12) + '...' : selectedCategory}</span>
+          {selectedCategory}
         </div>
       )}
       {emails.length > 0 ? (
@@ -16,10 +15,10 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
           if (Array.isArray(mail.content) && mail.content.length > 0) {
             if (selectedCategory === 'Boîte de réception' && mail.content.length >= 3) {
               // Pour la boîte de réception, on affiche la 3e ligne (index 2)
-              preview = mail.content[2].replace(/<br\s*\/?>/gi, ' ').substring(0, 40) + (mail.content[2].replace(/<br\s*\/?>/gi, ' ').length > 40 ? '...' : '');
+              preview = mail.content[2].replace(/<br\s*\/?>/gi, ' ').substring(0, 80) + (mail.content[2].replace(/<br\s*\/?>/gi, ' ').length > 80 ? '...' : '');
             } else {
               // Pour les autres catégories, on garde la première ligne
-              preview = mail.content[0].replace(/<br\s*\/?>/gi, ' ').substring(0, 40) + (mail.content[0].replace(/<br\s*\/?>/gi, ' ').length > 40 ? '...' : '');
+              preview = mail.content[0].replace(/<br\s*\/?>/gi, ' ').substring(0, 80) + (mail.content[0].replace(/<br\s*\/?>/gi, ' ').length > 80 ? '...' : '');
             }
           }
           return (
