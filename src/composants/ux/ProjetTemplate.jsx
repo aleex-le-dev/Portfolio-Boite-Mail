@@ -156,7 +156,7 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
                            {isDemo ? '🚀' : '💻'}
                          </span>
                          <span className="link-text">
-                           {isDemo ? 'Voir le site' : 'Voir le code'}
+                           {isDemo ? 'Voir le site' : 'GitHub'}
                          </span>
                        </a>
                      );
