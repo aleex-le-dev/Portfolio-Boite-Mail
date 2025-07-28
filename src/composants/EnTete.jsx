@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import SearchBar from "./ux/SearchBar";
-import { FiSettings } from "react-icons/fi";
+import { FiMoon } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant, MdEdit } from "react-icons/md";
 import { LABELS, USERNAME, USER_EMAIL, USER_AVATAR } from "./constantes";
 
@@ -194,19 +194,14 @@ export default function EnTete({
         {/* Boutons de droite - visibles sur mobile */}
         <div className="flex md:hidden items-center ">
           <button 
-            className="p-2 rounded-full hover:bg-gray-200 transition-transform duration-500" 
-            aria-label="Paramètres"
-            onClick={(e) => {
-              const button = e.currentTarget;
-              if (button) {
-                const currentRotation = button.style.transform;
-                const currentDegrees = currentRotation ? parseInt(currentRotation.match(/rotate\((\d+)deg\)/)?.[1] || '0') : 0;
-                const newDegrees = currentDegrees + 180;
-                button.style.transform = `rotate(${newDegrees}deg)`;
-              }
+            className="p-2 rounded-full hover:bg-gray-200 transition" 
+            aria-label="Mode sombre"
+            onClick={() => {
+              // TODO: Implémenter le mode sombre
+              console.log('Mode sombre à implémenter');
             }}
           >
-            <FiSettings className="text-xl text-gray-700" />
+            <FiMoon className="text-xl text-gray-700" />
           </button>
           
           <button
@@ -335,19 +330,14 @@ export default function EnTete({
       {/* Boutons de droite - cachés sur mobile */}
       <div className="hidden md:flex items-center gap-4 relative">
         <button 
-          className="p-2 rounded-full hover:bg-gray-200 transition-transform duration-500" 
-          aria-label="Paramètres"
-          onClick={(e) => {
-            const button = e.currentTarget;
-            if (button) {
-              const currentRotation = button.style.transform;
-              const currentDegrees = currentRotation ? parseInt(currentRotation.match(/rotate\((\d+)deg\)/)?.[1] || '0') : 0;
-              const newDegrees = currentDegrees + 180;
-              button.style.transform = `rotate(${newDegrees}deg)`;
-            }
+          className="p-2 rounded-full hover:bg-gray-200 transition" 
+          aria-label="Mode sombre"
+          onClick={() => {
+            // TODO: Implémenter le mode sombre
+            console.log('Mode sombre à implémenter');
           }}
         >
-          <FiSettings className="text-2xl text-gray-700" />
+          <FiMoon className="text-2xl text-gray-700" />
         </button>
         
         <button
