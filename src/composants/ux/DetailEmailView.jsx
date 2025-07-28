@@ -16,6 +16,7 @@ const DetailEmailView = ({
   to,
 }) => {
   const [showReply, setShowReply] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
 
   // Fermer le formulaire au clic sur overlay ou croix
   const handleOverlayClick = (e) => {
@@ -108,7 +109,7 @@ const DetailEmailView = ({
                   <span className="text-sm font-semibold text-gray-900">{sender}</span>
                   <span className="text-xs text-gray-500">{date}</span>
                 </div>
-                {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px]" />}
+                {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px] cursor-pointer" onClick={() => setPreviewImage(image)} />}
                 <div className="mt-5 mail-content">
                   {Array.isArray(content)
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
@@ -127,7 +128,7 @@ const DetailEmailView = ({
                   )}
                 </div>
                 {category === 'Mes certifications' && image && (
-                  <img src={image} alt="certification" className="rounded-xl mt-8 mb-4 object-contain max-w-[420px] w-full shadow-lg border border-gray-200" />
+                  <img src={image} alt="certification" className="rounded-xl mt-8 mb-4 object-contain max-w-[420px] w-full shadow-lg border border-gray-200 cursor-pointer" onClick={() => setPreviewImage(image)} />
                 )}
               </div>
             </div>
@@ -166,8 +167,9 @@ const DetailEmailView = ({
                         src={image}
                         alt="CValex"
                         title="CV Alexandre Janacek"
-                        className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200"
+                        className="rounded-xl object-contain w-full max-w-none shadow-lg border border-gray-200 cursor-pointer"
                         style={{maxWidth: '100%'}}
+                        onClick={() => setPreviewImage(image)}
                       />
                     </div>
                   )}
@@ -228,6 +230,26 @@ const DetailEmailView = ({
       {showReply && (
         <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/10" onClick={handleOverlayClick}>
           <RepondreMail onClose={() => setShowReply(false)} from={email} subject={title} onSendMail={onSendMail} />
+        </div>
+      )}
+
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setPreviewImage(null)}>
+          <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={previewImage} 
+              alt="Preview" 
+              className="max-w-full max-h-full object-contain rounded-lg"
+            />
+            <button 
+              className="absolute top-4 right-4 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+              onClick={() => setPreviewImage(null)}
+              aria-label="Fermer l'aperçu"
+            >
+              ×
+            </button>
+          </div>
         </div>
       )}
     </div>
