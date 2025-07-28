@@ -1,37 +1,44 @@
-import React, { useState } from "react";
-import { FcFolder } from "react-icons/fc";
-import { MdInbox, MdSchedule, MdLabelImportant, MdSend, MdEdit, MdDelete, MdExpandMore, MdArchive } from "react-icons/md";
-import { LABELS, NAV_CATEGORIES } from "./constantes";
+import React, { useState } from 'react';
+import { FcFolder } from 'react-icons/fc';
+import { MdExpandMore, MdEdit } from 'react-icons/md';
+import { LABELS, NAV_CATEGORIES } from './constantes.js';
+import SearchBar from './ux/SearchBar.jsx';
 
-// Composant de barre latérale façon Gmail (fond noir, icônes, menus déroulants, libellés)
-const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
-
-  const [open, setOpen] = useState(() => ({
-    categories: false,
-    plus: false,
+const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onDeleteSubLabel, filteredEmails, search, onSearchChange, searchResults, onSelectMail }) => {
+  const [open, setOpen] = useState({
     labels: Object.fromEntries(LABELS.map(l => [l.label, false])),
-    work: false,
-  }));
+    work: false
+  });
 
-  // Synchronise dynamiquement les clés de labels si LABELS change (ex: renommage)
-  React.useEffect(() => {
-    setOpen(o => ({
-      ...o,
-      labels: Object.fromEntries(LABELS.map(l => [l.label, !!o.labels[l.label]])),
-    }));
-  }, [LABELS]);
-
-  // Ferme tous les menus déroulants (projets et labels)
-  function closeAllDropdowns() {
-    setOpen(o => ({
-      ...o,
-      work: false,
-      labels: Object.fromEntries(Object.keys(o.labels).map(l => [l, false]))
-    }));
-  }
+  const closeAllDropdowns = () => {
+    setOpen({
+      labels: Object.fromEntries(LABELS.map(l => [l.label, false])),
+      work: false
+    });
+  };
 
   return (
     <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px]">
+      {/* Barre de recherche et bouton nouveau message - visibles uniquement sur mobile */}
+      <div className="md:hidden space-y-3 mb-4">
+        {/* Barre de recherche */}
+        <div className="px-2">
+          <SearchBar
+            placeholder="Rechercher..."
+            value={search}
+            onChange={onSearchChange}
+          />
+        </div>
+        
+        {/* Bouton Nouveau message */}
+        <div className="px-2">
+          <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
+            <MdEdit className="text-lg" />
+            Nouveau message
+          </button>
+        </div>
+      </div>
+
       {/* Section navigation principale */}
       <ul className="space-y-0 mb-2">
         {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (
@@ -44,22 +51,35 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
               <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>
                 {label}
               </span>
-              {(() => {
-                let allMails = [...(emails || [])];
-                try {
-                  const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-                  allMails = [...allMails, ...sent];
-                } catch {/* ignore */}
-                const count = allMails.filter(mail => mail.category === value).length;
-                return count > 0 && (
-                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{count}</span>
-                );
-              })()}
+              {value === 'Boîte de réception' && (
+                <span className="ml-auto bg-blue-100 rounded-full px-2 text-blue-700 text-xs font-semibold">
+                  {(emails || []).filter(mail => mail.category === 'Boîte de réception').length}
+                </span>
+              )}
+              {value === 'Important' && (
+                <span className="ml-auto bg-orange-100 rounded-full px-2 text-orange-700 text-xs font-semibold">
+                  {(emails || []).filter(mail => mail.category === 'Important').length}
+                </span>
+              )}
+              {value === 'Messages envoyés' && (
+                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-700 text-xs font-semibold">
+                  {JSON.parse(localStorage.getItem('messageenvoye') || '[]').length}
+                </span>
+              )}
+              {value === 'Corbeille' && (
+                <span className="ml-auto bg-red-100 rounded-full px-2 text-red-700 text-xs font-semibold">
+                  {(emails || []).filter(mail => mail.category === 'Corbeille').length}
+                </span>
+              )}
+              {value === 'Archive' && (
+                <span className="ml-auto bg-yellow-100 rounded-full px-2 text-yellow-700 text-xs font-semibold">
+                  {(emails || []).filter(mail => mail.category === 'Archive').length}
+                </span>
+              )}
             </button>
           </li>
         ))}
       </ul>
-
       {/* Libellés */}
       <div className="mt-6">
         <div className="flex items-center justify-between px-3 mb-2">
@@ -86,25 +106,9 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                 <span className="uppercase">
                   {label}
                 </span>
-                {label === 'Messages envoyés' && (
-                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label && !mail.to).length}</span>
-                )}
-                {label === 'Corbeille' && (
-                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{
-                    (() => {
-                      let sent = [];
-                      try {
-                        sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-                      } catch {/* ignore */}
-                      const jsonTrash = (emails || []).filter(e => e.category === 'Corbeille');
-                      const allTrash = [...sent.filter(e => e.category === 'Corbeille'), ...jsonTrash.filter(js => !sent.find(s => s.id === js.id))];
-                      return allTrash.length;
-                    })()
-                  }</span>
-                )}
-                {label !== 'Messages envoyés' && label !== 'Corbeille' && (
-                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label).length}</span>
-                )}
+                <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">
+                  {(emails || []).filter(mail => mail.category === label).length}
+                </span>
                 {subs.length > 0 && (
                   <MdExpandMore className={`text-lg transition-transform ${open.labels[label] ? 'rotate-180' : ''}`} />
                 )}

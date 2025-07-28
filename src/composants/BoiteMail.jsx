@@ -287,7 +287,36 @@ const BoiteMail = forwardRef((props, ref) => {
           {/* Sidebar */}
           <div className="absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full">
             <div className="p-4">
-              <BarreLaterale selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} emails={emails} onDeleteSubLabel={handleDeleteSubLabel} filteredEmails={filteredEmails} />
+              <BarreLaterale 
+                selectedCategory={selectedCategory} 
+                setSelectedCategory={setSelectedCategory} 
+                emails={emails} 
+                onDeleteSubLabel={handleDeleteSubLabel} 
+                filteredEmails={filteredEmails}
+                search={search}
+                onSearchChange={e => setSearch(e.target.value)}
+                searchResults={search && search.trim().length >= 3
+                  ? [...emails, ...(JSON.parse(localStorage.getItem('messageenvoye') || '[]'))]
+                      .filter(mail => {
+                        const searchLower = search.trim().toLowerCase();
+                        if (mail.title && mail.title.toLowerCase().includes(searchLower)) return true;
+                        if (mail.sender && mail.sender.toLowerCase().includes(searchLower)) return true;
+                        if (mail.email && mail.email.toLowerCase().includes(searchLower)) return true;
+                        if (Array.isArray(mail.content) && mail.content.some(c => c.toLowerCase().includes(searchLower))) return true;
+                        if ((mail.labels || []).some(label => label.toLowerCase().includes(searchLower))) return true;
+                        if (mail.image && (mail.alt && mail.alt.toLowerCase().includes(searchLower))) return true;
+                        if (mail.image && (mail.title && mail.title.toLowerCase().includes(searchLower))) return true;
+                        return false;
+                      })
+                      .slice(0, 10)
+                  : []}
+                onSelectMail={mail => {
+                  setSelectedCategory(mail.category);
+                  setTimeout(() => setSelectedEmailId(mail.id), 0);
+                  setSearch("");
+                  setSidebarOpen(false);
+                }}
+              />
             </div>
           </div>
         </div>

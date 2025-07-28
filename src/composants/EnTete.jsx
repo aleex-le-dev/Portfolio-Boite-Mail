@@ -101,8 +101,8 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
         </div>
       </div>
       
-      {/* Zone de recherche et bouton nouveau message */}
-      <div className="flex flex-col md:flex-row items-center gap-4">
+      {/* Zone de recherche - visible uniquement sur desktop */}
+      <div className="hidden md:flex flex-col md:flex-row items-center gap-4">
         {/* Barre de recherche - responsive */}
         <div className="relative w-full md:w-96 z-50">
           <div ref={searchRef}>
@@ -197,12 +197,6 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
             </>
           )}
         </div>
-        
-        {/* Bouton Nouveau message - visible sur mobile */}
-        <button className="md:hidden w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
-          <MdEdit className="text-lg" />
-          Nouveau message
-        </button>
       </div>
       
       {/* Boutons de droite - cachés sur mobile */}
