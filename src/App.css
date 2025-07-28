@@ -215,3 +215,40 @@
   from { opacity: 0; transform: translateY(30px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* Ajout du curseur pointer sur tous les boutons et liens */
+button, 
+a, 
+[role="button"],
+[class*="cursor-pointer"],
+[class*="hover:"] {
+  cursor: pointer !important;
+}
+
+/* Curseur par défaut pour tous les éléments */
+* {
+  cursor: default;
+}
+
+/* Curseur pointer pour les éléments parents interactifs */
+button, 
+a, 
+[role="button"],
+[class*="cursor-pointer"],
+[class*="hover:"] {
+  cursor: pointer !important;
+}
+
+/* Curseur par défaut pour les icônes et éléments enfants */
+button svg,
+button img,
+a svg,
+a img,
+[role="button"] svg,
+[role="button"] img,
+[class*="cursor-pointer"] svg,
+[class*="cursor-pointer"] img,
+[class*="hover:"] svg,
+[class*="hover:"] img {
+  cursor: inherit !important;
+}

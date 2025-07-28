@@ -132,10 +132,10 @@ export default function EnTete({
       </div>
       
       {/* Zone de recherche - visible uniquement sur desktop */}
-      <div className="hidden md:flex flex-col md:flex-row items-center gap-4">
-        {/* Barre de recherche - responsive */}
-        <div className="relative w-full md:w-96 z-50">
-          <div ref={searchRef}>
+      <div className="hidden md:flex flex-row items-center justify-center gap-4 w-full">
+        {/* Barre de recherche - centrée */}
+        <div className="relative w-full max-w-xl z-50 flex justify-center">
+          <div ref={searchRef} className="w-full">
             <SearchBar
               placeholder="Rechercher..."
               value={search}
@@ -248,11 +248,18 @@ export default function EnTete({
         </button>
         
         <button
-          className="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition"
+          className="flex items-center gap-2 p-2 transition"
           aria-label="Profil utilisateur"
           onClick={() => setShowUserMenu(!showUserMenu)}
         >
-          <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+          <div className="w-8 h-8 rounded-full overflow-hidden transition-transform hover:scale-110">
+            <img 
+              src={user.avatar} 
+              alt={user.name} 
+              className="w-full h-full object-cover"
+              style={{ borderRadius: '50%' }}
+            />
+          </div>
         </button>
         
         {showUserMenu && (

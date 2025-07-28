@@ -32,15 +32,14 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         </button>
       </div>
 
-      {/* Barre de recherche et bouton nouveau message - visibles uniquement sur mobile */}
-      <div className="md:hidden space-y-3 mb-4">
-        {/* Bouton Nouveau message */}
-        <div className="px-2">
-          <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
-            <IoMailSharp className="text-lg" />
-            Me contacter
-          </button>
-        </div>
+
+
+      {/* Bouton Me contacter - toujours visible au-dessus de la navigation */}
+      <div className="w-full px-2 mb-4">
+        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
+          <IoMailSharp className="text-lg" />
+          Me contacter
+        </button>
       </div>
 
       {/* Section navigation principale */}
