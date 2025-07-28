@@ -48,149 +48,148 @@ const EnTete = ({ onToggleSidebar, search, onSearchChange, searchResults = [], o
   }, [onSearchChange]);
 
   return (
-    <header className="w-full flex items-center justify-between px-6 py-4 bg-white">
+    <header className="w-full flex items-center justify-between px-4 md:px-6 py-4 bg-white">
       {/* Groupe menu + titre */}
       <div className="flex items-center">
         <button className="flex items-center justify-center h-8 w-8 p-0 rounded-full hover:bg-gray-200 transition mt-1" onClick={onToggleSidebar} aria-label="Ouvrir/fermer la barre latérale">
           <MdMenu className="text-2xl text-gray-700" />
         </button>
-        <div className="font-bold text-2xl text-gray-900 ml-1">salutalex.fr</div>
+        <div className="font-bold text-lg md:text-2xl text-gray-900 ml-1">salutalex.fr</div>
       </div>
-             {/* Barre de recherche */}
-       <div className="relative w-96 z-50">
+      
+      {/* Barre de recherche - responsive */}
+      <div className="relative w-48 md:w-96 z-50">
         <div ref={searchRef}>
           <SearchBar
-            placeholder="Rechercher dans les emails"
+            placeholder="Rechercher..."
             value={search}
             onChange={onSearchChange}
           />
         </div>
-                 {search && search.length >= 3 && (
-           <>
-             <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
-             <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[800px] px-2 max-h-[80vh]">
-            {noResult ? (
-              <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
-            ) : (
-              <>
-                {/* Catégorie Libellés */}
-                {(() => {
-                  const matchingLabels = LABELS.filter(l => {
-                    const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
-                    const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
-                    return matchParent || matchChild;
-                  });
-                  if (matchingLabels.length === 0) return null;
-                  return (
-                    <div className="mb-2">
-                      <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
-                      {matchingLabels.flatMap(({ label, subs }) => {
-                        if (
-                          label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
-                          subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
-                        ) {
-                          return sortAlpha(subs).map(sub => (
-                            <button
-                              key={label + '-' + sub}
-                              className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
-                              type="button"
-                              onClick={() => {
-                                if (typeof onSelectCategory === 'function') onSelectCategory(sub);
-                                else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
-                              }}
-                            >
-                              <MdLabelImportant className="text-yellow-500 text-lg" />
-                              <span className="text-base font-bold text-gray-800">{label} - {sub}</span>
-                            </button>
-                          ));
-                        }
-                        return sortAlpha(subs.filter(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))).map(sub => (
+        
+        {search && search.length >= 3 && (
+          <>
+            <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
+            <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh]">
+              {noResult ? (
+                <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
+              ) : (
+                <>
+                  {/* Catégorie Libellés */}
+                  {(() => {
+                    const matchingLabels = LABELS.filter(l => {
+                      const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                      const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                      return matchParent || matchChild;
+                    });
+                    if (matchingLabels.length === 0) return null;
+                    return (
+                      <div className="mb-2">
+                        <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
+                                                 {matchingLabels.flatMap(({ label, subs }) => {
+                           if (
+                             label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
+                             subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
+                           ) {
+                             return sortAlpha(subs).map(sub => {
+                               const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                               const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                               return (
+                                 <button
+                                   key={label + '-' + sub}
+                                   className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                                   type="button"
+                                   onClick={() => {
+                                     if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                                     else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                                   }}
+                                 >
+                                   {getCategoryIcon(sub)}
+                                   <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
+                                 </button>
+                               );
+                             });
+                           }
+                           return [];
+                         })}
+                      </div>
+                    );
+                  })()}
+                  
+                  {/* Résultats des emails */}
+                  {searchResults.length > 0 && (
+                    <div>
+                      <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
+                      {searchResults.map((mail, index) => {
+                        const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                        const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                        
+                        return (
                           <button
-                            key={label + '-' + sub}
-                            className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                            key={mail.id + '-' + index}
+                            className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
                             type="button"
-                            onClick={() => {
-                              if (typeof onSelectCategory === 'function') onSelectCategory(sub);
-                              else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
-                            }}
+                            onClick={() => onSelectMail(mail)}
                           >
-                            <MdLabelImportant className="text-yellow-500 text-lg" />
-                            <span className="text-base font-bold text-gray-800">{label} - {sub}</span>
+                            <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-sm font-semibold text-gray-900" dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                <span className="text-xs text-gray-500">{mail.date}</span>
+                              </div>
+                              <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
+                              <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
+                            </div>
                           </button>
-                        ));
+                        );
                       })}
                     </div>
-                  );
-                })()}
-                {/* Catégorie Emails */}
-                {searchResults.length > 0 && (
-                  <div className="mb-2">
-                    <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
-                    {searchResults.map(mail => {
-                      const regex = new RegExp(`(${search})`, 'gi');
-                      const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
-                      let contentPreview = '';
-                      if (Array.isArray(mail.content)) {
-                        const found = mail.content.find(c => regex.test(c));
-                        if (found) contentPreview = highlight(found);
-                      }
-                      return (
-                        <button
-                          key={mail.id}
-                          className="w-full flex items-start gap-3 text-left px-4 py-3 hover:bg-blue-50 transition border-b last:border-b-0 min-w-[320px]"
-                          onClick={() => onSelectMail(mail)}
-                        >
-                          <span className="flex-shrink-0 mt-1 flex items-center gap-1 w-28">
-                            <span>{getCategoryIcon(mail.category)}</span>
-                            <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border w-[120px] ${((mail.category || '').length < 14) ? 'text-center' : 'truncate'}`}>{mail.category || ''}</span>
-                          </span>
-                          <span className="flex flex-col min-w-0">
-                            <span className="font-semibold" dangerouslySetInnerHTML={{__html: highlight(mail.title)}} />
-                            <span className="text-xs text-gray-500" dangerouslySetInnerHTML={{__html: `${highlight(mail.sender)} | ${highlight(mail.email)}`}} />
-                            <span className="text-xs text-gray-700 mt-1" dangerouslySetInnerHTML={{__html: highlight(mail.category)}} />
-                            {contentPreview && <span className="text-xs text-gray-700 mt-1" dangerouslySetInnerHTML={{__html: contentPreview}} />}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-                             </>
-             )}
-           </div>
-         </>
-       )}
+                  )}
+                </>
+              )}
+            </div>
+          </>
+        )}
       </div>
-      <div className="flex items-center gap-4 relative">
-                 <button 
-           className="p-2 rounded-full hover:bg-gray-200 transition-transform duration-500" 
-           aria-label="Paramètres"
-           onClick={(e) => {
-             const button = e.currentTarget;
-             if (button) {
-               const currentRotation = button.style.transform;
-               const currentDegrees = currentRotation ? parseInt(currentRotation.match(/rotate\((\d+)deg\)/)?.[1] || '0') : 0;
-               const newDegrees = currentDegrees + 180;
-               button.style.transform = `rotate(${newDegrees}deg)`;
-             }
-           }}
-         >
-           <FiSettings className="text-2xl text-gray-700" />
-         </button>
-        <button
-          className="p-0 rounded-full hover:shadow-lg transition relative"
-          aria-label="Profil utilisateur"
-          onClick={() => setShowUserMenu(v => !v)}
-          style={{background: 'none', border: 'none'}}
+      
+      {/* Boutons de droite - cachés sur mobile */}
+      <div className="hidden md:flex items-center gap-4 relative">
+        <button 
+          className="p-2 rounded-full hover:bg-gray-200 transition-transform duration-500" 
+          aria-label="Paramètres"
+          onClick={(e) => {
+            const button = e.currentTarget;
+            if (button) {
+              const currentRotation = button.style.transform;
+              const currentDegrees = currentRotation ? parseInt(currentRotation.match(/rotate\((\d+)deg\)/)?.[1] || '0') : 0;
+              const newDegrees = currentDegrees + 180;
+              button.style.transform = `rotate(${newDegrees}deg)`;
+            }
+          }}
         >
-          <img src={user.avatar} alt="avatar" className="w-14 h-14 rounded-full object-cover border-4 border-blue-500" style={{background: 'none', padding: 0, margin: 0}} />
+          <FiSettings className="text-2xl text-gray-700" />
         </button>
+        
+        <button
+          className="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition"
+          aria-label="Profil utilisateur"
+          onClick={() => setShowUserMenu(!showUserMenu)}
+        >
+          <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+        </button>
+        
         {showUserMenu && (
-          <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-2xl shadow-2xl w-80 z-50 flex flex-col items-center p-6 animate-fade-in">
-            <img src={user.avatar} alt="avatar" className="w-16 h-16 rounded-full object-cover border-4 border-solid border-blue-500 mb-2" style={{background: 'none', padding: 0, margin: 0}} />
-            <div className="font-semibold text-lg mb-1 whitespace-nowrap">Bonjour {user.name} !</div>
-            <div className="text-gray-600 text-sm mb-4">{user.email}</div>
-            <button className="w-full py-2 bg-gray-100 hover:bg-red-500 hover:text-white text-gray-800 font-semibold rounded-xl transition">Se déconnecter</button>
+          <div className="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
+            <div className="px-4 py-2 border-b border-gray-100">
+              <div className="font-semibold text-gray-900">{user.name}</div>
+              <div className="text-sm text-gray-500">{user.email}</div>
+            </div>
+            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
+              Paramètres
+            </button>
+            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
+              Déconnexion
+            </button>
           </div>
         )}
       </div>

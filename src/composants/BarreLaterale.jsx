@@ -31,12 +31,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
   }
 
   return (
-    <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto ">
+    <aside className="w-auto min-w-fit whitespace-nowrap bg-white text-gray-900 h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px]">
       {/* Bouton Nouveau message sticky */}
       <div className="sticky top-0 z-10 bg-white pb-2">
-        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2">
-          <MdEdit className="text-xl" />
-          Nouveau message
+        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm md:text-base">
+          <MdEdit className="text-lg md:text-xl" />
+          <span className="hidden sm:inline">Nouveau message</span>
+          <span className="sm:hidden">Nouveau</span>
         </button>
       </div>
       {/* Section navigation principale */}
@@ -44,11 +45,14 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
         {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (
           <li key={value}>
             <button
-              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-base focus:outline-none ${selectedCategory === value ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
+              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-sm md:text-base focus:outline-none ${selectedCategory === value ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100 text-gray-900'}`}
               onClick={() => { setSelectedCategory(value); closeAllDropdowns(); }}
             >
-              {Icon && <Icon className="text-2xl" />}
-              <span className={`w-35 text-left ${selectedCategory === value ? 'font-bold' : ''}`}>{label}</span>
+              {Icon && <Icon className="text-xl md:text-2xl" />}
+              <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>
+                <span className="hidden sm:inline">{label}</span>
+                <span className="sm:hidden">{label.length > 8 ? label.substring(0, 8) + '...' : label}</span>
+              </span>
               {(() => {
                 let allMails = [...(emails || [])];
                 try {
@@ -68,12 +72,12 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
       {/* Libellés */}
       <div className="mt-6">
         <div className="flex items-center justify-between px-3 mb-2">
-          <span className="uppercase font-bold tracking-wider text-base">Libellés</span>
+          <span className="uppercase font-bold tracking-wider text-sm md:text-base">Libellés</span>
         </div>
         <ul className="space-y-0.5">
           {LABELS.map(({ label, subs }) => (
             <li key={label}>
-              <button className={`flex items-center w-full gap-2 px-3 py-1 text-base rounded-lg ${selectedCategory === label ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
+              <button className={`flex items-center w-full gap-2 px-3 py-1 text-sm md:text-base rounded-lg ${selectedCategory === label ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
                 onClick={() => {
                   if (label === 'Mes certifications') {
                     setSelectedCategory(label);
@@ -87,8 +91,11 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                   }
                 }}
               >
-                <FcFolder className="text-xl" />
-                <span className="uppercase">{label}</span>
+                <FcFolder className="text-lg md:text-xl" />
+                <span className="uppercase">
+                  <span className="hidden sm:inline">{label}</span>
+                  <span className="sm:hidden">{label.length > 8 ? label.substring(0, 8) + '...' : label}</span>
+                </span>
                 {label === 'Messages envoyés' && (
                   <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label && !mail.to).length}</span>
                 )}
@@ -99,39 +106,36 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails }) => {
                       try {
                         sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
                       } catch {/* ignore */}
-                      const jsonTrash = (emails || []).filter(e => e.category === label);
-                      const allTrash = [...sent.filter(e => e.category === label), ...jsonTrash.filter(js => !sent.find(s => s.id === js.id))];
+                      const jsonTrash = (emails || []).filter(e => e.category === 'Corbeille');
+                      const allTrash = [...sent.filter(e => e.category === 'Corbeille'), ...jsonTrash.filter(js => !sent.find(s => s.id === js.id))];
                       return allTrash.length;
                     })()
                   }</span>
                 )}
-                {label !== 'Mes certifications' && (
-                  <MdExpandMore className={`ml-auto text-xl font-bold transition-transform duration-200 ${open.labels[label] ? 'rotate-180' : ''}`} />
+                {label !== 'Messages envoyés' && label !== 'Corbeille' && (
+                  <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === label).length}</span>
+                )}
+                {subs.length > 0 && (
+                  <MdExpandMore className={`text-lg transition-transform ${open.labels[label] ? 'rotate-180' : ''}`} />
                 )}
               </button>
-              {subs && open.labels[label] && (
-                <ul className="mb-4">
-                  {[...subs].sort((a, b) => a.localeCompare(b, 'fr')).map(sub => {
-                    let allMails = [...(emails || [])];
-                    try {
-                      const sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-                      allMails = [...allMails, ...sent];
-                    } catch {/* ignore */}
-                    const count = allMails.filter(mail => mail.category === sub).length;
-                    return (
-                      <li key={sub}>
-                        <button
-                          className={`flex items-center justify-between w-full py-1 px-2 rounded-lg ${selectedCategory === sub ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
-                          onClick={() => { setSelectedCategory(sub); }}
-                        >
-                          <span className="flex items-center gap-2">{sub}</span>
-                          {count > 0 && (
-                            <span className="bg-gray-100 rounded-full px-2 text-gray-900 text-sm font-semibold">{count}</span>
-                          )}
-                        </button>
-                      </li>
-                    );
-                  })}
+              {subs.length > 0 && open.labels[label] && (
+                <ul className="ml-6 mt-1 space-y-0.5">
+                  {subs.map(sub => (
+                    <li key={sub}>
+                      <button
+                        className={`flex items-center w-full gap-2 px-3 py-1 text-sm rounded-lg ${selectedCategory === sub ? 'bg-blue-100 text-blue-700 font-bold' : 'hover:bg-gray-100 text-gray-900'}`}
+                        onClick={() => { setSelectedCategory(sub); closeAllDropdowns(); }}
+                      >
+                        <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+                        <span className="text-left">
+                          <span className="hidden sm:inline">{sub}</span>
+                          <span className="sm:hidden">{sub.length > 8 ? sub.substring(0, 8) + '...' : sub}</span>
+                        </span>
+                        <span className="ml-auto bg-gray-100 rounded-full px-2 text-gray-900 text-xs font-semibold">{(emails || []).filter(mail => mail.category === sub).length}</span>
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               )}
             </li>
