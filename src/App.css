@@ -6,13 +6,13 @@
   /* Thème Light */
   --light-primary-bg: white;
   --light-secondary-bg: #f5f5f5;
-  --light-text: #2c3e50;
+  --light-text: black;
   --light-border: #e5e7eb;
   
   /* Thème Dark */
   --dark-primary-bg: #000000;
   --dark-secondary-bg: #0c0c0c;
-  --dark-text: #ffffff;
+  --dark-text: white;
   --dark-border: #000000;
 
   /* Couleurs communes */
@@ -33,75 +33,6 @@
 
 .cookie-banner-animate {
   animation: slideUpCookie 0.5s cubic-bezier(0.4,0,0.2,1);
-}
-
-/* Styles pour l'animation GalaxyIntro */
-.galaxy-intro-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at 60% 40%, #0a1a2f 0%, #00111a 100%);
-  z-index: 1000;
-  overflow: hidden;
-}
-.galaxy-title {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-shadow: 0 2px 24px #00adef99, 0 0 8px #fff;
-  z-index: 1010;
-  pointer-events: none;
-}
-.galaxy-fade {
-  position: fixed;
-  inset: 0;
-  background: #00111a;
-  opacity: 0.92;
-  z-index: 1100;
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
-}
-
-/* Styles pour l'animation VortexIntro */
-.vortex-intro-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at 60% 40%, #0a1a2f 0%, #00111a 100%);
-  z-index: 1000;
-  overflow: hidden;
-}
-.vortex-title {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 2.6rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-shadow: 0 2px 32px #00adef99, 0 0 12px #fff;
-  z-index: 1010;
-  pointer-events: none;
-}
-.vortex-title-anim {
-  display: inline-block;
-  animation: vortexTitleAnim 1.2s cubic-bezier(.4,0,.2,1) both;
-}
-@keyframes vortexTitleAnim {
-  0% { opacity: 0; transform: scale(0.7) rotate(-8deg); filter: blur(8px); }
-  60% { opacity: 1; transform: scale(1.08) rotate(2deg); filter: blur(0); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
-}
-.vortex-fade {
-  position: fixed;
-  inset: 0;
-  background: #00111a;
-  opacity: 0.94;
-  z-index: 1100;
-  transition: opacity 0.8s cubic-bezier(.4,0,.2,1);
 }
 
 /* Styles pour l'animation MailRainIntro */

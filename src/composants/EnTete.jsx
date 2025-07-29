@@ -104,7 +104,7 @@ export default function EnTete({
               <>
                 <div className="fixed inset-0 z-40 pointer-events-none" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.7 }}></div>
                 <div 
-                  className={`fixed left-1/2 top-20 -translate-x-1/2 border rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)] ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}
+                  className={`absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-[calc(100vh-120px)] ${darkMode ? '' : 'bg-white border-gray-200'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : {}}
                 >
                   {searchResults.length === 0 ? (
                     <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
@@ -258,7 +258,7 @@ export default function EnTete({
         {search && search.length >= 3 && (
             <>
               <div className="fixed inset-0 z-40" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.7 }} onClick={() => onSearchChange({ target: { value: '' } })}></div>
-              <div ref={resultsRef} className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 border rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh] ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
+              <div ref={resultsRef} className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 border rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh] ${darkMode ? '' : 'bg-white border-gray-200'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : {}}>
             {noResult ? (
               <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
             ) : (
