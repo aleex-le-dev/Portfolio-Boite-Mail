@@ -29,11 +29,12 @@
   border-radius: 20px;
   max-width: 900px;
   width: 90%;
-  max-height: 90vh;
+  max-height: 95vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
   animation: slideUp 0.4s ease-out;
+  padding-bottom: 40px;
 }
 
 /* Version intégrée dans la zone de détail */
@@ -48,6 +49,7 @@
   box-shadow: none;
   position: relative;
   animation: none;
+  padding-bottom: 40px;
 }
 
 /* Header Section */
@@ -323,11 +325,11 @@
 }
 
 .demo-link {
-  background: linear-gradient(135deg, rgba(52, 152, 219, 0.8) 0%, rgba(52, 152, 219, 0.6) 100%);
+  background: var(--button-bg);
 }
 
 .code-link {
-  background: linear-gradient(135deg, rgba(231, 76, 60, 0.8) 0%, rgba(231, 76, 60, 0.6) 100%);
+  background: var(--button-bg);
 }
 
 .link-icon {
@@ -490,7 +492,7 @@
 @media (max-width: 768px) {
   .projet-template-container {
     width: 95%;
-    max-height: 95vh;
+    max-height: 98vh;
   }
   
   .projet-header {
