@@ -239,7 +239,7 @@ const DetailEmailView = ({
       )}
       {showReply && (
         <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/10" onClick={handleOverlayClick}>
-          <RepondreMail onClose={() => setShowReply(false)} from={email} subject={title} onSendMail={onSendMail} />
+          <RepondreMail onClose={() => setShowReply(false)} from={email} subject={title} onSendMail={onSendMail} darkMode={darkMode} />
         </div>
       )}
 

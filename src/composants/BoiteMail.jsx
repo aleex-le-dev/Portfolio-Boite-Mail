@@ -408,17 +408,17 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
-                  <div className="flex items-center justify-between px-6 border-b bg-gray-50 sticky top-0 z-10 text-xs text-gray-500 h-12 min-h-12 rounded-tr-2xl w-full">
+                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`}>
                     <div className="flex items-center gap-2">
                       {/* Bouton retour sur mobile */}
                       <button 
-                        className="md:hidden p-2 text-gray-500"
+                        className={`md:hidden p-2 ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-500'}`}
                         onClick={() => setSelectedEmailId(null)}
                         aria-label="Retour à la liste"
                       >
                         <IoMdArrowRoundBack className="text-2xl" />
                       </button>
-                      <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
+                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
                         onClick={() => {
                           const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                           if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
@@ -427,7 +427,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       >
                         <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
                       </button>
-                      <button className="hidden md:block p-0.5 rounded hover:bg-gray-200"
+                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
                         onClick={() => {
                           const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                           if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
@@ -437,28 +437,28 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                         <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
                       </button>
                       {selectedCategory === 'Boîte de réception' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
                       )}
                       {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
                       )}
                       {selectedCategory === 'Messages envoyés' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleImportant(selectedEmail?.id || selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleImportant(selectedEmail?.id || selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
                       )}
                       {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
                       )}
                       {selectedCategory === 'Messages envoyés' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => handleArchive(selectedEmail?.id || selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleArchive(selectedEmail?.id || selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
                       )}
                       {selectedCategory !== 'Corbeille' && (
-                        <button className="p-0.5 rounded hover:bg-gray-200" onClick={() => {
+                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => {
                           console.log('Bouton corbeille cliqué, selectedEmailId:', selectedEmailId, 'selectedEmail.id:', selectedEmail?.id);
                           handleTrash(selectedEmail?.id || selectedEmailId);
                         }} title="Mettre à la corbeille"><FiTrash2 className="text-xl" /></button>
                       )}
                     </div>
-                    <div className="font-bold text-sm">
+                    <div className={`font-bold text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
                       {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
                     </div>
                   </div>
@@ -468,6 +468,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                         projet={selectedEmail} 
                         onClose={() => {}} 
                         embedded={true}
+                        darkMode={darkMode}
                       />
                     </div>
                                                 ) : (

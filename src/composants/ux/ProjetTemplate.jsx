@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ProjetTemplate.css';
 import { PROJECT_CATEGORY_COLORS } from '../constantes';
 
-const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
+const ProjetTemplate = ({ projet, onClose, embedded = false, darkMode = false }) => {
   const [previewImage, setPreviewImage] = useState(null);
   
   if (!projet) return null;
@@ -12,8 +12,8 @@ const ProjetTemplate = ({ projet, onClose, embedded = false }) => {
   };
 
   return (
-    <div className={embedded ? "projet-template-embedded" : "projet-template-overlay"} onClick={embedded ? undefined : onClose}>
-      <div className="projet-template-container" onClick={(e) => !embedded && e.stopPropagation()}>
+    <div className={`${embedded ? "projet-template-embedded" : "projet-template-overlay"} ${darkMode ? 'dark-mode' : ''}`} onClick={embedded ? undefined : onClose}>
+      <div className={`projet-template-container ${darkMode ? 'dark-mode' : ''}`} onClick={(e) => !embedded && e.stopPropagation()}>
         {/* Header Section */}
         <div className="projet-header" style={{ backgroundColor: getCategoryColor(projet.category) }}>
           <div className="projet-header-content">
