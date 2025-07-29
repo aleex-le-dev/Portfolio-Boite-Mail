@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp src/composants/*.json dist/ && cp -r src/assets dist/ && node scripts/fix-paths.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

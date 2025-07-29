@@ -3,6 +3,7 @@ import "./intro.css";
 import BoiteMail from "./composants/BoiteMail";
 import Intro from "./Intro";
 import CookieBanner from "./composants/CookieBanner";
+import Banner from "./composants/Banner";
 
 function App() {
   const boiteMailRef = useRef();
@@ -44,6 +45,7 @@ function App() {
     <>
       {!introDone && !showTransition && <Intro onFinish={handleIntroFinish} />}
       {showTransition && <div className="mailbox-transition" />}
+      {introDone && <Banner darkMode={darkMode} />}
       {introDone && <BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />}
       {introDone && <CookieBanner onShowInfo={handleShowInfoMail} darkMode={darkMode} />}
     </>

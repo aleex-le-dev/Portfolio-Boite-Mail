@@ -60,7 +60,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
 
   useEffect(() => {
     // Charger d'abord les emails (comme avant)
-    fetch("./src/composants/email.json")
+    const basePath = import.meta.env.DEV ? './src/composants/' : './';
+    fetch(`${basePath}email.json`)
       .then(res => res.json())
       .then(data => {
         const today = new Date();
@@ -79,12 +80,12 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         let sent = [];
         try {
           sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-        } catch {/* ignore */}
+        } catch{/* ignore */}
         
         // Charger les projets et certifications
         Promise.all([
-          fetch("./src/composants/projets.json").then(res => res.json()).catch(() => []),
-          fetch("./src/composants/certification.json").then(res => res.json()).catch(() => [])
+          fetch(`${basePath}projets.json`).then(res => res.json()).catch(() => []),
+          fetch(`${basePath}certification.json`).then(res => res.json()).catch(() => [])
         ]).then(([projetData, certificationData]) => {
           const projetsWithDates = projetData.map(projet => ({
             ...projet,

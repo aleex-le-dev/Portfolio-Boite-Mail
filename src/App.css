@@ -3,21 +3,16 @@
 
 /* Variables CSS pour les thèmes */
 :root {
-  /* Thème Light */
   --light-primary-bg: white;
-  --light-secondary-bg: #f5f5f5;
+  --light-secondary-bg: #f8f9fa;
   --light-text: black;
   --light-border: #e5e7eb;
-  
-  /* Thème Dark */
-  --dark-primary-bg: #000000;
-  --dark-secondary-bg: #0c0c0c;
+  --dark-primary-bg: #1a1a1a;
+  --dark-secondary-bg: #2d2d2d;
   --dark-text: white;
-  --dark-border: #000000;
-
-  /* Couleurs communes */
-  --button-bg: #1d4ed8; /* bg-blue-700 */
-  --selection-bg: #dbeafe; /* bg-blue-100 */
+  --dark-border: #404040;
+  --button-bg: #3b82f6;
+  --selection-bg: #dbeafe;
 }
 
 @keyframes slideUpCookie {
@@ -201,4 +196,18 @@ a img,
 [class*="hover:"] svg,
 [class*="hover:"] img {
   cursor: inherit !important;
+}
+
+/* Animation de défilement pour la bannière */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }
