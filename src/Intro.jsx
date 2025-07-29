@@ -11,7 +11,8 @@ function MailRainCanvas({ onFinish }) {
   const [displayed, setDisplayed] = useState("");
   const [displayed2, setDisplayed2] = useState("");
   const [phase, setPhase] = useState(0); // 0: premier texte, 1: efface, 2: second texte
-  const welcome = "Bienvenue sur salutalex.fr";
+  const welcome = "Alexandre Janacek";
+  const poste = "Développeur Web";
   const launch = "Lancement de la boite mail";
 
   useEffect(() => {
@@ -131,6 +132,9 @@ function MailRainCanvas({ onFinish }) {
       <div className="mailrain-title mailrain-terminal mailrain-stack">
         <div className="mailrain-line1">
           <span>{welcome}</span>
+        </div>
+        <div className="mailrain-poste">
+          <span>{poste}</span>
         </div>
         <div className="mailrain-line2">
           <span>{displayed2}{phase === 2 && displayed2.length < launch.length ? <span className="mailrain-cursor">█</span> : null}</span>
