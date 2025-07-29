@@ -102,7 +102,7 @@ const DetailEmailView = ({
     );
   }
   return (
-    <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+    <div className={`h-full overflow-y-auto rounded-2xl ${darkMode ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
       {/* Corps du mail */}
       <style>{`
         .mail-content a { color: #2563eb; text-decoration: underline; transition: color 0.2s; }
