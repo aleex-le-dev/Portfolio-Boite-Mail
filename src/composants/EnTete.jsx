@@ -204,37 +204,37 @@ export default function EnTete({
         </div>
         
         {/* Boutons de droite - visibles sur mobile */}
-        <div className="flex md:hidden items-center ">
+        <div className="flex md:hidden items-center gap-3">
           <button 
-            className="p-2 rounded-full hover:bg-gray-200 transition" 
+            className="p-3 rounded-full hover:bg-gray-200 transition" 
             aria-label="Mode sombre"
             onClick={onToggleDarkMode}
           >
             {darkMode ? (
-              <FiSun className="text-xl text-yellow-400" />
+              <FiSun className="text-2xl md:text-xl text-yellow-400" />
             ) : (
-              <FiMoon className="text-xl text-gray-700" />
+              <FiMoon className="text-2xl md:text-xl text-gray-700" />
             )}
           </button>
           
           <button
-            className="p-2 rounded-full hover:bg-gray-200 transition"
+            className="p-3 rounded-full hover:bg-gray-200 transition"
             aria-label="Profil utilisateur"
             onClick={() => setShowUserMenu(!showUserMenu)}
           >
-            <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+            <img src={user.avatar} alt={user.name} className="w-10 h-10 md:w-8 md:h-8 rounded-full object-cover" />
           </button>
           
           {showUserMenu && (
-            <div ref={userMenuRef} className="absolute right-4 top-16 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
-              <div className="px-4 py-2 border-b border-gray-100">
-                <div className="font-semibold text-black">{user.name}</div>
+            <div ref={userMenuRef} className="absolute right-4 top-20 bg-white border border-gray-200 rounded-xl shadow-lg py-3 min-w-[220px] z-50">
+              <div className="px-4 py-3 border-b border-gray-100">
+                <div className="font-semibold text-black text-base">{user.name}</div>
                 <div className="text-sm text-gray-500">{user.email}</div>
               </div>
-              <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
+              <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
                 À propos de moi
               </button>
-              <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
+              <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition">
                 Déconnexion
               </button>
             </div>
@@ -346,9 +346,9 @@ export default function EnTete({
       </div>
       
       {/* Boutons de droite - cachés sur mobile */}
-      <div className="hidden md:flex items-center gap-4 relative">
+      <div className="hidden md:flex items-center gap-6 relative">
         <button 
-          className="p-2 rounded-full hover:bg-gray-200 transition" 
+          className="p-3 rounded-full hover:bg-gray-200 transition" 
           aria-label="Mode sombre"
           title="Mode sombre"
           onClick={onToggleDarkMode}
@@ -361,12 +361,12 @@ export default function EnTete({
         </button>
         
         <button
-          className="flex items-center gap-2 p-2 transition"
+          className="flex items-center gap-3 p-3 transition"
           aria-label="Profil utilisateur"
           title="Profil utilisateur"
           onClick={() => setShowUserMenu(!showUserMenu)}
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden transition-transform hover:scale-110">
+          <div className="w-10 h-10 rounded-full overflow-hidden transition-transform hover:scale-110">
             <img 
               src={user.avatar} 
               alt={user.name} 
