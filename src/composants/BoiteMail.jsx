@@ -117,14 +117,46 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       });
   }, []);
 
+  // Sélectionner automatiquement le premier email quand la catégorie change
+  useEffect(() => {
+    if (selectedCategory) {
+      let categoryEmails = [];
+      
+      if (selectedCategory === 'Boîte de réception') {
+        categoryEmails = emails.filter(mail => mail.category === 'Boîte de réception');
+      } else if (selectedCategory === 'Important') {
+        categoryEmails = emails.filter(mail => mail.category === 'Important');
+      } else if (selectedCategory === 'Archive') {
+        categoryEmails = emails.filter(mail => mail.category === 'Archive');
+      } else if (selectedCategory === 'Corbeille') {
+        categoryEmails = emails.filter(mail => mail.category === 'Corbeille');
+      } else if (selectedCategory === 'Messages envoyés') {
+        const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
+        const sentFromJSON = emails.filter(mail => mail.category === 'Messages envoyés');
+        categoryEmails = [...sentFromLocalStorage, ...sentFromJSON];
+      } else if (selectedCategory === 'Mes certifications') {
+        categoryEmails = emails.filter(mail => mail.category === 'Mes certifications');
+      } else {
+        categoryEmails = emails.filter(mail => mail.category === selectedCategory);
+      }
+      
+      // Sélectionner le premier email de la catégorie
+      if (categoryEmails.length > 0) {
+        setSelectedEmailId(categoryEmails[0].id);
+      }
+    }
+  }, [selectedCategory, emails]);
+
   // Filtrer les emails selon la catégorie sélectionnée
   let filteredEmails = [];
-  if (selectedCategory === 'Corbeille') {
-    filteredEmails = emails.filter(mail => mail.category === 'Corbeille');
+  if (selectedCategory === 'Boîte de réception') {
+    filteredEmails = emails.filter(mail => mail.category === 'Boîte de réception');
   } else if (selectedCategory === 'Important') {
     filteredEmails = emails.filter(mail => mail.category === 'Important');
   } else if (selectedCategory === 'Archive') {
     filteredEmails = emails.filter(mail => mail.category === 'Archive');
+  } else if (selectedCategory === 'Corbeille') {
+    filteredEmails = emails.filter(mail => mail.category === 'Corbeille');
   } else if (selectedCategory === 'Messages envoyés') {
     const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
     const sentFromJSON = emails.filter(mail => mail.category === 'Messages envoyés');
@@ -455,7 +487,10 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       )}
                     </div>
                     <div className={`font-bold text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>
-                      {filteredEmails.findIndex(e => e.id === selectedEmailId) + 1} / {filteredEmails.length}
+                      {(() => {
+                        const index = filteredEmails.findIndex(e => e.id === selectedEmailId);
+                        return index !== -1 ? `${index + 1} / ${filteredEmails.length}` : `1 / ${filteredEmails.length}`;
+                      })()}
                     </div>
                   </div>
                   {isProjet ? (
