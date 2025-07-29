@@ -11,7 +11,7 @@ const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, imag
     <div className="flex-1 min-w-0">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <span className={`font-semibold truncate text-base md:text-base ${isSelected ? 'text-black' : (darkMode ? 'text-white' : 'text-gray-900')}`}>{name}</span>
+          <span className={`font-semibold truncate text-base md:text-base ${isSelected ? 'text-black' : (darkMode ? 'text-white' : 'text-black')}`}>{name}</span>
           {badge && <span className="inline-block w-2 h-2 bg-green-500 rounded-full ml-1"></span>}
         </div>
         <div className="flex items-center gap-1 md:gap-2">

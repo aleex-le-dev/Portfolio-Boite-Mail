@@ -31,7 +31,7 @@ const RepondreMail = ({
   return (
     <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}>
       <div className={`flex items-center justify-between px-5 py-3 border-b ${darkMode ? '' : 'border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
-        <span className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>Répondre à {from}</span>
+        <span className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Répondre à {from}</span>
         <div className="flex items-center justify-center">
           <button className={`${darkMode ? 'text-gray-300' : 'hover:bg-gray-100 text-gray-600'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={onClose}><RiCloseLargeLine /></button>
         </div>

@@ -28,37 +28,37 @@ const DetailEmailView = ({
     return (
       <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
         <div className="px-10 pl-8 flex flex-col">
-          <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
+          <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>
           <div className="flex items-start gap-3 mb-4 w-full">
             <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
             <div className="flex flex-col w-full">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                 <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
               </div>
             </div>
           </div>
           <div className=" border-blue-200 rounded-xl">
-            <h2 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Confidentialité & cookies</h2>
+            <h2 className={`text-xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>Confidentialité & cookies</h2>
             <p className={`mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
             
-            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Cookies et analyse du trafic</h3>
+            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Cookies et analyse du trafic</h3>
             <p className={`mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Ce site utilise Google Tag Manager (GTM) pour analyser le trafic et améliorer l'expérience utilisateur. GTM peut placer des cookies sur votre appareil pour collecter des informations anonymes sur votre utilisation du site.</p>
             
-            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Qu'est-ce que le stockage local&nbsp;?</h3>
+            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Qu'est-ce que le stockage local&nbsp;?</h3>
             <p className={`mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Le stockage local (localStorage) permet de conserver certaines informations sur votre appareil, comme vos préférences d'affichage. Ces données ne sont jamais transmises à un serveur ou à des tiers.</p>
             
-            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Utilisation sur ce site</h3>
+            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Utilisation sur ce site</h3>
             <ul className={`list-disc ml-6 mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               <li>Analyse anonyme du trafic via Google Tag Manager</li>
               <li>Conservation de vos préférences d'affichage (acceptation des cookies)</li>
               <li>Amélioration de l'expérience utilisateur</li>
             </ul>
             
-            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Aucune exploitation commerciale</h3>
+            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Aucune exploitation commerciale</h3>
             <p className={`mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Les données collectées ne sont utilisées qu'à des fins d'analyse et d'amélioration du site. Aucune donnée n'est utilisée à des fins publicitaires, de profilage ou de suivi personnalisé.</p>
             
-            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Vos droits</h3>
+            <h3 className={`font-semibold mt-6 mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>Vos droits</h3>
             <p className={`mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Vous pouvez à tout moment effacer les cookies et données stockées via les paramètres de votre navigateur.</p>
             <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Pour toute question, contactez-moi à <a href="mailto:alexandre.janacek@gmail.com" className={`underline ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-700 hover:text-blue-800'} transition-colors`}>alexandre.janacek@gmail.com</a>.</p>
           </div>
@@ -70,7 +70,7 @@ const DetailEmailView = ({
     return (
       <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
         <div className="px-10 pl-8 flex flex-col">
-          <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>Mentions légales du site</h1>
+          <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>Mentions légales du site</h1>
           <p className={`mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-800'}`}>Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
 
           <div className="flex items-start gap-3 mb-4 w-full">
@@ -78,12 +78,12 @@ const DetailEmailView = ({
             <div className="flex flex-col w-full">
             
               <div className="flex items-center gap-2 mb-0.5">
-                <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                 <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
               </div>
             </div>
           </div>
-          <h2 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Mentions légales du site</h2>
+          <h2 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-black'}`}>Mentions légales du site</h2>
           <div className={`mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             <strong>Éditeur :</strong> Aleex Le Dev
           </div>
@@ -111,12 +111,12 @@ const DetailEmailView = ({
       <div className={`px-10 pl-8 flex flex-col ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
         {category !== 'Messages envoyés' && (
           <>
-            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-4 w-full">
               <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px] cursor-pointer" onClick={() => setPreviewImage(image)} />}
@@ -126,12 +126,12 @@ const DetailEmailView = ({
                         c === ""
                           ? <div key={i} className="h-4"></div>
                           : /<[^>]*>/i.test(c)
-                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
-                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
+                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`} dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`}>{c}</div>
                       )
                     : (/<[^>]*>/i.test(content)
-                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: content}} />
-                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content}</div>
+                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`} dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`}>{content}</div>
                       )}
                   {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
                     <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
@@ -146,12 +146,12 @@ const DetailEmailView = ({
         )}
         {category === 'Messages envoyés' && !to && (
           <>
-            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-4 w-full">
               <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 <div className="mt-5 mail-content">
@@ -160,12 +160,12 @@ const DetailEmailView = ({
                         c === ""
                           ? <div key={i} className="h-4"></div>
                           : /<[^>]*>/i.test(c)
-                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
-                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
+                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`} dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`}>{c}</div>
                       )
                     : (/<[^>]*>/i.test(content)
-                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: content}} />
-                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content}</div>
+                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`} dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`}>{content}</div>
                       )}
                   {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
                     <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
@@ -189,15 +189,15 @@ const DetailEmailView = ({
           </>
         )}
         {category === 'Messages envoyés' && to && Array.isArray(content) && content.length > 1 && (
-          <div className={`text-base w-full ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
-            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
+          <div className={`text-base w-full ${darkMode ? 'text-gray-200' : 'text-black'}`}>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-2">
               {senderAvatar &&
                 <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover border border-gray-300" />
               }
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 <div className="mt-5 mail-content">
@@ -205,8 +205,8 @@ const DetailEmailView = ({
                     c === ""
                       ? <div key={i} className="h-4"></div>
                       : /<[^>]*>/i.test(c)
-                        ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
-                        : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
+                        ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`} dangerouslySetInnerHTML={{__html: c}} />
+                        : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-black'}`}>{c}</div>
                   )}
                 </div>
               </div>
@@ -216,10 +216,10 @@ const DetailEmailView = ({
               <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alexandre.janacek@gmail.com" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400 mt-1" />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Aleex Le Dev</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>Aleex Le Dev</span>
                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
-                <div className={`text-base whitespace-pre-line mt-2 ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content[content.length - 1]}</div>
+                <div className={`text-base whitespace-pre-line mt-2 ${darkMode ? 'text-gray-200' : 'text-black'}`}>{content[content.length - 1]}</div>
               </div>
             </div>
           </div>

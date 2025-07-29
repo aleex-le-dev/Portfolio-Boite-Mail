@@ -619,4 +619,67 @@
 .projet-template-container.dark-mode .screenshot-item {
   background: var(--dark-secondary-bg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Light Mode Styles */
+.projet-template-container:not(.dark-mode) {
+  background: var(--light-secondary-bg);
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .projet-section {
+  border-bottom: 1px solid var(--light-border);
+}
+
+.projet-template-container:not(.dark-mode) .section-title {
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .projet-description {
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .technologies-section {
+  background: var(--light-secondary-bg);
+}
+
+.projet-template-container:not(.dark-mode) .tech-item {
+  background: var(--light-primary-bg);
+  color: var(--light-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.projet-template-container:not(.dark-mode) .tech-name {
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .features-section {
+  background: var(--light-secondary-bg);
+}
+
+.projet-template-container:not(.dark-mode) .feature-item {
+  background: var(--light-primary-bg);
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .feature-text {
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .links-section {
+  background: var(--light-secondary-bg);
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .links-section .section-title {
+  color: var(--light-text);
+}
+
+.projet-template-container:not(.dark-mode) .screenshots-section {
+  background: var(--light-secondary-bg);
+}
+
+.projet-template-container:not(.dark-mode) .screenshot-item {
+  background: var(--light-secondary-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 } 

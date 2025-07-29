@@ -74,20 +74,20 @@ export default function EnTete({
 
 
   return (
-    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'text-white' : 'bg-white text-gray-900'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
+    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'text-white' : 'bg-white text-black'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
-      <div className="flex items-center">
-        <button 
-          className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? '' : 'hover:bg-gray-200'}`} 
-          style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
-          onClick={onToggleSidebar} 
-          aria-label={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
-          title={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
-        >
-          <MdMenu className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} />
-        </button>
-          <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 whitespace-nowrap ${darkMode ? 'text-white' : 'text-gray-900'} `}>Alexandre Janacek</div>
+        <div className="flex items-center">
+          <button 
+            className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? '' : 'hover:bg-gray-200'}`} 
+            style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
+            onClick={onToggleSidebar} 
+            aria-label={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
+            title={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
+          >
+            <MdMenu className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} />
+          </button>
+          <div className={`hidden md:block font-bold text-lg md:text-2xl ml-1 whitespace-nowrap ${darkMode ? 'text-white' : 'text-black'}`}>Alexandre Janacek</div>
         </div>
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}
@@ -184,7 +184,7 @@ export default function EnTete({
                                 <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                    <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
                                     <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{mail.date}</span>
                                   </div>
                                   <div className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
@@ -228,7 +228,7 @@ export default function EnTete({
           {showUserMenu && (
             <div ref={userMenuRef} className="absolute right-4 top-16 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
               <div className="px-4 py-2 border-b border-gray-100">
-                <div className="font-semibold text-gray-900">{user.name}</div>
+                <div className="font-semibold text-black">{user.name}</div>
                 <div className="text-sm text-gray-500">{user.email}</div>
               </div>
               <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
@@ -326,7 +326,7 @@ export default function EnTete({
                               <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
-                                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
                                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{mail.date}</span>
                                 </div>
                                 <div className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
@@ -379,7 +379,7 @@ export default function EnTete({
         {showUserMenu && (
           <div ref={userMenuRef} className="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
             <div className="px-4 py-2 border-b border-gray-100">
-              <div className="font-semibold text-gray-900">{user.name}</div>
+              <div className="font-semibold text-black">{user.name}</div>
               <div className="text-sm text-gray-500">{user.email}</div>
             </div>
             <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Paramètres">
