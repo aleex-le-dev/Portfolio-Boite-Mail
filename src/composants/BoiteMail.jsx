@@ -153,7 +153,6 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
     : [];
   // Sélectionner le mail courant
   const selectedEmail = filteredEmails.find(e => e.id === selectedEmailId) || filteredEmails[0];
-  console.log('selectedEmailId:', selectedEmailId, 'selectedEmail:', selectedEmail?.title, 'filteredEmails:', filteredEmails.map(e => ({ id: e.id, title: e.title })));
 
   // Détecter si l'email sélectionné est un projet
   const isProjet = selectedEmail && PROJECT_CATEGORIES.includes(selectedEmail.category);
@@ -247,7 +246,6 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
 
   // Fonction pour mettre un mail à la corbeille
   const handleTrash = (id) => {
-    console.log('handleTrash appelé avec id:', id, 'selectedEmailId:', selectedEmailId);
     setEmails(prev => {
       let updated = prev;
       const mailToDelete = prev.find(e => e.id === id);
@@ -271,21 +269,17 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       }
       // Si c'est une réponse, supprime aussi l'original de la boîte de réception (même sujet + destinataire)
       if (mailToDelete && mailToDelete.to && mailToDelete.category === 'Messages envoyés') {
-        console.log('Mail à supprimer:', mailToDelete.title, 'to:', mailToDelete.to);
         // Vérifier que le mail original existe vraiment avant de le supprimer
         const originalMail = updated.find(e => e.category === 'Boîte de réception' && e.title === mailToDelete.title && e.email === mailToDelete.to);
         if (originalMail) {
-          console.log('Suppression du mail original:', originalMail.title, 'destinataire:', originalMail.email, 'to:', mailToDelete.to);
           updated = updated.filter(e => !(e.category === 'Boîte de réception' && e.title === mailToDelete.title && e.email === mailToDelete.to));
-        } else {
-          console.log('Aucun mail original trouvé pour:', mailToDelete.title, 'avec to:', mailToDelete.to);
         }
       }
       
       // Debug: afficher tous les mails avec le même titre
       if (mailToDelete && mailToDelete.category === 'Messages envoyés') {
-        const sameTitleMails = updated.filter(e => e.title === mailToDelete.title);
-        console.log('Mails avec le même titre:', sameTitleMails.map(m => ({ id: m.id, category: m.category, email: m.email, to: m.to })));
+        // Supprimer le mail de la corbeille
+        updated = updated.filter(e => e.id !== id);
       }
       if (selectedCategory === 'Messages envoyés') {
         const next = updated.filter(e => e.category === 'Messages envoyés');
@@ -454,7 +448,6 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       )}
                       {selectedCategory !== 'Corbeille' && (
                         <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => {
-                          console.log('Bouton corbeille cliqué, selectedEmailId:', selectedEmailId, 'selectedEmail.id:', selectedEmail?.id);
                           handleTrash(selectedEmail?.id || selectedEmailId);
                         }} title="Mettre à la corbeille"><FiTrash2 className="text-xl" /></button>
                       )}

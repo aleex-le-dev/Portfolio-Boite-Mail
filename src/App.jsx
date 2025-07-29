@@ -45,7 +45,7 @@ function App() {
       {!introDone && !showTransition && <Intro onFinish={handleIntroFinish} />}
       {showTransition && <div className="mailbox-transition" />}
       {introDone && <BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />}
-      {introDone && <CookieBanner onShowInfo={handleShowInfoMail} />}
+      {introDone && <CookieBanner onShowInfo={handleShowInfoMail} darkMode={darkMode} />}
     </>
   );
 }
