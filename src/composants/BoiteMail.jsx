@@ -349,7 +349,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   }));
 
   return (
-    <div className={`flex flex-col h-screen ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
+    <div className={`flex flex-col h-screen ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
                         <EnTete
                     onToggleSidebar={() => setSidebarOpen((v) => !v)}
                     search={search}
