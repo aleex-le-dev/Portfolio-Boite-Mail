@@ -1,6 +1,21 @@
 
 @import "tailwindcss";
 
+/* Variables CSS pour les thèmes */
+:root {
+  /* Thème Light */
+  --light-primary-bg: white;
+  --light-secondary-bg: #f0f0f0;
+  --light-text: #2c3e50;
+  --light-border: #e5e7eb;
+  
+  /* Thème Dark */
+  --dark-primary-bg: #000000;
+  --dark-secondary-bg: #0c0c0c;
+  --dark-text: #ffffff;
+  --dark-border: #000000;
+}
+
 @keyframes slideUpCookie {
   from {
     transform: translateY(100%);

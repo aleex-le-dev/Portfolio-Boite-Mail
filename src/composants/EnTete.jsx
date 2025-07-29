@@ -74,7 +74,7 @@ export default function EnTete({
 
 
   return (
-    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">

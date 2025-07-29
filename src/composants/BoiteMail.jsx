@@ -18,7 +18,6 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showReply, setShowReply] = useState(false);
   const [search, setSearch] = useState('');
 
   // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
@@ -52,7 +51,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         // Supprimer les mails corrompus ou avec des données incorrectes
         const cleaned = sent.filter(mail => mail && mail.id && mail.title && mail.category);
         localStorage.setItem('messageenvoye', JSON.stringify(cleaned));
-      } catch (error) {
+      } catch {
         localStorage.removeItem('messageenvoye');
       }
     };
@@ -119,7 +118,6 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   }, []);
 
   // Filtrer les emails selon la catégorie sélectionnée
-  const todayStr = new Date().toLocaleDateString('fr-FR');
   let filteredEmails = [];
   if (selectedCategory === 'Corbeille') {
     filteredEmails = emails.filter(mail => mail.category === 'Corbeille');
@@ -325,7 +323,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   }));
 
   return (
-    <div className={`flex flex-col h-screen ${darkMode ? 'bg-black' : 'bg-white'}`}>
+    <div className={`flex flex-col h-screen ${darkMode ? 'bg-black' : 'bg-white'}`} style={!darkMode ? { backgroundColor: 'var(--light-secondary-bg)' } : {}}>
                         <EnTete
                     onToggleSidebar={() => setSidebarOpen((v) => !v)}
                     search={search}
@@ -394,7 +392,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         <div className="flex flex-1 flex-col md:flex-row overflow-hidden md:overflow-visible h-full md:h-auto">
           {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
           <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} ${sidebarOpen ? 'w-full md:w-[30%]' : 'w-full'} mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
               <ListeEmails
                 selectedCategory={selectedCategory}
                 emails={filteredEmails}
@@ -407,7 +405,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
           <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
