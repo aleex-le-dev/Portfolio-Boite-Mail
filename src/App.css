@@ -17,6 +17,7 @@
 
   /* Couleurs communes */
   --button-bg: #1d4ed8; /* bg-blue-700 */
+  --selection-bg: #dbeafe; /* bg-blue-100 */
 }
 
 @keyframes slideUpCookie {

@@ -79,7 +79,8 @@ export default function EnTete({
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">
         <button 
-          className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'}`} 
+          className={`flex items-center justify-center h-8 w-8 p-0 rounded-full transition mt-1 ${darkMode ? '' : 'hover:bg-gray-200'}`} 
+          style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
           onClick={onToggleSidebar} 
           aria-label={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
           title={sidebarOpen ? "Réduire la barre latérale" : "Étendre la barre latérale"}
@@ -91,7 +92,7 @@ export default function EnTete({
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}
         <div className="md:hidden flex-1 mx-4 flex justify-center">
-          <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? 'bg-gray-800' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
+          <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}>
             <SearchBar
               placeholder="Rechercher une information..."
               value={search}
@@ -131,7 +132,8 @@ export default function EnTete({
                                   return (
                                     <div
                                       key={label + '-' + sub}
-                                      className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
+                                      className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
+                                      style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         onSelectCategory(sub);
@@ -166,7 +168,8 @@ export default function EnTete({
                             return (
                               <div
                                 key={mail.id + '-' + index}
-                                className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
+                                className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
+                                style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   onSelectMail(mail);
@@ -282,7 +285,8 @@ export default function EnTete({
                                 return (
                             <button
                               key={label + '-' + sub}
-                              className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
+                              className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
+                              style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
                               type="button"
                               aria-label={`Sélectionner ${sub}`}
                               onClick={() => {
@@ -313,7 +317,8 @@ export default function EnTete({
                       return (
                         <button
                               key={mail.id + '-' + index}
-                              className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
+                              className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
+                              style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
                               type="button"
                               aria-label={`Sélectionner l'email de ${mail.sender} : ${mail.title}`}
                           onClick={() => onSelectMail(mail)}

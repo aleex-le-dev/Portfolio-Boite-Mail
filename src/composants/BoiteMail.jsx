@@ -413,7 +413,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       >
                         <IoMdArrowRoundBack className="text-2xl" />
                       </button>
-                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                        style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
                         onClick={() => {
                           const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                           if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
@@ -422,7 +423,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       >
                         <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
                       </button>
-                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                        style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
                         onClick={() => {
                           const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
                           if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
@@ -432,22 +434,22 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                         <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
                       </button>
                       {selectedCategory === 'Boîte de réception' && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
                       )}
                       {(selectedCategory === 'Important' || selectedCategory === 'Corbeille' || selectedCategory === 'Archive') && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleToInbox(selectedEmailId)} title="Déplacer vers la boîte de réception"><MdInbox className="text-xl" /></button>
                       )}
                       {selectedCategory === 'Messages envoyés' && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleImportant(selectedEmail?.id || selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleImportant(selectedEmail?.id || selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
                       )}
                       {selectedCategory !== 'Archive' && selectedCategory !== 'Messages envoyés' && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleArchive(selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
                       )}
                       {selectedCategory === 'Messages envoyés' && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => handleArchive(selectedEmail?.id || selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleArchive(selectedEmail?.id || selectedEmailId)} title="Archiver"><MdArchive className="text-xl" /></button>
                       )}
                       {selectedCategory !== 'Corbeille' && (
-                        <button className={`p-0.5 rounded ${darkMode ? 'hover:bg-gray-600 text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} onClick={() => {
+                        <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => {
                           handleTrash(selectedEmail?.id || selectedEmailId);
                         }} title="Mettre à la corbeille"><FiTrash2 className="text-xl" /></button>
                       )}

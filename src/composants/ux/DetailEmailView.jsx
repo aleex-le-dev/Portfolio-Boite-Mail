@@ -26,7 +26,7 @@ const DetailEmailView = ({
 
   if (category === 'Important' && id === 1000) {
     return (
-      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
         <div className="px-10 pl-8 flex flex-col">
           <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
           <div className="flex items-start gap-3 mb-4 w-full">
@@ -68,7 +68,7 @@ const DetailEmailView = ({
   }
   if (category === 'Important' && id === 1001) {
     return (
-      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <div className={`w-full h-full flex flex-col rounded-2xl overflow-y-auto ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
         <div className="px-10 pl-8 flex flex-col">
           <h1 className="text-2xl font-bold mb-2 text-left w-full">Mentions légales du site</h1>
           <p className="mb-3 text-gray-800">Ce site respecte votre vie privée et utilise des cookies et le stockage local pour améliorer votre expérience utilisateur et analyser le trafic.</p>
@@ -102,7 +102,7 @@ const DetailEmailView = ({
     );
   }
   return (
-    <div className={`h-full overflow-y-auto rounded-2xl ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
+    <div className={`h-full overflow-y-auto rounded-2xl ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
       {/* Corps du mail */}
       <style>{`
         .mail-content a { color: #2563eb; text-decoration: underline; transition: color 0.2s; }

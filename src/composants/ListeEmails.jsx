@@ -3,9 +3,9 @@ import EmailItem from "./ux/EmailItem";
 
 const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selectedCategory, darkMode }) => {
   return (
-    <section className={`h-full ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
+    <section className={`h-full ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
       {emails.length > 0 && (
-        <div className={`flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base font-bold border-b rounded-tl-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'bg-gray-50' }}>
+        <div className={`flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base font-bold border-b rounded-tl-2xl ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
           {selectedCategory}
         </div>
       )}
@@ -24,7 +24,11 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
           return (
             <div
               key={mail.id}
-              className={`cursor-pointer transition-colors duration-100 w-full ${selectedEmailId === mail.id ? (darkMode ? 'bg-blue-900' : 'bg-blue-100') : (darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50')}`}
+              className={`cursor-pointer transition-colors duration-100 w-full ${selectedEmailId === mail.id ? '' : (darkMode ? '' : 'hover:bg-gray-50')}`}
+              style={selectedEmailId === mail.id ? 
+                (darkMode ? { backgroundColor: 'var(--selection-bg)' } : { backgroundColor: 'var(--selection-bg)' }) : 
+                (darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' })
+              }
               onClick={() => setSelectedEmailId(mail.id)}
             >
               <EmailItem
@@ -37,6 +41,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
                 calendar={mail.calendar}
                 image={mail.image}
                 darkMode={darkMode}
+                isSelected={selectedEmailId === mail.id}
               />
             </div>
           );
