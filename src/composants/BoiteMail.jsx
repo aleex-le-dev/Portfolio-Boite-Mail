@@ -17,9 +17,27 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [emails, setEmails] = useState([]);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showReply, setShowReply] = useState(false);
   const [search, setSearch] = useState('');
+
+  // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) { // md breakpoint
+        setSidebarOpen(true);
+      } else {
+        setSidebarOpen(false);
+      }
+    };
+    
+    // Appliquer au chargement initial
+    handleResize();
+    
+    // Écouter les changements de taille
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     // Nettoyage du localStorage pour éviter les doublons de test
@@ -330,38 +348,36 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                   />
       
       {/* Sidebar mobile - overlay */}
-      {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 z-50">
-          {/* Overlay sombre */}
-          <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)}></div>
-          {/* Sidebar */}
-          <div className="absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full">
-            <div className="p-4">
-              <BarreLaterale 
-                selectedCategory={selectedCategory} 
-                setSelectedCategory={(category) => {
-                  setSelectedCategory(category);
-                  setSelectedEmailId(null);
-                }} 
-                emails={emails} 
-                onDeleteSubLabel={handleDeleteSubLabel} 
-                filteredEmails={filteredEmails}
-                search={search}
-                onSearchChange={e => setSearch(e.target.value)}
-                searchResults={searchResults}
-                onSelectMail={mail => {
-                  setSelectedCategory(mail.category);
-                  setTimeout(() => setSelectedEmailId(mail.id), 0);
-                  setSearch("");
-                  setSidebarOpen(false);
-                }}
-                onCloseSidebar={() => setSidebarOpen(false)}
-                darkMode={darkMode}
-              />
-            </div>
+      <div className={`md:hidden fixed inset-0 z-50 transition-all duration-300 ease-out ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        {/* Overlay sombre */}
+        <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setSidebarOpen(false)}></div>
+        {/* Sidebar */}
+        <div className={`absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="p-4">
+            <BarreLaterale 
+              selectedCategory={selectedCategory} 
+              setSelectedCategory={(category) => {
+                setSelectedCategory(category);
+                setSelectedEmailId(null);
+              }} 
+              emails={emails} 
+              onDeleteSubLabel={handleDeleteSubLabel} 
+              filteredEmails={filteredEmails}
+              search={search}
+              onSearchChange={e => setSearch(e.target.value)}
+              searchResults={searchResults}
+              onSelectMail={mail => {
+                setSelectedCategory(mail.category);
+                setTimeout(() => setSelectedEmailId(mail.id), 0);
+                setSearch("");
+                setSidebarOpen(false);
+              }}
+              onCloseSidebar={() => setSidebarOpen(false)}
+              darkMode={darkMode}
+            />
           </div>
         </div>
-      )}
+      </div>
       
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar desktop - cachée sur mobile */}

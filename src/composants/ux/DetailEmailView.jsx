@@ -126,12 +126,12 @@ const DetailEmailView = ({
                         c === ""
                           ? <div key={i} className="h-4"></div>
                           : /<[^>]*>/i.test(c)
-                            ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                            : <div key={i} className="text-gray-900 text-base">{c}</div>
+                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
                       )
                     : (/<[^>]*>/i.test(content)
-                        ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
-                        : <div className="text-gray-900 text-base">{content}</div>
+                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content}</div>
                       )}
                   {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
                     <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
@@ -146,13 +146,13 @@ const DetailEmailView = ({
         )}
         {category === 'Messages envoyés' && !to && (
           <>
-            <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-4 w-full">
               <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover" />
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold text-gray-900">{sender}</span>
-                  <span className="text-xs text-gray-500">{date}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 <div className="mt-5 mail-content">
                   {Array.isArray(content)
@@ -160,12 +160,12 @@ const DetailEmailView = ({
                         c === ""
                           ? <div key={i} className="h-4"></div>
                           : /<[^>]*>/i.test(c)
-                            ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                            : <div key={i} className="text-gray-900 text-base">{c}</div>
+                            ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
+                            : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
                       )
                     : (/<[^>]*>/i.test(content)
-                        ? <div className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: content}} />
-                        : <div className="text-gray-900 text-base">{content}</div>
+                        ? <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: content}} />
+                        : <div className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content}</div>
                       )}
                   {Array.isArray(content) && /<img/i.test(content[content.length-1]) && (
                     <div className="w-full flex justify-center mt-6" dangerouslySetInnerHTML={{__html: content[content.length-1].replace(/<br\s*\/>Mon CV :/i, '')}} />
@@ -189,37 +189,37 @@ const DetailEmailView = ({
           </>
         )}
         {category === 'Messages envoyés' && to && Array.isArray(content) && content.length > 1 && (
-          <div className="text-gray-900 text-base w-full">
-            <h1 className="text-2xl font-bold mb-2 text-left w-full">{title}</h1>
+          <div className={`text-base w-full ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>
+            <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-gray-900'}`}>{title}</h1>
             <div className="flex items-start gap-3 mb-2">
               {senderAvatar &&
                 <img src={senderAvatar} alt={sender} className="w-10 h-10 rounded-full object-cover border border-gray-300" />
               }
               <div className="flex flex-col w-full">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold text-gray-900">{sender}</span>
-                  <span className="text-xs text-gray-500">{date}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{sender}</span>
+                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
                 <div className="mt-5 mail-content">
                   {content.slice(0, -1).map((c, i) =>
                     c === ""
                       ? <div key={i} className="h-4"></div>
                       : /<[^>]*>/i.test(c)
-                        ? <div key={i} className="text-gray-900 text-base" dangerouslySetInnerHTML={{__html: c}} />
-                        : <div key={i} className="text-gray-900 text-base">{c}</div>
+                        ? <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`} dangerouslySetInnerHTML={{__html: c}} />
+                        : <div key={i} className={`text-base ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{c}</div>
                   )}
                 </div>
               </div>
             </div>
-            <hr className="my-4 border-t-2 border-gray-200" />
+            <hr className={`my-4 border-t-2 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`} />
             <div className="flex items-start gap-3 mt-4">
               <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alexandre.janacek@gmail.com" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400 mt-1" />
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-gray-900">Aleex Le Dev</span>
-                  <span className="text-xs text-gray-500">{date} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Aleex Le Dev</span>
+                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date} à {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
-                <div className="text-gray-900 text-base whitespace-pre-line mt-2">{content[content.length - 1]}</div>
+                <div className={`text-base whitespace-pre-line mt-2 ${darkMode ? 'text-gray-200' : 'text-gray-900'}`}>{content[content.length - 1]}</div>
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@ const DetailEmailView = ({
       {category !== 'Archive' && category !== 'Corbeille' && category !== 'Design' && (
         <div className="flex gap-6 px-10 mt-6 mb-0 ml-11">
           <button
-            className="flex items-center gap-2 border border-gray-400 rounded-full px-5 py-2 text-base text-gray-700 font-semibold hover:bg-gray-50 transition mt-0 mb-0"
+            className={`flex items-center gap-2 border rounded-full px-5 py-2 text-base font-semibold transition mt-0 mb-0 ${darkMode ? 'border-gray-500 text-gray-300 hover:bg-gray-700' : 'border-gray-400 text-gray-700 hover:bg-gray-50'}`}
             onClick={() => setShowReply(true)}
           >
             Répondre
