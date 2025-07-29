@@ -29,8 +29,8 @@ const RepondreMail = ({
   };
 
   return (
-    <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
-      <div className={`flex items-center justify-between px-5 py-3 border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+    <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? 'bg-gray-800' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
+      <div className={`flex items-center justify-between px-5 py-3 border-b ${darkMode ? '' : 'border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
         <span className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>Répondre à {from}</span>
         <div className="flex items-center justify-center">
           <button className={`${darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'}`} onClick={onClose}><RiCloseLargeLine /></button>
@@ -38,13 +38,13 @@ const RepondreMail = ({
       </div>
       <form className="flex flex-col gap-3 px-5 py-4" onSubmit={handleSubmit}>
         <input
-          className={`w-full rounded border px-3 py-2 text-sm ${darkMode ? 'border-gray-600 bg-gray-700 text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`}
+          className={`w-full rounded border px-3 py-2 text-sm ${darkMode ? 'bg-gray-700 text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}
           placeholder="Subject"
           value={subject}
           readOnly
         />
         <textarea
-          className={`w-full rounded border px-3 py-2 text-sm font-mono min-h-[100px] ${darkMode ? 'border-gray-600 bg-gray-700 text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`}
+          className={`w-full rounded border px-3 py-2 text-sm font-mono min-h-[100px] ${darkMode ? 'bg-gray-700 text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}
           placeholder="Message"
           value={msg}
           onChange={e => setMsg(e.target.value)}

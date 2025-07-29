@@ -74,7 +74,7 @@ export default function EnTete({
 
 
   return (
-    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
+    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'text-white' : 'bg-white text-gray-900'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">
@@ -91,7 +91,7 @@ export default function EnTete({
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}
         <div className="md:hidden flex-1 mx-4 flex justify-center">
-          <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
+          <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? 'bg-gray-800' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
             <SearchBar
               placeholder="Rechercher une information..."
               value={search}
@@ -101,9 +101,9 @@ export default function EnTete({
             
                         {search && search.length >= 3 && (
               <>
-                <div className="fixed inset-0 bg-black/70 z-40 pointer-events-none"></div>
+                <div className="fixed inset-0 z-40 pointer-events-none" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.7 }}></div>
                 <div 
-                  className={`fixed left-1/2 top-20 -translate-x-1/2 border rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)] ${darkMode ? 'bg-[#0c0c0c] border-gray-600' : 'bg-white border-gray-200'}`}
+                  className={`fixed left-1/2 top-20 -translate-x-1/2 border rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)] ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}
                 >
                   {searchResults.length === 0 ? (
                     <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
@@ -254,8 +254,8 @@ export default function EnTete({
           
         {search && search.length >= 3 && (
             <>
-              <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
-              <div ref={resultsRef} className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 border rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh] ${darkMode ? 'bg-[#0c0c0c] border-gray-600' : 'bg-white border-gray-200'}`}>
+              <div className="fixed inset-0 z-40" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.7 }} onClick={() => onSearchChange({ target: { value: '' } })}></div>
+              <div ref={resultsRef} className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 border rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh] ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
             {noResult ? (
               <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
             ) : (

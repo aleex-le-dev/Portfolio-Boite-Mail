@@ -10,7 +10,7 @@ const SearchBar = ({ placeholder = "", value, onChange, darkMode = false }) => {
       </span>
       <input
         type="text"
-        className={`w-full ${focus ? 'pr-10 pl-4' : 'pl-10 pr-4'} py-2 rounded-full border shadow focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm md:text-base ${darkMode ? 'border-gray-600 bg-gray-800 text-white placeholder-gray-400' : 'border-gray-200 bg-white text-gray-900 placeholder-gray-400'}`}
+        className={`w-full ${focus ? 'pr-10 pl-4' : 'pl-10 pr-4'} py-2 rounded-full border shadow focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm md:text-base ${darkMode ? 'text-white placeholder-gray-400' : 'border-gray-200 bg-white text-gray-900 placeholder-gray-400'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : {}}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

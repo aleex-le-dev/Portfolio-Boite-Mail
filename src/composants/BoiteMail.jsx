@@ -323,7 +323,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   }));
 
   return (
-    <div className={`flex flex-col h-screen ${darkMode ? 'bg-black' : 'bg-white'}`} style={!darkMode ? { backgroundColor: 'var(--light-secondary-bg)' } : {}}>
+    <div className={`flex flex-col h-screen ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}>
                         <EnTete
                     onToggleSidebar={() => setSidebarOpen((v) => !v)}
                     search={search}
@@ -351,7 +351,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       {/* Sidebar mobile - overlay */}
       <div className={`md:hidden fixed inset-0 z-50 transition-all duration-300 ease-out ${sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         {/* Overlay sombre */}
-        <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setSidebarOpen(false)}></div>
+        <div className={`absolute inset-0 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0'}`} style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.5 }} onClick={() => setSidebarOpen(false)}></div>
         {/* Sidebar */}
         <div className={`absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="p-4">
@@ -409,7 +409,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
-                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-[#0c0c0c] border-gray-600 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`}>
+                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-[#0c0c0c] text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
                     <div className="flex items-center gap-2">
                       {/* Bouton retour sur mobile */}
                       <button 

@@ -19,7 +19,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
   };
 
   return (
-    <aside className={`w-auto min-w-fit whitespace-nowrap h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px] ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`} style={!darkMode ? { backgroundColor: 'var(--light-primary-bg)' } : {}}>
+    <aside className={`w-auto min-w-fit whitespace-nowrap h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px] ${darkMode ? 'text-white' : 'bg-white text-gray-900'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
       {/* Bouton fermer - visible uniquement sur mobile */}
       <div className="md:hidden flex justify-between items-center mb-4">
         <div className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>Alexandre Janacek</div>

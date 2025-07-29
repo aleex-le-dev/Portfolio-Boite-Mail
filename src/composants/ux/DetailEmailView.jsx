@@ -211,7 +211,7 @@ const DetailEmailView = ({
                 </div>
               </div>
             </div>
-            <hr className={`my-4 border-t-2 ${darkMode ? 'border-gray-600' : 'border-gray-200'}`} />
+            <hr className={`my-4 border-t-2 ${darkMode ? '' : 'border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}} />
             <div className="flex items-start gap-3 mt-4">
               <img src="https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o" alt="alexandre.janacek@gmail.com" className="w-10 h-10 rounded-full object-cover border-2 border-blue-400 mt-1" />
               <div className="flex flex-col">
@@ -238,14 +238,14 @@ const DetailEmailView = ({
         </div>
       )}
       {showReply && (
-        <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/10" onClick={handleOverlayClick}>
+        <div className="repondre-mail-overlay fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.1 }} onClick={handleOverlayClick}>
           <RepondreMail onClose={() => setShowReply(false)} from={email} subject={title} onSendMail={onSendMail} darkMode={darkMode} />
         </div>
       )}
 
       {/* Image Preview Modal */}
       {previewImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={() => setPreviewImage(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.8 }} onClick={() => setPreviewImage(null)}>
           <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <img 
               src={previewImage} 
