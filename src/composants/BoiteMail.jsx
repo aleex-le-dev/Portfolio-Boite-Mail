@@ -449,26 +449,30 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       >
                         <IoMdArrowRoundBack className="text-2xl" />
                       </button>
-                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
-                        style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
-                        onClick={() => {
-                          const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
-                          if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
-                        }}
-                        disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === 0}
-                      >
-                        <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-                      </button>
-                      <button className={`hidden md:block p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
-                        style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
-                        onClick={() => {
-                          const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
-                          if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
-                        }}
-                        disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === filteredEmails.length - 1}
-                      >
-                        <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-                      </button>
+                      {filteredEmails.length > 1 && (
+                        <>
+                          <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                            style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
+                            onClick={() => {
+                              const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
+                              if (idx > 0) setSelectedEmailId(filteredEmails[idx - 1].id);
+                            }}
+                            disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === 0}
+                          >
+                            <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                          </button>
+                          <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`}
+                            style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }}
+                            onClick={() => {
+                              const idx = filteredEmails.findIndex(e => e.id === selectedEmailId);
+                              if (idx < filteredEmails.length - 1) setSelectedEmailId(filteredEmails[idx + 1].id);
+                            }}
+                            disabled={filteredEmails.findIndex(e => e.id === selectedEmailId) === filteredEmails.length - 1}
+                          >
+                            <svg className="text-xl" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                          </button>
+                        </>
+                      )}
                       {selectedCategory === 'Boîte de réception' && (
                         <button className={`p-0.5 rounded ${darkMode ? 'text-gray-300' : 'hover:bg-gray-200 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={() => handleImportant(selectedEmailId)} title="Marquer comme important"><MdLabelImportant className="text-xl" /></button>
                       )}
