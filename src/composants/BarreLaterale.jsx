@@ -24,13 +24,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
     <aside className={`w-auto min-w-fit whitespace-nowrap h-full flex flex-col py-4 px-2 overflow-y-auto md:min-w-[240px] ${darkMode ? 'text-white' : 'bg-white text-black'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
       {/* Bouton fermer - visible uniquement sur mobile */}
       <div className="md:hidden flex justify-between items-center mb-4">
-        <div className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Alexandre Janacek</div>
+        <div className={`font-bold text-xl md:text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Alexandre Janacek</div>
         <button 
           className="p-2 rounded-full hover:bg-gray-200 transition"
           onClick={onCloseSidebar}
           aria-label="Fermer le menu"
         >
-          <MdClose className={`text-2xl ${darkMode ? 'text-white' : 'text-gray-700'}`} />
+          <MdClose className={`text-3xl md:text-2xl ${darkMode ? 'text-white' : 'text-gray-700'}`} />
         </button>
       </div>
 
@@ -38,9 +38,9 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
       <div className="w-full px-2 mb-4">
         <button 
           onClick={() => setIsContactFormOpen(true)}
-          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm"
+          className="w-full py-4 md:py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-base md:text-sm"
         >
-          <IoMailSharp className="text-lg" />
+          <IoMailSharp className="text-xl md:text-lg" />
           Me contacter
         </button>
       </div>
@@ -50,13 +50,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (
           <li key={value}>
             <button
-              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-sm md:text-base focus:outline-none ${selectedCategory === value ? (darkMode ? 'bg-blue-900 text-white' : 'bg-blue-50 text-blue-700') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
+              className={`flex items-center w-full gap-3 px-3 py-3 md:py-2 rounded-2xl text-base md:text-sm focus:outline-none ${selectedCategory === value ? (darkMode ? 'bg-blue-900 text-white' : 'bg-blue-50 text-blue-700') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
               onClick={() => { 
                 setSelectedCategory(value); 
                 closeAllDropdowns(); 
               }}
             >
-              {Icon && <Icon className="text-xl md:text-2xl" />}
+              {Icon && <Icon className="text-2xl md:text-xl" />}
               <span className={`text-left ${selectedCategory === value ? 'font-bold' : ''}`}>
                 {label}
               </span>
@@ -109,12 +109,12 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
       {/* Libellés */}
       <div className="mt-6">
         <div className="flex items-center justify-between px-3 mb-2">
-          <span className={`uppercase font-bold tracking-wider text-sm md:text-base ${darkMode ? 'text-white' : 'text-black'}`}>Libellés</span>
+          <span className={`uppercase font-bold tracking-wider text-base md:text-sm ${darkMode ? 'text-white' : 'text-black'}`}>Libellés</span>
         </div>
         <ul className="space-y-0.5">
           {LABELS.map(({ label, subs }) => (
             <li key={label}>
-              <button className={`flex items-center w-full gap-2 px-3 py-1 text-sm md:text-base rounded-lg ${selectedCategory === label ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
+              <button className={`flex items-center w-full gap-2 px-3 py-2 md:py-1 text-base md:text-sm rounded-lg ${selectedCategory === label ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
                 onClick={() => {
                   if (label === 'Mes certifications') {
                     setSelectedCategory(label);
@@ -128,7 +128,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
                   }
                 }}
               >
-                <FcFolder className="text-lg md:text-xl" />
+                <FcFolder className="text-xl md:text-lg" />
                 <span className="uppercase">
                   {label}
                 </span>
@@ -150,7 +150,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
                   {subs.map(sub => (
                     <li key={sub}>
                       <button
-                        className={`flex items-center w-full gap-2 px-3 py-1 text-sm rounded-lg ${selectedCategory === sub ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
+                        className={`flex items-center w-full gap-2 px-3 py-2 md:py-1 text-base md:text-sm rounded-lg ${selectedCategory === sub ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
                         onClick={() => { setSelectedCategory(sub); closeAllDropdowns(); }}
                       >
                         <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
