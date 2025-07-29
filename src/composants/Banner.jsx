@@ -15,7 +15,7 @@ const Banner = ({ darkMode }) => {
   });
 
   return (
-    <div className={`w-full py-3 px-4 text-center relative overflow-hidden ${darkMode ? 'bg-blue-900 text-white' : 'bg-blue-600 text-white'}`}>
+    <div className={`fixed top-0 left-0 right-0 z-[9999] w-full py-3 px-4 text-center relative overflow-hidden ${darkMode ? 'bg-blue-900 text-white' : 'bg-blue-600 text-white'}`}>
       {/* Animation de défilement */}
       <div className="animate-marquee whitespace-nowrap" style={{ paddingLeft: '60px', paddingRight: '80px' }}>
         <span className="inline-block mx-4">🚧 Portfolio toujours en cours de construction <span className="text-xs">({formattedDate})</span> 🚧</span>

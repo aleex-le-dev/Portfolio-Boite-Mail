@@ -449,7 +449,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           </div>
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
-          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
+          <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-screen overflow-y-auto`}>
             <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
@@ -525,9 +525,9 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                         darkMode={darkMode}
                       />
                     </div>
-                                                ) : (
-                                <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} darkMode={darkMode} />
-                              )}
+                  ) : (
+                    <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} darkMode={darkMode} />
+                  )}
                 </>
               ) : (
                 <div className="flex items-center justify-center h-full">
@@ -542,4 +542,4 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   );
 });
 
-export default BoiteMail; 
+export default BoiteMail;
