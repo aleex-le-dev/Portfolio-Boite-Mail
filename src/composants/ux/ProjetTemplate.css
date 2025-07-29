@@ -558,54 +558,63 @@
 
 /* Dark Mode Styles */
 .projet-template-container.dark-mode {
-  background: #0c0c0c; /* Couleur secondaire */
-  color: #f9fafb;
+  background: var(--dark-secondary-bg);
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .projet-section {
-  border-bottom: 1px solid #374151;
+  border-bottom: 1px solid var(--dark-border);
 }
 
 .projet-template-container.dark-mode .section-title {
-  color: #f9fafb;
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .projet-description {
-  color: #d1d5db;
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .technologies-section {
-  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  background: var(--dark-secondary-bg);
 }
 
 .projet-template-container.dark-mode .tech-item {
-  background: #374151;
-  color: #f9fafb;
+  background: var(--dark-primary-bg);
+  color: var(--dark-text);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .projet-template-container.dark-mode .tech-name {
-  color: #f9fafb;
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .features-section {
-  background: #1f2937;
+  background: var(--dark-secondary-bg);
 }
 
 .projet-template-container.dark-mode .feature-item {
-  background: #374151;
-  color: #f9fafb;
+  background: var(--dark-primary-bg);
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .feature-text {
-  color: #d1d5db;
+  color: var(--dark-text);
+}
+
+.projet-template-container.dark-mode .links-section {
+  background: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+.projet-template-container.dark-mode .links-section .section-title {
+  color: var(--dark-text);
 }
 
 .projet-template-container.dark-mode .screenshots-section {
-  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  background: var(--dark-secondary-bg);
 }
 
 .projet-template-container.dark-mode .screenshot-item {
-  background: #374151;
+  background: var(--dark-secondary-bg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 } 
