@@ -47,7 +47,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         {NAV_CATEGORIES.map(({ label, value, icon: Icon }) => (
           <li key={value}>
             <button
-              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-sm md:text-base focus:outline-none ${selectedCategory === value ? (darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-50 text-blue-700') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-gray-900')}`}
+              className={`flex items-center w-full gap-3 px-3 py-2 rounded-2xl text-sm md:text-base focus:outline-none ${selectedCategory === value ? (darkMode ? 'bg-blue-900 text-white' : 'bg-blue-50 text-blue-700') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-gray-900')}`}
               onClick={() => { 
                 setSelectedCategory(value); 
                 closeAllDropdowns(); 
