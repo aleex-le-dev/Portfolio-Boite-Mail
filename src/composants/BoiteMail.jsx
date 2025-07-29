@@ -96,19 +96,23 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           }));
           const allEmails = [...sent, ...emailsWithDates, ...projetsWithDates, ...certificationsWithDates];
           setEmails(allEmails);
-          // Sélectionner automatiquement le premier email de la boîte de réception
-          const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
-          if (firstInboxEmail) {
-            setSelectedEmailId(firstInboxEmail.id);
+          // Sélectionner automatiquement le premier email de la boîte de réception seulement sur desktop
+          if (window.innerWidth >= 768) {
+            const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
+            if (firstInboxEmail) {
+              setSelectedEmailId(firstInboxEmail.id);
+            }
           }
         }).catch(() => {
           console.log('Projets ou certifications non trouvés, chargement des emails seulement');
           const allEmails = [...sent, ...emailsWithDates];
           setEmails(allEmails);
-          // Sélectionner automatiquement le premier email de la boîte de réception
-          const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
-          if (firstInboxEmail) {
-            setSelectedEmailId(firstInboxEmail.id);
+          // Sélectionner automatiquement le premier email de la boîte de réception seulement sur desktop
+          if (window.innerWidth >= 768) {
+            const firstInboxEmail = allEmails.find(email => email.category === 'Boîte de réception');
+            if (firstInboxEmail) {
+              setSelectedEmailId(firstInboxEmail.id);
+            }
           }
         });
       })
@@ -140,8 +144,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         categoryEmails = emails.filter(mail => mail.category === selectedCategory);
       }
       
-      // Sélectionner le premier email de la catégorie
-      if (categoryEmails.length > 0) {
+      // Sélectionner le premier email de la catégorie seulement sur desktop
+      if (categoryEmails.length > 0 && window.innerWidth >= 768) {
         setSelectedEmailId(categoryEmails[0].id);
       }
     }
@@ -379,7 +383,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         {/* Overlay sombre */}
         <div className={`absolute inset-0 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0'}`} style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.5 }} onClick={() => setSidebarOpen(false)}></div>
         {/* Sidebar */}
-        <div className={`absolute top-0 left-0 h-full bg-white shadow-lg max-w-[280px] w-full transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`absolute top-0 left-0 h-full shadow-lg max-w-[280px] w-full transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} style={darkMode ? { backgroundColor: 'var(--dark-primary-bg)' } : { backgroundColor: 'var(--light-primary-bg)' }}>
           <div className="p-4">
             <BarreLaterale 
               selectedCategory={selectedCategory} 
