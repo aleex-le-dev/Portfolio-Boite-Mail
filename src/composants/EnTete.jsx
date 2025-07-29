@@ -93,7 +93,7 @@ export default function EnTete({
         <div className="md:hidden flex-1 mx-4 flex justify-center">
           <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
             <SearchBar
-              placeholder="Rechercher..."
+              placeholder="Rechercher une information..."
               value={search}
               onChange={onSearchChange}
               darkMode={darkMode}
@@ -245,7 +245,7 @@ export default function EnTete({
         <div className="relative w-full max-w-xl z-50 flex justify-center">
           <div ref={searchRef} className="w-full">
           <SearchBar
-              placeholder="Rechercher..."
+              placeholder="Rechercher une information..."
             value={search}
             onChange={onSearchChange}
             darkMode={darkMode}
