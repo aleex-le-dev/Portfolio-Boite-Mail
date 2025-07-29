@@ -28,7 +28,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
           onClick={onCloseSidebar}
           aria-label="Fermer le menu"
         >
-          <MdClose className="text-2xl text-gray-700" />
+          <MdClose className={`text-2xl ${darkMode ? 'text-white' : 'text-gray-700'}`} />
         </button>
       </div>
 

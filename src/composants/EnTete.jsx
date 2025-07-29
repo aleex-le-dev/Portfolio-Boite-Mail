@@ -231,8 +231,8 @@ export default function EnTete({
                 <div className="font-semibold text-black">{user.name}</div>
                 <div className="text-sm text-gray-500">{user.email}</div>
               </div>
-              <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
-                Paramètres
+              <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
+                À propos de moi
               </button>
               <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition">
                 Déconnexion
@@ -382,8 +382,8 @@ export default function EnTete({
               <div className="font-semibold text-black">{user.name}</div>
               <div className="text-sm text-gray-500">{user.email}</div>
             </div>
-            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Paramètres">
-              Paramètres
+            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
+              À propos de moi
             </button>
             <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Déconnexion">
               Déconnexion
