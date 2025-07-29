@@ -226,7 +226,7 @@ const DetailEmailView = ({
         )}
       </div>
       {/* Barre d'actions en bas */}
-      {category !== 'Archive' && category !== 'Corbeille' && category !== 'Design' && (
+      {category !== 'Archive' && category !== 'Corbeille' && category !== 'Design' && category !== 'Messages envoyés' && (
         <div className="flex gap-6 px-10 mt-6 mb-0 ml-11">
           <button
             className={`flex items-center gap-2 border rounded-full px-5 py-2 text-base font-semibold transition mt-0 mb-0 ${darkMode ? 'border-gray-500 text-gray-300 hover:bg-gray-700' : 'border-gray-400 text-gray-700 hover:bg-gray-50'}`}

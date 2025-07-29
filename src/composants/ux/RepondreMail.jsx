@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { LuSendHorizontal, } from "react-icons/lu";
-import { FaPaperclip } from "react-icons/fa6";
 import { RiCloseLargeLine } from "react-icons/ri";
 
 
@@ -54,11 +53,18 @@ const RepondreMail = ({
         />
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center gap-4">
-            <button type="button" className={`text-xl p-2 rounded-lg transition-colors ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}>
-              <FaPaperclip />
-            </button>
           </div>
-          <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors">
+          <button 
+            type="submit" 
+            className="text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors" 
+            style={{ backgroundColor: 'var(--selection-bg)' }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#1d4ed8';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'var(--selection-bg)';
+            }}
+          >
             Envoyer <LuSendHorizontal className="text-lg" />
           </button>
         </div>

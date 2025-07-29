@@ -95,7 +95,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
             ...cert,
             date: cert.date || "Aujourd'hui"
           }));
-          const allEmails = [...sent, ...emailsWithDates, ...projetsWithDates, ...certificationsWithDates];
+          const allEmails = [...emailsWithDates, ...projetsWithDates, ...certificationsWithDates];
           setEmails(allEmails);
           // Sélectionner automatiquement le premier email de la boîte de réception seulement sur desktop
           if (window.innerWidth >= 768) {
@@ -106,7 +106,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           }
         }).catch(() => {
           console.log('Projets ou certifications non trouvés, chargement des emails seulement');
-          const allEmails = [...sent, ...emailsWithDates];
+          const allEmails = [...emailsWithDates];
           setEmails(allEmails);
           // Sélectionner automatiquement le premier email de la boîte de réception seulement sur desktop
           if (window.innerWidth >= 768) {
@@ -138,7 +138,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       } else if (selectedCategory === 'Messages envoyés') {
         const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
         const sentFromJSON = emails.filter(mail => mail.category === 'Messages envoyés');
-        categoryEmails = [...sentFromLocalStorage, ...sentFromJSON];
+        // Combiner les deux sources en évitant les doublons par ID
+        const allSent = [...sentFromJSON];
+        sentFromLocalStorage.forEach(localMail => {
+          if (!allSent.find(jsonMail => jsonMail.id === localMail.id)) {
+            allSent.push(localMail);
+          }
+        });
+        categoryEmails = allSent;
       } else if (selectedCategory === 'Mes certifications') {
         categoryEmails = emails.filter(mail => mail.category === 'Mes certifications');
       } else {
@@ -165,7 +172,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   } else if (selectedCategory === 'Messages envoyés') {
     const sentFromLocalStorage = JSON.parse(localStorage.getItem('messageenvoye') || '[]');
     const sentFromJSON = emails.filter(mail => mail.category === 'Messages envoyés');
-    filteredEmails = [...sentFromLocalStorage, ...sentFromJSON];
+    // Combiner les deux sources en évitant les doublons par ID
+    const allSent = [...sentFromJSON];
+    sentFromLocalStorage.forEach(localMail => {
+      if (!allSent.find(jsonMail => jsonMail.id === localMail.id)) {
+        allSent.push(localMail);
+      }
+    });
+    filteredEmails = allSent;
   } else if (selectedCategory === 'Mes certifications') {
     filteredEmails = emails.filter(mail => mail.category === 'Mes certifications');
   } else {
@@ -218,7 +232,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       originalContent = originalContent.slice(0, -1);
     }
     const newMail = {
-      id: emails.length > 0 ? Math.max(...emails.map(e => e.id)) + 1 : 1,
+      id: Date.now(), // Utiliser un timestamp unique pour éviter les conflits
       category: "Messages envoyés",
       title: subject,
       sender: originalSender,
