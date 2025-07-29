@@ -394,7 +394,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         <div className="flex flex-1 flex-col md:flex-row overflow-hidden md:overflow-visible h-full md:h-auto">
           {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
           <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} ${sidebarOpen ? 'w-full md:w-[30%]' : 'w-full'} mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`}>
               <ListeEmails
                 selectedCategory={selectedCategory}
                 emails={filteredEmails}
@@ -407,11 +407,11 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
           <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-[#0c0c0c]' : 'bg-white'}`}>
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
-                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-gray-700 border-gray-600 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`}>
+                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-[#0c0c0c] border-gray-600 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`}>
                     <div className="flex items-center gap-2">
                       {/* Bouton retour sur mobile */}
                       <button 
