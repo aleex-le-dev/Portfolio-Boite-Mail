@@ -209,5 +209,12 @@ a img,
 }
 
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 12s linear infinite;
+}
+
+/* Animation plus rapide sur mobile */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: marquee 8s linear infinite;
+  }
 }
