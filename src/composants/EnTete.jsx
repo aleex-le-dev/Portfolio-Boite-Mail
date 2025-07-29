@@ -94,7 +94,7 @@ export default function EnTete({
         <div className="md:hidden flex-1 mx-4 flex justify-center">
           <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}>
             <SearchBar
-              placeholder="Rechercher une information..."
+              placeholder="Rechercher ..."
               value={search}
               onChange={onSearchChange}
               darkMode={darkMode}
@@ -346,7 +346,7 @@ export default function EnTete({
       </div>
       
       {/* Boutons de droite - cachés sur mobile */}
-      <div className="hidden md:flex items-center gap-6 relative">
+      <div className="hidden md:flex items-center relative">
         <button 
           className="p-3 rounded-full hover:bg-gray-200 transition" 
           aria-label="Mode sombre"
