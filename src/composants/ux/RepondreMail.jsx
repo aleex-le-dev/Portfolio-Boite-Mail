@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { LuSendHorizontal, } from "react-icons/lu";
 import { RiCloseLargeLine } from "react-icons/ri";
+import SendButton from '../SendButton';
 
 
 const RepondreMail = ({
@@ -26,6 +27,9 @@ const RepondreMail = ({
     setMsg("");
     if (onClose) onClose();
   };
+
+  // Vérifier si le message est rempli
+  const isMessageValid = msg.trim().length > 0;
 
   return (
     <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
@@ -54,19 +58,9 @@ const RepondreMail = ({
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center gap-4">
           </div>
-          <button 
-            type="submit" 
-            className="text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors" 
-            style={{ backgroundColor: 'var(--selection-bg)' }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#1d4ed8';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = 'var(--selection-bg)';
-            }}
-          >
-            Envoyer <LuSendHorizontal className="text-lg" />
-          </button>
+          <SendButton onClick={handleSubmit} disabled={!isMessageValid} errorMessage="Veuillez écrire votre message avant d'envoyer" errorTop="28%">
+            Envoyer
+          </SendButton>
         </div>
       </form>
     </div>

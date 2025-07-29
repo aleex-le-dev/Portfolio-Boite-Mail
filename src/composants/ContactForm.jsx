@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdClose } from 'react-icons/md';
 import { USER_EMAIL } from './constantes.js';
 import { LuSendHorizontal } from 'react-icons/lu';
+import SendButton from './SendButton';
 
 const ContactForm = ({ isOpen, onClose, darkMode }) => {
   const [formData, setFormData] = useState({
@@ -60,6 +61,9 @@ const ContactForm = ({ isOpen, onClose, darkMode }) => {
       setTimeout(() => { setSubmitStatus(null); onClose(); }, 3000);
     }, 1000);
   };
+
+  // Vérifier si tous les champs sont remplis
+  const isFormValid = formData.name.trim() && formData.email.trim() && formData.subject.trim() && formData.message.trim();
 
   if (!isOpen) return null;
 
@@ -141,40 +145,14 @@ const ContactForm = ({ isOpen, onClose, darkMode }) => {
           <div className="flex items-center justify-between mt-2">
             <div className="flex items-center gap-4">
             </div>
-            <button 
-              type="submit" 
-              disabled={isSubmitting}
-              className={`font-semibold rounded-lg px-6 py-3 md:py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 transition-colors text-base md:text-sm ${
-                isSubmitting 
-                  ? 'bg-gray-400 cursor-not-allowed text-white' 
-                  : 'text-white'
-              }`}
-              style={!isSubmitting ? { 
-                backgroundColor: 'var(--selection-bg)',
-                ':hover': { backgroundColor: '#1d4ed8' }
-              } : {}}
-              onMouseEnter={(e) => {
-                if (!isSubmitting) {
-                  e.target.style.backgroundColor = '#1d4ed8';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isSubmitting) {
-                  e.target.style.backgroundColor = 'var(--selection-bg)';
-                }
-              }}
+            <SendButton 
+              onClick={handleSubmit}
+              disabled={isSubmitting || !isFormValid}
+              errorMessage="Veuillez remplir tous les champs du formulaire"
+              errorTop="20%"
             >
-              {isSubmitting ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Envoi...
-                </>
-              ) : (
-                <>
-                  Envoyer <LuSendHorizontal className="text-lg" />
-                </>
-              )}
-            </button>
+              {isSubmitting ? "Envoi..." : "Envoyer"}
+            </SendButton>
           </div>
         </form>
       </div>
