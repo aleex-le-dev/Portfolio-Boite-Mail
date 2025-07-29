@@ -3,16 +3,16 @@
 
 /* Variables CSS pour les thèmes */
 :root {
-  --light-primary-bg: white;
-  --light-secondary-bg: #f8f9fa;
-  --light-text: black;
-  --light-border: #e5e7eb;
+  --light-primary-bg: #ffffff;
+  --light-secondary-bg: #f8fafc;
+  --light-text: #000000;
+  --light-border: #e2e8f0;
   --dark-primary-bg: #1a1a1a;
   --dark-secondary-bg: #2d2d2d;
-  --dark-text: white;
+  --dark-text: #ffffff;
   --dark-border: #404040;
   --button-bg: #3b82f6;
-  --selection-bg: #dbeafe;
+  --selection-bg: #3b82f6;
 }
 
 @keyframes slideUpCookie {
@@ -217,4 +217,61 @@ a img,
   .animate-marquee {
     animation: marquee 8s linear infinite;
   }
+}
+
+/* Animations pour les gradients du formulaire de contact */
+@keyframes slideRight {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes slideDiagonal {
+  0% { transform: translate(-100%, -100%); }
+  100% { transform: translate(100%, 100%); }
+}
+
+/* Animation d'ondulation fluide pour le formulaire de contact */
+@keyframes wave {
+  0%, 100% { 
+    transform: translateX(-100%) scaleX(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateX(100%) scaleX(1.2);
+    opacity: 0.6;
+  }
+}
+
+/* Animation de flottement doux pour les particules */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-8px) translateX(4px);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-12px) translateX(-2px);
+    opacity: 0.8;
+  }
+  75% { 
+    transform: translateY(-6px) translateX(6px);
+    opacity: 0.5;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient radial pour l'effet de profondeur */
+.bg-radial-gradient {
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
 }

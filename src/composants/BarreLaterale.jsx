@@ -4,12 +4,14 @@ import { MdExpandMore, MdEdit, MdClose } from 'react-icons/md';
 import { LABELS, NAV_CATEGORIES } from './constantes.js';
 import SearchBar from './ux/SearchBar.jsx';
 import { IoMailSharp } from 'react-icons/io5';
+import ContactForm from './ContactForm.jsx';
 
 const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseSidebar, darkMode }) => {
   const [open, setOpen] = useState({
     labels: Object.fromEntries(LABELS.map(l => [l.label, false])),
     work: false
   });
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   const closeAllDropdowns = () => {
     setOpen({
@@ -34,7 +36,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
 
       {/* Bouton Me contacter - toujours visible au-dessus de la navigation */}
       <div className="w-full px-2 mb-4">
-        <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm">
+        <button 
+          onClick={() => setIsContactFormOpen(true)}
+          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition flex items-center justify-center gap-2 text-sm"
+        >
           <IoMailSharp className="text-lg" />
           Me contacter
         </button>
@@ -168,6 +173,13 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
           ))}
         </ul>
       </div>
+      
+      {/* Formulaire de contact */}
+      <ContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        darkMode={darkMode}
+      />
     </aside>
   );
 };

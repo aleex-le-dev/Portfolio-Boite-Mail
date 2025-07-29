@@ -29,22 +29,24 @@ const RepondreMail = ({
   };
 
   return (
-    <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? '' : 'bg-white'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}>
-      <div className={`flex items-center justify-between px-5 py-3 border-b ${darkMode ? '' : 'border-gray-200'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
-        <span className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Répondre à {from}</span>
+    <div className={`rounded-2xl shadow-xl w-[420px] max-w-full p-0 border ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
+      <div className={`flex items-center justify-between px-5 py-3 border-b ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+        <span className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-gray-900'}`}>Répondre à {from}</span>
         <div className="flex items-center justify-center">
-          <button className={`${darkMode ? 'text-gray-300' : 'hover:bg-gray-100 text-gray-600'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)' } : { backgroundColor: 'var(--light-secondary-bg)' }} onClick={onClose}><RiCloseLargeLine /></button>
+          <button className={`p-2 rounded-lg transition-colors ${darkMode ? 'text-gray-300 hover:text-white hover:bg-gray-700' : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'}`} onClick={onClose}>
+            <RiCloseLargeLine className="text-xl" />
+          </button>
         </div>
       </div>
       <form className="flex flex-col gap-3 px-5 py-4" onSubmit={handleSubmit}>
         <input
-          className={`w-full rounded border px-3 py-2 text-sm ${darkMode ? 'text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
+          className={`w-full rounded-lg border px-3 py-2 text-sm transition-colors ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-400' : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-blue-500'}`}
           placeholder="Subject"
           value={subject}
           readOnly
         />
         <textarea
-          className={`w-full rounded border px-3 py-2 text-sm font-mono min-h-[100px] ${darkMode ? 'text-gray-200 placeholder-gray-400' : 'border-gray-200 bg-gray-50 text-gray-500'}`} style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
+          className={`w-full rounded-lg border px-3 py-2 text-sm font-mono min-h-[100px] transition-colors resize-none ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-400' : 'bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-blue-500'}`}
           placeholder="Message"
           value={msg}
           onChange={e => setMsg(e.target.value)}
@@ -52,9 +54,11 @@ const RepondreMail = ({
         />
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center gap-4">
-            <button type="button" className={`text-xl ${darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-700'}`}><FaPaperclip /></button>
+            <button type="button" className={`text-xl p-2 rounded-lg transition-colors ${darkMode ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-700' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'}`}>
+              <FaPaperclip />
+            </button>
           </div>
-          <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg px-6 py-2 flex items-center gap-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors">
             Envoyer <LuSendHorizontal className="text-lg" />
           </button>
         </div>
