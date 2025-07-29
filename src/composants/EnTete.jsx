@@ -377,15 +377,15 @@ export default function EnTete({
         </button>
         
         {showUserMenu && (
-          <div ref={userMenuRef} className="absolute right-0 top-12 bg-white border border-gray-200 rounded-xl shadow-lg py-2 min-w-[200px] z-50">
-            <div className="px-4 py-2 border-b border-gray-100">
-              <div className="font-semibold text-black">{user.name}</div>
+          <div ref={userMenuRef} className="absolute right-0 top-14 bg-white border border-gray-200 rounded-xl shadow-lg py-3 min-w-[220px] z-50">
+            <div className="px-4 py-3 border-b border-gray-100">
+              <div className="font-semibold text-black text-base">{user.name}</div>
               <div className="text-sm text-gray-500">{user.email}</div>
             </div>
-            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
+            <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
               À propos de moi
             </button>
-            <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 transition" aria-label="Déconnexion">
+            <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="Déconnexion">
               Déconnexion
             </button>
           </div>
