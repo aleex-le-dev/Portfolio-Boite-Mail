@@ -3,7 +3,7 @@ import EmailItem from "./ux/EmailItem";
 
 const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selectedCategory, darkMode }) => {
   return (
-    <section className={`flex flex-col h-full overflow-y-auto rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white'} `}>
+    <section className={`flex flex-col h-full overflow-y-auto rounded-2xl ${darkMode ? 'bg-gray-900' : 'bg-white'} `}>
       {emails.length > 0 && (
         <div className={`flex justify-center items-center text-center px-4 py-2 h-12 min-h-12 text-sm md:text-base font-bold border-b rounded-tl-2xl ${darkMode ? 'text-gray-300 bg-gray-700' : 'text-gray-700 bg-gray-50'}`}>
           {selectedCategory}

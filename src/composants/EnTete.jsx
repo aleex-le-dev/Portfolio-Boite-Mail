@@ -74,7 +74,7 @@ export default function EnTete({
 
 
   return (
-    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+    <header className={`w-full flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Groupe menu + titre */}
       <div className="flex items-center justify-between mb-0 md:mb-0">
       <div className="flex items-center">
@@ -91,18 +91,19 @@ export default function EnTete({
         
         {/* Barre de recherche mobile - centrée par rapport à l'écran */}
         <div className="md:hidden flex-1 mx-4 flex justify-center">
-          <div className="relative bg-white rounded-full border border-gray-200 shadow-sm w-full max-w-md">
+          <div className={`relative rounded-full border shadow-sm w-full max-w-md ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
             <SearchBar
               placeholder="Rechercher..."
               value={search}
               onChange={onSearchChange}
+              darkMode={darkMode}
             />
             
                         {search && search.length >= 3 && (
               <>
                 <div className="fixed inset-0 bg-black/70 z-40 pointer-events-none"></div>
                 <div 
-                  className="fixed left-1/2 top-20 -translate-x-1/2 bg-white border border-gray-200 rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)]"
+                  className={`fixed left-1/2 top-20 -translate-x-1/2 border rounded-xl shadow-lg z-[9999] overflow-y-auto w-[90vw] max-h-[calc(100vh-120px)] ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}
                 >
                   {searchResults.length === 0 ? (
                     <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
@@ -118,7 +119,7 @@ export default function EnTete({
                         if (matchingLabels.length === 0) return null;
                         return (
                           <div className="mb-2">
-                            <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
+                            <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Libellés</div>
                             {matchingLabels.flatMap(({ label, subs }) => {
                               if (
                                 label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
@@ -130,7 +131,7 @@ export default function EnTete({
                                   return (
                                     <div
                                       key={label + '-' + sub}
-                                      className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left cursor-pointer"
+                                      className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         onSelectCategory(sub);
@@ -143,7 +144,7 @@ export default function EnTete({
                                       }}
                                     >
                                       {getCategoryIcon(sub)}
-                                      <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
+                                      <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
                                     </div>
                                   );
                                 });
@@ -157,7 +158,7 @@ export default function EnTete({
                       {/* Résultats des emails */}
                       {searchResults.length > 0 && (
                         <div>
-                          <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
+                          <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</div>
                           {searchResults.map((mail, index) => {
                             const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                             const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
@@ -165,7 +166,7 @@ export default function EnTete({
                             return (
                               <div
                                 key={mail.id + '-' + index}
-                                className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left cursor-pointer"
+                                className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   onSelectMail(mail);
@@ -180,11 +181,11 @@ export default function EnTete({
                                 <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-sm font-semibold text-gray-900" dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
-                                    <span className="text-xs text-gray-500">{mail.date}</span>
+                                    <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                    <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{mail.date}</span>
                                   </div>
-                                  <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
-                                  <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
+                                  <div className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
+                                  <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`} dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
                                 </div>
                               </div>
                             );
@@ -247,13 +248,14 @@ export default function EnTete({
               placeholder="Rechercher..."
             value={search}
             onChange={onSearchChange}
+            darkMode={darkMode}
           />
         </div>
           
         {search && search.length >= 3 && (
             <>
               <div className="fixed inset-0 bg-black/70 z-40" onClick={() => onSearchChange({ target: { value: '' } })}></div>
-              <div ref={resultsRef} className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh]">
+              <div ref={resultsRef} className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 border rounded-xl shadow-lg z-50 overflow-y-auto w-[90vw] md:w-[800px] px-2 max-h-[80vh] ${darkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-200'}`}>
             {noResult ? (
               <div className="w-full text-center py-8 text-gray-400 text-base">Aucun résultat</div>
             ) : (
@@ -268,7 +270,7 @@ export default function EnTete({
                   if (matchingLabels.length === 0) return null;
                   return (
                     <div className="mb-2">
-                      <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Libellés</div>
+                      <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Libellés</div>
                       {matchingLabels.flatMap(({ label, subs }) => {
                         if (
                           label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
@@ -280,7 +282,7 @@ export default function EnTete({
                                 return (
                             <button
                               key={label + '-' + sub}
-                              className="flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                              className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
                               type="button"
                               aria-label={`Sélectionner ${sub}`}
                               onClick={() => {
@@ -289,7 +291,7 @@ export default function EnTete({
                               }}
                             >
                                     {getCategoryIcon(sub)}
-                                    <span className="text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
+                                    <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
                             </button>
                                 );
                               });
@@ -303,7 +305,7 @@ export default function EnTete({
                     {/* Résultats des emails */}
                 {searchResults.length > 0 && (
                       <div>
-                    <div className="font-bold text-sm text-gray-700 px-2 pt-2 pb-1">Emails</div>
+                    <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</div>
                         {searchResults.map((mail, index) => {
                           const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                       const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
@@ -311,7 +313,7 @@ export default function EnTete({
                       return (
                         <button
                               key={mail.id + '-' + index}
-                              className="flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full hover:bg-blue-50 transition text-left"
+                              className={`flex items-start gap-3 px-4 py-3 border-b last:border-b-0 w-full transition text-left ${darkMode ? 'hover:bg-gray-700 border-gray-600' : 'hover:bg-blue-50 border-gray-200'}`}
                               type="button"
                               aria-label={`Sélectionner l'email de ${mail.sender} : ${mail.title}`}
                           onClick={() => onSelectMail(mail)}
@@ -319,11 +321,11 @@ export default function EnTete({
                               <img src={mail.senderAvatar || "https://randomuser.me/api/portraits/men/32.jpg"} alt={mail.sender} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-sm font-semibold text-gray-900" dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
-                                  <span className="text-xs text-gray-500">{mail.date}</span>
+                                  <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
+                                  <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{mail.date}</span>
                                 </div>
-                                <div className="text-sm text-gray-700 font-medium mb-1" dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
-                                <div className="text-xs text-gray-500 truncate" dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
+                                <div className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
+                                <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`} dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
                               </div>
                         </button>
                       );

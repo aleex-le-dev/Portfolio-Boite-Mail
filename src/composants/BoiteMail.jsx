@@ -325,7 +325,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   }));
 
   return (
-    <div className={`flex flex-col h-screen ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className={`flex flex-col h-screen ${darkMode ? 'bg-black' : 'bg-white'}`}>
                         <EnTete
                     onToggleSidebar={() => setSidebarOpen((v) => !v)}
                     search={search}
@@ -340,7 +340,10 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       setSelectedCategory(category);
                       setSelectedEmailId(null);
                       setSearch("");
-                      setSidebarOpen(false);
+                      // Ne fermer la sidebar que sur mobile
+                      if (window.innerWidth < 768) {
+                        setSidebarOpen(false);
+                      }
                     }}
                     darkMode={darkMode}
                     onToggleDarkMode={onToggleDarkMode}
@@ -391,7 +394,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         <div className="flex flex-1 flex-col md:flex-row overflow-hidden md:overflow-visible h-full md:h-auto">
           {/* Liste des emails - visible sur mobile sauf si détail ouvert */}
           <div className={`${selectedEmailId ? 'hidden md:block' : 'block'} ${sidebarOpen ? 'w-full md:w-[30%]' : 'w-full'} mx-0.5 min-w-0 md:min-w-[280px] shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}> 
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
               <ListeEmails
                 selectedCategory={selectedCategory}
                 emails={filteredEmails}
@@ -404,7 +407,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           
           {/* Détail email - pleine largeur sur mobile, 70% sur desktop */}
           <div className={`${selectedEmailId ? 'block' : 'hidden md:block'} ${sidebarOpen ? 'w-full md:w-[70%]' : 'w-full'} mx-0.5 shadow-lg rounded-2xl h-full md:h-auto overflow-y-auto`}>
-            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+            <div className={`h-full rounded-2xl overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
