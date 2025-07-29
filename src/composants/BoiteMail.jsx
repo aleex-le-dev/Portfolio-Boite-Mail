@@ -435,7 +435,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
               {filteredEmails.length > 0 && selectedEmail ? (
                 <>
                   {/* Barre d'action au-dessus du détail */}
-                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-[#0c0c0c] text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-500'}`} style={darkMode ? { borderColor: 'var(--dark-border)' } : {}}>
+                  <div className={`flex items-center justify-between px-6 border-b sticky top-0 z-10 text-xs h-12 min-h-12 rounded-tr-2xl w-full ${darkMode ? 'bg-[#0c0c0c] text-gray-300 border-white' : 'bg-gray-50 border-black text-gray-500'}`} style={darkMode ? { borderColor: 'white' } : { borderColor: 'black' }}>
                     <div className="flex items-center gap-2">
                       {/* Bouton retour sur mobile */}
                       <button 
