@@ -37,10 +37,16 @@ export default function EnTete({
   const resultsRef = React.useRef();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userMenuRef = useRef(null);
+  const userMenuMobileRef = useRef(null);
   const user = {
     email: USER_EMAIL,
     name: USERNAME,
     avatar: USER_AVATAR
+  };
+
+  const handleDeconnexion = () => {
+    // Relancer l'intro en redirigeant vers la page d'accueil
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -61,7 +67,8 @@ export default function EnTete({
   useEffect(() => {
     if (!showUserMenu) return;
     function handleClickOutside(event) {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      if ((userMenuRef.current && !userMenuRef.current.contains(event.target)) &&
+          (userMenuMobileRef.current && !userMenuMobileRef.current.contains(event.target))) {
         setShowUserMenu(false);
       }
     }
@@ -226,7 +233,7 @@ export default function EnTete({
           </button>
           
           {showUserMenu && (
-            <div ref={userMenuRef} className="absolute right-4 top-20 bg-white border border-gray-200 rounded-xl shadow-lg py-3 min-w-[220px] z-50">
+            <div ref={userMenuMobileRef} className="absolute right-4 top-20 bg-white border border-gray-200 rounded-xl shadow-lg py-3 min-w-[220px] z-50">
               <div className="px-4 py-3 border-b border-gray-100">
                 <div className="font-semibold text-black text-base">{user.name}</div>
                 <div className="text-sm text-gray-500">{user.email}</div>
@@ -234,7 +241,7 @@ export default function EnTete({
               <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
                 À propos de moi
               </button>
-              <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition">
+              <button className="w-full px-4 py-3 text-left text-base text-red-600 hover:bg-red-50 transition" aria-label="Déconnexion" onClick={handleDeconnexion}>
                 Déconnexion
               </button>
             </div>
@@ -385,7 +392,7 @@ export default function EnTete({
             <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="À propos de moi">
               À propos de moi
             </button>
-            <button className="w-full px-4 py-3 text-left text-base text-gray-700 hover:bg-gray-50 transition" aria-label="Déconnexion">
+            <button className="w-full px-4 py-3 text-left text-base text-red-600 hover:bg-red-50 transition" aria-label="Déconnexion" onClick={handleDeconnexion}>
               Déconnexion
             </button>
           </div>
@@ -393,4 +400,4 @@ export default function EnTete({
       </div>
     </header>
   );
-};
+}

@@ -25,7 +25,7 @@ const SendButton = ({ onClick, disabled = false, children = "Envoyer", className
         style={{ 
           cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.6 : 1,
-          background: disabled ? '#6b7280' : 'royalblue'
+          background: disabled ? '#6b7280' : 'var(--button-bg, #3b82f6)'
         }}
       >
         <div className="svg-wrapper-1">
