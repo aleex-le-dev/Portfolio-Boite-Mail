@@ -239,9 +239,9 @@ export default function EnTete({
               style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}
             >
               <div className="px-4 py-4 border-b" style={{ borderColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)', background: 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)' }}>
-                <p className="text-xs font-medium text-blue-200 uppercase tracking-wider">
-                  Connecté en tant que
-                </p>
+                            <p className="text-xs font-medium uppercase tracking-wider" style={{ color: darkMode ? '#ffffff' : '#000000' }}>
+              Connecté en tant que
+            </p>
                 <div className="flex items-center mt-1">
                   <div className="w-8 h-8 rounded-full mr-2 flex-shrink-0 overflow-hidden">
                     <img 
@@ -263,8 +263,8 @@ export default function EnTete({
               <div className="py-1.5">
                 <a
                   href={`mailto:${USER_EMAIL}`}
-                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200"
-                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
                 >
                   <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                                   <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
@@ -281,7 +281,7 @@ export default function EnTete({
                     ></path>
                   </svg>
                 </div>
-                  <span className="font-medium text-gray-700 group-hover:text-[#1a365d]">Paramètres</span>
+                  <span className={`font-medium ${darkMode ? 'text-white group-hover:text-black' : 'text-black'}`}>A propos de moi</span>
                   <svg
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -298,8 +298,8 @@ export default function EnTete({
 
                 <button
                   onClick={handleDeconnexion}
-                  className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200"
-                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
+                  className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200 hover:bg-red-50"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
                 >
                   <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                   <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors duration-200">
@@ -316,7 +316,7 @@ export default function EnTete({
                       ></path>
                     </svg>
                   </div>
-                  <span className="font-medium text-gray-700 group-hover:text-red-600">Déconnexion</span>
+                  <span className={`font-medium ${darkMode ? 'text-white group-hover:text-black' : 'text-black'}`}>Déconnexion</span>
                   <svg
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -513,7 +513,7 @@ export default function EnTete({
             style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}
           >
             <div className="px-4 py-4 border-b" style={{ borderColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)', background: 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)' }}>
-              <p className="text-xs font-medium text-blue-200 uppercase tracking-wider">
+              <p className="text-xs font-medium uppercase tracking-wider" style={{ color: darkMode ? '#ffffff' : '#000000' }}>
                 Connecté en tant que
               </p>
               <div className="flex items-center mt-1">
@@ -537,8 +537,8 @@ export default function EnTete({
             <div className="py-1.5">
                               <a
                   href={`mailto:${USER_EMAIL}`}
-                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200"
-                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
                 >
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                 <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
@@ -555,7 +555,7 @@ export default function EnTete({
                     ></path>
                   </svg>
                 </div>
-                <span className="font-medium text-gray-700 group-hover:text-[#1a365d]">A propos de moi</span>
+                <span className={`font-medium ${darkMode ? 'text-white group-hover:text-black' : 'text-black'}`}>A propos de moi</span>
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -572,8 +572,8 @@ export default function EnTete({
 
               <button
                 onClick={handleDeconnexion}
-                className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200"
-                style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
+                className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200 hover:bg-red-50"
+                style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
               >
                 <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                 <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors duration-200">
@@ -590,7 +590,7 @@ export default function EnTete({
                     ></path>
                   </svg>
                 </div>
-                <span className="font-medium text-gray-700 group-hover:text-red-600">Déconnexion</span>
+                <span className={`font-medium ${darkMode ? 'text-white group-hover:text-black' : 'text-black'}`}>Déconnexion</span>
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
