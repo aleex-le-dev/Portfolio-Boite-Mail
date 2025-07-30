@@ -135,7 +135,7 @@ export default function EnTete({
                               ) {
                                 return sortAlpha(subs).map(sub => {
                                   const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                                  const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                                  const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
                                   return (
                                     <div
                                       key={label + '-' + sub}
@@ -235,9 +235,10 @@ export default function EnTete({
           {showUserMenu && (
             <div
               ref={userMenuMobileRef}
-              className="absolute right-0 top-full mt-2 max-w-xl bg-white border border-gray-200 rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-50"
+              className="absolute right-0 top-full mt-2 max-w-xl rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-50"
+              style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}
             >
-              <div className="px-4 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-700 to-blue-600">
+              <div className="px-4 py-4 border-b" style={{ borderColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)', background: 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)' }}>
                 <p className="text-xs font-medium text-blue-200 uppercase tracking-wider">
                   Connecté en tant que
                 </p>
@@ -249,16 +250,21 @@ export default function EnTete({
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-sm font-medium text-white hover:after:w-full relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[#2b6cb0] after:transition-all after:duration-300 flex-1 min-w-0">
-                    alexandre.janacek@example.com
-                  </p>
+                  <a 
+                    href={`mailto:${USER_EMAIL}`}
+                    className="text-sm font-medium hover:after:w-full relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[#2b6cb0] after:transition-all after:duration-300 flex-1 min-w-0 cursor-pointer"
+                    style={{ color: darkMode ? '#60a5fa' : '#2563eb' }}
+                  >
+                    {USER_EMAIL}
+                  </a>
                 </div>
               </div>
 
               <div className="py-1.5">
                 <a
-                  href="#"
-                  className="group relative flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 transition-all duration-200"
+                  href={`mailto:${USER_EMAIL}`}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
                 >
                   <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                                   <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
@@ -292,7 +298,8 @@ export default function EnTete({
 
                 <button
                   onClick={handleDeconnexion}
-                  className="group relative flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 transition-all duration-200"
+                  className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
                 >
                   <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                   <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors duration-200">
@@ -368,7 +375,7 @@ export default function EnTete({
                         ) {
                               return sortAlpha(subs).map(sub => {
                                 const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                                const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                                const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
                                 return (
                             <button
                               key={label + '-' + sub}
@@ -399,7 +406,7 @@ export default function EnTete({
                     <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</div>
                         {searchResults.map((mail, index) => {
                           const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                      const highlight = (txt) => txt ? txt.replace(regex, '<b>$1</b>') : '';
+                      const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
                           
                       return (
                         <button
@@ -466,9 +473,10 @@ export default function EnTete({
         {showUserMenu && (
           <div
             ref={userMenuRef}
-            className="absolute right-0 top-full mt-2 max-w-xl bg-white border border-gray-200 rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-50"
+            className="absolute right-0 top-full mt-2 max-w-xl rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-50"
+            style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}
           >
-            <div className="px-4 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-700 to-blue-600">
+            <div className="px-4 py-4 border-b" style={{ borderColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)', background: 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)' }}>
               <p className="text-xs font-medium text-blue-200 uppercase tracking-wider">
                 Connecté en tant que
               </p>
@@ -480,17 +488,22 @@ export default function EnTete({
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-sm font-medium text-white hover:after:w-full relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[#2b6cb0] after:transition-all after:duration-300 flex-1 min-w-0">
-                  alexandre.janacek@example.com
-                </p>
+                <a 
+                  href={`mailto:${USER_EMAIL}`}
+                  className="text-sm font-medium hover:after:w-full relative after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[#2b6cb0] after:transition-all after:duration-300 flex-1 min-w-0 cursor-pointer"
+                  style={{ color: darkMode ? '#60a5fa' : '#2563eb' }}
+                >
+                  {USER_EMAIL}
+                </a>
               </div>
             </div>
 
             <div className="py-1.5">
-              <a
-                href="#"
-                className="group relative flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 transition-all duration-200"
-              >
+                              <a
+                  href={`mailto:${USER_EMAIL}`}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200"
+                  style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
+                >
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                 <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors duration-200">
                   <svg
@@ -523,7 +536,8 @@ export default function EnTete({
 
               <button
                 onClick={handleDeconnexion}
-                className="group relative flex items-center w-full px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 transition-all duration-200"
+                className="group relative flex items-center w-full px-4 py-2.5 text-sm transition-all duration-200"
+                style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)', '--tw-hover-bg-opacity': '0.1' }}
               >
                 <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
                 <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors duration-200">
