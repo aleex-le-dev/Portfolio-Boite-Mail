@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiCornerUpLeft, FiCornerUpRight } from "react-icons/fi";
 import RepondreMail from "./RepondreMail";
 
@@ -21,6 +21,13 @@ const DetailEmailView = ({
 }) => {
   const [showReply, setShowReply] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
+
+  // Mettre à jour l'image de preview quand l'email change
+  useEffect(() => {
+    if (previewImage && image && previewImage !== image) {
+      setPreviewImage(image);
+    }
+  }, [image, previewImage]);
 
   // Fonctions de navigation entre les certifications
   const getCertificationEmails = () => {
@@ -294,7 +301,8 @@ const DetailEmailView = ({
             {/* Flèche précédente */}
             {category === 'Mes certifications' && canGoPrevious() && (
               <button 
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+                className="absolute top-1/2 transform -translate-y-1/2 w-24 h-24 text-white flex items-center justify-center text-6xl hover:text-gray-200 transition-colors"
+                style={{ left: '-12px' }}
                 onClick={(e) => {
                   e.stopPropagation();
                   goToPreviousCertification();
@@ -307,7 +315,8 @@ const DetailEmailView = ({
             {/* Flèche suivante */}
             {category === 'Mes certifications' && canGoNext() && (
               <button 
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+                className="absolute top-1/2 transform -translate-y-1/2 w-24 h-24 text-white flex items-center justify-center text-6xl hover:text-gray-200 transition-colors"
+                style={{ right: '-12px' }}
                 onClick={(e) => {
                   e.stopPropagation();
                   goToNextCertification();
