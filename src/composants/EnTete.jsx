@@ -406,7 +406,40 @@ export default function EnTete({
                     <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emails</div>
                         {searchResults.map((mail, index) => {
                           const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                      const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
+                          const highlight = (txt) => {
+                            if (!txt) return '';
+                            // Utiliser une approche plus robuste pour le surlignage
+                            const parts = txt.split(regex);
+                            return parts.map((part, index) => {
+                              if (index % 2 === 1) {
+                                // C'est la partie qui correspond à la recherche
+                                return `<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">${part}</mark>`;
+                              }
+                              return part;
+                            }).join('');
+                          };
+                          
+                          // Fonction pour extraire le contexte autour du mot recherché
+                          const getContext = (content) => {
+                            if (!content) return '';
+                            const text = Array.isArray(content) ? content.join(' ') : content;
+                            const match = text.match(regex);
+                            if (!match) return '';
+                            
+                            const matchIndex = text.toLowerCase().indexOf(search.toLowerCase());
+                            if (matchIndex === -1) return '';
+                            
+                            const start = Math.max(0, matchIndex - 50);
+                            const end = Math.min(text.length, matchIndex + search.length + 50);
+                            let context = text.substring(start, end);
+                            
+                            if (start > 0) context = '...' + context;
+                            if (end < text.length) context = context + '...';
+                            
+                            return context;
+                          };
+                          
+                          const context = getContext(mail.content);
                           
                       return (
                         <button
@@ -423,8 +456,11 @@ export default function EnTete({
                                   <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.sender) }} />
                                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{mail.date}</span>
                                 </div>
+                                {mail.email && (
+                                  <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-1`} dangerouslySetInnerHTML={{ __html: highlight(mail.email) }} />
+                                )}
                                 <div className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(mail.title) }} />
-                                <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`} dangerouslySetInnerHTML={{ __html: highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
+                                <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`} dangerouslySetInnerHTML={{ __html: context ? highlight(context) : highlight(Array.isArray(mail.content) ? mail.content[0] : mail.content) }} />
                               </div>
                         </button>
                       );

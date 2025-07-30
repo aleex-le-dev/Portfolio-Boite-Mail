@@ -191,13 +191,24 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
     ? [...emails, ...(JSON.parse(localStorage.getItem('messageenvoye') || '[]'))]
         .filter(mail => {
           const searchLower = search.trim().toLowerCase();
-          if (mail.title && mail.title.toLowerCase().includes(searchLower)) return true;
-          if (mail.sender && mail.sender.toLowerCase().includes(searchLower)) return true;
-          if (mail.email && mail.email.toLowerCase().includes(searchLower)) return true;
-          if (Array.isArray(mail.content) && mail.content.some(c => c.toLowerCase().includes(searchLower))) return true;
-          if ((mail.labels || []).some(label => label.toLowerCase().includes(searchLower))) return true;
-          if (mail.image && (mail.alt && mail.alt.toLowerCase().includes(searchLower))) return true;
-          if (mail.image && (mail.title && mail.title.toLowerCase().includes(searchLower))) return true;
+          
+          // Fonction pour vérifier si un texte contient le mot recherché de manière précise
+          const containsExactWord = (text) => {
+            if (!text) return false;
+            const words = text.toLowerCase().split(/\s+/);
+            return words.some(word => 
+              word === searchLower || 
+              word.startsWith(searchLower)
+            );
+          };
+          
+          if (mail.title && containsExactWord(mail.title)) return true;
+          if (mail.sender && containsExactWord(mail.sender)) return true;
+          if (mail.email && containsExactWord(mail.email.split('@')[0])) return true;
+          if (Array.isArray(mail.content) && mail.content.some(c => containsExactWord(c))) return true;
+          if ((mail.labels || []).some(label => containsExactWord(label))) return true;
+          if (mail.image && (mail.alt && containsExactWord(mail.alt))) return true;
+          if (mail.image && (mail.title && containsExactWord(mail.title))) return true;
           return false;
         })
         .slice(0, 10)
