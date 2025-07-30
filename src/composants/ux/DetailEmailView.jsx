@@ -245,11 +245,11 @@ const DetailEmailView = ({
       {/* Image Preview Modal */}
       {previewImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'var(--dark-primary-bg)'}} onClick={() => setPreviewImage(null)}>
-          <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
             <img 
               src={previewImage} 
               alt="Preview" 
-              className="max-w-full max-h-full object-contain rounded-lg"
+              className="w-full h-full object-contain"
             />
             <button 
               className="absolute top-4 right-4 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
