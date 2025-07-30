@@ -526,7 +526,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
                       />
                     </div>
                   ) : (
-                    <DetailEmailView {...selectedEmail} onSendMail={handleSendMail} darkMode={darkMode} />
+                    <DetailEmailView 
+                      {...selectedEmail} 
+                      onSendMail={handleSendMail} 
+                      darkMode={darkMode}
+                      emails={emails}
+                      selectedEmailId={selectedEmailId}
+                      onSelectEmail={setSelectedEmailId}
+                    />
                   )}
                 </>
               ) : (

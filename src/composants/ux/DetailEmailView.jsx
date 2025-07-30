@@ -15,9 +15,49 @@ const DetailEmailView = ({
   id,
   to,
   darkMode,
+  emails = [],
+  selectedEmailId,
+  onSelectEmail,
 }) => {
   const [showReply, setShowReply] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
+
+  // Fonctions de navigation entre les certifications
+  const getCertificationEmails = () => {
+    return emails.filter(email => email.category === 'Mes certifications' && email.image);
+  };
+
+  const getCurrentIndex = () => {
+    const certificationEmails = getCertificationEmails();
+    return certificationEmails.findIndex(email => email.id === selectedEmailId);
+  };
+
+  const goToPreviousCertification = () => {
+    const certificationEmails = getCertificationEmails();
+    const currentIndex = getCurrentIndex();
+    if (currentIndex > 0) {
+      onSelectEmail(certificationEmails[currentIndex - 1].id);
+    }
+  };
+
+  const goToNextCertification = () => {
+    const certificationEmails = getCertificationEmails();
+    const currentIndex = getCurrentIndex();
+    if (currentIndex < certificationEmails.length - 1) {
+      onSelectEmail(certificationEmails[currentIndex + 1].id);
+    }
+  };
+
+  const canGoPrevious = () => {
+    const currentIndex = getCurrentIndex();
+    return currentIndex > 0;
+  };
+
+  const canGoNext = () => {
+    const certificationEmails = getCertificationEmails();
+    const currentIndex = getCurrentIndex();
+    return currentIndex < certificationEmails.length - 1;
+  };
 
   // Fermer le formulaire au clic sur overlay ou croix
   const handleOverlayClick = (e) => {
@@ -251,8 +291,34 @@ const DetailEmailView = ({
               alt="Preview" 
               className="w-full h-full object-contain"
             />
+            {/* Flèche précédente */}
+            {category === 'Mes certifications' && canGoPrevious() && (
+              <button 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPreviousCertification();
+                }}
+                aria-label="Certification précédente"
+              >
+                ‹
+              </button>
+            )}
+            {/* Flèche suivante */}
+            {category === 'Mes certifications' && canGoNext() && (
+              <button 
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNextCertification();
+                }}
+                aria-label="Certification suivante"
+              >
+                ›
+              </button>
+            )}
             <button 
-              className="absolute top-4 right-4 w-12 h-12 bg-white/90 text-gray-800 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-white transition-colors"
+              className="absolute top-4 right-4 w-12 h-12 text-white flex items-center justify-center text-3xl font-bold hover:text-gray-200 transition-colors"
               onClick={() => setPreviewImage(null)}
               aria-label="Fermer l'aperçu"
             >
