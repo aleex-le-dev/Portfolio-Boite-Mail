@@ -114,7 +114,7 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
         <ul className="space-y-0.5">
           {LABELS.map(({ label, subs }) => (
             <li key={label}>
-              <button className={`flex items-center w-full gap-2 px-3 py-2 md:py-1 text-base md:text-sm rounded-lg ${selectedCategory === label ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
+              <button className={`flex items-center w-full gap-2 px-3 py-2 md:py-1 text-base md:text-sm rounded-lg ${selectedCategory === label ? (darkMode ? 'bg-blue-900 text-white font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
                 onClick={() => {
                   if (label === 'Mes certifications') {
                     setSelectedCategory(label);

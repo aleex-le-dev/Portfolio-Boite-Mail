@@ -119,7 +119,6 @@ const DetailEmailView = ({
                   <span className={`text-sm font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>{sender}</span>
                   <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>{date}</span>
                 </div>
-                {image && <img src={image} alt="illustration" className="rounded-xl mb-4 object-cover max-w-[120px] max-h-[80px] cursor-pointer" onClick={() => setPreviewImage(image)} />}
                 <div className="mt-5 mail-content">
                   {Array.isArray(content)
                     ? content.filter(c => !/<img/i.test(c)).map((c, i) =>
@@ -245,7 +244,7 @@ const DetailEmailView = ({
 
       {/* Image Preview Modal */}
       {previewImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'var(--dark-primary-bg)', opacity: 0.8 }} onClick={() => setPreviewImage(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'var(--dark-primary-bg)'}} onClick={() => setPreviewImage(null)}>
           <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             <img 
               src={previewImage} 
