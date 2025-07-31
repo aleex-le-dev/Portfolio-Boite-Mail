@@ -8,16 +8,104 @@ import './timeline.css';
 export default function AProposDeMoi({ darkMode }) {
   const navigate = useNavigate();
   const [visibleBlocks, setVisibleBlocks] = useState(new Set());
+  const [timelineProgress, setTimelineProgress] = useState(0);
+  const [sectionsVisible, setSectionsVisible] = useState({
+    about: false,
+    skills: false,
+    languages: false
+  });
+
+  // Reset et remettre en haut lors de l'actualisation
+  useEffect(() => {
+    // Forcer le retour en haut de page de plusieurs façons
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Forcer le scroll en haut avec plusieurs délais pour s'assurer que ça fonctionne
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 50);
+    
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 200);
+    
+    // Reset toutes les animations
+    setVisibleBlocks(new Set());
+    setTimelineProgress(0);
+    setSectionsVisible({
+      about: false,
+      skills: false,
+      languages: false
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const timelineBlocks = document.querySelectorAll('.cd-timeline-block');
-      const windowHeight = window.innerHeight;
-      const scrollTop = window.scrollY;
+      const timelineContainer = document.getElementById('cd-timeline');
+      const socialIcons = document.querySelector('.social-icons-container');
+      
+      if (!timelineContainer || !socialIcons) return;
 
-      timelineBlocks.forEach((block, index) => {
-        const blockTop = block.offsetTop;
-        const shouldBeVisible = blockTop <= scrollTop + windowHeight * 0.75;
+      const socialRect = socialIcons.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculer la progression de la timeline basée sur la position des icônes sociales
+      const socialTop = socialRect.top;
+      
+      // La timeline commence à apparaître quand les icônes sociales sont visibles
+      const startTrigger = windowHeight * 0.8;
+      const endTrigger = windowHeight * 0.2;
+      
+      if (socialTop <= startTrigger && socialTop >= endTrigger) {
+        const progress = Math.max(0, Math.min(1, (startTrigger - socialTop) / (startTrigger - endTrigger)));
+        setTimelineProgress(progress);
+      } else if (socialTop < endTrigger) {
+        setTimelineProgress(1);
+      } else {
+        setTimelineProgress(0);
+      }
+
+      // Animation des sections principales
+      const aboutSection = document.querySelector('.about-section');
+      const skillsSection = document.querySelector('.skills-section');
+      const languagesSection = document.querySelector('.languages-section');
+
+      if (aboutSection) {
+        const aboutRect = aboutSection.getBoundingClientRect();
+        // Apparition au niveau 2/10 de l'écran (vers le haut)
+        if (aboutRect.top <= windowHeight * 0.2 && !sectionsVisible.about) {
+          setSectionsVisible(prev => ({ ...prev, about: true }));
+        }
+      }
+
+      if (skillsSection) {
+        const skillsRect = skillsSection.getBoundingClientRect();
+        // Apparition au niveau 2/10 de l'écran (vers le haut)
+        if (skillsRect.top <= windowHeight * 0.2 && !sectionsVisible.skills) {
+          setSectionsVisible(prev => ({ ...prev, skills: true }));
+        }
+      }
+
+      if (languagesSection) {
+        const languagesRect = languagesSection.getBoundingClientRect();
+        // Apparition au niveau 2/10 de l'écran (vers le haut)
+        if (languagesRect.top <= windowHeight * 0.2 && !sectionsVisible.languages) {
+          setSectionsVisible(prev => ({ ...prev, languages: true }));
+        }
+      }
+
+      // Animation des blocs individuels
+      const timelineBlocks = document.querySelectorAll('.cd-timeline-block');
+              timelineBlocks.forEach((block, index) => {
+          const blockTop = block.getBoundingClientRect().top;
+          // Apparition au niveau 4/10 de l'écran (vers le haut)
+          const shouldBeVisible = blockTop <= windowHeight * 0.4;
         
         if (shouldBeVisible && !visibleBlocks.has(index)) {
           setVisibleBlocks(prev => new Set([...prev, index]));
@@ -29,7 +117,7 @@ export default function AProposDeMoi({ darkMode }) {
     handleScroll(); // Check initial state
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [visibleBlocks]);
+  }, [visibleBlocks, sectionsVisible]);
 
   // Fonction pour extraire les technologies du contenu
   const extractTechnologies = (content) => {
@@ -146,7 +234,7 @@ export default function AProposDeMoi({ darkMode }) {
                   className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
                 ></div>
 
-                <div className="relative flex items-end gap-x-2 p-2">
+                <div className="social-icons-container relative flex items-end gap-x-2 p-2">
                   {/* Email */}
                   <div className="relative">
                     <a
@@ -233,7 +321,9 @@ export default function AProposDeMoi({ darkMode }) {
             {/* À propos */}
             <div className="md:col-span-2">
               <section 
-                className="rounded-xl p-6 shadow-lg"
+                className={`about-section rounded-xl p-6 shadow-lg transition-all duration-1000 ease-out ${
+                  sectionsVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
                 style={{ 
                   backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
                   border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
@@ -269,7 +359,9 @@ export default function AProposDeMoi({ darkMode }) {
             {/* Compétences, Langues et Contact */}
             <div className="space-y-9">
               <section 
-                className="rounded-xl p-6 shadow-lg"
+                className={`skills-section rounded-xl p-6 shadow-lg transition-all duration-1000 ease-out delay-200 ${
+                  sectionsVisible.skills ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
                 style={{ 
                   backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
                   border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
@@ -344,7 +436,9 @@ export default function AProposDeMoi({ darkMode }) {
 
               {/* Langues */}
               <section 
-                className="rounded-xl p-6 shadow-lg"
+                className={`languages-section rounded-xl p-6 shadow-lg transition-all duration-1000 ease-out delay-400 ${
+                  sectionsVisible.languages ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
                 style={{ 
                   backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
                   border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
@@ -401,28 +495,51 @@ export default function AProposDeMoi({ darkMode }) {
                 id="cd-timeline" 
                 className={`relative py-8 my-8 ${
                   darkMode ? 'before:bg-gray-600' : 'before:bg-gray-300'
-                } before:content-[''] before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:h-full before:w-1`}
+                } before:content-[''] before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:h-full before:w-1 before:transition-all before:duration-1000`}
+                style={{
+                  opacity: timelineProgress,
+                  transform: `scaleY(${timelineProgress})`,
+                  transformOrigin: 'top'
+                }}
               >
+                {/* Ligne de progression qui se dessine */}
+                <div 
+                  className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-1 transition-all duration-1000 ${
+                    darkMode ? 'bg-blue-500' : 'bg-blue-600'
+                  }`}
+                  style={{
+                    height: `${timelineProgress * 100}%`,
+                    boxShadow: timelineProgress > 0 ? '0 0 10px rgba(59, 130, 246, 0.5)' : 'none'
+                  }}
+                ></div>
+
                 {timelineData.timeline.map((item, index) => (
                   <div key={item.id} className="cd-timeline-block relative my-8 first:mt-0 last:mb-0">
-                    <div 
-                      className={`cd-timeline-img absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full shadow-lg border-4 border-white ${getColorForCategory(item.categorie)} ${
-                        visibleBlocks.has(index) ? 'bounce-in' : 'is-hidden'
-                      }`}
-                    >
-                      <div className="flex items-center justify-center h-full">
-                        {getIconForCategory(item.categorie)}
-                      </div>
+                                                        <div 
+                    className={`cd-timeline-img absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full shadow-lg border-4 border-white ${getColorForCategory(item.categorie)} transition-all duration-300 ${
+                      visibleBlocks.has(index) ? 'bounce-in opacity-100 scale-100' : 'is-hidden opacity-0 scale-50'
+                    }`}
+                    style={{
+                      transitionDelay: `${index * 100}ms`
+                    }}
+                  >
+                    <div className="flex items-center justify-center h-full">
+                      {getIconForCategory(item.categorie)}
                     </div>
+                  </div>
 
-                    <div 
-                      className={`cd-timeline-content relative mt-6 ml-0 p-6 rounded-lg shadow-lg ${
-                        darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-                      } w-full md:w-5/12 ${
-                        index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
-                      } ${
-                        visibleBlocks.has(index) ? 'bounce-in' : 'is-hidden'
-                      }`}
+                  <div 
+                    className={`cd-timeline-content relative mt-6 ml-0 p-6 rounded-lg shadow-lg transition-all duration-300 ${
+                      darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+                    } w-full md:w-5/12 ${
+                      index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
+                    } ${
+                      visibleBlocks.has(index) ? 'bounce-in opacity-100 translate-x-0' : 'is-hidden opacity-0'
+                    }`}
+                    style={{
+                      transitionDelay: `${index * 100}ms`,
+                      transform: visibleBlocks.has(index) ? 'translateX(0)' : `translateX(${index % 2 === 0 ? '-50px' : '50px'})`
+                    }}
                     >
                       <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                         {item.titre}
