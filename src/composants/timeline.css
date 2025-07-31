@@ -1,0 +1,84 @@
+/* Timeline CodyHouse Styles */
+.cd-timeline-img.is-hidden {
+  visibility: hidden;
+}
+
+.cd-timeline-img.bounce-in {
+  visibility: visible;
+  animation: cd-bounce-1 0.6s;
+}
+
+.cd-timeline-content.is-hidden {
+  visibility: hidden;
+}
+
+.cd-timeline-content.bounce-in {
+  visibility: visible;
+  animation: cd-bounce-2 0.6s;
+}
+
+/* Bounce animations */
+@keyframes cd-bounce-1 {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cd-bounce-2 {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Inverse bounce for even blocks */
+.cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+  animation: cd-bounce-2-inverse 0.6s;
+}
+
+@keyframes cd-bounce-2-inverse {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cd-timeline-img {
+    left: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .cd-timeline-content {
+    margin-left: 60px !important;
+    width: calc(100% - 60px) !important;
+  }
+  
+  #cd-timeline::before {
+    left: 20px !important;
+    margin-left: 0 !important;
+  }
+} 

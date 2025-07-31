@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR, USER_EMAIL } from './constantes';
 import projetsData from './projets.json';
+import timelineData from './timeline.json';
+import './timeline.css';
 
 export default function AProposDeMoi({ darkMode }) {
   const navigate = useNavigate();
+  const [visibleBlocks, setVisibleBlocks] = useState(new Set());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const timelineBlocks = document.querySelectorAll('.cd-timeline-block');
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+
+      timelineBlocks.forEach((block, index) => {
+        const blockTop = block.offsetTop;
+        const shouldBeVisible = blockTop <= scrollTop + windowHeight * 0.75;
+        
+        if (shouldBeVisible && !visibleBlocks.has(index)) {
+          setVisibleBlocks(prev => new Set([...prev, index]));
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [visibleBlocks]);
 
   // Fonction pour extraire les technologies du contenu
   const extractTechnologies = (content) => {
@@ -22,6 +47,41 @@ export default function AProposDeMoi({ darkMode }) {
   // Fonction pour extraire la description (première ligne du contenu)
   const extractDescription = (content) => {
     return content[0] || '';
+  };
+
+  const getIconForCategory = (categorie) => {
+    switch (categorie) {
+      case 'experience':
+        return (
+          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+          </svg>
+        );
+      case 'formation':
+        return (
+          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+          </svg>
+        );
+    }
+  };
+
+  const getColorForCategory = (categorie) => {
+    switch (categorie) {
+      case 'experience':
+        return 'bg-blue-500';
+      case 'formation':
+        return 'bg-green-500';
+      default:
+        return 'bg-gray-500';
+    }
   };
 
   return (
@@ -335,11 +395,57 @@ export default function AProposDeMoi({ darkMode }) {
               Parcours Professionnel
             </h2>
             
-            {/* Timeline centrale */}
-            <div className="relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-green-500 to-orange-500 rounded-full shadow-lg"></div>
-              <div className="space-y-12">
-                {/* Contenu de la timeline supprimé */}
+            {/* Timeline CodyHouse */}
+            <div className="cd-container relative">
+              <div 
+                id="cd-timeline" 
+                className={`relative py-8 my-8 ${
+                  darkMode ? 'before:bg-gray-600' : 'before:bg-gray-300'
+                } before:content-[''] before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:h-full before:w-1`}
+              >
+                {timelineData.timeline.map((item, index) => (
+                  <div key={item.id} className="cd-timeline-block relative my-8 first:mt-0 last:mb-0">
+                    <div 
+                      className={`cd-timeline-img absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full shadow-lg border-4 border-white ${getColorForCategory(item.categorie)} ${
+                        visibleBlocks.has(index) ? 'bounce-in' : 'is-hidden'
+                      }`}
+                    >
+                      <div className="flex items-center justify-center h-full">
+                        {getIconForCategory(item.categorie)}
+                      </div>
+                    </div>
+
+                    <div 
+                      className={`cd-timeline-content relative mt-6 ml-0 p-6 rounded-lg shadow-lg ${
+                        darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+                      } w-full md:w-5/12 ${
+                        index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
+                      } ${
+                        visibleBlocks.has(index) ? 'bounce-in' : 'is-hidden'
+                      }`}
+                    >
+                      <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                        {item.titre}
+                      </h3>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {item.entreprise || item.organisme} • {item.lieu}
+                      </p>
+                      <p className="text-sm font-semibold text-blue-500 mb-3">
+                        {item.annee}
+                      </p>
+                      <ul className="space-y-1">
+                        {item.missions.map((mission, missionIndex) => (
+                          <li key={missionIndex} className="text-sm flex items-start">
+                            <span className="text-blue-500 mr-2">•</span>
+                            <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                              {mission}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
