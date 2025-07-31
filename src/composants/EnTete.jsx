@@ -3,6 +3,7 @@ import SearchBar from "./ux/SearchBar";
 import { FiMoon, FiSun, FiLogOut } from "react-icons/fi";
 import { MdMenu, MdInbox, MdSend, MdArchive, MdSchedule, MdDelete, MdFolder, MdLabelImportant, MdEdit } from "react-icons/md";
 import { LABELS, USERNAME, USER_EMAIL, USER_AVATAR } from "./constantes";
+import { useNavigate } from "react-router-dom";
 
 export default function EnTete({
   onToggleSidebar,
@@ -15,6 +16,7 @@ export default function EnTete({
   onToggleDarkMode,
   sidebarOpen
 }) {
+  const navigate = useNavigate();
   // Fonction pour obtenir l'icône de catégorie
   const getCategoryIcon = (cat) => {
     switch ((cat || '').toLowerCase()) {
@@ -262,8 +264,8 @@ export default function EnTete({
 
               <div className="py-1.5">
                 <a
-                  href={`mailto:${USER_EMAIL}`}
-                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50"
+                  onClick={() => navigate('/a-propos')}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50 cursor-pointer"
                   style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
                 >
                   <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>
@@ -536,8 +538,8 @@ export default function EnTete({
 
             <div className="py-1.5">
                               <a
-                  href={`mailto:${USER_EMAIL}`}
-                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50"
+                  onClick={() => navigate('/a-propos')}
+                  className="group relative flex items-center px-4 py-2.5 text-sm transition-all duration-200 hover:bg-blue-50 cursor-pointer"
                   style={{ color: darkMode ? 'var(--dark-text-color)' : 'var(--light-text-color)' }}
                 >
                 <div className="absolute left-0 top-0 h-full w-1 bg-blue-600 rounded-r opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-y-100 scale-y-80"></div>

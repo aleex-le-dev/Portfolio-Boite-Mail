@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./intro.css";
 import BoiteMail from "./composants/BoiteMail";
 import Intro from "./Intro";
 import CookieBanner from "./composants/CookieBanner";
+import AProposDeMoi from "./composants/AProposDeMoi";
 
 function App() {
   const boiteMailRef = useRef();
@@ -41,12 +43,18 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       {!introDone && !showTransition && <Intro onFinish={handleIntroFinish} />}
       {showTransition && <div className="mailbox-transition" />}
-      {introDone && <BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />}
+      {introDone && (
+        <Routes>
+          <Route path="/" element={<BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />} />
+          <Route path="/a-propos" element={<AProposDeMoi darkMode={darkMode} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      )}
       {introDone && <CookieBanner onShowInfo={handleShowInfoMail} darkMode={darkMode} />}
-    </>
+    </Router>
   );
 }
 
