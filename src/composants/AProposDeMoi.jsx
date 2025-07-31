@@ -145,13 +145,17 @@ export default function AProposDeMoi({ darkMode }) {
                       </svg>
                     </a>
                   </div>
-                  <button className="cursor-pointer group relative flex items-center justify-center gap-1.5 w-10 h-10 bg-black bg-opacity-80 text-[#f1f1f1] rounded-xl hover:bg-opacity-70 transition font-semibold shadow-md">
-                  <span className="text-s">CV</span>
-                  
-                 
-                    <div className="absolute opacity-0 -bottom-full rounded-md py-2 px-2 bg-black bg-opacity-70 left-1/2 -translate-x-1/2 group-hover:opacity-100 transition-opacity shadow-lg text-xs">
-                      Télécharger
-                    </div>
+                  <button 
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = '/src/assets/CV Alexandre_Janacek_Concepteur_Développeur.png';
+                      link.download = 'CV_Alexandre_Janacek_Concepteur_Developpeur.png';
+                      link.click();
+                    }}
+                    className="cursor-pointer group relative flex items-center justify-center gap-1.5 w-10 h-10 bg-black bg-opacity-80 text-[#f1f1f1] rounded-xl hover:bg-opacity-70 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl font-semibold shadow-md"
+                  >
+                    <span className="text-s cursor-pointer">CV</span>
+               
                   </button>
                 </div>
               </div>
