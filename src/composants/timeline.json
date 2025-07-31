@@ -1,0 +1,191 @@
+{
+  "timeline": [
+    {
+      "id": 1,
+      "categorie": "experience",
+      "titre": "Développeur Web Full Stack",
+      "annee": "2022-2024",
+      "entreprise": "Maisoncléo",
+      "lieu": "Lille (59)",
+      "missions": [
+        "Création de nouvelles fonctionnalités en PHP/JS/MySQL",
+        "Utilisation de Wordpress avec Git",
+        "Développement d'applications web modernes",
+        "Gestion de projets agiles"
+      ],
+      "couleur": "blue"
+    },
+    {
+      "id": 2,
+      "categorie": "formation",
+      "titre": "Formation Développeur Web",
+      "annee": "2022",
+      "organisme": "OpenClassrooms",
+      "lieu": "Formation en ligne",
+      "missions": [
+        "Formation complète en développement web",
+        "HTML, CSS, JavaScript",
+        "React, Node.js",
+        "Bases de données"
+      ],
+      "couleur": "indigo"
+    },
+    {
+      "id": 3,
+      "categorie": "experience",
+      "titre": "Stagiaire Référent Digital",
+      "annee": "2022",
+      "entreprise": "Groupe Scolaire N-D de la Renaissance",
+      "lieu": "Somain (59)",
+      "missions": [
+        "Création du site Web",
+        "Création d'affiches pour Rollup",
+        "Maintenance informatique"
+      ],
+      "couleur": "green"
+    },
+    {
+      "id": 4,
+      "categorie": "formation",
+      "titre": "Certifications",
+      "annee": "2022",
+      "organisme": "Divers",
+      "lieu": "En ligne",
+      "missions": [
+        "Certification Google Marketing Digital",
+        "Certification Cybersécurité OpenClassrooms",
+        "Certification SEO",
+        "Certification UX/UI"
+      ],
+      "couleur": "teal"
+    },
+         {
+       "id": 5,
+       "categorie": "experience",
+       "titre": "Chauffeur Livreur",
+       "annee": "2021",
+       "entreprise": "Pizza Crousty",
+       "lieu": "Arleux (59)",
+       "missions": [
+         "Livraison de pizzas à domicile",
+         "Gestion des commandes",
+         "Service client",
+         "Respect des délais de livraison"
+       ],
+       "couleur": "gray"
+     },
+     {
+       "id": 6,
+       "categorie": "experience",
+       "titre": "Cariste d'entrepôt",
+       "annee": "2021",
+       "entreprise": "Logisima",
+       "lieu": "Sin-Le-Noble (59)",
+       "missions": [
+         "Manutention de marchandises",
+         "Utilisation d'engins de levage",
+         "Gestion des stocks",
+         "Préparation de commandes"
+       ],
+       "couleur": "slate"
+     },
+     {
+       "id": 7,
+       "categorie": "experience",
+       "titre": "Magasinier Cariste",
+       "annee": "2021",
+       "entreprise": "Conforama",
+       "lieu": "Seclin (59)",
+       "missions": [
+         "Gestion des stocks de mobilier",
+         "Préparation des commandes",
+         "Utilisation d'engins de manutention",
+         "Organisation de l'entrepôt"
+       ],
+       "couleur": "zinc"
+     },
+     {
+       "id": 8,
+       "categorie": "experience",
+       "titre": "Cariste d'entrepôt",
+       "annee": "2021",
+       "entreprise": "Transport Ducourneau",
+       "lieu": "Douai (59)",
+       "missions": [
+         "Chargement et déchargement de camions",
+         "Manutention de palettes",
+         "Gestion des flux logistiques",
+         "Respect des consignes de sécurité"
+       ],
+       "couleur": "stone"
+     },
+     {
+       "id": 9,
+       "categorie": "experience",
+       "titre": "Agent Logistique",
+       "annee": "2020",
+       "entreprise": "Kiabi Logistique",
+       "lieu": "Lauwin-Planque (59)",
+       "missions": [
+         "Gestion des stocks de vêtements",
+         "Préparation des commandes e-commerce",
+         "Contrôle qualité des produits",
+         "Optimisation des flux logistiques"
+       ],
+       "couleur": "neutral"
+     },
+         {
+       "id": 10,
+       "categorie": "experience",
+       "titre": "Assistant de Manager",
+       "annee": "2016-2017",
+       "entreprise": "Collège Sainte Anne - Service civique",
+       "lieu": "Somain (59)",
+       "missions": [
+         "Assistant Manager au Groupe Scolaire N-D de la Renaissance",
+         "Gestion d'équipe",
+         "Communication",
+         "Organisation administrative"
+       ],
+       "couleur": "orange"
+     },
+         {
+       "id": 11,
+       "categorie": "formation",
+       "titre": "Formation Management",
+       "annee": "2016",
+       "organisme": "Service Civique",
+       "lieu": "Somain (59)",
+       "missions": [
+         "Formation en gestion d'équipe",
+         "Communication",
+         "Organisation administrative"
+       ],
+       "couleur": "amber"
+     },
+         {
+       "id": 12,
+       "categorie": "experience",
+       "titre": "Stage Assistant Manager",
+       "annee": "2012",
+       "entreprise": "Société M-Animation",
+       "lieu": "Douai (59)",
+       "missions": [
+         "Stage Assistant Manager à l'Usine Renault - Cuincy"
+       ],
+       "couleur": "purple"
+     },
+         {
+       "id": 13,
+       "categorie": "experience",
+       "titre": "Stage Technicien de Maintenance Informatique",
+       "annee": "2008",
+       "entreprise": "CC Cœur d'Ostrevent",
+       "lieu": "Lewarde (59)",
+       "missions": [
+         "Stage en maintenance informatique"
+       ],
+       "couleur": "red"
+     }
+  ]
+} 

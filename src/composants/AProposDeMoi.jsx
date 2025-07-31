@@ -148,7 +148,7 @@ export default function AProposDeMoi({ darkMode }) {
               </div>
             </section>
 
-            {/* Expérience */}
+            {/* Timeline Expérience et Formation */}
             <section 
               className="rounded-xl p-6 shadow-lg"
               style={{ 
@@ -156,176 +156,244 @@ export default function AProposDeMoi({ darkMode }) {
                 border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
               }}
             >
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
-                Expérience Professionnelle
+                Parcours Professionnel
               </h2>
-                             <div className="space-y-6">
-                 <div className="border-l-4 border-blue-500 pl-6">
-                   <div className="flex justify-between items-start mb-2">
-                     <h3 className="text-xl font-semibold">Développeur Web Full Stack</h3>
-                     <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                       2022 - 2024
-                     </span>
-                   </div>
-                   <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>Maisoncléo - Lille (59)</p>
-                   <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                     Création de nouvelles fonctionnalités en PHP/JS/MySQL. Utilisation de Wordpress avec Git.
-                   </p>
-                 </div>
-                 
-                                   <div className="border-l-4 border-green-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Stagiaire Référent Digital</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2022
-                      </span>
-                    </div>
-                    <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>Groupe Scolaire N-D de la Renaissance - Somain (59)</p>
-                    <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                      Création du site Web, création d'affiches pour Rollup, maintenance informatique.
-                    </p>
-                  </div>
-
-                  <div className="border-l-4 border-gray-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Expériences en Logistique</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2020 - 2021
-                      </span>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Chauffeur Livreur</strong> - Pizza Crousty, Arleux (59)</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Cariste d'entrepôt</strong> - Logisima, Sin-Le-Noble (59)</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Magasinier Cariste</strong> - Conforama, Seclin (59)</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Cariste d'entrepôt</strong> - Transport Ducourneau, Douai (59)</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Agent Logistique</strong> - Kiabi Logistique, Lauwin-Planque (59)</p>
-                      </div>
-                    </div>
-                  </div>
-
-                 <div className="border-l-4 border-orange-500 pl-6">
-                   <div className="flex justify-between items-start mb-2">
-                     <h3 className="text-xl font-semibold">Assistant de Manager</h3>
-                     <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                       2016 - 2017
-                     </span>
-                   </div>
-                   <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>Collège Sainte Anne - Service civique - Somain (59)</p>
-                   <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                     Assistant Manager au Groupe Scolaire N-D de la Renaissance - Somain (59).
-                   </p>
-                 </div>
-
-                 <div className="border-l-4 border-purple-500 pl-6">
-                   <div className="flex justify-between items-start mb-2">
-                     <h3 className="text-xl font-semibold">Stage Assistant Manager</h3>
-                     <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                       2012
-                     </span>
-                   </div>
-                   <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>Société M-Animation - Douai (59)</p>
-                   <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                     Stage Assistant Manager à l'Usine Renault - Cuincy (59).
-                   </p>
-                 </div>
-
-                                   <div className="border-l-4 border-red-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Stage Technicien de Maintenance Informatique</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2008
-                      </span>
-                    </div>
-                    <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>CC Cœur d'Ostrevent - Lewarde (59)</p>
-                    <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                      Stage en maintenance informatique.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              {/* Formation */}
-              <section 
-                className="rounded-xl p-6 shadow-lg"
-                style={{ 
-                  backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
-                  border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
-                }}
-              >
-                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.17 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
-                    </svg>
-                  </div>
-                  Formation Professionnelle
-                </h2>
+              
+              <div className="relative">
+                {/* Timeline centrale */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-500 via-green-500 to-orange-500 rounded-full shadow-lg"></div>
                 
-                <div className="space-y-6">
-                  <div className="border-l-4 border-indigo-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Formation Développeur Web</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2022
-                      </span>
+                <div className="space-y-12">
+                  {/* 2022-2024 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-6 shadow-lg border border-blue-200 dark:border-blue-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            Développeur Web Full Stack
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                            2022-2024
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-blue-600 mb-2">Maisoncléo - Lille (59)</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Création de nouvelles fonctionnalités en PHP/JS/MySQL. Utilisation de Wordpress avec Git.
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>OpenClassrooms - Formation en ligne</p>
-                    <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                      Formation complète en développement web avec HTML, CSS, JavaScript, React, Node.js et bases de données.
-                    </p>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2024</span>
+                    </div>
+                    
+                    {/* Formation à droite */}
+                    <div className="w-5/12 pl-8">
+                      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-2xl p-6 shadow-lg border border-indigo-200 dark:border-indigo-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                            Formation Développeur Web
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200">
+                            2022
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-indigo-600 mb-2">OpenClassrooms</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Formation complète en développement web avec HTML, CSS, JavaScript, React, Node.js.
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="border-l-4 border-teal-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Certifications</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2022
-                      </span>
+                  {/* 2022 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 shadow-lg border border-green-200 dark:border-green-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                            Stagiaire Référent Digital
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
+                            2022
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-green-600 mb-2">Groupe Scolaire N-D de la Renaissance</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Création du site Web, création d'affiches pour Rollup, maintenance informatique.
+                        </p>
+                      </div>
                     </div>
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Certification Google</strong> - Marketing Digital</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Certification Cybersécurité</strong> - OpenClassrooms</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Certification SEO</strong> - Optimisation pour les moteurs de recherche</p>
-                      </div>
-                      <div>
-                        <p className="text-lg mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}><strong>Certification UX/UI</strong> - Design d'expérience utilisateur</p>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2022</span>
+                    </div>
+                    
+                    {/* Formation à droite */}
+                    <div className="w-5/12 pl-8">
+                      <div className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-2xl p-6 shadow-lg border border-teal-200 dark:border-teal-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
+                            Certifications
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200">
+                            2022
+                          </span>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-sm font-medium text-teal-600">• Certification Google Marketing Digital</p>
+                          <p className="text-sm font-medium text-teal-600">• Certification Cybersécurité</p>
+                          <p className="text-sm font-medium text-teal-600">• Certification SEO & UX/UI</p>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-l-4 border-amber-500 pl-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">Formation Management</h3>
-                      <span className="text-sm px-3 py-1 rounded-full" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                        2016
-                      </span>
+                  {/* 2020-2021 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-gray-600 to-slate-600 bg-clip-text text-transparent">
+                            Expériences en Logistique
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+                            2020-2021
+                          </span>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-sm font-medium text-gray-600">• Chauffeur Livreur - Pizza Crousty</p>
+                          <p className="text-sm font-medium text-gray-600">• Cariste d'entrepôt - Logisima</p>
+                          <p className="text-sm font-medium text-gray-600">• Magasinier Cariste - Conforama</p>
+                          <p className="text-sm font-medium text-gray-600">• Agent Logistique - Kiabi</p>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-lg mb-2" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>Formation Assistant Manager - Service Civique</p>
-                    <p style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
-                      Formation en gestion d'équipe, communication et organisation administrative.
-                    </p>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-gray-500 to-slate-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2021</span>
+                    </div>
+                    
+                    {/* Espace vide à droite */}
+                    <div className="w-5/12 pl-8"></div>
+                  </div>
+
+                  {/* 2016-2017 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-6 shadow-lg border border-orange-200 dark:border-orange-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">
+                            Assistant de Manager
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200">
+                            2016-2017
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-orange-600 mb-2">Collège Sainte Anne - Service civique</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Assistant Manager au Groupe Scolaire N-D de la Renaissance - Somain (59).
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2017</span>
+                    </div>
+                    
+                    {/* Formation à droite */}
+                    <div className="w-5/12 pl-8">
+                      <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-2xl p-6 shadow-lg border border-amber-200 dark:border-amber-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">
+                            Formation Management
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200">
+                            2016
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-amber-600 mb-2">Service Civique</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Formation en gestion d'équipe, communication et organisation administrative.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2012 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 shadow-lg border border-purple-200 dark:border-purple-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            Stage Assistant Manager
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
+                            2012
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-purple-600 mb-2">Société M-Animation - Douai</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Stage Assistant Manager à l'Usine Renault - Cuincy (59).
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2012</span>
+                    </div>
+                    
+                    {/* Espace vide à droite */}
+                    <div className="w-5/12 pl-8"></div>
+                  </div>
+
+                  {/* 2008 */}
+                  <div className="relative flex items-center">
+                    {/* Expérience à gauche */}
+                    <div className="w-5/12 pr-8">
+                      <div className="bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-2xl p-6 shadow-lg border border-red-200 dark:border-red-800 transform hover:scale-105 transition-transform duration-300">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                            Stage Technicien de Maintenance Informatique
+                          </h3>
+                          <span className="text-sm px-3 py-1 rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200">
+                            2008
+                          </span>
+                        </div>
+                        <p className="text-lg font-semibold text-red-600 mb-2">CC Cœur d'Ostrevent - Lewarde</p>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          Stage en maintenance informatique.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Point central avec année */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-rose-500 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">2008</span>
+                    </div>
+                    
+                    {/* Espace vide à droite */}
+                    <div className="w-5/12 pl-8"></div>
                   </div>
                 </div>
-              </section>
+              </div>
+            </section>
 
             {/* Projets récents */}
             <section 
