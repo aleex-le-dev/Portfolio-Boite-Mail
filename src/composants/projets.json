@@ -104,7 +104,40 @@
       "",
       "Voir le code : https://github.com/aleex-le-dev/cineguide"
     ]
+  },
+  {
+    "id": 53,
+    "category": "React",
+    "title": "Futuro Budget",
+    "sender": "Aleex Le Dev",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "2025",
+    "image": "/src/assets/projet/futurobudget/fb.png",
+    "screenshots": [
+      "/src/assets/projet/futurobudget/fb1.png",
+      "/src/assets/projet/futurobudget/fb2.png",
+      "/src/assets/projet/futurobudget/fb3.png"
+    ],
+    "content": [
+      "Futuro Budget est une application web de gestion de budget personnelle. Elle  n'est pas totalement terminée. Elle permet aux utilisateurs de suivre leurs revenus, dépenses et d'obtenir une vision claire de leur situation financière en temps réel.",
+      "",
+      "Technologies utilisées :",
+      "React • Tailwind CSS • JavaScript • Firebase",
+      "",
+      "Fonctionnalités principales :",
+      "• Ajout, modification et suppression de revenus et dépenses",
+      "• Calcul automatique du solde restant",
+      "• Affichage dynamique des totaux et pourcentages",
+      "• UI responsive et moderne avec Tailwind CSS",
+      "• Composants réutilisables et gestion d’état avec useState",
+      "",
+      "Voir le code : https://github.com/aleex-le-dev/Futuro-budget",
+      "",
+      "Voir le site : https://budget.salutalex.fr/"
+    ]
   }
+  
   
   
 
