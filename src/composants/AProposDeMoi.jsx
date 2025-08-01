@@ -66,6 +66,25 @@ export default function AProposDeMoi({ darkMode }) {
   }, []);
 
   useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (isMobile) {
+        // Fermer tous les details ouverts sauf si on clique sur un details
+        if (!e.target.closest('details')) {
+          const openDetails = document.querySelectorAll('details[open]');
+          openDetails.forEach(detail => {
+            detail.open = false;
+          });
+        }
+      }
+    };
+
+    if (isMobile) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
     const handleScroll = () => {
       // Sur mobile, afficher tout immédiatement
       if (isMobile) {
@@ -623,14 +642,25 @@ export default function AProposDeMoi({ darkMode }) {
                      >
                                                   {/* Contenu */}
                          <div 
-                           className={`w-5/12 p-3 md:p-6 rounded-lg shadow-lg ${
+                           className={`w-8/12 md:w-5/12 p-3 md:p-6 rounded-lg shadow-lg ${
                              item.categorie === 'experience' ? 'mr-auto' : 'ml-auto'
-                           }`}
+                           } ${isMobile ? 'cursor-pointer' : ''}`}
                            style={{ 
                              backgroundColor: darkMode ? '#374151' : '#ffffff',
                              color: darkMode ? '#ffffff' : '#000000',
                              border: `1px solid ${darkMode ? '#4B5563' : '#E5E7EB'}`
                            }}
+                           onClick={isMobile ? (e) => {
+                             e.stopPropagation();
+                             const details = e.currentTarget.querySelector('details');
+                             if (details) {
+                               // Si on clique sur le summary, on laisse le comportement par défaut
+                               if (e.target.closest('summary')) {
+                                 return;
+                               }
+                               details.open = !details.open;
+                             }
+                           } : undefined}
                          >
                            <div className="flex items-center gap-3 mb-3">
                              {!isMobile && (
@@ -644,36 +674,56 @@ export default function AProposDeMoi({ darkMode }) {
                              <div className="text-center md:text-left">
                                <h3 className="font-bold text-lg">{item.titre}</h3>
                                <p className="text-sm text-gray-600 dark:text-gray-400">
-                                 {item.entreprise || item.organisme}
-                               </p>
-                               <p className="text-sm text-gray-600 dark:text-gray-400">
-                                 {item.lieu}
+                                 {item.entreprise || item.organisme} • {item.lieu}
                                </p>
                              </div>
                            </div>
                            
-                           <ul className="space-y-2">
-                             {item.missions.map((mission, missionIndex) => (
-                               <li key={missionIndex} className="text-sm flex items-start">
-                                 <span className="mr-2 mt-1" style={{ color: getColorForDomain(item.couleur) }}>•</span>
-                                 <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
-                                   {mission}
-                                 </span>
-                               </li>
-                             ))}
-                           </ul>
+                           {isMobile ? (
+                             <details className="group" onClick={(e) => e.stopPropagation()}>
+                               <summary className="cursor-pointer text-sm font-medium flex items-center justify-between" style={{ color: getColorForDomain(item.couleur) }}>
+                                 <span>Voir les missions ({item.missions.length})</span>
+                                 <svg className="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                 </svg>
+                               </summary>
+                               <ul className="space-y-2 mt-3 pl-4 border-l-2" style={{ borderColor: getColorForDomain(item.couleur) }}>
+                                 {item.missions.map((mission, missionIndex) => (
+                                   <li key={missionIndex} className="text-sm flex items-start">
+                                     <span className="mr-2 mt-1" style={{ color: getColorForDomain(item.couleur) }}>•</span>
+                                     <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                       {mission}
+                                     </span>
+                                   </li>
+                                 ))}
+                               </ul>
+                             </details>
+                           ) : (
+                             <ul className="space-y-2">
+                               {item.missions.map((mission, missionIndex) => (
+                                 <li key={missionIndex} className="text-sm flex items-start">
+                                   <span className="mr-2 mt-1" style={{ color: getColorForDomain(item.couleur) }}>•</span>
+                                   <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                     {mission}
+                                   </span>
+                                 </li>
+                               ))}
+                             </ul>
+                           )}
                          </div>
                          
                                               {/* Point central */}
-                     <div 
-                       className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white transition-all duration-400 ease-out ${
-                         timelineVisible.has(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-                       }`}
-                       style={{ 
-                         backgroundColor: getColorForDomain(item.couleur),
-                         transitionDelay: `${index * 50 + 100}ms`
-                       }}
-                     ></div>
+                     {!isMobile && (
+                       <div 
+                         className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white transition-all duration-400 ease-out ${
+                           timelineVisible.has(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                         }`}
+                         style={{ 
+                           backgroundColor: getColorForDomain(item.couleur),
+                           transitionDelay: `${index * 50 + 100}ms`
+                         }}
+                       ></div>
+                     )}
                          
                                                                             {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
                          {shouldShowYear && (
