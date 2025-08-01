@@ -7,30 +7,104 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=600&fit=crop&crop=center",
+    "image": "/src/assets/projet/maisoncleo/mc.png",
     "screenshots": [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&crop=center"
+      "/src/assets/projet/maisoncleo/mc1.png",
+      "/src/assets/projet/maisoncleo/mc2.png",
+      "/src/assets/projet/maisoncleo/mc3.png"
+
     ],
     "content": [
-      "Création d'une interface moderne et responsive pour un portfolio professionnel. Accent mis sur la clarté, l'accessibilité et l'impact visuel.",
+      "MaisonCléo est une marque française de prêt-à-porter artisanal. Le projet consistait à refondre entièrement leur site e-commerce afin de moderniser l’expérience utilisateur tout en respectant l’identité visuelle de la marque. La refonte a été réalisée sous WordPress avec WooCommerce pour gérer la boutique en ligne. L’objectif principal était d’améliorer la navigation, la rapidité du site et le processus d’achat, tout en intégrant un design sur mesure basé sur des maquettes Figma. Le projet a également inclus un changement d’hébergement pour une solution plus performante, avec meilleure gestion du trafic, sauvegardes automatiques et certificat SSL intégré. Le tout accompagné d’une optimisation mobile, d’un tunnel de commande personnalisé et de l’intégration de paiements sécurisés (PayPal, Paypal X4, CB).",
+      "",
+      "Voir le site : https://maisoncleo.com",
       "",
       "Technologies utilisées :",
-      "• Figma • Adobe XD • CSS3 • JavaScript • HTML5",
+      "Wordpress • PHP • JavaScript",
       "",
       "Fonctionnalités principales :",
+      "• Intégration WooCommerce complète",
+      "• Gestion des produits, variantes, stocks et commandes",
+      "• Tunnel de commande personnalisé",
+      "• Paiement sécurisé (Stripe & PayPal)",
       "• Design system complet (couleurs, typographies, composants)",
       "• Maquettes Figma & prototypage interactif",
-      "• Optimisation mobile et desktop",
-      "• Animations et micro-interactions",
-      "• Tests utilisateurs et itérations",
+      "• Optimisation mobile et desktop (responsive & lazy loading)",
+      "• Animations CSS et micro-interactions JavaScript",
+      "• Optimisation SEO et performance (caching, minification)",
+      "• Tests utilisateurs et itérations UI/UX",
       "",
       "Projet de design UI/UX complet avec création d'un design system, maquettes interactives et optimisation pour tous les écrans.",
       "",
       "Voir le site : https://maisoncleo.com",
       "Voir le code : "
     ]
+  },
+  {
+    "id": 51,
+    "category": "React Native",
+    "title": "TryToWin",
+    "sender": "Aleex Le Dev",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "2025",
+    "image": "/src/assets/projet/trytowin/ttw.png",
+    "screenshots": [
+      "/src/assets/projet/trytowin/ttw2.png",
+      "/src/assets/projet/trytowin/ttw3.png",
+      "/src/assets/projet/trytowin/ttw4.png"
+    ],
+    "content": [
+      "TryToWin est une application mobile de jeux concours développée avec React Native. Elle permet aux utilisateurs de participer à des tirages au sort quotidiens pour tenter de remporter des cadeaux. L'objectif était de créer une application fluide, interactive et gamifiée, avec une logique backend solide pour gérer les utilisateurs, les tirages, et les notifications.",
+      "",
+      "Technologies utilisées :",
+      "React Native • Firebase • Expo • JavaScript",
+      "",
+      "Fonctionnalités principales :",
+      "• Inscription et connexion via Firebase Auth",
+      "• Participation à des jeux concours quotidiens",
+      "• Notifications push (Expo)",
+      "• Gestion des utilisateurs et scores en temps réel",
+      "• Interface mobile responsive avec animations",
+      "• Stockage des données avec Firestore",
+      "• Composants réutilisables et navigation React Navigation",
+      "• Optimisation des performances mobiles",
+      "",
+      "Voir le code : https://github.com/aleex-le-dev/TryToWin"
+    ]
+  },
+  {
+    "id": 52,
+    "category": "React",
+    "title": "CineGuide",
+    "sender": "Aleex Le Dev",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "2025",
+    "image": "/src/assets/projet/cineguide/cine.png",
+    "screenshots": [
+      "/src/assets/projet/cineguide/cine1.png",
+      "/src/assets/projet/cineguide/cine2.png",
+      "/src/assets/projet/cineguide/cine3.png"
+    ],
+    "content": [
+      "CineGuide est un catalogue web permettant de retrouver facilement où regarder un film ou une série en fonction des plateformes de streaming disponibles. Le but était de centraliser les informations de visionnage et offrir une navigation rapide et intuitive à l’utilisateur.",
+      "",
+      "Technologies utilisées :",
+      "React • JavaScript • API REST • SCSS",
+      "",
+      "Fonctionnalités principales :",
+      "• Recherche de films et séries par titre",
+      "• Appels API pour récupérer les plateformes de streaming",
+      "• Affichage dynamique des résultats avec visuels",
+      "• Système de filtres et tris (plateforme, note, popularité)",
+      "• Responsive design et UI soignée",
+      "• Utilisation de hooks React (useEffect, useState...)",
+      "",
+      "Voir le code : https://github.com/aleex-le-dev/cineguide"
+    ]
   }
+  
+  
 
 ] 

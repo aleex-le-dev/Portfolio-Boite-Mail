@@ -4,6 +4,7 @@ import { PROJECT_CATEGORY_COLORS } from '../constantes';
 
 const ProjetTemplate = ({ projet, onClose, embedded = false, darkMode = false }) => {
   const [previewImage, setPreviewImage] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   if (!projet) return null;
 
@@ -11,25 +12,34 @@ const ProjetTemplate = ({ projet, onClose, embedded = false, darkMode = false })
     return PROJECT_CATEGORY_COLORS[category] || PROJECT_CATEGORY_COLORS.default;
   };
 
+  const getTransparentColor = (color) => {
+    // Convertir hex en rgb pour rgba
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    return `rgba(${r}, ${g}, ${b}, 0.25)`;
+  };
+
   return (
     <div className={`${embedded ? "projet-template-embedded" : "projet-template-overlay"} ${darkMode ? 'dark-mode' : ''}`} onClick={embedded ? undefined : onClose}>
       <div className={`projet-template-container ${darkMode ? 'dark-mode' : ''}`} onClick={(e) => !embedded && e.stopPropagation()}>
         {/* Header Section */}
-        <div className="projet-header" style={{ backgroundColor: getCategoryColor(projet.category) }}>
+        <div 
+          className="projet-header" 
+          style={{ 
+            backgroundImage: projet.image ? `url(${projet.image})` : undefined,
+            backgroundColor: projet.image ? 'transparent' : getCategoryColor(projet.category)
+          }}
+        >
           <div className="projet-header-content">
-            <h1 className="projet-title">{projet.title}</h1>
-            <div className="projet-meta">
+            <div className="projet-meta" style={{ backgroundColor: getTransparentColor(getCategoryColor(projet.category)) }}>
+              {/* Debug: {getCategoryColor(projet.category)} - {getTransparentColor(getCategoryColor(projet.category))} */}
+              <h1 className="projet-title">{projet.title}</h1>
               <p className="projet-date">{projet.date}</p>
             </div>
           </div>
         </div>
-
-        {/* Main Image Section */}
-        {projet.image && (
-          <div className="projet-image-section">
-            <img src={projet.image} alt={projet.title} className="projet-main-image" />
-          </div>
-        )}
 
         {/* Introduction Section */}
         <div className="projet-section">
@@ -91,12 +101,15 @@ const ProjetTemplate = ({ projet, onClose, embedded = false, darkMode = false })
               <div className="screenshots-grid">
                 {projet.screenshots.map((screenshot, index) => (
                   <div key={index} className="screenshot-item">
-                    <img 
-                      src={screenshot} 
-                      alt={`Capture d'écran ${index + 1}`} 
-                      className="screenshot-image"
-                      onClick={() => setPreviewImage(screenshot)}
-                    />
+                                         <img 
+                       src={screenshot} 
+                       alt={`Capture d'écran ${index + 1}`} 
+                       className="screenshot-image"
+                       onClick={() => {
+                         setPreviewImage(screenshot);
+                         setCurrentImageIndex(index);
+                       }}
+                     />
                     
                   </div>
                 ))}
@@ -105,25 +118,48 @@ const ProjetTemplate = ({ projet, onClose, embedded = false, darkMode = false })
           </div>
         )}
 
-        {/* Screenshot Preview Modal */}
-        {previewImage && (
-          <div className="screenshot-preview-overlay" onClick={() => setPreviewImage(null)}>
-            <div className="screenshot-preview-container" onClick={(e) => e.stopPropagation()}>
-              <img 
-                src={previewImage} 
-                alt="Preview" 
-                className="screenshot-preview-image"
-              />
-              <button 
-                className="screenshot-preview-close" 
-                onClick={() => setPreviewImage(null)}
-                aria-label="Fermer l'aperçu"
-              >
-                ×
-              </button>
-            </div>
-          </div>
-        )}
+                 {/* Screenshot Preview Modal */}
+         {previewImage && (
+           <div className="screenshot-preview-overlay" onClick={() => setPreviewImage(null)}>
+             <div className="screenshot-preview-container" onClick={(e) => e.stopPropagation()}>
+               <img 
+                 src={projet.screenshots[currentImageIndex]} 
+                 alt="Preview" 
+                 className="screenshot-preview-image"
+               />
+               
+               {/* Flèche précédente */}
+               {currentImageIndex > 0 && (
+                 <button 
+                   className="screenshot-nav-btn screenshot-prev-btn" 
+                   onClick={() => setCurrentImageIndex(currentImageIndex - 1)}
+                   aria-label="Image précédente"
+                 >
+                   ‹
+                 </button>
+               )}
+               
+               {/* Flèche suivante */}
+               {currentImageIndex < projet.screenshots.length - 1 && (
+                 <button 
+                   className="screenshot-nav-btn screenshot-next-btn" 
+                   onClick={() => setCurrentImageIndex(currentImageIndex + 1)}
+                   aria-label="Image suivante"
+                 >
+                   ›
+                 </button>
+               )}
+               
+               <button 
+                 className="screenshot-preview-close" 
+                 onClick={() => setPreviewImage(null)}
+                 aria-label="Fermer l'aperçu"
+               >
+                 ×
+               </button>
+             </div>
+           </div>
+         )}
 
         {/* Links Section */}
         {projet.content.filter(line => line.includes('https://')).length > 0 && (
