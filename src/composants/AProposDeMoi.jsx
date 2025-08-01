@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR, USER_EMAIL } from './constantes';
 import projetsData from './projets.json';
 import timelineData from './timeline.json';
+import ReactLightIcon from '../assets/icone/React_light.svg';
+import ReactDarkIcon from '../assets/icone/React_dark.svg';
+import JavaScriptIcon from '../assets/icone/javascript.svg';
+import WordPressIcon from '../assets/icone/wordpress.svg';
+import AdobeIcon from '../assets/icone/adobe.svg';
+import FigmaIcon from '../assets/icone/figma.svg';
 
 export default function AProposDeMoi({ darkMode }) {
   const navigate = useNavigate();
@@ -453,9 +459,12 @@ export default function AProposDeMoi({ darkMode }) {
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src="/src/assets/icone/React_light.svg" 
+                        src={darkMode ? ReactDarkIcon : ReactLightIcon} 
                         alt="React" 
                         className="w-8 h-8"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
                       />
                     </div>
                     <span className="text-xs font-medium">React</span>
@@ -464,9 +473,12 @@ export default function AProposDeMoi({ darkMode }) {
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src="/src/assets/icone/javascript.svg" 
+                        src={JavaScriptIcon} 
                         alt="JavaScript" 
                         className="w-8 h-8"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
                       />
                   </div>
                     <span className="text-xs font-medium">JavaScript</span>
@@ -475,9 +487,12 @@ export default function AProposDeMoi({ darkMode }) {
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src="/src/assets/icone/wordpress.svg" 
+                        src={WordPressIcon} 
                         alt="WordPress" 
                         className="w-8 h-8"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
                       />
                   </div>
                     <span className="text-xs font-medium">WordPress</span>
@@ -486,9 +501,12 @@ export default function AProposDeMoi({ darkMode }) {
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src="/src/assets/icone/adobe.svg" 
+                        src={AdobeIcon} 
                         alt="Suite Adobe" 
                         className="w-8 h-8"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
                       />
                   </div>
                     <span className="text-xs font-medium">Suite Adobe</span>
@@ -497,9 +515,12 @@ export default function AProposDeMoi({ darkMode }) {
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src="/src/assets/icone/figma.svg" 
+                        src={FigmaIcon} 
                         alt="Figma" 
                         className="w-8 h-8"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
                       />
                   </div>
                     <span className="text-xs font-medium">Figma</span>
