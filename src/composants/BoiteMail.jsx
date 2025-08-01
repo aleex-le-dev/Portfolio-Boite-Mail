@@ -191,6 +191,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
 
   // Fonction pour voir un email depuis un popup
   const handleViewEmail = (emailData, popupId) => {
+    // Changer vers la boîte de réception pour s'assurer que l'email est visible
+    setSelectedCategory('Boîte de réception');
     // Sélectionner l'email dans la liste
     setSelectedEmailId(emailData.id);
     // Fermer seulement le popup spécifique
