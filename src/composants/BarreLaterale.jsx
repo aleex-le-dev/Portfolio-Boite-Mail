@@ -53,7 +53,11 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
               className={`flex items-center w-full gap-3 px-3 py-3 md:py-2 rounded-2xl text-base md:text-sm focus:outline-none ${selectedCategory === value ? (darkMode ? 'bg-blue-900 text-white' : 'bg-blue-50 text-blue-700') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
               onClick={() => { 
                 setSelectedCategory(value); 
-                closeAllDropdowns(); 
+                closeAllDropdowns();
+                // Fermer la barre latérale sur mobile
+                if (window.innerWidth < 768) {
+                  onCloseSidebar();
+                }
               }}
             >
               {Icon && <Icon className="text-2xl md:text-xl" />}
@@ -119,6 +123,10 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
                   if (label === 'Mes certifications') {
                     setSelectedCategory(label);
                     closeAllDropdowns();
+                    // Fermer la barre latérale sur mobile
+                    if (window.innerWidth < 768) {
+                      onCloseSidebar();
+                    }
                   } else {
                     setOpen(o => ({
                       ...o,
@@ -151,7 +159,14 @@ const BarreLaterale = ({ selectedCategory, setSelectedCategory, emails, onCloseS
                     <li key={sub}>
                       <button
                         className={`flex items-center w-full gap-2 px-3 py-2 md:py-1 text-base md:text-sm rounded-lg ${selectedCategory === sub ? (darkMode ? 'bg-blue-900 text-blue-300 font-bold' : 'bg-blue-100 text-blue-700 font-bold') : (darkMode ? 'hover:bg-gray-700 text-white' : 'hover:bg-gray-100 text-black')}`}
-                        onClick={() => { setSelectedCategory(sub); closeAllDropdowns(); }}
+                        onClick={() => { 
+                          setSelectedCategory(sub); 
+                          closeAllDropdowns();
+                          // Fermer la barre latérale sur mobile
+                          if (window.innerWidth < 768) {
+                            onCloseSidebar();
+                          }
+                        }}
                       >
                         <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                         <span className="text-left">
