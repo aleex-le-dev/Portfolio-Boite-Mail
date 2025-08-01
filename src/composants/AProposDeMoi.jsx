@@ -15,6 +15,7 @@ export default function AProposDeMoi({ darkMode }) {
   const [lineProgress, setLineProgress] = useState(0);
   const [projectsVisible, setProjectsVisible] = useState(false);
 
+
   // Reset et remettre en haut lors de l'actualisation
   useEffect(() => {
     // Désactiver temporairement le scroll automatique du navigateur
@@ -43,6 +44,7 @@ export default function AProposDeMoi({ darkMode }) {
     setTimelineVisible(new Set());
     setLineProgress(0);
     setProjectsVisible(false);
+
     
     // Restaurer le comportement normal après un délai
     setTimeout(() => {
@@ -172,16 +174,22 @@ export default function AProposDeMoi({ darkMode }) {
     }
   };
 
-  const getColorForCategory = (categorie) => {
-    switch (categorie) {
-      case 'experience':
-        return 'rgb(59, 130, 246)'; // blue-500
-      case 'formation':
-        return 'rgb(34, 197, 94)'; // green-500
+
+
+  const getColorForDomain = (couleur) => {
+    switch (couleur) {
+      case 'green':
+        return 'rgb(34, 197, 94)'; // Informatique
+      case 'orange':
+        return 'rgb(249, 115, 22)'; // Logistique
+      case 'purple':
+        return 'rgb(147, 51, 234)'; // Administratif
       default:
         return 'rgb(107, 114, 128)'; // gray-500
     }
   };
+
+
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}>
@@ -492,7 +500,7 @@ export default function AProposDeMoi({ darkMode }) {
             }}
           >
             <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-400 to-green-400 flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"/>
                 </svg>
@@ -550,7 +558,7 @@ export default function AProposDeMoi({ darkMode }) {
                        }`}
                        style={{ transitionDelay: `${index * 150}ms` }}
                      >
-                         {/* Contenu */}
+                                                  {/* Contenu */}
                          <div 
                            className={`w-5/12 p-6 rounded-lg shadow-lg ${
                              item.categorie === 'experience' ? 'mr-auto' : 'ml-auto'
@@ -564,7 +572,7 @@ export default function AProposDeMoi({ darkMode }) {
                            <div className="flex items-center gap-3 mb-3">
                              <div 
                                className="w-8 h-8 rounded-full flex items-center justify-center"
-                               style={{ backgroundColor: getColorForCategory(item.categorie) }}
+                               style={{ backgroundColor: getColorForDomain(item.couleur) }}
                              >
                                {getIconForCategory(item.categorie)}
                              </div>
@@ -573,13 +581,13 @@ export default function AProposDeMoi({ darkMode }) {
                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                  {item.entreprise || item.organisme} • {item.lieu}
                                </p>
-                                                      </div>
-                       </div>
-                       
-                       <ul className="space-y-2">
+                             </div>
+                           </div>
+                           
+                           <ul className="space-y-2">
                              {item.missions.map((mission, missionIndex) => (
                                <li key={missionIndex} className="text-sm flex items-start">
-                                 <span className="text-blue-500 mr-2 mt-1">•</span>
+                                 <span className="mr-2 mt-1" style={{ color: getColorForDomain(item.couleur) }}>•</span>
                                  <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
                                    {mission}
                                  </span>
@@ -594,7 +602,7 @@ export default function AProposDeMoi({ darkMode }) {
                          timelineVisible.has(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                        }`}
                        style={{ 
-                         backgroundColor: getColorForCategory(item.categorie),
+                         backgroundColor: getColorForDomain(item.couleur),
                          transitionDelay: `${index * 150 + 200}ms`
                        }}
                      ></div>
