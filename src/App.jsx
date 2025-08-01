@@ -49,7 +49,7 @@ function App() {
       {introDone && (
         <Routes>
           <Route path="/" element={<BoiteMail ref={boiteMailRef} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} onTitleChange={setPageTitle} />} />
-          <Route path="/a-propos" element={<AProposDeMoi darkMode={darkMode} />} />
+          <Route path="/a-propos" element={<AProposDeMoi darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       )}

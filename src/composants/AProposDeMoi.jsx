@@ -9,8 +9,9 @@ import JavaScriptIcon from '../assets/icone/javascript.svg';
 import WordPressIcon from '../assets/icone/wordpress.svg';
 import AdobeIcon from '../assets/icone/adobe.svg';
 import FigmaIcon from '../assets/icone/figma.svg';
+import { FiMoon, FiSun } from "react-icons/fi";
 
-export default function AProposDeMoi({ darkMode }) {
+export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
   const navigate = useNavigate();
   const [sectionsVisible, setSectionsVisible] = useState({
     about: false,
@@ -253,22 +254,41 @@ export default function AProposDeMoi({ darkMode }) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}>
-      {/* Bouton de retour */}
+      {/* Bouton de retour et mode sombre */}
       <div className="max-w-7xl mx-auto px-6 pt-6">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors mb-6"
-          style={{ 
-            backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
-            color: darkMode ? '#fff' : 'var(--light-text)',
-            border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
-          }}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Retour au portfolio
-        </button>
+        <div className="flex justify-between items-center mb-6">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+            style={{ 
+              backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
+              color: darkMode ? '#fff' : 'var(--light-text)',
+              border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
+            }}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Retour au portfolio
+          </button>
+          
+          <button 
+            className="p-3 rounded-full hover:bg-gray-200 transition" 
+            aria-label="Mode sombre"
+            title="Mode sombre"
+            onClick={onToggleDarkMode}
+            style={{ 
+              backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
+              border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
+            }}
+          >
+            {darkMode ? (
+              <FiSun className="text-2xl text-yellow-400" />
+            ) : (
+              <FiMoon className="text-2xl text-gray-700" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* En-tête avec photo et informations */}
