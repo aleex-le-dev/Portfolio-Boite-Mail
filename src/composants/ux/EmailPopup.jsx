@@ -39,19 +39,24 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
   const maxTopOffset = window.innerHeight - 200; // 200px de marge en bas
   const adjustedTopOffset = Math.min(topOffset, maxTopOffset);
 
+  // Ajuster la position pour mobile
+  const isMobile = window.innerWidth < 768;
+  const mobileTopOffset = isMobile ? 1 : adjustedTopOffset; // Plus proche du haut sur mobile
+  const mobileRightOffset = isMobile ? 1 : rightOffset; // Plus proche du bord droit sur mobile
+
   return (
     <div 
       className="fixed transition-all duration-300 ease-out" 
       data-popup="true"
       style={{ 
-        top: `${adjustedTopOffset}rem`, 
-        right: `${rightOffset}rem`, 
+        top: `${mobileTopOffset}rem`, 
+        right: `${mobileRightOffset}rem`, 
         zIndex: 50 + index // Z-index normal basé sur l'index, pas de changement quand étendu
       }}
     >
       {/* Petit popup de notification */}
       <div 
-        className={`w-80 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ease-out ${
+        className={`${isMobile ? 'w-72' : 'w-80'} rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ease-out ${
           isAnimating ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
         style={{
@@ -74,10 +79,10 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <h4 className="font-semibold text-sm truncate">{emailData.sender}</h4>
-                <div className="flex items-center gap-1 text-xs" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
+                <h4 className="font-semibold text-sm truncate flex-1 mr-2">{emailData.sender}</h4>
+                <div className="flex items-center gap-1 text-xs flex-shrink-0" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
                   <FiClock className="text-xs" />
-                  {emailData.date || emailData.time}
+                  <span className="whitespace-nowrap">{emailData.date || emailData.time}</span>
                 </div>
               </div>
               <p className="text-xs truncate" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
