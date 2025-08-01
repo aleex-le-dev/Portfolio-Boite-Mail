@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
-const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail }) => {
+const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail, isExpanded, onToggleExpanded }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -33,9 +33,18 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
 
   // Calculer la position verticale selon l'index
   const topOffset = 4 + (index * 4); // 4px de base + 4px par popup pour une superposition plus importante
+  const rightOffset = isExpanded ? 16 : 4; // Décalage plus important vers la gauche si étendu
 
   return (
-    <div className="fixed right-4" style={{ top: `${topOffset}rem`, zIndex: 50 + index }}>
+    <div 
+      className="fixed transition-all duration-300 ease-out" 
+      data-popup="true"
+      style={{ 
+        top: `${topOffset}rem`, 
+        right: `${rightOffset}rem`, 
+        zIndex: 50 + index // Z-index normal basé sur l'index, pas de changement quand étendu
+      }}
+    >
       {/* Petit popup de notification */}
       <div 
         className={`w-80 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ease-out ${
@@ -49,8 +58,11 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
       >
         {/* Email Content compact */}
         <div className="p-3 relative">
-          {/* Sender Info compact */}
-          <div className="flex items-center gap-2 mb-3">
+          {/* Sender Info compact - cliquable pour étendre */}
+          <div 
+            className="flex items-center gap-2 mb-3 cursor-pointer"
+            onClick={onToggleExpanded}
+          >
             <img 
               src={emailData.senderAvatar || emailData.avatar} 
               alt={emailData.sender}

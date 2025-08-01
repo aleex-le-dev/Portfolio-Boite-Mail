@@ -22,6 +22,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [search, setSearch] = useState('');
   const [activePopups, setActivePopups] = useState([]);
   const [newEmailsPool, setNewEmailsPool] = useState([]);
+  const [expandedPopupId, setExpandedPopupId] = useState(null);
 
   // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
   useEffect(() => {
@@ -165,7 +166,37 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
     setSelectedEmailId(emailData.id);
     // Fermer seulement le popup spécifique
     setActivePopups(prev => prev.filter(popup => popup.id !== popupId));
+    // Réinitialiser l'état étendu
+    setExpandedPopupId(null);
   };
+
+  // Fonction pour basculer l'état étendu d'un popup
+  const handleToggleExpanded = (popupId) => {
+    setExpandedPopupId(prev => prev === popupId ? null : popupId);
+  };
+
+  // Gestionnaire de clic global pour remettre les popups à leur place
+  useEffect(() => {
+    const handleGlobalClick = (event) => {
+      // Vérifier si le clic est en dehors des popups
+      const popupElements = document.querySelectorAll('[data-popup]');
+      let clickedInsidePopup = false;
+      
+      popupElements.forEach(element => {
+        if (element.contains(event.target)) {
+          clickedInsidePopup = true;
+        }
+      });
+      
+      // Si le clic est en dehors des popups, remettre à la place
+      if (!clickedInsidePopup && expandedPopupId) {
+        setExpandedPopupId(null);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+    return () => document.removeEventListener('click', handleGlobalClick);
+  }, [expandedPopupId]);
 
   // Sélectionner automatiquement le premier email quand la catégorie change
   useEffect(() => {
@@ -612,6 +643,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           emailData={popup.emailData}
           index={index}
           onViewEmail={() => handleViewEmail(popup.emailData, popup.id)}
+          isExpanded={expandedPopupId === popup.id}
+          onToggleExpanded={() => handleToggleExpanded(popup.id)}
         />
       ))}
       
