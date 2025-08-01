@@ -3,12 +3,50 @@ import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
 const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail, isExpanded, onToggleExpanded, totalPopups = 1, isLastPopup = false }) => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentTime, setCurrentTime] = useState("À l'instant");
 
   useEffect(() => {
     if (isVisible) {
       setIsAnimating(true);
     }
   }, [isVisible]);
+
+  // Fonction pour calculer le temps écoulé
+  const calculateTimeElapsed = (timestamp) => {
+    if (!timestamp) return "À l'instant";
+    const now = Date.now();
+    const elapsed = now - timestamp;
+    const minutes = Math.floor(elapsed / 60000);
+    
+    if (minutes === 0) return "À l'instant";
+    if (minutes === 1) return "Il y a 1 min";
+    if (minutes < 60) return `Il y a ${minutes} min`;
+    
+    const hours = Math.floor(minutes / 60);
+    if (hours === 1) return "Il y a 1h";
+    if (hours < 24) return `Il y a ${hours}h`;
+    
+    const days = Math.floor(hours / 24);
+    if (days === 1) return "Hier";
+    return `Il y a ${days}j`;
+  };
+
+  // Mettre à jour le temps toutes les minutes
+  useEffect(() => {
+    if (!isVisible || !propEmailData?.timestamp) return;
+
+    const updateTime = () => {
+      setCurrentTime(calculateTimeElapsed(propEmailData.timestamp));
+    };
+
+    // Mise à jour immédiate
+    updateTime();
+
+    // Mise à jour toutes les minutes
+    const interval = setInterval(updateTime, 60000);
+
+    return () => clearInterval(interval);
+  }, [isVisible, propEmailData?.timestamp]);
 
   // Utiliser les données passées en props ou des données par défaut
   const emailData = propEmailData || {
@@ -82,7 +120,7 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
                 <h4 className="font-semibold text-sm truncate flex-1 mr-2">{emailData.sender}</h4>
                 <div className="flex items-center gap-1 text-xs flex-shrink-0" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
                   <FiClock className="text-xs" />
-                  <span className="whitespace-nowrap">{emailData.date || emailData.time}</span>
+                  <span className="whitespace-nowrap">{currentTime}</span>
                 </div>
               </div>
               <p className="text-xs truncate" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>

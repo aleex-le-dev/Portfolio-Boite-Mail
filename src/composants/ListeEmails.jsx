@@ -43,6 +43,7 @@ const ListeEmails = ({ emails = [], selectedEmailId, setSelectedEmailId, selecte
                   image={mail.image}
                   darkMode={darkMode}
                   isSelected={selectedEmailId === mail.id}
+                  timestamp={mail.timestamp}
                 />
               </div>
             );

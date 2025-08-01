@@ -2,7 +2,7 @@ import React from "react";
 import { HiPaperClip } from "react-icons/hi";
 import { MdAttachFile } from "react-icons/md";
 
-const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, image, onClick, darkMode, isSelected }) => {
+const EmailItem = ({ avatar, name, subject, preview, date, badge, calendar, image, onClick, darkMode, isSelected, timestamp }) => {
   // Fonction pour formater la date
   const formatDate = (dateString) => {
     if (dateString === "À l'instant") {

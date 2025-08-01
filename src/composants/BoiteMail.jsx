@@ -24,6 +24,43 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [newEmailsPool, setNewEmailsPool] = useState([]);
   const [expandedPopupId, setExpandedPopupId] = useState(null);
 
+  // Fonction pour calculer le temps écoulé en minutes
+  const calculateTimeElapsed = (timestamp) => {
+    if (!timestamp) return "À l'instant";
+    const now = Date.now();
+    const elapsed = now - timestamp;
+    const minutes = Math.floor(elapsed / 60000);
+    
+    if (minutes === 0) return "À l'instant";
+    if (minutes === 1) return "Il y a 1 min";
+    if (minutes < 60) return `Il y a ${minutes} min`;
+    
+    const hours = Math.floor(minutes / 60);
+    if (hours === 1) return "Il y a 1h";
+    if (hours < 24) return `Il y a ${hours}h`;
+    
+    const days = Math.floor(hours / 24);
+    if (days === 1) return "Hier";
+    return `Il y a ${days}j`;
+  };
+
+  // Mettre à jour les temps des emails toutes les minutes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEmails(prev => prev.map(email => {
+        if (email.timestamp) {
+          return {
+            ...email,
+            date: calculateTimeElapsed(email.timestamp)
+          };
+        }
+        return email;
+      }));
+    }, 60000); // Mise à jour toutes les minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
   useEffect(() => {
     const handleResize = () => {
@@ -152,13 +189,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       const originalIndex = newEmailsPool.indexOf(selectedEmail);
       usedEmails.add(originalIndex);
       
-      // Préparer l'email pour l'affichage avec un ID unique
-      const emailToAdd = {
-        ...selectedEmail,
-        id: Date.now() + Math.random(), // ID unique basé sur timestamp + random
-        category: 'Boîte de réception',
-        date: "À l'instant"
-      };
+        // Préparer l'email pour l'affichage avec un ID unique
+  const emailToAdd = {
+    ...selectedEmail,
+    id: Date.now() + Math.random(), // ID unique basé sur timestamp + random
+    category: 'Boîte de réception',
+    date: "À l'instant",
+    timestamp: Date.now() // Ajouter un timestamp pour calculer le temps écoulé
+  };
       
       // Ajouter l'email à la boîte de réception sans le sélectionner automatiquement
       setEmails(prev => [emailToAdd, ...prev]);
