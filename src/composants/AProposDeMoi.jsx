@@ -533,7 +533,23 @@ export default function AProposDeMoi({ darkMode }) {
                     // Créer un Map pour suivre les années déjà affichées
                     const displayedYears = new Map();
                     
-                    return timelineData.timeline.map((item, index) => {
+                    // Trier les éléments par année (du plus récent au plus ancien)
+                    const sortedTimeline = [...timelineData.timeline].sort((a, b) => {
+                      // Fonction pour extraire l'année numérique
+                      const getYear = (annee) => {
+                        if (annee === "Aujourd'hui") return new Date().getFullYear();
+                        if (annee.includes('-')) {
+                          const years = annee.split('-').map(y => y.trim());
+                          const numericYears = years.filter(y => !isNaN(parseInt(y)));
+                          return numericYears.length > 0 ? Math.max(...numericYears.map(y => parseInt(y))) : 0;
+                        }
+                        return parseInt(annee) || 0;
+                      };
+                      
+                      return getYear(b.annee) - getYear(a.annee);
+                    });
+                    
+                    return sortedTimeline.map((item, index) => {
                       // Extraire la deuxième année si c'est une plage (ex: "2016-2017" -> "2017")
                       let displayYear = item.annee;
                       if (item.annee.includes('-') && item.annee !== "Aujourd'hui") {

@@ -50,7 +50,7 @@
       "id": 4,
       "categorie": "formation",
       "titre": "Certifications",
-      "annee": "2023",
+      "annee": "2022",
       "organisme": "Divers",
       "lieu": "En ligne",
       "missions": [
@@ -279,6 +279,21 @@
         "Nettoyage des ordinateurs"
       ],
       "couleur": "green"
-    }
+    },
+    {
+        "id": 1,
+        "categorie": "experience",
+        "titre": "Développeur Web Full Stack",
+        "annee": "2025",
+        "entreprise": "Maisoncléo",
+        "lieu": "Calais (59)",
+        "missions": [
+          "Développement d'outils pour l'entreprise",
+          "Optimisation du site internet",
+          "Création de nouvelles fonctionnalités "
+      
+        ],
+        "couleur": "green"
+      }
   ]
 } 
