@@ -155,7 +155,7 @@ const DetailEmailView = ({
         .mail-content a { color: #2563eb; text-decoration: underline; transition: color 0.2s; }
         .mail-content a:hover { color: #1d4ed8; text-decoration: underline; }
       `}</style>
-      <div className={`px-10 pl-8 flex flex-col pb-32 ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
+      <div className={`px-10 pl-8 flex flex-col pb-32 pt-8 ${category === 'Messages envoyés' ? '' : 'items-center'}`}>
         {category !== 'Messages envoyés' && (
           <>
             <h1 className={`text-2xl font-bold mb-2 text-left w-full ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>
