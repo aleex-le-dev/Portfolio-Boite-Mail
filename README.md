@@ -31,39 +31,17 @@ Portfolio moderne et interactif présentant mes compétences de développeur web
 - **Optimisation des images** et chargement lazy
 - **SEO optimisé** avec métadonnées complètes
 
-## 🎨 Interface et UX
+### Système de Notifications
+- **Popups d'emails** avec timestamps en temps réel
+- **Mise à jour automatique** du temps écoulé
+- **Gestion des états** étendus et compacts
+- **Positionnement intelligent** des notifications
 
-### Design System
-- **Variables CSS** pour la cohérence des couleurs
-- **Composants réutilisables** avec props dynamiques
-- **Responsive design** adapté à tous les écrans
-- **Accessibilité** avec ARIA labels et navigation clavier
-
-### Animations et Transitions
-- **Animations CSS** fluides et performantes
-- **Transitions de page** avec effets de slide
-- **Hover effects** interactifs sur tous les éléments
-- **Loading states** avec spinners personnalisés
-
-## 📊 Architecture
-
-```
-src/
-├── composants/          # Composants réutilisables
-│   ├── ux/             # Composants d'interface utilisateur
-│   ├── AProposDeMoi.jsx
-│   ├── Banner.jsx
-│   ├── BoiteMail.jsx
-│   ├── ContactForm.jsx
-│   └── EnTete.jsx
-├── assets/             # Images, icônes et ressources
-│   ├── certification/  # Images des certifications
-│   ├── icone/         # Icônes SVG
-│   └── projet/        # Images des projets
-├── App.jsx            # Composant principal
-├── Intro.jsx          # Animation d'introduction
-└── main.jsx           # Point d'entrée
-```
+### Gestion des Données
+- **JSON statiques** pour les emails et projets
+- **Système de cache** avec localStorage
+- **Synchronisation** des préférences utilisateur
+- **Gestion des erreurs** et fallbacks
 
 ## 🚀 Technologies utilisées
 
@@ -79,25 +57,6 @@ src/
 - **React Icons** pour les icônes
 - **LocalStorage** pour la persistance des données
 
-### Performance
-- **Lazy loading** des images et composants
-- **Code splitting** automatique avec Vite
-- **Optimisation des bundles** et compression
-- **Service Worker** pour le cache (optionnel)
-
-## 🎯 Fonctionnalités avancées
-
-### Système de Notifications
-- **Popups d'emails** avec timestamps en temps réel
-- **Mise à jour automatique** du temps écoulé
-- **Gestion des états** étendus et compacts
-- **Positionnement intelligent** des notifications
-
-### Gestion des Données
-- **JSON statiques** pour les emails et projets
-- **Système de cache** avec localStorage
-- **Synchronisation** des préférences utilisateur
-- **Gestion des erreurs** et fallbacks
 
 ## 📱 Aperçus de l'application
 
