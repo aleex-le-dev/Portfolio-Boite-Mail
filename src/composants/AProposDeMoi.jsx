@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR, USER_EMAIL } from './constantes';
 import projetsData from './projets.json';
 import timelineData from './timeline.json';
-import './timeline.css';
 
 export default function AProposDeMoi({ darkMode }) {
-  const navigate = useNavigate();
-  const [visibleBlocks, setVisibleBlocks] = useState(new Set());
-  const [timelineProgress, setTimelineProgress] = useState(0);
   const [sectionsVisible, setSectionsVisible] = useState({
     about: false,
     skills: false,
     languages: false
   });
+  const [timelineVisible, setTimelineVisible] = useState(new Set());
+  const [lineProgress, setLineProgress] = useState(0);
 
   // Reset et remettre en haut lors de l'actualisation
   useEffect(() => {
@@ -35,13 +32,13 @@ export default function AProposDeMoi({ darkMode }) {
     setTimeout(scrollToTop, 100);
     
     // Reset toutes les animations
-    setVisibleBlocks(new Set());
-    setTimelineProgress(0);
     setSectionsVisible({
       about: false,
       skills: false,
       languages: false
     });
+    setTimelineVisible(new Set());
+    setLineProgress(0);
     
     // Restaurer le comportement normal après un délai
     setTimeout(() => {
@@ -51,39 +48,16 @@ export default function AProposDeMoi({ darkMode }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const timelineContainer = document.getElementById('cd-timeline');
-      const socialIcons = document.querySelector('.social-icons-container');
-      
-      if (!timelineContainer || !socialIcons) return;
-
-      const socialRect = socialIcons.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // Calculer la progression de la timeline basée sur la position des icônes sociales
-      const socialTop = socialRect.top;
-      
-      // La timeline commence à apparaître quand les icônes sociales sont visibles
-      const startTrigger = windowHeight * 0.8;
-      const endTrigger = windowHeight * 0.2;
-      
-      if (socialTop <= startTrigger && socialTop >= endTrigger) {
-        const progress = Math.max(0, Math.min(1, (startTrigger - socialTop) / (startTrigger - endTrigger)));
-        setTimelineProgress(progress);
-      } else if (socialTop < endTrigger) {
-        setTimelineProgress(1);
-      } else {
-        setTimelineProgress(0);
-      }
-
       // Animation des sections principales
       const aboutSection = document.querySelector('.about-section');
       const skillsSection = document.querySelector('.skills-section');
       const languagesSection = document.querySelector('.languages-section');
+      const timelineSection = document.querySelector('.timeline-section');
 
       if (aboutSection) {
         const aboutRect = aboutSection.getBoundingClientRect();
         // Apparition au niveau 2/10 de l'écran (vers le haut)
-        if (aboutRect.top <= windowHeight * 0.2 && !sectionsVisible.about) {
+        if (aboutRect.top <= window.innerHeight * 0.2 && !sectionsVisible.about) {
           setSectionsVisible(prev => ({ ...prev, about: true }));
         }
       }
@@ -91,7 +65,7 @@ export default function AProposDeMoi({ darkMode }) {
       if (skillsSection) {
         const skillsRect = skillsSection.getBoundingClientRect();
         // Apparition au niveau 2/10 de l'écran (vers le haut)
-        if (skillsRect.top <= windowHeight * 0.2 && !sectionsVisible.skills) {
+        if (skillsRect.top <= window.innerHeight * 0.2 && !sectionsVisible.skills) {
           setSectionsVisible(prev => ({ ...prev, skills: true }));
         }
       }
@@ -99,44 +73,65 @@ export default function AProposDeMoi({ darkMode }) {
       if (languagesSection) {
         const languagesRect = languagesSection.getBoundingClientRect();
         // Apparition au niveau 2/10 de l'écran (vers le haut)
-        if (languagesRect.top <= windowHeight * 0.2 && !sectionsVisible.languages) {
+        if (languagesRect.top <= window.innerHeight * 0.2 && !sectionsVisible.languages) {
           setSectionsVisible(prev => ({ ...prev, languages: true }));
         }
       }
 
-            // Animation des blocs individuels
-      const timelineBlocks = document.querySelectorAll('.cd-timeline-block');
-      timelineBlocks.forEach((block, index) => {
-        const blockTop = block.getBoundingClientRect().top;
-        // Apparition vers le bas de l'écran (niveau 8/10)
-        const shouldBeVisible = blockTop <= windowHeight * 0.8;
+      // Animation de la timeline
+      if (timelineSection) {
+        const timelineRect = timelineSection.getBoundingClientRect();
+        const timelineItems = document.querySelectorAll('.timeline-item');
         
-        if (shouldBeVisible && !visibleBlocks.has(index)) {
-          setVisibleBlocks(prev => new Set([...prev, index]));
+        // Calculer la progression de la ligne
+        if (timelineRect.top <= window.innerHeight * 0.8) {
+          // Quand la timeline est complètement visible, la progression doit atteindre 100%
+          const timelineBottom = timelineRect.bottom;
+          const viewportBottom = window.innerHeight;
+          
+          if (timelineBottom <= viewportBottom) {
+            // Timeline complètement visible, progression à 100%
+            setLineProgress(1);
+          } else {
+            // Timeline partiellement visible, progression basée sur la position
+            const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.8 - timelineRect.top) / (timelineRect.height + window.innerHeight * 0.3)));
+            setLineProgress(progress);
+          }
+        } else {
+          setLineProgress(0);
         }
-      });
+        
+        timelineItems.forEach((item, index) => {
+          // Calculer la position relative de l'élément dans la timeline (0 à 1)
+          const elementPosition = index / (timelineItems.length - 1);
+          
+          // L'élément s'affiche exactement quand la ligne atteint sa position
+          if (lineProgress >= elementPosition && !timelineVisible.has(index)) {
+            setTimelineVisible(prev => new Set([...prev, index]));
+          }
+        });
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Check initial state
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [visibleBlocks, sectionsVisible]);
+  }, [sectionsVisible, timelineVisible, lineProgress]);
 
   // Fonction pour extraire les technologies du contenu
   const extractTechnologies = (content) => {
     const techLine = content.find(line => line.includes('Technologies utilisées :'));
     if (techLine) {
-      const techIndex = content.indexOf(techLine);
-      const nextLine = content[techIndex + 1];
-      if (nextLine && nextLine.includes('•')) {
-        return nextLine.split('•').slice(1).map(tech => tech.trim());
+      const techMatch = techLine.match(/Technologies utilisées :\s*(.+)/);
+      if (techMatch) {
+        return techMatch[1].split('•').map(tech => tech.trim()).filter(tech => tech);
       }
     }
     return [];
   };
 
-  // Fonction pour extraire la description (première ligne du contenu)
+  // Fonction pour extraire la description du contenu
   const extractDescription = (content) => {
     return content[0] || '';
   };
@@ -168,151 +163,126 @@ export default function AProposDeMoi({ darkMode }) {
   const getColorForCategory = (categorie) => {
     switch (categorie) {
       case 'experience':
-        return 'bg-blue-500';
+        return 'rgb(59, 130, 246)'; // blue-500
       case 'formation':
-        return 'bg-green-500';
+        return 'rgb(34, 197, 94)'; // green-500
       default:
-        return 'bg-gray-500';
+        return 'rgb(107, 114, 128)'; // gray-500
     }
   };
 
   return (
-    <div 
-      className={`min-h-screen${darkMode ? ' text-white' : ''}`}
-      style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}
-    >
-      {/* Bouton de retour */}
-      <div className="max-w-4xl mx-auto px-6 pt-6 pb-6">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors mb-6"
-          style={{ 
-            backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
-            color: darkMode ? '#fff' : 'var(--light-text)',
-            border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
-          }}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Retour au portfolio
-        </button>
-      </div>
-
-      {/* Header avec photo de profil */}
-      <div 
-        className="max-w-4xl mx-auto px-6 py-12"
-        style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', color: darkMode ? '#fff' : undefined }}
-      >
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Photo de profil */}
-          <div className="relative">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-blue-500 shadow-xl">
+    <div className="min-h-screen" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}>
+      {/* En-tête avec photo et informations */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Photo de profil */}
+            <div className="flex-shrink-0">
               <img 
                 src={USER_AVATAR} 
                 alt="Alexandre Janacek" 
-                className="w-full h-full object-cover"
+                className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
               />
             </div>
-          </div>
 
-          {/* Informations principales */}
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Alexandre Janacek</h1>
-            <p className="text-xl mb-4" style={{ color: darkMode ? '#fff' : undefined }}>
-              Concepteur Développeur d&apos;Applications
-            </p>
-            
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              {/* From Uiverse.io by Itskrish01 */}
-              <svg width="0" height="0" style={{ position: 'absolute' }}>
-                <defs>
-                  <clipPath id="squircleClip" clipPathUnits="objectBoundingBox">
-                    <path d="M 0,0.5 C 0,0 0,0 0.5,0 S 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5"></path>
-                  </clipPath>
-                </defs>
-              </svg>
+            {/* Informations principales */}
+            <div className="flex-1 text-center md:text-left">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">Alexandre Janacek</h1>
+              <p className="text-xl mb-4" style={{ color: darkMode ? '#fff' : undefined }}>
+                Concepteur Développeur d&apos;Applications
+              </p>
+              
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                {/* From Uiverse.io by Itskrish01 */}
+                <svg width="0" height="0" style={{ position: 'absolute' }}>
+                  <defs>
+                    <clipPath id="squircleClip" clipPathUnits="objectBoundingBox">
+                      <path d="M 0,0.5 C 0,0 0,0 0.5,0 S 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5"></path>
+                    </clipPath>
+                  </defs>
+                </svg>
 
-              <div className="relative">
-                <div
-                  className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
-                ></div>
+                <div className="relative">
+                  <div
+                    className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
+                  ></div>
 
-                <div className="social-icons-container relative flex items-end gap-x-2 p-2">
-                  {/* Email */}
-                  <div className="relative">
-                    <a
-                      href={`mailto:${USER_EMAIL}`}
-                      style={{ clipPath: 'url(#squircleClip)' }}
-                      className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-6 w-6 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
+                  <div className="social-icons-container relative flex items-end gap-x-2 p-2">
+                    {/* Email */}
+                    <div className="relative">
+                      <a
+                        href={`mailto:${USER_EMAIL}`}
+                        style={{ clipPath: 'url(#squircleClip)' }}
+                        className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
                       >
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                      </svg>
-                    </a>
-                  </div>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="h-6 w-6 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                      </a>
+                    </div>
 
-                  {/* LinkedIn */}
-                  <div className="relative">
-                    <a
-                      href="https://linkedin.com/in/alexandre-janacek"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ clipPath: 'url(#squircleClip)' }}
-                      className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg border border-blue-500/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-6 w-6 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
+                    {/* LinkedIn */}
+                    <div className="relative">
+                      <a
+                        href="https://linkedin.com/in/alexandre-janacek"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ clipPath: 'url(#squircleClip)' }}
+                        className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg border border-blue-500/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
                       >
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                      </svg>
-                    </a>
-                  </div>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="h-6 w-6 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                      </a>
+                    </div>
 
-                  {/* GitHub */}
-                  <div className="relative">
-                    <a
-                      href="https://github.com/aleex-le-dev"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ clipPath: 'url(#squircleClip)' }}
-                      className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-6 w-6 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
+                    {/* GitHub */}
+                    <div className="relative">
+                      <a
+                        href="https://github.com/aleex-le-dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ clipPath: 'url(#squircleClip)' }}
+                        className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center shadow-lg border border-gray-600/50 cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl block"
                       >
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                    </a>
-                  </div>
-                  <button 
-                    onClick={() => {
-                      const link = document.createElement('a');
-                      link.href = '/src/assets/CV Alexandre_Janacek_Concepteur_Développeur.png';
-                      link.download = 'CV_Alexandre_Janacek_Concepteur_Developpeur.png';
-                      link.click();
-                    }}
-                    className="cursor-pointer group relative flex items-center justify-center gap-1.5 w-10 h-10 bg-black bg-opacity-80 text-[#f1f1f1] rounded-xl hover:bg-opacity-70 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl font-semibold shadow-md"
-                  >
-                    <span className="text-s cursor-pointer">CV</span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="h-6 w-6 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                      </a>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = '/src/assets/CV Alexandre_Janacek_Concepteur_Développeur.png';
+                        link.download = 'CV_Alexandre_Janacek_Concepteur_Developpeur.png';
+                        link.click();
+                      }}
+                      className="cursor-pointer group relative flex items-center justify-center gap-1.5 w-10 h-10 bg-black bg-opacity-80 text-[#f1f1f1] rounded-xl hover:bg-opacity-70 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl font-semibold shadow-md"
+                    >
+                      <span className="text-s cursor-pointer">CV</span>
                
-                  </button>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-       
           </div>
         </div>
       </div>
@@ -373,18 +343,18 @@ export default function AProposDeMoi({ darkMode }) {
                 }}
               >
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-lg bg-yellow-100 flex items-center justify-center">
-                    <svg className="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  <div className="w-6 h-6 rounded-lg bg-green-100 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
                     </svg>
                   </div>
                   Compétences
                 </h2>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="flex flex-col items-center">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
-                        src={darkMode ? '/src/assets/icone/React_dark.svg' : '/src/assets/icone/React_light.svg'} 
+                        src="/src/assets/icone/React_light.svg" 
                         alt="React" 
                         className="w-8 h-8"
                       />
@@ -475,9 +445,9 @@ export default function AProposDeMoi({ darkMode }) {
             </div>
           </div>
 
-          {/* Timeline Expérience et Formation */}
+          {/* Timeline personnalisée moderne */}
           <section 
-            className="rounded-xl p-6 shadow-lg w-full"
+            className="timeline-section rounded-xl p-6 shadow-lg w-full"
             style={{ 
               backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
               border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
@@ -493,138 +463,123 @@ export default function AProposDeMoi({ darkMode }) {
               Parcours Professionnel
             </h2>
             
-            {/* Timeline CodyHouse */}
-            <div className="cd-container relative">
-              {/* En-têtes des colonnes */}
-              <div className="flex justify-center items-center mb-8 px-4">
-                <div className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mr-16`}>
-                  Expérience
-                </div>
-                <div className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} ml-16`}>
-                  Formation
-                </div>
-              </div>
-              
+            <div className="relative">
+              {/* Ligne centrale de base */}
               <div 
-                id="cd-timeline" 
-                className={`relative py-8 my-8 ${
-                  darkMode ? 'before:bg-gray-600' : 'before:bg-gray-300'
-                } before:content-[''] before:absolute before:top-0 before:left-1/2 before:transform before:-translate-x-1/2 before:h-full before:w-1 before:transition-all before:duration-1000`}
-                style={{
-                  opacity: timelineProgress,
-                  transform: `scaleY(${timelineProgress})`,
-                  transformOrigin: 'top'
+                className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full"
+                style={{ 
+                  backgroundColor: darkMode ? '#4B5563' : '#E5E7EB'
                 }}
-              >
-                {/* Ligne de progression qui se dessine */}
-                <div 
-                  className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-1 transition-all duration-1000 ${
-                    darkMode ? 'bg-blue-500' : 'bg-blue-600'
-                  }`}
-                  style={{
-                    height: `${timelineProgress * 100}%`,
-                    boxShadow: timelineProgress > 0 ? '0 0 10px rgba(59, 130, 246, 0.5)' : 'none'
-                  }}
-                ></div>
-
-                {/* Affichage des années uniques sur la ligne centrale */}
-                {(() => {
-                  const uniqueYears = [];
-                  const yearPositions = {};
-                  
-                  timelineData.timeline.forEach((item, index) => {
-                    // Extraire la plus grande année si c'est une plage (ex: "2016-2017" -> "2017")
-                    let displayYear = item.annee;
-                    if (item.annee.includes('-') && item.annee !== "Aujourd'hui") {
-                      const years = item.annee.split('-').map(y => y.trim());
-                      const numericYears = years.filter(y => !isNaN(parseInt(y)));
-                      if (numericYears.length > 0) {
-                        displayYear = Math.max(...numericYears.map(y => parseInt(y))).toString();
-                      }
-                    }
-                    
-                    if (!uniqueYears.includes(displayYear)) {
-                      uniqueYears.push(displayYear);
-                      yearPositions[displayYear] = index;
-                    }
-                  });
-                  
-                  return uniqueYears.map((year) => {
-                    const firstIndex = yearPositions[year];
-                    return (
-                      <div 
-                        key={`year-${year}`}
-                        className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
-                          visibleBlocks.has(firstIndex) ? 'opacity-100' : 'opacity-0'
-                        }`}
-                        style={{
-                          top: `${(firstIndex / (timelineData.timeline.length - 1)) * 100}%`,
-                          transitionDelay: `${firstIndex * 100}ms`
-                        }}
-                      >
-                        <div className={`px-2 py-1 rounded-full text-xs font-bold ${
-                          year === "Aujourd'hui" 
-                            ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white')
-                            : (darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')
-                        } shadow-lg border`}>
-                          {year}
-                        </div>
-                      </div>
-                    );
-                  });
-                })()}
-
-                {timelineData.timeline.map((item, index) => (
-                  <div key={item.id} className="cd-timeline-block relative my-8 first:mt-0 last:mb-0">
-                    {/* Point de la timeline (sans icône) */}
-                    <div 
-                      className={`absolute top-6 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white ${getColorForCategory(item.categorie)} transition-all duration-300 ${
-                        visibleBlocks.has(index) ? 'bounce-in opacity-100 scale-100' : 'is-hidden opacity-0 scale-50'
-                      }`}
-                      style={{
-                        transitionDelay: `${index * 100}ms`
-                      }}
-                    ></div>
-
-                  <div 
-                    className={`cd-timeline-content relative mt-6 ml-0 p-6 rounded-lg shadow-lg transition-all duration-300 ${
-                      darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-                    } w-full md:w-5/12 ${
-                      item.categorie === 'experience' ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
-                    } ${
-                      visibleBlocks.has(index) ? 'bounce-in opacity-100 translate-x-0' : 'is-hidden opacity-0'
-                    }`}
-                    style={{
-                      transitionDelay: `${index * 100}ms`,
-                      transform: visibleBlocks.has(index) ? 'translateX(0)' : `translateX(${item.categorie === 'experience' ? '-50px' : '50px'})`
-                    }}
-                    >
-                                          <h3 className={`text-lg font-bold mb-2 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${getColorForCategory(item.categorie)}`}>
-                        {getIconForCategory(item.categorie)}
-                      </div>
-                      {item.titre}
-                    </h3>
-                      <p className="text-sm text-gray-600 mb-2">
-                        {item.entreprise || item.organisme} • {item.lieu}
-                      </p>
-                      <p className="text-sm font-semibold text-blue-500 mb-3">
-                        {item.annee}
-                      </p>
-                      <ul className="space-y-1">
-                        {item.missions.map((mission, missionIndex) => (
-                          <li key={missionIndex} className="text-sm flex items-start">
-                            <span className="text-blue-500 mr-2">•</span>
-                            <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
-                              {mission}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              ></div>
+              
+              {/* Ligne qui progresse */}
+              <div 
+                className="absolute left-1/2 transform -translate-x-1/2 w-1 transition-all duration-300 ease-out"
+                style={{ 
+                  backgroundColor: darkMode ? '#3B82F6' : '#2563EB',
+                  height: `${lineProgress * 100}%`,
+                  boxShadow: lineProgress > 0 ? '0 0 10px rgba(59, 130, 246, 0.5)' : 'none'
+                }}
+              ></div>
+              
+                                            {/* Éléments de la timeline */}
+               <div className="space-y-8">
+                 {(() => {
+                   // Créer un Map pour suivre les années déjà affichées
+                   const displayedYears = new Map();
+                   
+                   return timelineData.timeline.map((item, index) => {
+                     // Vérifier si cette année a déjà été affichée
+                     const shouldShowYear = !displayedYears.has(item.annee);
+                     if (shouldShowYear) {
+                       displayedYears.set(item.annee, index);
+                     }
+                     
+                     return (
+                       <div 
+                         key={item.id}
+                         className={`timeline-item relative flex items-center transition-all duration-700 ease-out ${
+                           timelineVisible.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                         }`}
+                         style={{ transitionDelay: `${index * 200}ms` }}
+                       >
+                         {/* Contenu */}
+                         <div 
+                           className={`w-5/12 p-6 rounded-lg shadow-lg ${
+                             item.categorie === 'experience' ? 'mr-auto' : 'ml-auto'
+                           }`}
+                           style={{ 
+                             backgroundColor: darkMode ? '#374151' : '#ffffff',
+                             color: darkMode ? '#ffffff' : '#000000',
+                             border: `1px solid ${darkMode ? '#4B5563' : '#E5E7EB'}`
+                           }}
+                         >
+                           <div className="flex items-center gap-3 mb-3">
+                             <div 
+                               className="w-8 h-8 rounded-full flex items-center justify-center"
+                               style={{ backgroundColor: getColorForCategory(item.categorie) }}
+                             >
+                               {getIconForCategory(item.categorie)}
+                             </div>
+                             <div>
+                               <h3 className="font-bold text-lg">{item.titre}</h3>
+                               <p className="text-sm text-gray-600 dark:text-gray-400">
+                                 {item.entreprise || item.organisme} • {item.lieu}
+                               </p>
+                             </div>
+                           </div>
+                           
+                           <div className="mb-3">
+                             <span 
+                               className="px-3 py-1 rounded-full text-xs font-semibold"
+                               style={{ 
+                                 backgroundColor: getColorForCategory(item.categorie),
+                                 color: '#ffffff'
+                               }}
+                             >
+                               {item.annee}
+                             </span>
+                           </div>
+                           
+                           <ul className="space-y-2">
+                             {item.missions.map((mission, missionIndex) => (
+                               <li key={missionIndex} className="text-sm flex items-start">
+                                 <span className="text-blue-500 mr-2 mt-1">•</span>
+                                 <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                   {mission}
+                                 </span>
+                               </li>
+                             ))}
+                           </ul>
+                         </div>
+                         
+                         {/* Point central */}
+                         <div 
+                           className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white"
+                           style={{ backgroundColor: getColorForCategory(item.categorie) }}
+                         ></div>
+                         
+                         {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
+                         {shouldShowYear && (
+                           <div 
+                             className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-300 ${
+                               timelineVisible.has(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                             }`}
+                             style={{ 
+                               backgroundColor: darkMode ? '#1F2937' : '#ffffff',
+                               color: darkMode ? '#ffffff' : '#000000',
+                               borderColor: darkMode ? '#4B5563' : '#E5E7EB',
+                               top: '-8px'
+                             }}
+                           >
+                             {item.annee}
+                           </div>
+                         )}
+                       </div>
+                     );
+                   });
+                 })()}
+               </div>
             </div>
           </section>
 
@@ -669,10 +624,10 @@ export default function AProposDeMoi({ darkMode }) {
                       {technologies.map((tech, index) => (
                         <span 
                           key={index}
-                          className="text-xs px-2 py-1 rounded" 
+                          className="px-2 py-1 text-xs rounded-full"
                           style={{ 
-                            backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', 
-                            color: darkMode ? '#fff' : 'var(--light-text)' 
+                            backgroundColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)',
+                            color: darkMode ? '#fff' : undefined
                           }}
                         >
                           {tech}
