@@ -341,24 +341,41 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         .filter(mail => {
           const searchLower = search.trim().toLowerCase();
           
-          // Fonction pour vérifier si un texte contient le mot recherché de manière précise
-          const containsExactWord = (text) => {
+          // Fonction uniformisée pour vérifier si un texte contient le terme recherché
+          const containsSearchTerm = (text) => {
             if (!text) return false;
-            const words = text.toLowerCase().split(/\s+/);
-            return words.some(word => 
-              word === searchLower || 
-              word.startsWith(searchLower)
-            );
+            const normalizedText = text.toLowerCase().replace(/\s+/g, '');
+            const normalizedSearch = searchLower.replace(/\s+/g, '');
+            
+            // Recherche exacte dans le texte normalisé
+            return normalizedText.includes(normalizedSearch);
           };
           
-          if (mail.title && containsExactWord(mail.title)) return true;
-          if (mail.sender && containsExactWord(mail.sender)) return true;
-          if (mail.email && containsExactWord(mail.email.split('@')[0])) return true;
-          if (Array.isArray(mail.content) && mail.content.some(c => containsExactWord(c))) return true;
-          if ((mail.labels || []).some(label => containsExactWord(label))) return true;
-          if (mail.image && (mail.alt && containsExactWord(mail.alt))) return true;
-          if (mail.image && (mail.title && containsExactWord(mail.title))) return true;
+          // Vérifier dans tous les champs pertinents
+          if (mail.title && containsSearchTerm(mail.title)) return true;
+          if (mail.sender && containsSearchTerm(mail.sender)) return true;
+          if (mail.email && containsSearchTerm(mail.email.split('@')[0])) return true;
+          if (Array.isArray(mail.content) && mail.content.some(c => containsSearchTerm(c))) return true;
+          if ((mail.labels || []).some(label => containsSearchTerm(label))) return true;
+          if (mail.image && (mail.alt && containsSearchTerm(mail.alt))) return true;
+          if (mail.image && (mail.title && containsSearchTerm(mail.title))) return true;
           return false;
+        })
+        // Éviter les doublons basés sur l'ID
+        .filter((mail, index, self) => 
+          index === self.findIndex(m => m.id === mail.id)
+        )
+        // Trier par pertinence (titre en premier, puis contenu)
+        .sort((a, b) => {
+          const searchLower = search.trim().toLowerCase();
+          const aTitleMatch = a.title && a.title.toLowerCase().includes(searchLower);
+          const bTitleMatch = b.title && b.title.toLowerCase().includes(searchLower);
+          
+          if (aTitleMatch && !bTitleMatch) return -1;
+          if (!aTitleMatch && bTitleMatch) return 1;
+          
+          // Si même niveau de pertinence, trier par date (plus récent en premier)
+          return new Date(b.date || 0) - new Date(a.date || 0);
         })
         .slice(0, 10)
     : [];

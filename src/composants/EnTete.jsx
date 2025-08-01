@@ -32,7 +32,11 @@ export default function EnTete({
   const sortAlpha = arr => [...arr].sort((a, b) => a.localeCompare(b, 'fr'));
   // Détection d'absence totale de résultats (ni mail ni libellé)
   const searchNorm = search ? search.toLowerCase().replace(/\s+/g, '') : '';
-  const hasLabel = LABELS.some(l => l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) || l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm)));
+  const hasLabel = LABELS.some(l => {
+    const labelMatch = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+    const subMatch = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+    return labelMatch || subMatch;
+  });
   const noResult = search && !searchResults.length && !hasLabel;
 
   const searchRef = React.useRef();
@@ -47,6 +51,8 @@ export default function EnTete({
   };
 
   const handleDeconnexion = () => {
+    // Supprimer le flag d'intro jouée pour la relancer
+    localStorage.removeItem('introPlayed');
     // Relancer l'intro en redirigeant vers la page d'accueil
     window.location.reload();
   };
@@ -122,19 +128,19 @@ export default function EnTete({
                       {/* Catégorie Libellés */}
                       {(() => {
                         const matchingLabels = LABELS.filter(l => {
-                          const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
-                          const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
-                          return matchParent || matchChild;
+                          const labelMatch = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                          const subMatch = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                          return labelMatch || subMatch;
                         });
                         if (matchingLabels.length === 0) return null;
                         return (
                           <div className="mb-2">
                             <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Libellés</div>
                             {matchingLabels.flatMap(({ label, subs }) => {
-                              if (
-                                label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
-                                subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
-                              ) {
+                              const labelMatches = label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                              const subMatches = subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                              
+                              if (labelMatches || subMatches) {
                                 return sortAlpha(subs).map(sub => {
                                   const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                                   const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
@@ -378,41 +384,41 @@ export default function EnTete({
                 {/* Catégorie Libellés */}
                 {(() => {
                   const matchingLabels = LABELS.filter(l => {
-                    const matchParent = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
-                    const matchChild = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
-                    return matchParent || matchChild;
+                    const labelMatch = l.label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                    const subMatch = l.subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                    return labelMatch || subMatch;
                   });
                   if (matchingLabels.length === 0) return null;
                   return (
                     <div className="mb-2">
                       <div className={`font-bold text-sm px-2 pt-2 pb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Libellés</div>
                       {matchingLabels.flatMap(({ label, subs }) => {
-                        if (
-                          label.toLowerCase().replace(/\s+/g, '').includes(searchNorm) ||
-                          subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm))
-                        ) {
-                              return sortAlpha(subs).map(sub => {
-                                const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                                const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
-                                return (
-                            <button
-                              key={label + '-' + sub}
-                              className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
-                              style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
-                              type="button"
-                              aria-label={`Sélectionner ${sub}`}
-                              onClick={() => {
-                                if (typeof onSelectCategory === 'function') onSelectCategory(sub);
-                                else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
-                              }}
-                            >
-                                    {getCategoryIcon(sub)}
-                                    <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
-                            </button>
-                                );
-                              });
-                            }
-                            return [];
+                        const labelMatches = label.toLowerCase().replace(/\s+/g, '').includes(searchNorm);
+                        const subMatches = subs.some(sub => sub.toLowerCase().replace(/\s+/g, '').includes(searchNorm));
+                        
+                        if (labelMatches || subMatches) {
+                          return sortAlpha(subs).map(sub => {
+                            const regex = new RegExp(`(${search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            const highlight = (txt) => txt ? txt.replace(regex, '<mark style="background-color: #fef08a; padding: 0 1px; border-radius: 2px;">$1</mark>') : '';
+                            return (
+                              <button
+                                key={label + '-' + sub}
+                                className={`flex items-center gap-2 px-4 py-2 border-b last:border-b-0 w-full transition text-left cursor-pointer ${darkMode ? '' : 'hover:bg-blue-50'}`}
+                                style={darkMode ? { backgroundColor: 'var(--dark-secondary-bg)', borderColor: 'var(--dark-border)' } : { backgroundColor: 'var(--light-secondary-bg)', borderColor: 'var(--light-border)' }}
+                                type="button"
+                                aria-label={`Sélectionner ${sub}`}
+                                onClick={() => {
+                                  if (typeof onSelectCategory === 'function') onSelectCategory(sub);
+                                  else if (typeof onSelectMail === 'function') onSelectMail({ category: sub });
+                                }}
+                              >
+                                {getCategoryIcon(sub)}
+                                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`} dangerouslySetInnerHTML={{ __html: highlight(sub) }} />
+                              </button>
+                            );
+                          });
+                        }
+                        return [];
                       })}
                     </div>
                   );

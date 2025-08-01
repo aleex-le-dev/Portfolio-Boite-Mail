@@ -8,7 +8,11 @@ import AProposDeMoi from "./composants/AProposDeMoi";
 
 function App() {
   const boiteMailRef = useRef();
-  const [introDone, setIntroDone] = useState(false); // false pour afficher l'intro, true pour afficher la boîte mail
+  const [introDone, setIntroDone] = useState(() => {
+    // Vérifier si l'intro a déjà été jouée
+    const introPlayed = localStorage.getItem('introPlayed');
+    return introPlayed === 'true';
+  });
   const [showTransition, setShowTransition] = useState(false);
   const [pageTitle, setPageTitle] = useState("Aleex-le-dev Développeur Web | Lillers & Béthune");
   const [darkMode, setDarkMode] = useState(() => {
@@ -29,6 +33,8 @@ function App() {
 
   const handleIntroFinish = () => {
     setShowTransition(true);
+    // Sauvegarder que l'intro a été jouée
+    localStorage.setItem('introPlayed', 'true');
     // Démarrer la transition bleue
     setTimeout(() => {
       setIntroDone(true);

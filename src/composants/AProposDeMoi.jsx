@@ -54,16 +54,19 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
     // Scroll après un court délai pour s'assurer que le DOM est prêt
     setTimeout(scrollToTop, 100);
     
-    // Reset toutes les animations
-    setSectionsVisible({
-      about: false,
-      skills: false,
-      languages: false
-    });
-    setTimelineVisible(new Set());
-    setLineProgress(0);
-    setProjectsVisible(false);
-
+    // Reset toutes les animations de manière uniforme
+    const resetAnimations = () => {
+      setSectionsVisible({
+        about: false,
+        skills: false,
+        languages: false
+      });
+      setTimelineVisible(new Set());
+      setLineProgress(0);
+      setProjectsVisible(false);
+    };
+    
+    resetAnimations();
     
     // Restaurer le comportement normal après un délai
     setTimeout(() => {
@@ -118,20 +121,22 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
       const scrollY = window.scrollY;
       setShowScrollTop(scrollY > 300);
 
-      // Sur mobile, afficher tout immédiatement
+      // Sur mobile, afficher tout immédiatement avec un délai uniforme
       if (isMobile) {
-        setSectionsVisible({
-          about: true,
-          skills: true,
-          languages: true
-        });
-        setLineProgress(1);
-        setProjectsVisible(true);
-        
-        // Afficher tous les éléments de timeline
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const allIndices = Array.from({ length: timelineItems.length }, (_, i) => i);
-        setTimelineVisible(new Set(allIndices));
+        setTimeout(() => {
+          setSectionsVisible({
+            about: true,
+            skills: true,
+            languages: true
+          });
+          setLineProgress(1);
+          setProjectsVisible(true);
+          
+          // Afficher tous les éléments de timeline avec un délai progressif
+          const timelineItems = document.querySelectorAll('.timeline-item');
+          const allIndices = Array.from({ length: timelineItems.length }, (_, i) => i);
+          setTimelineVisible(new Set(allIndices));
+        }, 100);
         return;
       }
 
@@ -672,17 +677,17 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
                       const yearA = getYear(a.annee);
                       const yearB = getYear(b.annee);
                       
-                      // Si les années sont différentes, trier par année
+                      // Trier d'abord par année (plus récente en premier)
                       if (yearA !== yearB) {
                         return yearB - yearA;
                       }
                       
-                      // Si les années sont identiques, mettre les expériences en premier (car l'ordre est du plus ancien au plus récent)
+                      // Si même année, mettre les expériences en premier
                       if (a.categorie === 'formation' && b.categorie === 'experience') {
-                        return 1; // a (formation) après b (experience)
+                        return 1;
                       }
                       if (a.categorie === 'experience' && b.categorie === 'formation') {
-                        return -1; // b (formation) après a (experience)
+                        return -1;
                       }
                       
                       // Si même catégorie, garder l'ordre original
@@ -690,17 +695,18 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
                     });
                     
                     return sortedTimeline.map((item, index) => {
-                      // Extraire la deuxième année si c'est une plage (ex: "2016-2017" -> "2017")
+                      // Extraire l'année principale pour l'affichage
                       let displayYear = item.annee;
                       if (item.annee.includes('-') && item.annee !== "Aujourd'hui") {
                         const years = item.annee.split('-').map(y => y.trim());
                         const numericYears = years.filter(y => !isNaN(parseInt(y)));
                         if (numericYears.length > 0) {
+                          // Prendre l'année la plus récente pour l'affichage
                           displayYear = Math.max(...numericYears.map(y => parseInt(y))).toString();
                         }
                       }
                       
-                      // Vérifier si cette année a déjà été affichée
+                      // Afficher l'année seulement si c'est la première occurrence
                       const shouldShowYear = !displayedYears.has(displayYear);
                       if (shouldShowYear) {
                         displayedYears.set(displayYear, index);
