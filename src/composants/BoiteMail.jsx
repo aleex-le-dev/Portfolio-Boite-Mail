@@ -159,6 +159,14 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
     setActivePopups(prev => prev.filter(popup => popup.id !== popupId));
   };
 
+  // Fonction pour voir un email depuis un popup
+  const handleViewEmail = (emailData, popupId) => {
+    // Sélectionner l'email dans la liste
+    setSelectedEmailId(emailData.id);
+    // Fermer seulement le popup spécifique
+    setActivePopups(prev => prev.filter(popup => popup.id !== popupId));
+  };
+
   // Sélectionner automatiquement le premier email quand la catégorie change
   useEffect(() => {
     if (selectedCategory) {
@@ -603,6 +611,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           darkMode={darkMode}
           emailData={popup.emailData}
           index={index}
+          onViewEmail={() => handleViewEmail(popup.emailData, popup.id)}
         />
       ))}
       
