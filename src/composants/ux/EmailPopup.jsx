@@ -79,15 +79,15 @@ const EmailPopup = ({ isVisible, onClose, darkMode }) => {
 
           {/* Actions compactes */}
           <div className="flex gap-2 pt-2 border-t border-gray-200 dark:border-gray-700">
-            <button
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
-                darkMode 
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                  : 'bg-blue-500 hover:bg-blue-600 text-white'
-              }`}
-            >
-              Répondre
-            </button>
+                                    <button
+                          className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
+                            darkMode 
+                              ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                              : 'bg-blue-500 hover:bg-blue-600 text-white'
+                          }`}
+                        >
+                          Voir
+                        </button>
             <button
               className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
                 darkMode 
