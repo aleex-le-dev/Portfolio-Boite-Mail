@@ -136,7 +136,47 @@
       "",
       "Voir le site : https://budget.salutalex.fr/"
     ]
+  },
+  {
+    "id": 54,
+    "category": "Portfolio",
+    "title": "Mon Portfolio",
+    "sender": "Aleex Le Dev",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "2025",
+    "image": "/src/assets/projet/portfolio/portfolio.png",
+    "screenshots": [
+      "/src/assets/projet/portfolio/portfolio1.png",
+      "/src/assets/projet/portfolio/portfolio2.png",
+      "/src/assets/projet/portfolio/portfolio3.png",
+      "/src/assets/projet/portfolio/portfolio4.png",
+      "/src/assets/projet/portfolio/portfolio5.png"
+
+
+    ],
+    "content": [
+      "Portfolio personnel présentant mes compétences, projets et expériences en développement web. Conçu pour offrir une navigation fluide et un design épuré, il met en avant mes réalisations techniques et ma démarche professionnelle.",
+      "",
+      "Technologies utilisées :",
+      "React • JavaScript • Tailwind",
+      "",
+      "Fonctionnalités principales :",
+      "• Mise en avant de mes projets avec liens directs vers GitHub",
+      "• Affichage de mes informations personnelles (contact, réseaux sociaux)",
+      "• Interface inspirée d’une boîte mail pour une navigation intuitive",
+      "• Navigation fluide grâce à React Router",
+      "• Design responsive et moderne avec Tailwind CSS",
+      "• Optimisation SEO pour une meilleure visibilité",
+      "• Composants React réutilisables pour modularité et maintenabilité",
+      "• Intégration d’animations légères pour améliorer l’expérience utilisateur",
+      "",
+      "Voir le code : ",
+      "",
+      "Voir le site : Vous êtes déjà sur mon projet !"
+    ]
   }
+  
   
   
   
