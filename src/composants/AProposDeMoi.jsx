@@ -17,23 +17,22 @@ export default function AProposDeMoi({ darkMode }) {
 
   // Reset et remettre en haut lors de l'actualisation
   useEffect(() => {
-    // Forcer le retour en haut de page de plusieurs façons
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    // Désactiver temporairement le scroll automatique du navigateur
+    const originalScrollRestoration = history.scrollRestoration;
+    history.scrollRestoration = 'manual';
     
-    // Forcer le scroll en haut avec plusieurs délais pour s'assurer que ça fonctionne
-    setTimeout(() => {
+    // Forcer le retour en haut de page une seule fois
+    const scrollToTop = () => {
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }, 50);
+    };
     
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 200);
+    // Scroll immédiat
+    scrollToTop();
+    
+    // Scroll après un court délai pour s'assurer que le DOM est prêt
+    setTimeout(scrollToTop, 100);
     
     // Reset toutes les animations
     setVisibleBlocks(new Set());
@@ -43,6 +42,11 @@ export default function AProposDeMoi({ darkMode }) {
       skills: false,
       languages: false
     });
+    
+    // Restaurer le comportement normal après un délai
+    setTimeout(() => {
+      history.scrollRestoration = originalScrollRestoration;
+    }, 2000);
   }, []);
 
   useEffect(() => {
