@@ -38,11 +38,11 @@
       "lieu": "Villeneuve d'Ascq (59)",
       "missions": [
         "Formation sur tous les domaines de l'informatique, à savoir :",
-        " - Développement Web",
-        " - Cybersécurité",
-        " - Maintenance informatique",
-        " - PAO",
-        " - Community Manager"
+        "Développement Web",
+        "Cybersécurité",
+        "Maintenance informatique",
+        "PAO",
+        "Community Manager"
       ],
       "couleur": "green"
     },
@@ -51,13 +51,19 @@
       "categorie": "formation",
       "titre": "Certifications",
       "annee": "2022",
-      "organisme": "Divers",
+      "organisme": "OpenClassrooms et Google",
       "lieu": "En ligne",
       "missions": [
-        "Certification Google Marketing Digital",
-        "Certification Cybersécurité OpenClassrooms",
-        "Certification SEO",
-        "Certification UX/UI"
+        "Objectifs IA",
+        "Cybersécurité",
+        "HTML5 et CSS3",
+        "PHP et MySQL",
+        "Git et Github",
+        "Wordpress 5",
+        "L'UX Design",
+        "Le marketing Digital",
+        "Le SEO",
+        "Illustrator"
       ],
       "couleur": "green"
     },
@@ -281,7 +287,7 @@
       "couleur": "green"
     },
     {
-        "id": 1,
+        "id": 20,
         "categorie": "experience",
         "titre": "Développeur Web Full Stack",
         "annee": "2025",

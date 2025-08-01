@@ -14,7 +14,20 @@ export default function AProposDeMoi({ darkMode }) {
   const [timelineVisible, setTimelineVisible] = useState(new Set());
   const [lineProgress, setLineProgress] = useState(0);
   const [projectsVisible, setProjectsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
+
+  // Détecter si on est sur mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Reset et remettre en haut lors de l'actualisation
   useEffect(() => {
@@ -54,6 +67,23 @@ export default function AProposDeMoi({ darkMode }) {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Sur mobile, afficher tout immédiatement
+      if (isMobile) {
+        setSectionsVisible({
+          about: true,
+          skills: true,
+          languages: true
+        });
+        setLineProgress(1);
+        setProjectsVisible(true);
+        
+        // Afficher tous les éléments de timeline
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const allIndices = Array.from({ length: timelineItems.length }, (_, i) => i);
+        setTimelineVisible(new Set(allIndices));
+        return;
+      }
+
       // Animation des sections principales
       const aboutSection = document.querySelector('.about-section');
       const skillsSection = document.querySelector('.skills-section');
@@ -131,7 +161,7 @@ export default function AProposDeMoi({ darkMode }) {
     handleScroll(); // Check initial state
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sectionsVisible, timelineVisible, lineProgress, projectsVisible]);
+  }, [sectionsVisible, timelineVisible, lineProgress, projectsVisible, isMobile]);
 
   // Fonction pour extraire les technologies du contenu
   const extractTechnologies = (content) => {
@@ -593,7 +623,7 @@ export default function AProposDeMoi({ darkMode }) {
                      >
                                                   {/* Contenu */}
                          <div 
-                           className={`w-5/12 p-6 rounded-lg shadow-lg ${
+                           className={`w-5/12 p-3 md:p-6 rounded-lg shadow-lg ${
                              item.categorie === 'experience' ? 'mr-auto' : 'ml-auto'
                            }`}
                            style={{ 
@@ -603,16 +633,21 @@ export default function AProposDeMoi({ darkMode }) {
                            }}
                          >
                            <div className="flex items-center gap-3 mb-3">
-                             <div 
-                               className="w-8 h-8 rounded-full flex items-center justify-center"
-                               style={{ backgroundColor: getColorForDomain(item.couleur) }}
-                             >
-                               {getIconForCategory(item.categorie)}
-                             </div>
-                             <div>
+                             {!isMobile && (
+                               <div 
+                                 className="w-8 h-8 rounded-full flex items-center justify-center"
+                                 style={{ backgroundColor: getColorForDomain(item.couleur) }}
+                               >
+                                 {getIconForCategory(item.categorie)}
+                               </div>
+                             )}
+                             <div className="text-center md:text-left">
                                <h3 className="font-bold text-lg">{item.titre}</h3>
                                <p className="text-sm text-gray-600 dark:text-gray-400">
-                                 {item.entreprise || item.organisme} • {item.lieu}
+                                 {item.entreprise || item.organisme}
+                               </p>
+                               <p className="text-sm text-gray-600 dark:text-gray-400">
+                                 {item.lieu}
                                </p>
                              </div>
                            </div>
