@@ -586,10 +586,10 @@ export default function AProposDeMoi({ darkMode }) {
                      return (
                                             <div 
                        key={item.id}
-                       className={`timeline-item relative flex items-center transition-all duration-1000 ease-out ${
+                       className={`timeline-item relative flex items-center transition-all duration-500 ease-out ${
                          timelineVisible.has(index) ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
                        }`}
-                       style={{ transitionDelay: `${index * 150}ms` }}
+                       style={{ transitionDelay: `${index * 50}ms` }}
                      >
                                                   {/* Contenu */}
                          <div 
@@ -631,19 +631,19 @@ export default function AProposDeMoi({ darkMode }) {
                          
                                               {/* Point central */}
                      <div 
-                       className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white transition-all duration-700 ease-out ${
+                       className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white transition-all duration-400 ease-out ${
                          timelineVisible.has(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                        }`}
                        style={{ 
                          backgroundColor: getColorForDomain(item.couleur),
-                         transitionDelay: `${index * 150 + 200}ms`
+                         transitionDelay: `${index * 50 + 100}ms`
                        }}
                      ></div>
                          
                                                                             {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
                          {shouldShowYear && (
                            <div 
-                             className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-700 ease-out ${
+                             className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-400 ease-out ${
                                timelineVisible.has(index) ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-75 translate-y-2'
                              }`}
                              style={{ 
@@ -651,7 +651,7 @@ export default function AProposDeMoi({ darkMode }) {
                                color: darkMode ? '#ffffff' : '#000000',
                                borderColor: darkMode ? '#4B5563' : '#E5E7EB',
                                top: '-8px',
-                               transitionDelay: `${index * 150 + 300}ms`
+                               transitionDelay: `${index * 50 + 0}ms`
                              }}
                            >
                              {displayYear}
