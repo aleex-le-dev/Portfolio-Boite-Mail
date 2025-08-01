@@ -100,12 +100,12 @@ export default function AProposDeMoi({ darkMode }) {
         }
       }
 
-      // Animation des blocs individuels
+            // Animation des blocs individuels
       const timelineBlocks = document.querySelectorAll('.cd-timeline-block');
-              timelineBlocks.forEach((block, index) => {
-          const blockTop = block.getBoundingClientRect().top;
-          // Apparition au niveau 4/10 de l'écran (vers le haut)
-          const shouldBeVisible = blockTop <= windowHeight * 0.4;
+      timelineBlocks.forEach((block, index) => {
+        const blockTop = block.getBoundingClientRect().top;
+        // Apparition vers le bas de l'écran (niveau 8/10)
+        const shouldBeVisible = blockTop <= windowHeight * 0.8;
         
         if (shouldBeVisible && !visibleBlocks.has(index)) {
           setVisibleBlocks(prev => new Set([...prev, index]));
@@ -491,6 +491,16 @@ export default function AProposDeMoi({ darkMode }) {
             
             {/* Timeline CodyHouse */}
             <div className="cd-container relative">
+              {/* En-têtes des colonnes */}
+              <div className="flex justify-center items-center mb-8 px-4">
+                <div className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mr-16`}>
+                  Expérience
+                </div>
+                <div className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} ml-16`}>
+                  Formation
+                </div>
+              </div>
+              
               <div 
                 id="cd-timeline" 
                 className={`relative py-8 my-8 ${
@@ -512,6 +522,28 @@ export default function AProposDeMoi({ darkMode }) {
                     boxShadow: timelineProgress > 0 ? '0 0 10px rgba(59, 130, 246, 0.5)' : 'none'
                   }}
                 ></div>
+
+                {/* Affichage des années sur la ligne centrale */}
+                {timelineData.timeline.map((item, index) => (
+                  <div 
+                    key={`year-${item.id}`}
+                    className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
+                      visibleBlocks.has(index) ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    style={{
+                      top: `${(index / (timelineData.timeline.length - 1)) * 100}%`,
+                      transitionDelay: `${index * 100}ms`
+                    }}
+                  >
+                    <div className={`px-2 py-1 rounded-full text-xs font-bold ${
+                      item.annee === "Aujourd'hui" 
+                        ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white')
+                        : (darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')
+                    } shadow-lg border`}>
+                      {item.annee}
+                    </div>
+                  </div>
+                ))}
 
                 {timelineData.timeline.map((item, index) => (
                   <div key={item.id} className="cd-timeline-block relative my-8 first:mt-0 last:mb-0">
