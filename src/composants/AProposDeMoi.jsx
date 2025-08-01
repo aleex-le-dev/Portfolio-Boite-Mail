@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR, USER_EMAIL } from './constantes';
 import projetsData from './projets.json';
 import timelineData from './timeline.json';
 
 export default function AProposDeMoi({ darkMode }) {
+  const navigate = useNavigate();
   const [sectionsVisible, setSectionsVisible] = useState({
     about: false,
     skills: false,
@@ -83,18 +85,19 @@ export default function AProposDeMoi({ darkMode }) {
         const timelineRect = timelineSection.getBoundingClientRect();
         const timelineItems = document.querySelectorAll('.timeline-item');
         
-        // Calculer la progression de la ligne
+        // Calculer la progression de la ligne de manière plus fluide
         if (timelineRect.top <= window.innerHeight * 0.8) {
-          // Quand la timeline est complètement visible, la progression doit atteindre 100%
-          const timelineBottom = timelineRect.bottom;
-          const viewportBottom = window.innerHeight;
+          // Calculer la progression basée sur la position de la timeline dans le viewport
+          const timelineStart = window.innerHeight * 0.8;
+          const timelineEnd = window.innerHeight * 0.2;
+          const timelineRange = timelineStart - timelineEnd;
           
-          if (timelineBottom <= viewportBottom) {
+          if (timelineRect.top <= timelineEnd) {
             // Timeline complètement visible, progression à 100%
             setLineProgress(1);
           } else {
-            // Timeline partiellement visible, progression basée sur la position
-            const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.8 - timelineRect.top) / (timelineRect.height + window.innerHeight * 0.3)));
+            // Progression fluide basée sur la position
+            const progress = Math.max(0, Math.min(1, (timelineStart - timelineRect.top) / timelineRange));
             setLineProgress(progress);
           }
         } else {
@@ -105,8 +108,8 @@ export default function AProposDeMoi({ darkMode }) {
           // Calculer la position relative de l'élément dans la timeline (0 à 1)
           const elementPosition = index / (timelineItems.length - 1);
           
-          // L'élément s'affiche exactement quand la ligne atteint sa position
-          if (lineProgress >= elementPosition && !timelineVisible.has(index)) {
+          // L'élément s'affiche avec une petite marge pour plus de fluidité
+          if (lineProgress >= (elementPosition - 0.02) && !timelineVisible.has(index)) {
             setTimelineVisible(prev => new Set([...prev, index]));
           }
         });
@@ -173,8 +176,33 @@ export default function AProposDeMoi({ darkMode }) {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}>
+      {/* Bouton de retour */}
+      <div className="max-w-7xl mx-auto px-6 pt-6">
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors mb-6"
+          style={{ 
+            backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
+            color: darkMode ? '#fff' : 'var(--light-text)',
+            border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
+          }}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Retour au portfolio
+        </button>
+      </div>
+
       {/* En-tête avec photo et informations */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+      <div 
+        className="py-12"
+        style={{ 
+          backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
+          borderBottom: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
+          color: darkMode ? '#fff' : 'var(--light-text)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Photo de profil */}
@@ -474,7 +502,7 @@ export default function AProposDeMoi({ darkMode }) {
               
               {/* Ligne qui progresse */}
               <div 
-                className="absolute left-1/2 transform -translate-x-1/2 w-1 transition-all duration-300 ease-out"
+                className="absolute left-1/2 transform -translate-x-1/2 w-1 transition-all duration-500 ease-in-out"
                 style={{ 
                   backgroundColor: darkMode ? '#3B82F6' : '#2563EB',
                   height: `${lineProgress * 100}%`,
@@ -484,16 +512,26 @@ export default function AProposDeMoi({ darkMode }) {
               
                                             {/* Éléments de la timeline */}
                <div className="space-y-8">
-                 {(() => {
-                   // Créer un Map pour suivre les années déjà affichées
-                   const displayedYears = new Map();
-                   
-                   return timelineData.timeline.map((item, index) => {
-                     // Vérifier si cette année a déjà été affichée
-                     const shouldShowYear = !displayedYears.has(item.annee);
-                     if (shouldShowYear) {
-                       displayedYears.set(item.annee, index);
-                     }
+                                   {(() => {
+                    // Créer un Map pour suivre les années déjà affichées
+                    const displayedYears = new Map();
+                    
+                    return timelineData.timeline.map((item, index) => {
+                      // Extraire la deuxième année si c'est une plage (ex: "2016-2017" -> "2017")
+                      let displayYear = item.annee;
+                      if (item.annee.includes('-') && item.annee !== "Aujourd'hui") {
+                        const years = item.annee.split('-').map(y => y.trim());
+                        const numericYears = years.filter(y => !isNaN(parseInt(y)));
+                        if (numericYears.length > 0) {
+                          displayYear = Math.max(...numericYears.map(y => parseInt(y))).toString();
+                        }
+                      }
+                      
+                      // Vérifier si cette année a déjà été affichée
+                      const shouldShowYear = !displayedYears.has(displayYear);
+                      if (shouldShowYear) {
+                        displayedYears.set(displayYear, index);
+                      }
                      
                      return (
                        <div 
@@ -559,22 +597,22 @@ export default function AProposDeMoi({ darkMode }) {
                            style={{ backgroundColor: getColorForCategory(item.categorie) }}
                          ></div>
                          
-                         {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
-                         {shouldShowYear && (
-                           <div 
-                             className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-300 ${
-                               timelineVisible.has(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-                             }`}
-                             style={{ 
-                               backgroundColor: darkMode ? '#1F2937' : '#ffffff',
-                               color: darkMode ? '#ffffff' : '#000000',
-                               borderColor: darkMode ? '#4B5563' : '#E5E7EB',
-                               top: '-8px'
-                             }}
-                           >
-                             {item.annee}
-                           </div>
-                         )}
+                                                   {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
+                          {shouldShowYear && (
+                            <div 
+                              className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-300 ${
+                                timelineVisible.has(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                              }`}
+                              style={{ 
+                                backgroundColor: darkMode ? '#1F2937' : '#ffffff',
+                                color: darkMode ? '#ffffff' : '#000000',
+                                borderColor: darkMode ? '#4B5563' : '#E5E7EB',
+                                top: '-8px'
+                              }}
+                            >
+                              {displayYear}
+                            </div>
+                          )}
                        </div>
                      );
                    });
