@@ -2,61 +2,393 @@
   {
     "id": 1,
     "category": "Boîte de réception",
-    "title": "Demande de création de portfolio",
-    "sender": "Sophie Martin",
-    "email": "sophie.martin@email.com",
-    "senderAvatar": "https://randomuser.me/api/portraits/women/44.jpg",
+    "title": "Candidature - Développeur Frontend React",
+    "sender": "Recrutement Orange",
+    "email": "recrutement@orange.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/44.jpg",
     "date": "10/06/2024",
     "image": "",
     "content": [
-      "Bonjour,",
-      "Je suis designer graphique et j'aimerais un portfolio moderne pour mettre en valeur mes réalisations.",
-      "Pouvez-vous me proposer une maquette ou un devis ? Merci d'avance !"
+      "Bonjour Alexandre Janacek,",
+      "Nous avons étudié votre profil et nous recherchons actuellement un développeur frontend React pour rejoindre notre équipe digitale.",
+      "Votre expérience en développement web et votre maîtrise de React correspondent parfaitement à nos besoins.",
+      "Seriez-vous disponible pour un entretien téléphonique cette semaine ?",
+      "Cordialement,",
+      "Service Recrutement Orange"
     ]
   },
   {
     "id": 2,
     "category": "Boîte de réception",
-    "title": "Proposition de mission freelance React",
-    "sender": "Agence Web Paris",
-    "email": "contact@agencewebparis.fr",
-    "senderAvatar": "https://randomuser.me/api/portraits/men/45.jpg",
+    "title": "Mission freelance - Refonte site e-commerce",
+    "sender": "Agence Digital Lille",
+    "email": "contact@digital-lille.fr",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/45.jpg",
     "date": "09/06/2024",
     "image": "",
     "content": [
-      "Bonjour Alex,",
-      "Nous avons consulté votre portfolio et nous recherchons un développeur React pour un site vitrine.",
-      "Seriez-vous disponible pour un entretien cette semaine ?"
+      "Bonjour M. Janacek,",
+      "Nous avons consulté votre portfolio et nous recherchons un développeur React pour la refonte complète d'un site e-commerce.",
+      "Mission : 3 mois, télétravail possible, budget 15k€.",
+      "Intéressé par cette opportunité ?",
+      "Bien cordialement,",
+      "Marie Dubois - Directrice Technique"
     ]
   },
   {
     "id": 3,
     "category": "Boîte de réception",
-    "title": "Demande de refonte de CV en ligne",
-    "sender": "Julien Lefevre",
-    "email": "julien.lefevre@email.com",
+    "title": "Stage Développeur Web - Hiver 2024",
+    "sender": "Capgemini",
+    "email": "stages@capgemini.com",
     "senderAvatar": "https://randomuser.me/api/portraits/men/46.jpg",
     "date": "08/06/2024",
     "image": "",
     "content": [
-      "Bonjour,",
-      "Je souhaite moderniser mon CV en ligne et y intégrer une section projets.",
-      "Merci de me faire un retour sur vos disponibilités."
+      "Bonjour Alexandre,",
+      "Nous proposons un stage de 6 mois en développement web à partir de janvier 2024.",
+      "Technologies : React, Node.js, bases de données.",
+      "Localisation : Lille ou Paris.",
+      "Votre profil nous intéresse. Disponible pour un entretien ?",
+      "Cordialement,",
+      "Service RH Capgemini"
     ]
   },
   {
     "id": 4,
     "category": "Boîte de réception",
-    "title": "Demande de collaboration pour un projet web",
-    "sender": "Claire Dubois",
-    "email": "claire.dubois@email.com",
+    "title": "Consultation technique - Application mobile",
+    "sender": "StartupTech Solutions",
+    "email": "tech@startuptech.fr",
     "senderAvatar": "https://randomuser.me/api/portraits/women/47.jpg",
     "date": "07/06/2024",
     "image": "",
     "content": [
-      "Bonjour Alex,",
-      "Je travaille sur un projet de plateforme web et j'aimerais bénéficier de votre expertise en développement React.",
-      "Seriez-vous disponible pour un échange cette semaine ? Merci d'avance !"
+      "Bonjour,",
+      "Nous développons une application mobile React Native et nous cherchons un consultant technique.",
+      "Besoin : Audit de code, optimisation des performances, conseils architecture.",
+      "Durée : 2-3 jours, tarif journalier à discuter.",
+      "Merci de votre retour.",
+      "Sarah Martin - CTO"
+    ]
+  },
+  {
+    "id": 5,
+    "category": "Boîte de réception",
+    "title": "CDI - Développeur Full Stack",
+    "sender": "BNP Paribas",
+    "email": "emploi@bnpparibas.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/48.jpg",
+    "date": "06/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour M. Janacek,",
+      "BNP Paribas recrute un développeur full stack pour notre équipe digitale.",
+      "Technologies : React, Node.js, SQL, DevOps.",
+      "Contrat : CDI, salaire selon expérience, avantages sociaux.",
+      "Localisation : Paris ou Lille.",
+      "Intéressé par cette opportunité ?",
+      "Cordialement,",
+      "Service Recrutement IT"
+    ]
+  },
+  {
+    "id": 6,
+    "category": "Boîte de réception",
+    "title": "Formation - Intervenant React",
+    "sender": "ESGI Paris",
+    "email": "formation@esgi.fr",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/49.jpg",
+    "date": "05/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour,",
+      "L'ESGI recherche des intervenants pour nos formations en développement web.",
+      "Module : React et écosystème moderne (40h).",
+      "Public : Étudiants niveau Bac+3/+4.",
+      "Rémunération : 80€/heure.",
+      "Disponible à partir de septembre ?",
+      "Cordialement,",
+      "Service Formation Continue"
+    ]
+  },
+  {
+    "id": 7,
+    "category": "Boîte de réception",
+    "title": "Projet - Plateforme de gestion",
+    "sender": "Mairie de Lille",
+    "email": "numerique@mairie-lille.fr",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/50.jpg",
+    "date": "04/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour,",
+      "La Ville de Lille lance un appel d'offres pour le développement d'une plateforme de gestion interne.",
+      "Technologies : React, API REST, base de données sécurisée.",
+      "Budget : 50k€, délai 6 mois.",
+      "Dossier complet disponible sur notre site.",
+      "Date limite : 30 juin 2024.",
+      "Cordialement,",
+      "Service Numérique"
+    ]
+  },
+  {
+    "id": 8,
+    "category": "Boîte de réception",
+    "title": "Collaboration - Projet européen",
+    "sender": "Institut de Recherche",
+    "email": "projets@institut-recherche.eu",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/51.jpg",
+    "date": "03/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour M. Janacek,",
+      "Nous coordonnons un projet européen H2020 sur l'IA et le web sémantique.",
+      "Recherche : Développeur pour interface utilisateur avancée.",
+      "Durée : 18 mois, financement européen.",
+      "Technologies : React, IA, visualisation de données.",
+      "Intéressé par cette collaboration ?",
+      "Dr. Elena Rodriguez - Coordinatrice"
+    ]
+  },
+  {
+    "id": 9,
+    "category": "Boîte de réception",
+    "title": "Audit sécurité - Application web",
+    "sender": "Cabinet Conseil Cybersécurité",
+    "email": "audit@cabinet-securite.fr",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/52.jpg",
+    "date": "02/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour,",
+      "Nous recherchons un expert en sécurité web pour auditer nos applications.",
+      "Mission : Audit de code React, tests de pénétration, recommandations.",
+      "Expertise requise : OWASP, bonnes pratiques sécurité.",
+      "Durée : 1 semaine, tarif journalier 800€.",
+      "Disponible fin juin ?",
+      "Cordialement,",
+      "Service Audit"
+    ]
+  },
+  {
+    "id": 10,
+    "category": "Boîte de réception",
+    "title": "Mentorat - Programme jeunes développeurs",
+    "sender": "Association Code & Co",
+    "email": "mentorat@codeandco.org",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/53.jpg",
+    "date": "01/06/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "Notre association accompagne de jeunes développeurs en insertion professionnelle.",
+      "Nous cherchons des mentors bénévoles pour des sessions de code review et conseils.",
+      "Engagement : 2h/semaine, 3 mois minimum.",
+      "Lieu : Lille, en présentiel ou visio.",
+      "Envie de partager votre expertise ?",
+      "Cordialement,",
+      "Équipe Code & Co"
+    ]
+  },
+  {
+    "id": 11,
+    "category": "Boîte de réception",
+    "title": "Développeur Frontend - Startup Fintech",
+    "sender": "Lydia",
+    "email": "recrutement@lydia-app.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/54.jpg",
+    "date": "31/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "Lydia, leader du paiement mobile en France, recrute un développeur frontend.",
+      "Technologies : React, TypeScript, tests automatisés.",
+      "Environnement : Startup en croissance, équipe jeune et dynamique.",
+      "Localisation : Paris, télétravail 3j/semaine.",
+      "Intéressé par cette aventure ?",
+      "Cordialement,",
+      "Équipe Recrutement Lydia"
+    ]
+  },
+  {
+    "id": 12,
+    "category": "Boîte de réception",
+    "title": "Mission - Refonte application bancaire",
+    "sender": "Société Générale",
+    "email": "digital@sg.fr",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/55.jpg",
+    "date": "30/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour M. Janacek,",
+      "La Société Générale lance un projet de refonte de son application mobile bancaire.",
+      "Recherche : Développeur React Native senior.",
+      "Mission : 8 mois, équipe de 6 développeurs.",
+      "Budget : 120k€, localisation Paris.",
+      "Expertise sécurité bancaire requise.",
+      "Cordialement,",
+      "Direction Digitale"
+    ]
+  },
+  {
+    "id": 13,
+    "category": "Boîte de réception",
+    "title": "Lead Developer - Équipe e-commerce",
+    "sender": "Veepee",
+    "email": "jobs@veepee.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/56.jpg",
+    "date": "29/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "Veepee recherche un Lead Developer pour diriger notre équipe e-commerce.",
+      "Responsabilités : Architecture technique, mentoring, code review.",
+      "Technologies : React, Node.js, microservices, AWS.",
+      "Équipe : 8 développeurs, méthodologie agile.",
+      "Salaire : 65-85k€ selon expérience.",
+      "Cordialement,",
+      "Service Recrutement Tech"
+    ]
+  },
+  {
+    "id": 14,
+    "category": "Boîte de réception",
+    "title": "Expert React - Cabinet conseil",
+    "sender": "McKinsey Digital",
+    "email": "digital@mckinsey.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/57.jpg",
+    "date": "28/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour M. Janacek,",
+      "McKinsey Digital recherche un expert React pour nos missions de transformation digitale.",
+      "Profil : Consultant technique, expertise React/écosystème moderne.",
+      "Missions : Clients CAC40, projets internationaux.",
+      "Rémunération : 90-120k€ + bonus performance.",
+      "Voyages : 30% du temps à l'international.",
+      "Cordialement,",
+      "Équipe Recrutement"
+    ]
+  },
+  {
+    "id": 15,
+    "category": "Boîte de réception",
+    "title": "Architecte Frontend - Scale-up",
+    "sender": "BlaBlaCar",
+    "email": "tech@blablacar.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/58.jpg",
+    "date": "27/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "BlaBlaCar recrute un Architecte Frontend pour optimiser nos applications.",
+      "Défis : Performance, scalabilité, expérience utilisateur.",
+      "Technologies : React, GraphQL, PWA, tests E2E.",
+      "Impact : 100M+ utilisateurs dans 22 pays.",
+      "Équipe : 50+ développeurs frontend.",
+      "Cordialement,",
+      "Équipe Engineering"
+    ]
+  },
+  {
+    "id": 16,
+    "category": "Boîte de réception",
+    "title": "Développeur Senior - Plateforme SaaS",
+    "sender": "Aircall",
+    "email": "jobs@aircall.io",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/59.jpg",
+    "date": "26/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour,",
+      "Aircall, leader de la téléphonie cloud, recherche un développeur senior.",
+      "Produit : Plateforme de centre d'appels intelligent.",
+      "Stack : React, TypeScript, WebRTC, microservices.",
+      "Culture : Remote-first, équipe internationale.",
+      "Salaire : 70-90k€ + equity.",
+      "Cordialement,",
+      "Équipe Recrutement"
+    ]
+  },
+  {
+    "id": 17,
+    "category": "Boîte de réception",
+    "title": "Tech Lead - Startup IA",
+    "sender": "Hugging Face",
+    "email": "careers@huggingface.co",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/60.jpg",
+    "date": "25/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "Hugging Face recherche un Tech Lead pour notre équipe frontend.",
+      "Produit : Plateforme d'IA collaborative, 1M+ développeurs.",
+      "Technologies : React, Python, ML, visualisation données.",
+      "Impact : Définir l'avenir de l'IA open source.",
+      "Équipe : 200+ chercheurs et développeurs.",
+      "Cordialement,",
+      "Équipe Recrutement"
+    ]
+  },
+  {
+    "id": 18,
+    "category": "Boîte de réception",
+    "title": "Développeur - Éditeur logiciel",
+    "sender": "Adobe",
+    "email": "jobs@adobe.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/61.jpg",
+    "date": "24/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour M. Janacek,",
+      "Adobe recrute pour notre équipe Creative Cloud.",
+      "Projet : Applications web créatives (Photoshop, Illustrator).",
+      "Technologies : React, WebAssembly, Canvas API.",
+      "Défis : Performance, créativité, innovation.",
+      "Localisation : San Francisco ou Paris.",
+      "Cordialement,",
+      "Équipe Recrutement"
+    ]
+  },
+  {
+    "id": 19,
+    "category": "Boîte de réception",
+    "title": "Senior Developer - Gaming",
+    "sender": "Ubisoft",
+    "email": "careers@ubisoft.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/men/62.jpg",
+    "date": "23/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour Alexandre,",
+      "Ubisoft recherche un développeur senior pour nos plateformes web gaming.",
+      "Projets : Uplay, Ubisoft Connect, outils internes.",
+      "Technologies : React, WebGL, WebSocket, gaming APIs.",
+      "Culture : Créativité, innovation, passion gaming.",
+      "Localisation : Paris, Lyon, ou Montréal.",
+      "Cordialement,",
+      "Équipe Recrutement Tech"
+    ]
+  },
+  {
+    "id": 20,
+    "category": "Boîte de réception",
+    "title": "Expert Frontend - Scale-up européenne",
+    "sender": "Spotify",
+    "email": "jobs@spotify.com",
+    "senderAvatar": "https://randomuser.me/api/portraits/women/63.jpg",
+    "date": "22/05/2024",
+    "image": "",
+    "content": [
+      "Bonjour,",
+      "Spotify recherche un expert frontend pour notre équipe Premium.",
+      "Produit : Application web premium, 200M+ utilisateurs.",
+      "Technologies : React, Redux, Web Audio API, PWA.",
+      "Défis : Performance, accessibilité, expérience utilisateur.",
+      "Localisation : Stockholm, Londres, ou Paris.",
+      "Cordialement,",
+      "Équipe Recrutement"
     ]
   },
 

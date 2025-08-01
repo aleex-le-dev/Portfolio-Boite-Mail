@@ -6,6 +6,7 @@ import BarreLaterale from "./BarreLaterale";
 import ListeEmails from "./ListeEmails";
 import DetailEmailView from "./ux/DetailEmailView";
 import ProjetTemplate from "./ux/ProjetTemplate";
+import EmailPopup from "./ux/EmailPopup";
 import { PROJECT_CATEGORIES } from "./constantes";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
@@ -556,6 +557,13 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           </div>
         </div>
       </div>
+      
+      {/* TEMPORAIRE : Popup email pour le développement */}
+      <EmailPopup 
+        isVisible={true}
+        onClose={() => {}}
+        darkMode={darkMode}
+      />
     </div>
   );
 });
