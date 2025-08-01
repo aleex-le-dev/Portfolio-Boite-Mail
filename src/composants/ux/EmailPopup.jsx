@@ -14,9 +14,7 @@ const EmailPopup = ({ isVisible, onClose, darkMode }) => {
     }
   }, [isVisible]);
 
-  // TEMPORAIRE : Forcer l'affichage pour le développement
-  const forceVisible = true;
-  if (!forceVisible && !isVisible) return null;
+                if (!isVisible) return null;
 
   const emailData = {
     sender: "Recrutement Google",

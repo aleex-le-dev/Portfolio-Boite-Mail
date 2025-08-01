@@ -20,6 +20,9 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
+  const [newEmailData, setNewEmailData] = useState(null);
+  const [newEmailsPool, setNewEmailsPool] = useState([]);
 
   // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
   useEffect(() => {
@@ -83,6 +86,10 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
         } catch{/* ignore */}
         
+        // Préparer la pool des nouveaux emails pour les popups
+        const newEmails = data.filter(email => email.category === 'Nouveaux emails');
+        setNewEmailsPool(newEmails);
+        
         // Charger les projets et certifications
         Promise.all([
           fetch(`${basePath}projets.json`).then(res => res.json()).catch(() => []),
@@ -122,6 +129,43 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         console.error('Erreur lors du chargement des emails:', error);
       });
   }, []);
+
+  // Système d'arrivée automatique de nouveaux emails avec popup
+  useEffect(() => {
+    if (newEmailsPool.length === 0) return;
+
+    const interval = setInterval(() => {
+      // Prendre un email aléatoire de la pool
+      const randomIndex = Math.floor(Math.random() * newEmailsPool.length);
+      const newEmail = newEmailsPool[randomIndex];
+      
+      // Retirer cet email de la pool pour éviter les doublons
+      setNewEmailsPool(prev => prev.filter((_, index) => index !== randomIndex));
+      
+      // Préparer l'email pour l'affichage
+      const emailToAdd = {
+        ...newEmail,
+        category: 'Boîte de réception',
+        date: "À l'instant"
+      };
+      
+      // Ajouter l'email à la boîte de réception
+      setEmails(prev => [emailToAdd, ...prev]);
+      
+      // Afficher le popup
+      setNewEmailData(emailToAdd);
+      setShowEmailPopup(true);
+      
+      // Masquer le popup après 5 secondes
+      setTimeout(() => {
+        setShowEmailPopup(false);
+        setNewEmailData(null);
+      }, 5000);
+      
+    }, 5000); // Tous les 5 secondes
+
+    return () => clearInterval(interval);
+  }, [newEmailsPool]);
 
   // Sélectionner automatiquement le premier email quand la catégorie change
   useEffect(() => {
@@ -558,12 +602,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         </div>
       </div>
       
-      {/* TEMPORAIRE : Popup email pour le développement */}
-      <EmailPopup 
-        isVisible={true}
-        onClose={() => {}}
-        darkMode={darkMode}
-      />
+      
     </div>
   );
 });
