@@ -266,15 +266,15 @@ export default function AProposDeMoi({ darkMode }) {
       </div>
 
       {/* En-tête avec photo et informations */}
-      <div 
-        className="py-12"
-        style={{ 
-          backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
-          borderBottom: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
-          color: darkMode ? '#fff' : 'var(--light-text)'
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 mb-9">
+        <section 
+          className="rounded-xl p-6 shadow-lg"
+          style={{ 
+            backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
+            border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
+            color: darkMode ? '#fff' : 'var(--light-text)'
+          }}
+        >
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Photo de profil */}
             <div className="flex-shrink-0">
@@ -383,11 +383,11 @@ export default function AProposDeMoi({ darkMode }) {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Contenu principal */}
-      <div className="max-w-7xl mx-auto px-6 py-12" style={{ color: darkMode ? '#fff' : undefined }}>
+      <div className="max-w-7xl mx-auto px-6 " style={{ color: darkMode ? '#fff' : undefined }}>
         <div className="space-y-8">
           {/* Section À propos et Compétences */}
         <div className="grid md:grid-cols-3 gap-8">
