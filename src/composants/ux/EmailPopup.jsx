@@ -34,13 +34,17 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
   // Calculer la position verticale selon l'index
   const topOffset = 4 + (index * 4); // 4px de base + 4px par popup pour une superposition plus importante
   const rightOffset = isExpanded ? 16 : 4; // Décalage plus important vers la gauche si étendu
+  
+  // Vérifier si le popup dépasse de l'écran et ajuster la position
+  const maxTopOffset = window.innerHeight - 200; // 200px de marge en bas
+  const adjustedTopOffset = Math.min(topOffset, maxTopOffset);
 
   return (
     <div 
       className="fixed transition-all duration-300 ease-out" 
       data-popup="true"
       style={{ 
-        top: `${topOffset}rem`, 
+        top: `${adjustedTopOffset}rem`, 
         right: `${rightOffset}rem`, 
         zIndex: 50 + index // Z-index normal basé sur l'index, pas de changement quand étendu
       }}

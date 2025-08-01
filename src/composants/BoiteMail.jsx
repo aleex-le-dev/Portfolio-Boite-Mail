@@ -130,14 +130,31 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   useEffect(() => {
     if (newEmailsPool.length === 0) return;
 
-    const interval = setInterval(() => {
-      // Sélectionner un email aléatoire de la pool
-      const randomIndex = Math.floor(Math.random() * newEmailsPool.length);
-      const newEmail = newEmailsPool[randomIndex];
+    let timeoutId;
+    let usedEmails = new Set(); // Pour éviter les doublons
+    let isFirstEmail = true;
+
+    const scheduleNextEmail = () => {
+      // Filtrer les emails non utilisés
+      const availableEmails = newEmailsPool.filter((_, index) => !usedEmails.has(index));
+      
+      // Si tous les emails ont été utilisés, réinitialiser
+      if (availableEmails.length === 0) {
+        usedEmails.clear();
+        availableEmails.push(...newEmailsPool);
+      }
+      
+      // Sélectionner un email aléatoire parmi les disponibles
+      const randomIndex = Math.floor(Math.random() * availableEmails.length);
+      const selectedEmail = availableEmails[randomIndex];
+      
+      // Marquer cet email comme utilisé
+      const originalIndex = newEmailsPool.indexOf(selectedEmail);
+      usedEmails.add(originalIndex);
       
       // Préparer l'email pour l'affichage avec un ID unique
       const emailToAdd = {
-        ...newEmail,
+        ...selectedEmail,
         id: Date.now() + Math.random(), // ID unique basé sur timestamp + random
         category: 'Boîte de réception',
         date: "À l'instant"
@@ -150,9 +167,21 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       const popupId = Date.now() + Math.random();
       setActivePopups(prev => [...prev, { id: popupId, emailData: emailToAdd }]);
       
-    }, 5000); // Tous les 5 secondes
+      // Programmer le prochain email
+      const nextDelay = isFirstEmail ? 30000 : Math.random() * 60000 + 60000; // 30s pour le premier, 60-120s pour les suivants
+      isFirstEmail = false;
+      
+      timeoutId = setTimeout(scheduleNextEmail, nextDelay);
+    };
 
-    return () => clearInterval(interval);
+    // Démarrer le premier email après 30 secondes
+    timeoutId = setTimeout(scheduleNextEmail, 30000);
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [newEmailsPool]);
 
   // Fonction pour fermer un popup spécifique
