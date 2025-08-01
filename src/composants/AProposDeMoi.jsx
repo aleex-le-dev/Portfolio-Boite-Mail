@@ -830,7 +830,7 @@ export default function AProposDeMoi({ darkMode }) {
                 className="fixed bottom-6 right-6 w-12 h-12 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 flex items-center justify-center"
                 style={{
                   backgroundColor: darkMode ? 'var(--primary-blue)' : 'var(--primary-blue)',
-                  color: 'white',
+                  color: darkMode ? 'white' : 'black',
                   border: 'none'
                 }}
                 aria-label="Revenir en haut"
