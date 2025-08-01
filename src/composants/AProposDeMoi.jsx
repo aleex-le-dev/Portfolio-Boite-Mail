@@ -13,6 +13,7 @@ export default function AProposDeMoi({ darkMode }) {
   });
   const [timelineVisible, setTimelineVisible] = useState(new Set());
   const [lineProgress, setLineProgress] = useState(0);
+  const [projectsVisible, setProjectsVisible] = useState(false);
 
   // Reset et remettre en haut lors de l'actualisation
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function AProposDeMoi({ darkMode }) {
     });
     setTimelineVisible(new Set());
     setLineProgress(0);
+    setProjectsVisible(false);
     
     // Restaurer le comportement normal après un délai
     setTimeout(() => {
@@ -105,14 +107,21 @@ export default function AProposDeMoi({ darkMode }) {
         }
         
         timelineItems.forEach((item, index) => {
-          // Calculer la position relative de l'élément dans la timeline (0 à 1)
-          const elementPosition = index / (timelineItems.length - 1);
-          
-          // L'élément s'affiche avec une petite marge pour plus de fluidité
-          if (lineProgress >= (elementPosition - 0.02) && !timelineVisible.has(index)) {
+          const itemRect = item.getBoundingClientRect();
+          // L'élément s'affiche quand il entre dans le viewport
+          if (itemRect.top <= window.innerHeight * 0.8 && !timelineVisible.has(index)) {
             setTimelineVisible(prev => new Set([...prev, index]));
           }
         });
+      }
+
+      // Animation des projets récents
+      const projectsSection = document.querySelector('.projects-section');
+      if (projectsSection) {
+        const projectsRect = projectsSection.getBoundingClientRect();
+        if (projectsRect.top <= window.innerHeight * 0.8 && !projectsVisible) {
+          setProjectsVisible(true);
+        }
       }
     };
 
@@ -120,7 +129,7 @@ export default function AProposDeMoi({ darkMode }) {
     handleScroll(); // Check initial state
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [sectionsVisible, timelineVisible, lineProgress]);
+  }, [sectionsVisible, timelineVisible, lineProgress, projectsVisible]);
 
   // Fonction pour extraire les technologies du contenu
   const extractTechnologies = (content) => {
@@ -416,11 +425,11 @@ export default function AProposDeMoi({ darkMode }) {
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-secondary-bg)' }}>
                       <img 
                         src="/src/assets/icone/adobe.svg" 
-                        alt="Pack Office" 
+                        alt="Suite Adobe" 
                         className="w-8 h-8"
                       />
                     </div>
-                    <span className="text-xs font-medium">Pack Office</span>
+                    <span className="text-xs font-medium">Suite Adobe</span>
                   </div>
                   
                   <div className="flex flex-col items-center">
@@ -534,13 +543,13 @@ export default function AProposDeMoi({ darkMode }) {
                       }
                      
                      return (
-                       <div 
-                         key={item.id}
-                         className={`timeline-item relative flex items-center transition-all duration-700 ease-out ${
-                           timelineVisible.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                         }`}
-                         style={{ transitionDelay: `${index * 200}ms` }}
-                       >
+                                            <div 
+                       key={item.id}
+                       className={`timeline-item relative flex items-center transition-all duration-1000 ease-out ${
+                         timelineVisible.has(index) ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-12 scale-95'
+                       }`}
+                       style={{ transitionDelay: `${index * 150}ms` }}
+                     >
                          {/* Contenu */}
                          <div 
                            className={`w-5/12 p-6 rounded-lg shadow-lg ${
@@ -564,22 +573,10 @@ export default function AProposDeMoi({ darkMode }) {
                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                  {item.entreprise || item.organisme} • {item.lieu}
                                </p>
-                             </div>
-                           </div>
-                           
-                           <div className="mb-3">
-                             <span 
-                               className="px-3 py-1 rounded-full text-xs font-semibold"
-                               style={{ 
-                                 backgroundColor: getColorForCategory(item.categorie),
-                                 color: '#ffffff'
-                               }}
-                             >
-                               {item.annee}
-                             </span>
-                           </div>
-                           
-                           <ul className="space-y-2">
+                                                      </div>
+                       </div>
+                       
+                       <ul className="space-y-2">
                              {item.missions.map((mission, missionIndex) => (
                                <li key={missionIndex} className="text-sm flex items-start">
                                  <span className="text-blue-500 mr-2 mt-1">•</span>
@@ -591,28 +588,34 @@ export default function AProposDeMoi({ darkMode }) {
                            </ul>
                          </div>
                          
-                         {/* Point central */}
-                         <div 
-                           className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white"
-                           style={{ backgroundColor: getColorForCategory(item.categorie) }}
-                         ></div>
+                                              {/* Point central */}
+                     <div 
+                       className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white transition-all duration-700 ease-out ${
+                         timelineVisible.has(index) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                       }`}
+                       style={{ 
+                         backgroundColor: getColorForCategory(item.categorie),
+                         transitionDelay: `${index * 150 + 200}ms`
+                       }}
+                     ></div>
                          
-                                                   {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
-                          {shouldShowYear && (
-                            <div 
-                              className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-300 ${
-                                timelineVisible.has(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-                              }`}
-                              style={{ 
-                                backgroundColor: darkMode ? '#1F2937' : '#ffffff',
-                                color: darkMode ? '#ffffff' : '#000000',
-                                borderColor: darkMode ? '#4B5563' : '#E5E7EB',
-                                top: '-8px'
-                              }}
-                            >
-                              {displayYear}
-                            </div>
-                          )}
+                                                                            {/* Année sur la ligne centrale - seulement si c'est la première occurrence */}
+                         {shouldShowYear && (
+                           <div 
+                             className={`absolute left-1/2 transform -translate-x-1/2 px-2 py-1 rounded-full text-xs font-bold shadow-lg border transition-all duration-700 ease-out ${
+                               timelineVisible.has(index) ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-75 translate-y-2'
+                             }`}
+                             style={{ 
+                               backgroundColor: darkMode ? '#1F2937' : '#ffffff',
+                               color: darkMode ? '#ffffff' : '#000000',
+                               borderColor: darkMode ? '#4B5563' : '#E5E7EB',
+                               top: '-8px',
+                               transitionDelay: `${index * 150 + 300}ms`
+                             }}
+                           >
+                             {displayYear}
+                           </div>
+                         )}
                        </div>
                      );
                    });
@@ -623,7 +626,9 @@ export default function AProposDeMoi({ darkMode }) {
 
           {/* Projets récents */}
           <section 
-            className="rounded-xl p-6 shadow-lg"
+            className={`projects-section rounded-xl p-6 shadow-lg transition-all duration-1000 ease-out ${
+              projectsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
             style={{ 
               backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
               border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,

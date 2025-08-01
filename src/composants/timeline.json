@@ -175,6 +175,18 @@
        ],
        "couleur": "purple"
      },
+     {
+        "id": 13,
+        "categorie": "experience",
+        "titre": "Stage Assistant Manager à l'Usine Renault - Cuincy",
+        "annee": "2011",
+        "entreprise": "Usine Renault - Cuincy",
+        "lieu": "Cuincy (59)",
+        "missions": [
+          "Stage Technicien de Maintenance Informatique"
+        ],
+        "couleur": "purple"
+      },
          {
        "id": 13,
        "categorie": "experience",
