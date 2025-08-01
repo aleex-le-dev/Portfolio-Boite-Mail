@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
 const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) => {
+  const [isAnimating, setIsAnimating] = useState(false);
 
+  useEffect(() => {
+    if (isVisible) {
+      setIsAnimating(true);
+    }
+  }, [isVisible]);
 
-                // Utiliser les données passées en props ou des données par défaut
+  // Utiliser les données passées en props ou des données par défaut
   const emailData = propEmailData || {
     sender: "Recrutement Google",
     email: "jobs@google.com",
@@ -23,66 +29,87 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) 
     avatar: "https://randomuser.me/api/portraits/men/64.jpg"
   };
 
-    if (!isVisible) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed top-4 right-4 z-50">
       {/* Petit popup de notification */}
       <div 
-        className={`w-80 rounded-xl shadow-2xl overflow-hidden ${
-          darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+        className={`w-80 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ease-out ${
+          isAnimating ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
+        style={{
+          backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)',
+          color: darkMode ? 'var(--dark-text)' : 'var(--light-text)',
+          border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
+        }}
       >
-                            {/* Email Content compact */}
-                    <div className="p-3 relative">
-                                {/* Sender Info compact */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <img 
-                          src={emailData.senderAvatar || emailData.avatar} 
-                          alt={emailData.sender}
-                          className="w-8 h-8 rounded-full object-cover"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between">
-                            <h4 className="font-semibold text-sm truncate">{emailData.sender}</h4>
-                                                    <div className={`flex items-center gap-1 text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                          <FiClock className="text-xs" />
-                          {emailData.date || emailData.time}
-                        </div>
-                          </div>
-                          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`}>
-                            {emailData.email}
-                          </p>
-                        </div>
-                      </div>
+        {/* Email Content compact */}
+        <div className="p-3 relative">
+          {/* Sender Info compact */}
+          <div className="flex items-center gap-2 mb-3">
+            <img 
+              src={emailData.senderAvatar || emailData.avatar} 
+              alt={emailData.sender}
+              className="w-8 h-8 rounded-full object-cover"
+            />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <h4 className="font-semibold text-sm truncate">{emailData.sender}</h4>
+                <div className="flex items-center gap-1 text-xs" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
+                  <FiClock className="text-xs" />
+                  {emailData.date || emailData.time}
+                </div>
+              </div>
+              <p className="text-xs truncate" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
+                {emailData.email}
+              </p>
+            </div>
+          </div>
 
           {/* Subject et contenu compact */}
           <div className="mb-3">
-            <h5 className={`font-semibold text-sm mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>
+            <h5 className="font-semibold text-sm mb-1" style={{ color: darkMode ? 'var(--dark-text)' : 'var(--light-text)' }}>
               {emailData.title}
             </h5>
-                                    <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`}>
-                          {emailData.content && emailData.content[1] ? emailData.content[1] : emailData.content && emailData.content[0] ? emailData.content[0] : ''}
-                        </p>
+            <p className="text-xs truncate" style={{ color: darkMode ? '#9ca3af' : '#6b7280' }}>
+              {emailData.content && emailData.content[1] ? emailData.content[1] : emailData.content && emailData.content[0] ? emailData.content[0] : ''}
+            </p>
           </div>
 
           {/* Actions compactes */}
-          <div className="flex gap-2 pt-2 border-t border-gray-200 dark:border-gray-700">
-                                    <button
-                          className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
-                            darkMode 
-                              ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                              : 'bg-blue-500 hover:bg-blue-600 text-white'
-                          }`}
-                        >
-                          Voir
-                        </button>
+          <div className="flex gap-2 pt-2" style={{ borderTop: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}>
             <button
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-colors ${
-                darkMode 
-                  ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
-              }`}
+              className="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              style={{
+                backgroundColor: 'var(--button-bg)',
+                color: 'white'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#2563eb';
+                e.target.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'var(--button-bg)';
+                e.target.style.transform = 'scale(1)';
+              }}
+            >
+              Voir
+            </button>
+            <button
+              className="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              style={{
+                backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : '#e5e7eb',
+                color: darkMode ? 'var(--dark-text)' : '#374151'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = darkMode ? '#404040' : '#d1d5db';
+                e.target.style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = darkMode ? 'var(--dark-secondary-bg)' : '#e5e7eb';
+                e.target.style.transform = 'scale(1)';
+              }}
               onClick={onClose}
             >
               Fermer
