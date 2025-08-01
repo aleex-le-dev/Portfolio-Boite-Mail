@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
-const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail, isExpanded, onToggleExpanded }) => {
+const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail, isExpanded, onToggleExpanded, totalPopups = 1, isLastPopup = false }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -64,8 +64,8 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, in
         <div className="p-3 relative">
           {/* Sender Info compact - cliquable pour étendre */}
           <div 
-            className="flex items-center gap-2 mb-3 cursor-pointer"
-            onClick={onToggleExpanded}
+            className={`flex items-center gap-2 mb-3 ${totalPopups > 1 && !isLastPopup ? 'cursor-pointer' : ''}`}
+            onClick={totalPopups > 1 && !isLastPopup ? onToggleExpanded : undefined}
           >
             <img 
               src={emailData.senderAvatar || emailData.avatar} 

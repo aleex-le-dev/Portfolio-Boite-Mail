@@ -201,6 +201,10 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
 
   // Fonction pour basculer l'état étendu d'un popup
   const handleToggleExpanded = (popupId) => {
+    // Empêcher l'expansion s'il n'y a qu'un seul popup ou si c'est le dernier arrivé
+    if (activePopups.length <= 1 || popupId === activePopups[activePopups.length - 1]?.id) {
+      return;
+    }
     setExpandedPopupId(prev => prev === popupId ? null : popupId);
   };
 
@@ -674,6 +678,8 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           onViewEmail={() => handleViewEmail(popup.emailData, popup.id)}
           isExpanded={expandedPopupId === popup.id}
           onToggleExpanded={() => handleToggleExpanded(popup.id)}
+          totalPopups={activePopups.length}
+          isLastPopup={index === activePopups.length - 1}
         />
       ))}
       
