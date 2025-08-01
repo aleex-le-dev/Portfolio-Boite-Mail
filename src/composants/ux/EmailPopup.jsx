@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
-const EmailPopup = ({ isVisible, onClose, darkMode }) => {
-  const [isAnimating, setIsAnimating] = useState(false);
+const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) => {
 
-  useEffect(() => {
-    if (isVisible) {
-      setIsAnimating(true);
-      const timer = setTimeout(() => {
-        setIsAnimating(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
 
-                if (!isVisible) return null;
-
-  const emailData = {
+                // Utiliser les données passées en props ou des données par défaut
+  const emailData = propEmailData || {
     sender: "Recrutement Google",
     email: "jobs@google.com",
     title: "Opportunité - Développeur Frontend Senior",
@@ -34,30 +23,32 @@ const EmailPopup = ({ isVisible, onClose, darkMode }) => {
     avatar: "https://randomuser.me/api/portraits/men/64.jpg"
   };
 
+    if (!isVisible) return null;
+
   return (
     <div className="fixed top-4 right-4 z-50">
       {/* Petit popup de notification */}
       <div 
-        className={`w-80 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 ${
-          isAnimating ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
-        } ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}`}
+        className={`w-80 rounded-xl shadow-2xl overflow-hidden ${
+          darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+        }`}
       >
                             {/* Email Content compact */}
                     <div className="p-3 relative">
                                 {/* Sender Info compact */}
                       <div className="flex items-center gap-2 mb-3">
                         <img 
-                          src={emailData.avatar} 
+                          src={emailData.senderAvatar || emailData.avatar} 
                           alt={emailData.sender}
                           className="w-8 h-8 rounded-full object-cover"
                         />
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between">
                             <h4 className="font-semibold text-sm truncate">{emailData.sender}</h4>
-                            <div className={`flex items-center gap-1 text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                              <FiClock className="text-xs" />
-                              {emailData.time}
-                            </div>
+                                                    <div className={`flex items-center gap-1 text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                          <FiClock className="text-xs" />
+                          {emailData.date || emailData.time}
+                        </div>
                           </div>
                           <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`}>
                             {emailData.email}
@@ -70,9 +61,9 @@ const EmailPopup = ({ isVisible, onClose, darkMode }) => {
             <h5 className={`font-semibold text-sm mb-1 ${darkMode ? 'text-white' : 'text-black'}`}>
               {emailData.title}
             </h5>
-            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`}>
-              {emailData.content[1]}
-            </p>
+                                    <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} truncate`}>
+                          {emailData.content && emailData.content[1] ? emailData.content[1] : emailData.content && emailData.content[0] ? emailData.content[0] : ''}
+                        </p>
           </div>
 
           {/* Actions compactes */}

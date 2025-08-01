@@ -80,11 +80,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
           }
         });
         
-        // Ajout des messages envoyés depuis localStorage
-        let sent = [];
-        try {
-          sent = JSON.parse(localStorage.getItem('messageenvoye')) || [];
-        } catch{/* ignore */}
+
         
         // Préparer la pool des nouveaux emails pour les popups
         const newEmails = data.filter(email => email.category === 'Nouveaux emails');
@@ -602,6 +598,15 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         </div>
       </div>
       
+      {/* Popup pour les nouveaux emails */}
+      {showEmailPopup && newEmailData && (
+        <EmailPopup 
+          isVisible={showEmailPopup}
+          onClose={() => setShowEmailPopup(false)}
+          darkMode={darkMode}
+          emailData={newEmailData}
+        />
+      )}
       
     </div>
   );
