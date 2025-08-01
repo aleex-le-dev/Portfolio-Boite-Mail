@@ -546,7 +546,24 @@ export default function AProposDeMoi({ darkMode }) {
                         return parseInt(annee) || 0;
                       };
                       
-                      return getYear(b.annee) - getYear(a.annee);
+                      const yearA = getYear(a.annee);
+                      const yearB = getYear(b.annee);
+                      
+                      // Si les années sont différentes, trier par année
+                      if (yearA !== yearB) {
+                        return yearB - yearA;
+                      }
+                      
+                      // Si les années sont identiques, mettre les expériences en premier (car l'ordre est du plus ancien au plus récent)
+                      if (a.categorie === 'formation' && b.categorie === 'experience') {
+                        return 1; // a (formation) après b (experience)
+                      }
+                      if (a.categorie === 'experience' && b.categorie === 'formation') {
+                        return -1; // b (formation) après a (experience)
+                      }
+                      
+                      // Si même catégorie, garder l'ordre original
+                      return 0;
                     });
                     
                     return sortedTimeline.map((item, index) => {
