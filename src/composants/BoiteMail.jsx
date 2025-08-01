@@ -20,8 +20,7 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
   const [selectedCategory, setSelectedCategory] = useState('Boîte de réception');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState('');
-  const [showEmailPopup, setShowEmailPopup] = useState(false);
-  const [newEmailData, setNewEmailData] = useState(null);
+  const [activePopups, setActivePopups] = useState([]);
   const [newEmailsPool, setNewEmailsPool] = useState([]);
 
   // Détecter la taille d'écran et ouvrir la sidebar par défaut sur desktop
@@ -126,42 +125,39 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       });
   }, []);
 
-  // Système d'arrivée automatique de nouveaux emails avec popup
+  // Système de popups pour les nouveaux emails
   useEffect(() => {
     if (newEmailsPool.length === 0) return;
 
     const interval = setInterval(() => {
-      // Prendre un email aléatoire de la pool
+      // Sélectionner un email aléatoire de la pool
       const randomIndex = Math.floor(Math.random() * newEmailsPool.length);
       const newEmail = newEmailsPool[randomIndex];
       
-      // Retirer cet email de la pool pour éviter les doublons
-      setNewEmailsPool(prev => prev.filter((_, index) => index !== randomIndex));
-      
-      // Préparer l'email pour l'affichage
+      // Préparer l'email pour l'affichage avec un ID unique
       const emailToAdd = {
         ...newEmail,
+        id: Date.now() + Math.random(), // ID unique basé sur timestamp + random
         category: 'Boîte de réception',
         date: "À l'instant"
       };
       
-      // Ajouter l'email à la boîte de réception
+      // Ajouter l'email à la boîte de réception sans le sélectionner automatiquement
       setEmails(prev => [emailToAdd, ...prev]);
       
-      // Afficher le popup
-      setNewEmailData(emailToAdd);
-      setShowEmailPopup(true);
-      
-      // Masquer le popup après 5 secondes
-      setTimeout(() => {
-        setShowEmailPopup(false);
-        setNewEmailData(null);
-      }, 5000);
+      // Ajouter le popup à la liste des popups actifs
+      const popupId = Date.now() + Math.random();
+      setActivePopups(prev => [...prev, { id: popupId, emailData: emailToAdd }]);
       
     }, 5000); // Tous les 5 secondes
 
     return () => clearInterval(interval);
   }, [newEmailsPool]);
+
+  // Fonction pour fermer un popup spécifique
+  const closePopup = (popupId) => {
+    setActivePopups(prev => prev.filter(popup => popup.id !== popupId));
+  };
 
   // Sélectionner automatiquement le premier email quand la catégorie change
   useEffect(() => {
@@ -193,12 +189,12 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
         categoryEmails = emails.filter(mail => mail.category === selectedCategory);
       }
       
-      // Sélectionner le premier email de la catégorie seulement sur desktop
-      if (categoryEmails.length > 0 && window.innerWidth >= 768) {
+      // Sélectionner le premier email de la catégorie seulement sur desktop et seulement si aucun email n'est déjà sélectionné
+      if (categoryEmails.length > 0 && window.innerWidth >= 768 && !selectedEmailId) {
         setSelectedEmailId(categoryEmails[0].id);
       }
     }
-  }, [selectedCategory, emails]);
+  }, [selectedCategory, emails, selectedEmailId]);
 
   // Filtrer les emails selon la catégorie sélectionnée
   let filteredEmails = [];
@@ -599,14 +595,16 @@ const BoiteMail = forwardRef(({ darkMode, onToggleDarkMode, onTitleChange }, ref
       </div>
       
       {/* Popup pour les nouveaux emails */}
-      {showEmailPopup && newEmailData && (
+      {activePopups.map((popup, index) => (
         <EmailPopup 
-          isVisible={showEmailPopup}
-          onClose={() => setShowEmailPopup(false)}
+          key={popup.id}
+          isVisible={true} // Always visible for stacked popups
+          onClose={() => closePopup(popup.id)}
           darkMode={darkMode}
-          emailData={newEmailData}
+          emailData={popup.emailData}
+          index={index}
         />
-      )}
+      ))}
       
     </div>
   );

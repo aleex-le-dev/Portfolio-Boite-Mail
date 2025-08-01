@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiX, FiMail, FiUser, FiClock } from 'react-icons/fi';
 
-const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) => {
+const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData, index = 0, onViewEmail }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -31,8 +31,11 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) 
 
   if (!isVisible) return null;
 
+  // Calculer la position verticale selon l'index
+  const topOffset = 4 + (index * 4); // 4px de base + 4px par popup pour une superposition plus importante
+
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed right-4" style={{ top: `${topOffset}rem`, zIndex: 50 + index }}>
       {/* Petit popup de notification */}
       <div 
         className={`w-80 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ease-out ${
@@ -93,6 +96,7 @@ const EmailPopup = ({ isVisible, onClose, darkMode, emailData: propEmailData }) 
                 e.target.style.backgroundColor = 'var(--button-bg)';
                 e.target.style.transform = 'scale(1)';
               }}
+              onClick={onViewEmail}
             >
               Voir
             </button>
