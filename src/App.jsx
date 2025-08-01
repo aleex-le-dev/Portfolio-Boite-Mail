@@ -8,7 +8,7 @@ import AProposDeMoi from "./composants/AProposDeMoi";
 
 function App() {
   const boiteMailRef = useRef();
-  const [introDone, setIntroDone] = useState(true); // false pour afficher l'intro, true pour afficher la boîte mail
+  const [introDone, setIntroDone] = useState(false); // false pour afficher l'intro, true pour afficher la boîte mail
   const [showTransition, setShowTransition] = useState(false);
   const [pageTitle, setPageTitle] = useState("Aleex-le-dev Développeur Web | Lillers & Béthune");
   const [darkMode, setDarkMode] = useState(() => {
