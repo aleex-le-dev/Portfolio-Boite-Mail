@@ -226,10 +226,21 @@ export default function EnTete({
             )}
           </button>
           
-          <button
-            className="p-3 rounded-full hover:bg-gray-200 transition"
-            aria-label="Profil utilisateur"
-            onClick={() => setShowUserMenu(!showUserMenu)}
+                   <button
+           className={`p-0.5 rounded-full transition ${showUserMenu ? 'bg-blue-100' : 'hover:bg-gray-200'}`}
+           aria-label="Profil utilisateur"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Clic sur profil mobile, showUserMenu:', !showUserMenu);
+              setShowUserMenu(!showUserMenu);
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('Touch sur profil mobile, showUserMenu:', !showUserMenu);
+              setShowUserMenu(!showUserMenu);
+            }}
           >
             <img src={user.avatar} alt={user.name} className="w-10 h-10 md:w-8 md:h-8 rounded-full object-cover" />
           </button>
@@ -237,8 +248,13 @@ export default function EnTete({
           {showUserMenu && (
             <div
               ref={userMenuMobileRef}
-              className="absolute right-0 top-full mt-2 max-w-xl rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-50"
-              style={{ backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}` }}
+              className="fixed top-20 right-4 max-w-xl rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.08),0_15px_15px_-6px_rgba(0,0,0,0.06)] transition-all duration-300 z-[9999]"
+              style={{ 
+                backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)', 
+                border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
+                width: '300px',
+                maxWidth: 'calc(100vw - 32px)'
+              }}
             >
               <div className="px-4 py-4 border-b" style={{ borderColor: darkMode ? 'var(--dark-border)' : 'var(--light-border)', background: 'linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%)' }}>
                             <p className="text-xs font-medium uppercase tracking-wider" style={{ color: darkMode ? '#ffffff' : '#000000' }}>
