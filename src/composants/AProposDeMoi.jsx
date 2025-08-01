@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { USER_AVATAR, USER_EMAIL } from './constantes';
 import projetsData from './projets.json';
 import timelineData from './timeline.json';
@@ -12,7 +11,6 @@ import FigmaIcon from '../assets/icone/figma.svg';
 import { FiMoon, FiSun } from "react-icons/fi";
 
 export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
-  const navigate = useNavigate();
   const [sectionsVisible, setSectionsVisible] = useState({
     about: false,
     skills: false,
@@ -73,9 +71,31 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
     }, 2000);
   }, []);
 
+  // Reset des animations lors du changement de route
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setSectionsVisible({
+        about: false,
+        skills: false,
+        languages: false
+      });
+      setTimelineVisible(new Set());
+      setLineProgress(0);
+      setProjectsVisible(false);
+    };
+
+    // Reset immédiatement lors du montage du composant
+    handleRouteChange();
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (isMobile) {
+        // Ne pas fermer les details si on clique sur le bouton de retour ou le bouton mode sombre
+        if (e.target.closest('button[onClick*="navigate"]') || e.target.closest('button[onClick*="onToggleDarkMode"]')) {
+          return;
+        }
+        
         // Fermer tous les details ouverts sauf si on clique sur un details
         if (!e.target.closest('details')) {
           const openDetails = document.querySelectorAll('details[open]');
@@ -256,14 +276,19 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
     <div className="min-h-screen" style={{ backgroundColor: darkMode ? 'var(--dark-primary-bg)' : 'var(--light-primary-bg)' }}>
       {/* Bouton de retour et mode sombre */}
       <div className="max-w-7xl mx-auto px-6 pt-6">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 relative z-10">
           <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = '/';
+            }}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer"
             style={{ 
               backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
               color: darkMode ? '#fff' : 'var(--light-text)',
-              border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
+              border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`,
+              zIndex: 10,
+              position: 'relative'
             }}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -276,7 +301,10 @@ export default function AProposDeMoi({ darkMode, onToggleDarkMode }) {
             className="p-3 rounded-full hover:bg-gray-200 transition" 
             aria-label="Mode sombre"
             title="Mode sombre"
-            onClick={onToggleDarkMode}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleDarkMode();
+            }}
             style={{ 
               backgroundColor: darkMode ? 'var(--dark-secondary-bg)' : 'var(--light-secondary-bg)',
               border: `1px solid ${darkMode ? 'var(--dark-border)' : 'var(--light-border)'}`
