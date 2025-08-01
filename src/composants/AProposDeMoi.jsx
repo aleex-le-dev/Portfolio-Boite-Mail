@@ -523,59 +523,84 @@ export default function AProposDeMoi({ darkMode }) {
                   }}
                 ></div>
 
-                {/* Affichage des années sur la ligne centrale */}
-                {timelineData.timeline.map((item, index) => (
-                  <div 
-                    key={`year-${item.id}`}
-                    className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
-                      visibleBlocks.has(index) ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    style={{
-                      top: `${(index / (timelineData.timeline.length - 1)) * 100}%`,
-                      transitionDelay: `${index * 100}ms`
-                    }}
-                  >
-                    <div className={`px-2 py-1 rounded-full text-xs font-bold ${
-                      item.annee === "Aujourd'hui" 
-                        ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white')
-                        : (darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')
-                    } shadow-lg border`}>
-                      {item.annee}
-                    </div>
-                  </div>
-                ))}
+                {/* Affichage des années uniques sur la ligne centrale */}
+                {(() => {
+                  const uniqueYears = [];
+                  const yearPositions = {};
+                  
+                  timelineData.timeline.forEach((item, index) => {
+                    // Extraire la plus grande année si c'est une plage (ex: "2016-2017" -> "2017")
+                    let displayYear = item.annee;
+                    if (item.annee.includes('-') && item.annee !== "Aujourd'hui") {
+                      const years = item.annee.split('-').map(y => y.trim());
+                      const numericYears = years.filter(y => !isNaN(parseInt(y)));
+                      if (numericYears.length > 0) {
+                        displayYear = Math.max(...numericYears.map(y => parseInt(y))).toString();
+                      }
+                    }
+                    
+                    if (!uniqueYears.includes(displayYear)) {
+                      uniqueYears.push(displayYear);
+                      yearPositions[displayYear] = index;
+                    }
+                  });
+                  
+                  return uniqueYears.map((year) => {
+                    const firstIndex = yearPositions[year];
+                    return (
+                      <div 
+                        key={`year-${year}`}
+                        className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
+                          visibleBlocks.has(firstIndex) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        style={{
+                          top: `${(firstIndex / (timelineData.timeline.length - 1)) * 100}%`,
+                          transitionDelay: `${firstIndex * 100}ms`
+                        }}
+                      >
+                        <div className={`px-2 py-1 rounded-full text-xs font-bold ${
+                          year === "Aujourd'hui" 
+                            ? (darkMode ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white')
+                            : (darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800')
+                        } shadow-lg border`}>
+                          {year}
+                        </div>
+                      </div>
+                    );
+                  });
+                })()}
 
                 {timelineData.timeline.map((item, index) => (
                   <div key={item.id} className="cd-timeline-block relative my-8 first:mt-0 last:mb-0">
-                                                        <div 
-                    className={`cd-timeline-img absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full shadow-lg border-4 border-white ${getColorForCategory(item.categorie)} transition-all duration-300 ${
-                      visibleBlocks.has(index) ? 'bounce-in opacity-100 scale-100' : 'is-hidden opacity-0 scale-50'
-                    }`}
-                    style={{
-                      transitionDelay: `${index * 100}ms`
-                    }}
-                  >
-                    <div className="flex items-center justify-center h-full">
-                      {getIconForCategory(item.categorie)}
-                    </div>
-                  </div>
+                    {/* Point de la timeline (sans icône) */}
+                    <div 
+                      className={`absolute top-6 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full shadow-lg border-2 border-white ${getColorForCategory(item.categorie)} transition-all duration-300 ${
+                        visibleBlocks.has(index) ? 'bounce-in opacity-100 scale-100' : 'is-hidden opacity-0 scale-50'
+                      }`}
+                      style={{
+                        transitionDelay: `${index * 100}ms`
+                      }}
+                    ></div>
 
                   <div 
                     className={`cd-timeline-content relative mt-6 ml-0 p-6 rounded-lg shadow-lg transition-all duration-300 ${
                       darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
                     } w-full md:w-5/12 ${
-                      index % 2 === 0 ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
+                      item.categorie === 'experience' ? 'md:ml-0 md:mr-auto' : 'md:ml-auto md:mr-0'
                     } ${
                       visibleBlocks.has(index) ? 'bounce-in opacity-100 translate-x-0' : 'is-hidden opacity-0'
                     }`}
                     style={{
                       transitionDelay: `${index * 100}ms`,
-                      transform: visibleBlocks.has(index) ? 'translateX(0)' : `translateX(${index % 2 === 0 ? '-50px' : '50px'})`
+                      transform: visibleBlocks.has(index) ? 'translateX(0)' : `translateX(${item.categorie === 'experience' ? '-50px' : '50px'})`
                     }}
                     >
-                      <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                        {item.titre}
-                      </h3>
+                                          <h3 className={`text-lg font-bold mb-2 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${getColorForCategory(item.categorie)}`}>
+                        {getIconForCategory(item.categorie)}
+                      </div>
+                      {item.titre}
+                    </h3>
                       <p className="text-sm text-gray-600 mb-2">
                         {item.entreprise || item.organisme} • {item.lieu}
                       </p>
