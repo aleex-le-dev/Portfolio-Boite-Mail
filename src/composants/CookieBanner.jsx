@@ -19,25 +19,7 @@ function CookieBanner({ onShowInfo, darkMode = false }) {
     }
   };
 
-  // Fonction pour désactiver Google Analytics
-  const disableAnalytics = () => {
-    // Désactiver Google Tag Manager
-    if (window.dataLayer) {
-      window.dataLayer.push({'event': 'cookie_consent_refused'});
-    }
-    
-    // Désactiver le script GTM
-    const gtmScript = document.querySelector('script[src*="googletagmanager.com"]');
-    if (gtmScript) {
-      gtmScript.disabled = true;
-    }
-    
-    // Supprimer les cookies de tracking existants
-    const cookiesToRemove = ['_ga', '_gid', '_gat', '_ga_GTM-N96FZ3N7'];
-    cookiesToRemove.forEach(cookie => {
-      document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    });
-  };
+
   
   const handleAccept = () => {
     localStorage.setItem('cookiecheck', 'accepted');
@@ -46,9 +28,10 @@ function CookieBanner({ onShowInfo, darkMode = false }) {
     setVisible(false);
   };
 
-  const handleRefuse = () => {
-    localStorage.setItem('cookiecheck', 'refused');
-    disableAnalytics();
+  const handleEssentialsOnly = () => {
+    localStorage.setItem('cookiecheck', 'essentials');
+    enableAnalytics(); // Autoriser Google Analytics même avec "essentiels uniquement"
+    console.log('✅ Essentiels uniquement - Google Analytics ACTIVÉ');
     setVisible(false);
   };
 
@@ -63,9 +46,9 @@ function CookieBanner({ onShowInfo, darkMode = false }) {
       // Cookies acceptés, activer Google Analytics
       enableAnalytics();
       setVisible(false);
-    } else if (cookieStatus === 'refused') {
-      // Cookies refusés, désactiver Google Analytics
-      disableAnalytics();
+    } else if (cookieStatus === 'essentials') {
+      // Essentiels uniquement, activer Google Analytics
+      enableAnalytics();
       setVisible(false);
     }
   }, []);
@@ -80,7 +63,7 @@ function CookieBanner({ onShowInfo, darkMode = false }) {
           <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Ce site utilise des cookies et le stockage local pour améliorer votre expérience et analyser le trafic. <button type="button" className={`underline hover:text-blue-400 ${darkMode ? 'text-blue-400' : 'text-blue-700'}`} onClick={onShowInfo}>En savoir plus</button></span>
         </div>
         <div className="flex gap-2">
-          <button onClick={handleRefuse} className={`font-semibold rounded-lg px-4 py-2 shadow focus:outline-none focus:ring-2 focus:ring-red-400 transition ${darkMode ? 'text-white' : 'bg-red-500 hover:bg-red-600 text-white'}`} style={darkMode ? { backgroundColor: '#dc2626' } : {}}>Refuser</button>
+          <button onClick={handleEssentialsOnly} className={`font-semibold rounded-lg px-4 py-2 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${darkMode ? 'text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'}`} style={darkMode ? { backgroundColor: '#3b82f6' } : {}}>Essentiels uniquement</button>
           <button onClick={handleAccept} className={`font-semibold rounded-lg px-6 py-2 shadow focus:outline-none focus:ring-2 focus:ring-green-400 transition ${darkMode ? 'text-white' : 'bg-green-500 hover:bg-green-600 text-white'}`} style={darkMode ? { backgroundColor: '#16a34a' } : {}}>J'accepte</button>
         </div>
       </div>

@@ -85,17 +85,18 @@
     "screenshots": [
       "/src/assets/projet/cineguide/cine1.png",
       "/src/assets/projet/cineguide/cine2.png",
-      "/src/assets/projet/cineguide/cine3.png"
+      "/src/assets/projet/cineguide/cine3.png",
+      "/src/assets/projet/cineguide/cine4.png"
     ],
     "content": [
       "CineGuide est un catalogue web permettant de retrouver facilement où regarder un film ou une série en fonction des plateformes de streaming disponibles. Le but était de centraliser les informations de visionnage et offrir une navigation rapide et intuitive à l’utilisateur.",
       "",
       "Technologies utilisées :",
-      "React • JavaScript • API REST • SCSS",
+      "React • JavaScript • Tailwind • MongoDB",
       "",
       "Fonctionnalités principales :",
       "• Recherche de films et séries par titre",
-      "• Appels API pour récupérer les plateformes de streaming",
+      "• Appels API pour récupérer les plateformes de streaming depuis l'API de JustWatch et TMDB",
       "• Affichage dynamique des résultats avec visuels",
       "• Système de filtres et tris (plateforme, note, popularité)",
       "• Responsive design et UI soignée",
