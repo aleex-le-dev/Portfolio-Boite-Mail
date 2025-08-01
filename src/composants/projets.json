@@ -7,11 +7,11 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/maisoncleo/mc.png",
+    "image": "./assets/projet/maisoncleo/mc.png",
     "screenshots": [
-      "/src/assets/projet/maisoncleo/mc1.png",
-      "/src/assets/projet/maisoncleo/mc2.png",
-      "/src/assets/projet/maisoncleo/mc3.png"
+      "./assets/projet/maisoncleo/mc1.png",
+      "./assets/projet/maisoncleo/mc2.png",
+      "./assets/projet/maisoncleo/mc3.png"
 
     ],
     "content": [
@@ -48,11 +48,11 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/trytowin/ttw.png",
+    "image": "./assets/projet/trytowin/ttw.png",
     "screenshots": [
-      "/src/assets/projet/trytowin/ttw2.png",
-      "/src/assets/projet/trytowin/ttw3.png",
-      "/src/assets/projet/trytowin/ttw4.png"
+      "./assets/projet/trytowin/ttw2.png",
+      "./assets/projet/trytowin/ttw3.png",
+      "./assets/projet/trytowin/ttw4.png"
     ],
     "content": [
       "TryToWin est une application mobile de jeux concours développée avec React Native. Elle permet aux utilisateurs de participer à des tirages au sort quotidiens pour tenter de remporter des cadeaux. L'objectif était de créer une application fluide, interactive et gamifiée, avec une logique backend solide pour gérer les utilisateurs, les tirages, et les notifications.",
@@ -81,12 +81,12 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/cineguide/cine.png",
+    "image": "./assets/projet/cineguide/cine.png",
     "screenshots": [
-      "/src/assets/projet/cineguide/cine1.png",
-      "/src/assets/projet/cineguide/cine2.png",
-      "/src/assets/projet/cineguide/cine3.png",
-      "/src/assets/projet/cineguide/cine4.png"
+      "./assets/projet/cineguide/cine1.png",
+      "./assets/projet/cineguide/cine2.png",
+      "./assets/projet/cineguide/cine3.png",
+      "./assets/projet/cineguide/cine4.png"
     ],
     "content": [
       "CineGuide est un catalogue web permettant de retrouver facilement où regarder un film ou une série en fonction des plateformes de streaming disponibles. Le but était de centraliser les informations de visionnage et offrir une navigation rapide et intuitive à l’utilisateur.",
@@ -115,11 +115,11 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/futurobudget/fb.png",
+    "image": "./assets/projet/futurobudget/fb.png",
     "screenshots": [
-      "/src/assets/projet/futurobudget/fb1.png",
-      "/src/assets/projet/futurobudget/fb2.png",
-      "/src/assets/projet/futurobudget/fb3.png"
+      "./assets/projet/futurobudget/fb1.png",
+      "./assets/projet/futurobudget/fb2.png",
+      "./assets/projet/futurobudget/fb3.png"
     ],
     "content": [
       "Futuro Budget est une application web de gestion de budget personnelle. Elle  n'est pas totalement terminée. Elle permet aux utilisateurs de suivre leurs revenus, dépenses et d'obtenir une vision claire de leur situation financière en temps réel.",
@@ -147,13 +147,13 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/portfolio/portfolio.png",
+    "image": "./assets/projet/portfolio/portfolio.png",
     "screenshots": [
-      "/src/assets/projet/portfolio/portfolio1.png",
-      "/src/assets/projet/portfolio/portfolio2.png",
-      "/src/assets/projet/portfolio/portfolio3.png",
-      "/src/assets/projet/portfolio/portfolio4.png",
-      "/src/assets/projet/portfolio/portfolio5.png"
+      "./assets/projet/portfolio/portfolio1.png",
+      "./assets/projet/portfolio/portfolio2.png",
+      "./assets/projet/portfolio/portfolio3.png",
+      "./assets/projet/portfolio/portfolio4.png",
+      "./assets/projet/portfolio/portfolio5.png"
 
 
     ],
