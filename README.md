@@ -101,7 +101,11 @@ src/
 
 ## 📱 Aperçus de l'application
 
-[Captures d'écran à ajouter]
+![Aperçu 1](./src/assets/projet/portfolio/portfolio1.png)
+![Aperçu 2](./src/assets/projet/portfolio/portfolio2.png)
+![Aperçu 3](./src/assets/projet/portfolio/portfolio3.png)
+![Aperçu 4](./src/assets/projet/portfolio/portfolio4.png)
+![Aperçu 5](./src/assets/projet/portfolio/portfolio5.png)
 
 
 ## 🎨 Personnalisation
