@@ -81,12 +81,12 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "./assets/projet/cineguide/cine.png",
+    "image": "/src/assets/projet/cineguide/cine.png",
     "screenshots": [
-      "./assets/projet/cineguide/cine1.png",
-      "./assets/projet/cineguide/cine2.png",
-      "./assets/projet/cineguide/cine3.png",
-      "./assets/projet/cineguide/cine4.png"
+      "/src/assets/projet/cineguide/cine1.png",
+      "/src/assets/projet/cineguide/cine2.png",
+      "/src/assets/projet/cineguide/cine3.png",
+      "/src/assets/projet/cineguide/cine4.png"
     ],
     "content": [
       "CineGuide est un catalogue web permettant de retrouver facilement où regarder un film ou une série en fonction des plateformes de streaming disponibles. Le but était de centraliser les informations de visionnage et offrir une navigation rapide et intuitive à l’utilisateur.",
@@ -177,7 +177,43 @@
       "",
       "Voir le site : Vous êtes déjà sur mon projet !"
     ]
+  },
+  {
+    "id": 55,
+    "category": "React",
+    "title": "AlexTech - Ecommerce",
+    "sender": "Aleex Le Dev",
+    "email": "alexandre.janacek@gmail.com",
+    "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
+    "date": "2025",
+    "image": "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080421.png",
+    "screenshots": [
+      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080421.png",
+      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080438.png",
+      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080452.png",
+      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080505.png",
+      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080513.png"
+    ],
+    "content": [
+      "AlexTech est un site e-commerce fictif développé pour expérimenter la vente de produits tech avec une interface moderne et intuitive. L'objectif était de mettre en place un front complet de boutique en ligne avec panier, produits, filtrage et navigation fluide.",
+      "",
+      "Technologies utilisées :",
+      "React • Tailwind CSS • JavaScript",
+      "",
+      "Fonctionnalités principales :",
+      "• Catalogue de produits dynamique avec filtres par catégorie",
+      "• Système de panier avec ajout/suppression et total automatique",
+      "• Design responsive et épuré avec Tailwind CSS",
+      "• Navigation fluide entre les pages produits, accueil et panier",
+      "• Composants réutilisables et gestion d’état avec useState et useContext",
+      "• Simulations de fiches produits et descriptions détaillées",
+      "",
+      "Voir le code : https://github.com/aleex-le-dev/AlexTech---Ecommerce",
+      "",
+      "Voir le site : https://aleextech.netlify.app"
+    ]
   }
+  
   
   
   
