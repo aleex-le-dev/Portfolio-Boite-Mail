@@ -191,8 +191,7 @@
       "./assets/projet/alextech/alextech1.png",
       "./assets/projet/alextech/alextech2.png",
       "./assets/projet/alextech/alextech3.png",
-      "./assets/projet/alextech/alextech4.png",
-      "./assets/projet/alextech/alextech5.png"
+      "./assets/projet/alextech/alextech4.png"
     ],
     "content": [
       "AlexTech est un site e-commerce fictif développé pour expérimenter la vente de produits tech avec une interface moderne et intuitive. L'objectif était de mettre en place un front complet de boutique en ligne avec panier, produits, filtrage et navigation fluide.",
