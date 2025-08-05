@@ -12,13 +12,13 @@ export const NAV_CATEGORIES = [
 
 // Catégories de projets
 // export const PROJECT_CATEGORIES = ['Portfolio', 'React Native', 'E-commerce'];
-export const PROJECT_CATEGORIES = [ 'E-commerce', 'React Native', 'React', 'Portfolio'];
+export const PROJECT_CATEGORIES = [ 'WordPress', 'React Native', 'React', 'Portfolio'];
 
 // Couleurs par catégorie de projet
 export const PROJECT_CATEGORY_COLORS = {
   // 'Portfolio': '#2E8B57', // Sea Green
   'React Native': '#4169E1', // Royal Blue
-  'E-commerce': '#FF6B35', // Orange
+  'WordPress': '#FF6B35', // Orange
   'React': '#61DAFB', // React Blue
   'Portfolio': 'black', 
   'default': 'black'
