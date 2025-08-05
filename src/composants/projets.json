@@ -48,11 +48,11 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "./assets/projet/trytowin/ttw.png",
+    "image": "./assets/projet/TryToWin/ttw.png",
     "screenshots": [
-      "./assets/projet/trytowin/ttw2.png",
-      "./assets/projet/trytowin/ttw3.png",
-      "./assets/projet/trytowin/ttw4.png"
+      "./assets/projet/TryToWin/ttw2.png",
+      "./assets/projet/TryToWin/ttw3.png",
+      "./assets/projet/TryToWin/ttw4.png"
     ],
     "content": [
       "TryToWin est une application mobile de jeux concours développée avec React Native. Elle permet aux utilisateurs de participer à des tirages au sort quotidiens pour tenter de remporter des cadeaux. L'objectif était de créer une application fluide, interactive et gamifiée, avec une logique backend solide pour gérer les utilisateurs, les tirages, et les notifications.",
@@ -81,12 +81,12 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "/src/assets/projet/cineguide/cine.png",
+    "image": "./assets/projet/cineguide/cine.png",
     "screenshots": [
-      "/src/assets/projet/cineguide/cine1.png",
-      "/src/assets/projet/cineguide/cine2.png",
-      "/src/assets/projet/cineguide/cine3.png",
-      "/src/assets/projet/cineguide/cine4.png"
+      "./assets/projet/cineguide/cine1.png",
+      "./assets/projet/cineguide/cine2.png",
+      "./assets/projet/cineguide/cine3.png",
+      "./assets/projet/cineguide/cine4.png"
     ],
     "content": [
       "CineGuide est un catalogue web permettant de retrouver facilement où regarder un film ou une série en fonction des plateformes de streaming disponibles. Le but était de centraliser les informations de visionnage et offrir une navigation rapide et intuitive à l’utilisateur.",
@@ -186,13 +186,13 @@
     "email": "alexandre.janacek@gmail.com",
     "senderAvatar": "https://media.licdn.com/dms/image/v2/D4E03AQHsjLWbL7ML0g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1672497184613?e=2147483647&v=beta&t=pHUPGHFTtXxg-xkAMXqpxoFItxeqD6u3jm-0ZlYUm0o",
     "date": "2025",
-    "image": "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080421.png",
+    "image": "./assets/projet/alextech/alextech.png",
     "screenshots": [
-      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080421.png",
-      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080438.png",
-      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080452.png",
-      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080505.png",
-      "https://github.com/aleex-le-dev/AlexTech---Ecommerce/raw/main/src/assets/capture/Capture%20d'%C3%A9cran%202025-08-05%20080513.png"
+      "./assets/projet/alextech/alextech1.png",
+      "./assets/projet/alextech/alextech2.png",
+      "./assets/projet/alextech/alextech3.png",
+      "./assets/projet/alextech/alextech4.png",
+      "./assets/projet/alextech/alextech5.png"
     ],
     "content": [
       "AlexTech est un site e-commerce fictif développé pour expérimenter la vente de produits tech avec une interface moderne et intuitive. L'objectif était de mettre en place un front complet de boutique en ligne avec panier, produits, filtrage et navigation fluide.",
