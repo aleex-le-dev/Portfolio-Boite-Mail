@@ -1,4 +1,4 @@
-# Portfolio Aleex-le-dev
+# Portfolio Boite Mail
 
 Portfolio moderne et interactif présentant mes compétences de développeur web avec une interface inspirée d'un client email professionnel.
 
